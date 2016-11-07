@@ -87,3 +87,9 @@ ENV/
 
 # Rope project settings
 .ropeproject
+
+# Stuff
+zee_notes.txt
+.idea/
+src/
+
