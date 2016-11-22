@@ -92,4 +92,5 @@ ENV/
 zee_notes.txt
 .idea/
 src/
+logs/
 

@@ -1,4 +1,7 @@
 --index-url https://pypi.python.org/simple/
 
+# pyqt5 ## can only be done (installed by pip) under Python >= 3.5.
+# see http://pyqt.sourceforge.net/Docs/PyQt5/installation.html#building-and-installing-from-source
+
 -e git+https://github.com/EHRI/rspub-core@master#egg=rspub-core
 -e .

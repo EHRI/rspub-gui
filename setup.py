@@ -5,7 +5,7 @@ from setuptools import setup
 setup(
     name='rspub-gui',
     version='0.1',
-    packages=[],
+    packages=['rspub.gui'],
     url='https://github.com/EHRI/rspub-gui',
     license='Apache License 2.0',
     author='henk van den berg',
@@ -13,5 +13,3 @@ setup(
     description='Application for ResourceSync publishing',
     install_requires=['rspub-core']
 )
-
-
