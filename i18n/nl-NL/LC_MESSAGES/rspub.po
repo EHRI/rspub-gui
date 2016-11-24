@@ -1,0 +1,102 @@
+# Translations template for rspub-gui.
+# Copyright (C) 2016 ORGANIZATION
+# This file is distributed under the same license as the rspub-gui project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2016.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: rspub-gui 0.1\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2016-11-23 16:02+0100\n"
+"PO-Revision-Date: 2016-11-23 16:05+0100\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.3.4\n"
+"X-Generator: Poedit 1.8.11\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: nl_NL\n"
+
+#: rspub/gui/fpref.py:32
+msgid "Interface Language"
+msgstr "Taal van de interface"
+
+#: rspub/gui/wapp.py:34
+msgid "Starting application"
+msgstr "Applicatie starten"
+
+#: rspub/gui/wapp.py:35
+#, python-format
+msgid "APPLICATION_HOME=%s"
+msgstr ""
+
+#: rspub/gui/wapp.py:36
+#, python-format
+msgid "LOCALE_DIR=%s"
+msgstr ""
+
+#: rspub/gui/wapp.py:37
+msgid "Language was set to locale en-US"
+msgstr "De taal-instelling is verzet naar nl-NL"
+
+#: rspub/gui/wapp.py:44
+msgid "Closing application"
+msgstr "De applicatie sluiten"
+
+#: rspub/gui/wmain.py:41
+msgid "&Exit"
+msgstr ""
+
+#: rspub/gui/wmain.py:43
+msgid "Exit application"
+msgstr ""
+
+#: rspub/gui/wmain.py:46
+msgid "&Configure"
+msgstr ""
+
+#: rspub/gui/wmain.py:51
+msgid "&Export"
+msgstr ""
+
+#: rspub/gui/wmain.py:53
+msgid "Export files"
+msgstr ""
+
+#: rspub/gui/wmain.py:56
+msgid "&Statistics"
+msgstr ""
+
+#: rspub/gui/wmain.py:58 rspub/gui/wmain.py:125
+msgid "Statistics"
+msgstr "Statistieken"
+
+#: rspub/gui/wmain.py:61
+msgid "&Manual Sets"
+msgstr ""
+
+#: rspub/gui/wmain.py:63 rspub/gui/wmain.py:126
+msgid "Manual Sets"
+msgstr ""
+
+#: rspub/gui/wmain.py:66
+msgid "&Rule-based Sets"
+msgstr ""
+
+#: rspub/gui/wmain.py:68 rspub/gui/wmain.py:127
+msgid "Rule-based Sets"
+msgstr "Op regels gebaseerde sets"
+
+#: rspub/gui/wmain.py:74
+msgid "&File"
+msgstr ""
+
+#: rspub/gui/wmain.py:77
+msgid "&View"
+msgstr ""
+
+#: rspub/gui/wmain.py:123
+msgid "&Preferences"
+msgstr "&Voorkeuren"

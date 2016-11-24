@@ -118,3 +118,14 @@ class GuiConf(object):
     def set_language(self, language):
         self.__set_option__(SECTION_I18N, "language", language)
 
+    def window_width(self, fallback=500):
+        return self.__get_int__(SECTION_WINDOW, "window_width", fallback=fallback)
+
+    def set_window_width(self, width):
+        self.__set_int__(SECTION_WINDOW, "window_width", width)
+
+    def window_height(self, fallback=300):
+        return self.__get_int__(SECTION_WINDOW, "window_height", fallback=fallback)
+
+    def set_window_height(self, height):
+        self.__set_int__(SECTION_WINDOW, "window_height", height)

@@ -1,0 +1,3 @@
+en-US,English
+nl-NL,Nederlands
+fr-FR,Français
