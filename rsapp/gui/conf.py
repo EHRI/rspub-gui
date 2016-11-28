@@ -9,6 +9,7 @@ CFG_FILENAME = "rspub.cfg"
 CFG_DIRNAME = "gui"
 SECTION_I18N = "i18n"
 SECTION_WINDOW = "window"
+SECTION_MENU = "menu"
 
 LOG = logging.getLogger(__name__)
 

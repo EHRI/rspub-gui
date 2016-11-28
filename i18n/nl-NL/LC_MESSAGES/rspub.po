@@ -7,96 +7,196 @@ msgid ""
 msgstr ""
 "Project-Id-Version: rspub-gui 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-11-23 16:02+0100\n"
-"PO-Revision-Date: 2016-11-23 16:05+0100\n"
+"POT-Creation-Date: 2016-11-27 20:41+0100\n"
+"PO-Revision-Date: 2016-11-27 20:41+0100\n"
+"Last-Translator: \n"
 "Language-Team: \n"
+"Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
 "X-Generator: Poedit 1.8.11\n"
-"Last-Translator: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: nl_NL\n"
 
-#: rspub/gui/fpref.py:32
-msgid "Interface Language"
-msgstr "Taal van de interface"
+#: rsapp/gui/ctrl.py:60
+msgid "Could not reed iso-lang.json"
+msgstr "Kon bestand niet lezen: iso-lang.json"
 
-#: rspub/gui/wapp.py:34
-msgid "Starting application"
-msgstr "Applicatie starten"
-
-#: rspub/gui/wapp.py:35
+#: rsapp/gui/ctrl.py:91
 #, python-format
-msgid "APPLICATION_HOME=%s"
+msgid ""
+"%s\n"
+"Caused by:\n"
+"\n"
+"%s"
+msgstr ""
+"%s\n"
+"Veroorzaakt door:\n"
+"\n"
+"%s"
+
+#: rsapp/gui/fconfigure.py:93 rsapp/gui/fconfigure.py:99
+#: rsapp/gui/fconfigure.py:130 rsapp/gui/fconfigure.py:165
+msgid "_label"
 msgstr ""
 
-#: rspub/gui/wapp.py:36
-#, python-format
-msgid "LOCALE_DIR=%s"
-msgstr ""
+#: rsapp/gui/fconfigure.py:100
+msgid "Browse"
+msgstr "Bladeren"
 
-#: rspub/gui/wapp.py:37
+#: rsapp/gui/fconfigure.py:230 rsapp/gui/fconfigure.py:234
+#, python-format
+msgid "Configure parameters: '%s'"
+msgstr "Parameters configureren: '%s'"
+
+#: rsapp/gui/fconfigure.py:254
+msgid "resource_dir_label"
+msgstr "Digitale bron folder"
+
+#: rsapp/gui/fconfigure.py:255
+msgid "metadata_dir_label"
+msgstr "Metadata folder"
+
+#: rsapp/gui/fconfigure.py:256
+msgid "description_dir_label"
+msgstr "Bronbeschrijving folder"
+
+#: rsapp/gui/fconfigure.py:257
+msgid "plugin_dir_label"
+msgstr "Plugin folder"
+
+#: rsapp/gui/fconfigure.py:258
+msgid "url_prefix_label"
+msgstr "URL prefix"
+
+#: rsapp/gui/fconfigure.py:259
+msgid "strategy_label"
+msgstr "Strategie"
+
+#: rsapp/gui/fconfigure.py:260
+msgid "max_items_in_list_label"
+msgstr "Max. aantal items"
+
+#: rsapp/gui/fconfigure.py:261
+msgid "zero_fill_filename_label"
+msgstr "Nul-vul bestandsnaam"
+
+#: rsapp/gui/fconfigure.py:262
+msgid "is_saving_pretty_xml_label"
+msgstr "Sitemaps met nieuwe regels"
+
+#: rsapp/gui/fconfigure.py:263
+msgid "is_saving_sitemaps_label"
+msgstr "Sitemaps opslaan"
+
+#: rsapp/gui/fconfigure.py:264
+msgid "has_wellknown_at_root_label"
+msgstr "‘well-known’ op server root"
+
+#: rsapp/gui/fconfigure.py:266
+msgid "New resourcelist strategy"
+msgstr "Strategie nieuwe resourcelist"
+
+#: rsapp/gui/fconfigure.py:267
+msgid "New changelist strategy"
+msgstr "Strategie nieuwe changelist"
+
+#: rsapp/gui/fconfigure.py:268
+msgid "Incremental changelist strategy"
+msgstr "Strategie incrementele changelist"
+
+#: rsapp/gui/wapp.py:21
 msgid "Language was set to locale en-US"
 msgstr "De taal-instelling is verzet naar nl-NL"
 
-#: rspub/gui/wapp.py:44
-msgid "Closing application"
-msgstr "De applicatie sluiten"
+#: rsapp/gui/wmain.py:59 rsapp/gui/wmain.py:113
+msgid "File"
+msgstr "Bestand"
 
-#: rspub/gui/wmain.py:41
-msgid "&Exit"
-msgstr ""
+#: rsapp/gui/wmain.py:62 rsapp/gui/wmain.py:116
+msgid "Load configuration"
+msgstr "Configuratie laden"
 
-#: rspub/gui/wmain.py:43
+#: rsapp/gui/wmain.py:68 rsapp/gui/wmain.py:117 rsapp/gui/wmain.py:150
+msgid "Save configuration as..."
+msgstr "Configuratie opslaan als…"
+
+#: rsapp/gui/wmain.py:73 rsapp/gui/wmain.py:114
+msgid "Exit"
+msgstr "Afsluiten"
+
+#: rsapp/gui/wmain.py:83 rsapp/gui/wmain.py:118
+msgid "Preferences"
+msgstr "Voorkeuren"
+
+#: rsapp/gui/wmain.py:90 rsapp/gui/wmain.py:119
+msgid "Language"
+msgstr "Taal"
+
+#: rsapp/gui/wmain.py:115
 msgid "Exit application"
-msgstr ""
+msgstr "De applicatie afsluiten"
 
-#: rspub/gui/wmain.py:46
-msgid "&Configure"
-msgstr ""
+#: rsapp/gui/wmain.py:150
+msgid "Configuration name:"
+msgstr "Configuratie-naam:"
 
-#: rspub/gui/wmain.py:51
-msgid "&Export"
-msgstr ""
+#: rsapp/gui/wmain.py:178 rsapp/gui/wmain.py:184
+msgid "Configure"
+msgstr "Configureren"
 
-#: rspub/gui/wmain.py:53
-msgid "Export files"
-msgstr ""
+#: rsapp/gui/wmain.py:179 rsapp/gui/wmain.py:185
+msgid "Select"
+msgstr "Selecteren"
 
-#: rspub/gui/wmain.py:56
-msgid "&Statistics"
-msgstr ""
+#: rsapp/gui/wmain.py:180 rsapp/gui/wmain.py:186
+msgid "Execute"
+msgstr "Uitvoeren"
 
-#: rspub/gui/wmain.py:58 rspub/gui/wmain.py:125
-msgid "Statistics"
-msgstr "Statistieken"
+#~ msgid "Native menu"
+#~ msgstr "Systeem-eigen menu"
 
-#: rspub/gui/wmain.py:61
-msgid "&Manual Sets"
-msgstr ""
+#~ msgid "Load -configuration"
+#~ msgstr "-Configuratie laden"
 
-#: rspub/gui/wmain.py:63 rspub/gui/wmain.py:126
-msgid "Manual Sets"
-msgstr ""
+#~ msgid "Save -configuration as..."
+#~ msgstr "-Configuratie opslaan als…"
 
-#: rspub/gui/wmain.py:66
-msgid "&Rule-based Sets"
-msgstr ""
+#~ msgid "-Exit"
+#~ msgstr "Afsluiten"
 
-#: rspub/gui/wmain.py:68 rspub/gui/wmain.py:127
-msgid "Rule-based Sets"
-msgstr "Op regels gebaseerde sets"
+#~ msgid "Load con_figuration"
+#~ msgstr "‘Configuratie’ laden"
 
-#: rspub/gui/wmain.py:74
-msgid "&File"
-msgstr ""
+# On Mac menu items with words like Configuration end up in the sytem menu.
+# Slightly altered this does not happen.
+#~ msgid "Save con_figuration as..."
+#~ msgstr "#Configuratie opslaan als"
 
-#: rspub/gui/wmain.py:77
-msgid "&View"
-msgstr ""
+#~ msgid "&File"
+#~ msgstr "&Bestand"
 
-#: rspub/gui/wmain.py:123
-msgid "&Preferences"
-msgstr "&Voorkeuren"
+#~ msgid "&Exit"
+#~ msgstr "Afsluiten"
+
+#~ msgid "&Preferences"
+#~ msgstr "Voorkeuren"
+
+#~ msgid "&Language"
+#~ msgstr "&Taal"
+
+#~ msgid "&Configure"
+#~ msgstr "&Configureren"
+
+#~ msgid "&Select"
+#~ msgstr "&Selecteren"
+
+#~ msgid "&Execute"
+#~ msgstr "&Uitvoeren"
+
+#~ msgid "&Open configuration"
+#~ msgstr "Open configuratie"
+
+#~ msgid "Open a saved configuration"
+#~ msgstr "Een opgeslagen configuratie openen"

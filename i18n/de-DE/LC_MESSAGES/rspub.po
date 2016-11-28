@@ -7,11 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: rspub-gui 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-11-27 21:04+0100\n"
-"PO-Revision-Date: 2016-11-27 21:05+0100\n"
+"POT-Creation-Date: 2016-11-27 21:07+0100\n"
+"PO-Revision-Date: 2016-11-27 21:22+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Language: en_GB\n"
+"Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -20,8 +20,8 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: rsapp/gui/ctrl.py:60
-msgid "Could not reed iso-lang.json"
-msgstr ""
+msgid "Could not read iso-lang.json"
+msgstr "iso-lang.json konnte nicht gelesen werden"
 
 #: rsapp/gui/ctrl.py:91
 #, python-format
@@ -31,6 +31,10 @@ msgid ""
 "\n"
 "%s"
 msgstr ""
+"%s\n"
+"Verursacht durch:\n"
+"\n"
+"%s"
 
 #: rsapp/gui/fconfigure.py:93 rsapp/gui/fconfigure.py:99
 #: rsapp/gui/fconfigure.py:130 rsapp/gui/fconfigure.py:165
@@ -39,134 +43,131 @@ msgstr ""
 
 #: rsapp/gui/fconfigure.py:100
 msgid "Browse"
-msgstr ""
+msgstr "Durchsuchen"
 
 #: rsapp/gui/fconfigure.py:230 rsapp/gui/fconfigure.py:234
 #, python-format
 msgid "Configure parameters: '%s'"
-msgstr ""
+msgstr "Konfigurieren von Parametern: ‘%s’"
 
 #: rsapp/gui/fconfigure.py:254
 msgid "resource_dir_label"
-msgstr "Resource directory"
+msgstr ""
 
 #: rsapp/gui/fconfigure.py:255
 msgid "metadata_dir_label"
-msgstr "Metadata directory"
+msgstr ""
 
 #: rsapp/gui/fconfigure.py:256
 msgid "description_dir_label"
-msgstr "Description directory"
+msgstr ""
 
 #: rsapp/gui/fconfigure.py:257
 msgid "plugin_dir_label"
-msgstr "Plugin directory"
+msgstr ""
 
 #: rsapp/gui/fconfigure.py:258
 msgid "url_prefix_label"
-msgstr "URL prefix"
+msgstr "URL-Präfix"
 
 #: rsapp/gui/fconfigure.py:259
 msgid "strategy_label"
-msgstr "Strategy"
+msgstr "Strategie"
 
 #: rsapp/gui/fconfigure.py:260
 msgid "max_items_in_list_label"
-msgstr "Max. items in one list"
+msgstr "Max. Artikel in der Liste"
 
 #: rsapp/gui/fconfigure.py:261
 msgid "zero_fill_filename_label"
-msgstr "Zero-fill filename"
+msgstr "Null-Füllung Dateiname"
 
 #: rsapp/gui/fconfigure.py:262
 msgid "is_saving_pretty_xml_label"
-msgstr "Sitemaps with new lines"
+msgstr "Xml mit Zeilenumbrüchen"
 
 #: rsapp/gui/fconfigure.py:263
 msgid "is_saving_sitemaps_label"
-msgstr "Save sitemaps to disk"
+msgstr "Speichern von Sitemaps"
 
 #: rsapp/gui/fconfigure.py:264
 msgid "has_wellknown_at_root_label"
-msgstr "‘well-known’ is at server root"
+msgstr ""
 
 #: rsapp/gui/fconfigure.py:266
 msgid "New resourcelist strategy"
-msgstr ""
+msgstr "Neue Resourcelist Strategie"
 
 #: rsapp/gui/fconfigure.py:267
 msgid "New changelist strategy"
-msgstr ""
+msgstr "Neue Changelist-Strategie"
 
 #: rsapp/gui/fconfigure.py:268
 msgid "Incremental changelist strategy"
-msgstr ""
+msgstr "Inkrementelle Changelist-Strategie"
 
 #: rsapp/gui/wapp.py:21
 msgid "Language was set to locale en-US"
-msgstr ""
+msgstr "Sprache wurde auf Gebietsschema festgelegt de-DE"
 
 #: rsapp/gui/wmain.py:59 rsapp/gui/wmain.py:113
 msgid "File"
-msgstr ""
+msgstr "Datei"
 
 #: rsapp/gui/wmain.py:62 rsapp/gui/wmain.py:116
 msgid "Load configuration"
-msgstr ""
+msgstr "Konfiguration laden"
 
 #: rsapp/gui/wmain.py:68 rsapp/gui/wmain.py:117 rsapp/gui/wmain.py:150
 msgid "Save configuration as..."
-msgstr ""
+msgstr "Konfiguration speichern"
 
 #: rsapp/gui/wmain.py:73 rsapp/gui/wmain.py:114
 msgid "Exit"
-msgstr ""
+msgstr "Ausgang"
 
 #: rsapp/gui/wmain.py:83 rsapp/gui/wmain.py:118
 msgid "Preferences"
-msgstr ""
+msgstr "Einstellungen"
 
 #: rsapp/gui/wmain.py:90 rsapp/gui/wmain.py:119
 msgid "Language"
-msgstr ""
+msgstr "Sprache"
 
 #: rsapp/gui/wmain.py:115
 msgid "Exit application"
-msgstr ""
+msgstr "Anwendung beenden"
 
 #: rsapp/gui/wmain.py:150
 msgid "Configuration name:"
-msgstr ""
+msgstr "Konfigurationsname:"
 
 #: rsapp/gui/wmain.py:178 rsapp/gui/wmain.py:184
 msgid "Configure"
-msgstr ""
+msgstr "Konfigurieren"
 
 #: rsapp/gui/wmain.py:179 rsapp/gui/wmain.py:185
 msgid "Select"
-msgstr ""
+msgstr "Wählen"
 
 #: rsapp/gui/wmain.py:180 rsapp/gui/wmain.py:186
 msgid "Execute"
-msgstr ""
+msgstr "Ausführen"
 
-#~ msgid "Load con_figuration"
-#~ msgstr "Load configuration"
+#~ msgid "&File"
+#~ msgstr "&Datei"
 
-#~ msgid "Save con_figuration as..."
-#~ msgstr "Save configuration as..."
+#~ msgid "&Exit"
+#~ msgstr "&Ausgang"
 
-#~ msgid "Interface Language"
-#~ msgstr "Interface Language"
+#~ msgid "&Language"
+#~ msgstr "&Sprache"
 
-#~ msgid "Starting application"
-#~ msgstr "Starting application"
+#~ msgid "&Open configuration"
+#~ msgstr "&Konfiguration öffnen"
 
-#~ msgid "APPLICATION_HOME=%s"
-#~ msgstr "APPLICATION_HOME=%s"
+#~ msgid "Open a saved configuration"
+#~ msgstr "Eine gespeicherte Konfiguration öffnen"
 
-#~ msgid "LOCALE_DIR=%s"
-#~ msgstr "LOCALE_DIR=%s"
-
-#~ msgid "Closing application"
-#~ msgstr "Closing application"
+#~ msgid "&View"
+#~ msgstr "&Aussicht"

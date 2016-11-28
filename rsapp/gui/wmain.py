@@ -2,214 +2,219 @@
 # -*- coding: utf-8 -*-
 import logging
 
+from PyQt5.QtCore import pyqtSlot
 from PyQt5.QtWidgets import QAction, qApp
 from PyQt5.QtWidgets import QActionGroup
+from PyQt5.QtWidgets import QApplication
+from PyQt5.QtWidgets import QInputDialog
 from PyQt5.QtWidgets import QMainWindow
 from PyQt5.QtWidgets import QMenu
+from PyQt5.QtWidgets import QMessageBox
 from PyQt5.QtWidgets import QTabWidget
-from PyQt5.QtWidgets import QWidget
 
-from rsapp.gui import utils
 from rsapp.gui.conf import GuiConf
-from rsapp.gui.fpref import PreferencesFrame
+from rsapp.gui.fconfigure import ConfigureFrame
+from rsapp.gui.fexecute import ExecuteFrame
+from rsapp.gui.finspect import InspectFrame
+from rsapp.gui.fselect import SelectFrame
+from rspub.core.config import Configurations
 
 LOG = logging.getLogger(__name__)
+
+# Menus disappear when the menu text -or its translation- is 'special'
+# under MacOs and -
+#       self.menubar.setNativeMenuBar(True)
+# - .
 
 
 class WMain(QMainWindow):
 
     def __init__(self):
         super().__init__()
+        self.ctrl = QApplication.instance().ctrl
+        self.ctrl.switch_language.connect(self.retranslate_ui)
+        self.ctrl.switch_configuration.connect(self.reset_paras)
+        self.paras = self.ctrl.paras
         self.config = GuiConf()
+
         self.init_ui()
         self.retranslate_ui()
+        self.reset_paras()
         self.show()
 
     def init_ui(self):
-        self.create_actions()
         self.create_menus()
-
-
 
         self.tabframe = TabbedFrame(self)
         self.setCentralWidget(self.tabframe)
-        self.resize(self.config.window_width(), self.config.window_height())
+        self.resize(self.ctrl.config.window_width(), self.ctrl.config.window_height())
 
-    def create_actions(self):
-        self.action_exit = QAction(self)
+
+    ####### menu bar ######################################
+    def create_menus(self):
+        self.menubar = self.menuBar()
+        self.menubar.setNativeMenuBar(False)
+
+        self.menu_file = QMenu(_("File"), self)
+        self.menubar.addMenu(self.menu_file)
+
+        self.menu_open_config = QMenu(_("Load configuration"), self)
+        self.menu_file.addMenu(self.menu_open_config)
+        self.config_action_group = QActionGroup(self)
+        self.config_action_group.triggered.connect(self.switch_config)
+        self.menu_open_config.aboutToShow.connect(self.set_open_config_menu_items)
+
+        self.action_save_configuration_as = QAction(_("Save configuration as..."), self)
+        self.menu_file.addAction(self.action_save_configuration_as)
+        self.action_save_configuration_as.triggered.connect(self.save_configuration_as)
+
+        self.menu_file.addSeparator()
+        self.action_exit = QAction(_("Exit"), self)
         self.action_exit.setShortcut("Ctrl+Q")
         self.action_exit.triggered.connect(qApp.quit)
+        self.menu_file.addAction(self.action_exit)
 
-        self.action_open_configuration = QAction(self)
-        self.action_open_configuration.setShortcut("Ctrl+O")
-        self.action_open_configuration.triggered.connect(self.open_configuration)
+        self.menu_settings = self.create_menu_settings()
+        self.menubar.addMenu(self.menu_settings)
 
-    def create_menus(self):
-        self.menu_file = self.create_menu_file()
+    ####### menus ######################################
+    def create_menu_settings(self):
+        menu_settings = QMenu(_("Preferences"), self)
         self.menu_language = self.create_menu_language()
+        menu_settings.addMenu(self.menu_language)
 
-        self.menubar = self.menuBar()
-        self.menubar.setNativeMenuBar(True)
-        self.menubar.addMenu(self.menu_file)
-        self.menubar.addMenu(self.menu_language)
-
-    def create_menu_file(self):
-        menu_file = QMenu(self)
-        menu_file.addAction(self.action_exit)
-        menu_file.addAction(self.action_open_configuration)
-        return menu_file
+        return menu_settings
 
     def create_menu_language(self):
-        language_menu = QMenu(self)
-        languageActionGroup = QActionGroup(self)
-        languageActionGroup.triggered.connect(self.switch_language)
-        lang_idx = utils.language_index()
-        current_locale = utils.current_language()
-        for locale in utils.locales():
-            if locale in lang_idx:
-                language = lang_idx[locale]
+        language_menu = QMenu(_("Language"), self)
+        action_group = QActionGroup(self)
+        action_group.triggered.connect(self.switch_language)
+        iso_idx = self.ctrl.iso_lang()
+        current_locale = self.ctrl.current_language()
+
+        for locale in self.ctrl.locales():
+            short_locale = locale.split("-")[0]
+            if short_locale in iso_idx:
+                iso = iso_idx[short_locale]
             else:
-                language = "-"
-            action = QAction(language + " (" + locale + ")", self)
+                iso = {'nativeName': '-', 'name': '-'}
+            action = QAction("%s - %s | %s" % (iso["nativeName"], iso["name"], locale), self)
             action.setCheckable(True)
             action.setData(locale)
             language_menu.addAction(action)
-            languageActionGroup.addAction(action)
+            action_group.addAction(action)
             if locale == current_locale:
                 action.setChecked(True)
         return language_menu
 
-
-    def retranslate_ui(self):
-        self.menu_file.setTitle(_("&File"))
-
-        self.action_exit.setText(_("&Exit"))
+    ####### functions #######################################
+    def retranslate_ui(self, code=None):
+        self.menu_file.setTitle(_("File"))
+        self.action_exit.setText(_("Exit"))
         self.action_exit.setStatusTip(_("Exit application"))
+        self.menu_open_config.setTitle(_("Load configuration"))
+        self.action_save_configuration_as.setText(_("Save configuration as..."))
+        self.menu_settings.setTitle(_("Preferences"))
+        self.menu_language.setTitle(_("Language"))
 
-        self.action_open_configuration.setText(_("&Open configuration"))
-        self.action_open_configuration.setStatusTip(_("Open a saved configuration"))
+    def reset_paras(self, name=None):
+        self.paras = self.ctrl.paras
+        self.setWindowTitle(self.paras.configuration_name())
 
-        self.menu_language.setTitle(_("&Language"))
+    def set_open_config_menu_items(self):
+        self.menu_open_config.clear()
+        for child in self.config_action_group.children():
+            self.config_action_group.removeAction(child)
+        current_name = Configurations.current_configuration_name()
+        for name in Configurations.list_configurations():
+            action = QAction(name, self)
+            action.setCheckable(True)
+            action.setData(name)
+            self. config_action_group.addAction(action)
+            self.menu_open_config.addAction(action)
+            if name == current_name:
+                action.setChecked(True)
 
-        self.tabframe.retranslate_ui()
-
-    def open_configuration(self):
-        LOG.debug("open congig")
-
-    def create_menu(self):
-
-        exit_action = QAction(_("&Exit"), self)
-        exit_action.setShortcut("Ctrl+Q")
-        exit_action.setStatusTip(_("Exit application"))
-        exit_action.triggered.connect(qApp.quit)
-
-        show_configure_action = QAction(_("&Configure"), self)
-        show_configure_action.setShortcut("Ctrl+C")
-        show_configure_action.setStatusTip("Configure rsync")
-        show_configure_action.triggered.connect(lambda: self.on_tab_choice(0))
-
-        show_export_action = QAction(_("&Export"), self)
-        show_export_action.setShortcut("Ctrl+E")
-        show_export_action.setStatusTip(_("Export files"))
-        show_export_action.triggered.connect(lambda: self.on_tab_choice(1))
-
-        show_statistics_action = QAction(_("&Statistics"), self)
-        show_statistics_action.setShortcut("Ctrl+S")
-        show_statistics_action.setStatusTip(_("Statistics"))
-        show_statistics_action.triggered.connect(lambda: self.on_tab_choice(2))
-
-        show_man_sets_action = QAction(_("&Manual Sets"), self)
-        show_man_sets_action.setShortcut("Ctrl+M")
-        show_man_sets_action.setStatusTip(_("Manual Sets"))
-        show_man_sets_action.triggered.connect(lambda: self.on_tab_choice(3))
-
-        show_rule_based_sets_action = QAction(_("&Rule-based Sets"), self)
-        show_rule_based_sets_action.setShortcut("Ctrl+R")
-        show_rule_based_sets_action.setStatusTip(_("Rule-based Sets"))
-        show_rule_based_sets_action.triggered.connect(lambda: self.on_tab_choice(4))
-
-
-        self.menubar.setNativeMenuBar(True)
-
-        self.fileMenu = self.menubar.addMenu(_("&File"))
-        self.fileMenu.addAction(exit_action)             # on mac under [application] > Quit [application]
-
-        self.viewMenu = self.menubar.addMenu(_("&View"))
-        self.viewMenu.addAction(show_configure_action)   # on mac under [application] > Preverences
-        self.viewMenu.addAction(show_export_action)
-        self.viewMenu.addAction(show_statistics_action)
-        self.viewMenu.addAction(show_man_sets_action)
-        self.viewMenu.addAction(show_rule_based_sets_action)
-
-        self.tab_actions = list()
-        self.tab_actions.append(show_configure_action)      # 0
-        self.tab_actions.append(show_export_action)         # 1
-        self.tab_actions.append(show_statistics_action)     # 2
-        self.tab_actions.append(show_man_sets_action)       # 3
-        self.tab_actions.append(show_rule_based_sets_action) # 4
-
-        self.menu_language = self.create_menu_language()
-        self.menubar.addMenu(self.menu_language)
-
+    def switch_config(self):
+        action_group = self.sender()
+        name = action_group.checkedAction().data()
+        if self.tabframe.ok_to_change_parameters(_("Switch configuration...")):
+            self.ctrl.load_configuration(name)
 
     def switch_language(self):
         action_group = self.sender()
         locale = action_group.checkedAction().data()
-        utils.set_language(locale)
-        self.retranslate_ui()
+        self.ctrl.set_language(locale)
 
-    # def on_tab_choice(self, tabnr):
-    #     self.tabframe.setCurrentIndex(tabnr)
-    #     self.set_tab_menu_enabled(tabnr)
-    #
-    # def set_tab_menu_enabled(self, tabnr):
-    #     for action in self.tab_actions:
-    #         action.setEnabled(True)
-    #     self.tab_actions[tabnr].setEnabled(False)
+    def save_configuration_as(self):
+        text =  _("Save configuration as...")
+        if self.tabframe.ok_to_change_parameters(text):
+            name, ok = QInputDialog.getText(self, text, _("Configuration name:"))
+            if ok:
+                self.ctrl.save_configuration_as(name)
 
     def close(self):
         LOG.debug("window closing")
-        self.config.set_window_height(self.height())
-        self.config.set_window_width(self.width())
-        self.config.persist()
+        self.ctrl.config.set_window_height(self.height())
+        self.ctrl.config.set_window_width(self.width())
+        self.ctrl.config.persist()
         self.tabframe.close()
 
 
+# ################################################################
 class TabbedFrame(QTabWidget):
 
     def __init__(self, parent):
         super().__init__(parent)
-        self.parent = parent
+        self.ctrl = QApplication.instance().ctrl
+        self.ctrl.switch_language.connect(self.retranslate_ui)
         self.currentChanged.connect(self.__tabchanged)
         self.previndex = -1
-        self.preferencesFrame = PreferencesFrame(self)
-        # self.exportframe = ExportFrame(self)
         self.init_ui()
 
+    def init_ui(self):
+        self.frame_configure = ConfigureFrame(self)
+        self.frame_inspect = InspectFrame(self)
+        self.frame_select = SelectFrame(self)
+        self.frame_execute = ExecuteFrame(self)
+
+        self.addTab(self.frame_configure, _("Configure"))
+        self.addTab(self.frame_inspect, _("Inspect"))
+        self.addTab(self.frame_select, _("Select"))
+        self.addTab(self.frame_execute, _("Execute"))
+
+    @pyqtSlot(str)
+    def retranslate_ui(self, code=None):
+        self.setTabText(0, _("Configure"))
+        self.setTabText(1, _("Inspect"))
+        self.setTabText(2, _("Select"))
+        self.setTabText(3, _("Execute"))
+
+    @pyqtSlot(int)
     def __tabchanged(self, index):
         if self.previndex > -1:
             self.widget(self.previndex).hide()
 
         self.widget(index).show()
         self.previndex = index
-        #self.parent.set_tab_menu_enabled(index)
 
-    def init_ui(self):
-        LOG.debug("Initializing TabbedFrame")
-        # self.addTab(self.configframe, _("&Configuration"))
-        # self.addTab(self.exportframe, _("&Export"))
-
-        self.addTab(self.preferencesFrame, _("&Preferences"))
-
-
-        self.addTab(QWidget(), _("Statistics"))
-        self.addTab(QWidget(), _("Manual Sets"))
-        self.addTab(QWidget(), _("Rule-based Sets"))
-
-    def retranslate_ui(self):
-        self.setTabText(0, _("&Preferences"))
-        self.preferencesFrame.retranslate_ui()
-
+    def ok_to_change_parameters(self, text):
+        ok_to_change = True
+        error_count = self.frame_configure.count_errors()
+        if error_count > 0:
+            msg_box = QMessageBox()
+            msg_box.setText(text)
+            i_text = _("Parameters '%s' has %d error(s).") % (self.paras.configuration_name(), error_count)
+            i_text += "\n\n"
+            i_text += _("Ok to proceed?")
+            msg_box.setInformativeText(i_text)
+            msg_box.setIcon(QMessageBox.Question)
+            msg_box.setStandardButtons(QMessageBox.No | QMessageBox.Yes)
+            msg_box.setDefaultButton(QMessageBox.Yes)
+            exe = msg_box.exec()
+            if exe == QMessageBox.No:
+                ok_to_change = False
+        return ok_to_change
 
     def close(self):
         LOG.debug("TabbedFrame closing")

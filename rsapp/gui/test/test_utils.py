@@ -13,3 +13,10 @@ class Test_utiles(unittest.TestCase):
 
     def test_language_index(self):
         print(utils.language_index())
+
+    def test_iso_lang(self):
+        data = utils.iso_lang()
+        #print(data)
+        print(data["bh"])
+        print(data["bh"]["name"])
+        print(data["bh"]["nativeName"])
