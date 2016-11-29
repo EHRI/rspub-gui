@@ -1,5 +1,20 @@
 --index-url https://pypi.python.org/simple/
 
+### requirements.txt ##############################################
+###
+### To install, run:
+###      $ pip install -r requirements.txt
+###
+### PyQt5 needs to be installed on the system.
+### There are several ways to do this, depending on the operating
+### system, your skills and what dependencies and tools are
+### already installed.
+### See:    http://pyqt.sourceforge.net/Docs/PyQt5/installation.html
+###         https://www.riverbankcomputing.com/software/pyqt/download5
+###         https://pypi.python.org/pypi/PyQt5
+###         https://pypi.python.org/pypi/pyqt5-installer
+###################################################################
+
 # pyqt5 ## can only be done (installed by pip) under Python >= 3.5.
 # see http://pyqt.sourceforge.net/Docs/PyQt5/installation.html#building-and-installing-from-source
 

@@ -187,7 +187,7 @@ class ParaStrategyDrop(ParaWidget):
         self.combo.clear()
         for i in range(len(Strategy.names())):
             strategy = Strategy.strategy_for(i)
-            self.combo.addItem(_(strategy.describe()), strategy.name)
+            self.combo.addItem(_(str(strategy)), strategy.name)
 
     def reset_paras(self):
         self.paras = self.ctrl.paras
@@ -248,7 +248,6 @@ class ConfigureFrame(QFrame):
 
         vbl_0.addLayout(grid)
         vbl_0.addStretch(1)
-
         self.setLayout(vbl_0)
 
     def count_errors(self):
@@ -302,9 +301,6 @@ class ConfigureFrame(QFrame):
         _("is_saving_sitemaps_label")
         _("has_wellknown_at_root_label")
 
-        strategy_descriptions = [_("New resourcelist strategy"),
-                                 _("New changelist strategy"),
-                                 _("Incremental changelist strategy")]
 
 
 

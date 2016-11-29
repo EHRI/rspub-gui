@@ -23,6 +23,7 @@ class Ctrl(QObject):
 
     switch_language = pyqtSignal(str)
     switch_configuration = pyqtSignal(str)
+    switch_tab = pyqtSignal(int)
 
     def __init__(self, application_home, locale_dir):
         QObject.__init__(self)
@@ -30,6 +31,9 @@ class Ctrl(QObject):
         self.locale_dir = locale_dir
         self.config = GuiConf()
         self.paras = RsParameters()
+
+    def report_tab_switch(self, index):
+        self.switch_tab.emit(index)
 
     def locales(self):
         return [os.path.basename(x) for x in glob.glob(os.path.join(self.locale_dir, "*-*")) if os.path.isdir(x)]

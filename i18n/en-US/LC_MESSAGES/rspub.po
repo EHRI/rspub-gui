@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: rspub-gui 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-11-27 21:04+0100\n"
-"PO-Revision-Date: 2016-11-27 21:05+0100\n"
+"POT-Creation-Date: 2016-11-28 18:26+0100\n"
+"PO-Revision-Date: 2016-11-28 18:26+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_GB\n"
@@ -19,11 +19,11 @@ msgstr ""
 "X-Generator: Poedit 1.8.11\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: rsapp/gui/ctrl.py:60
-msgid "Could not reed iso-lang.json"
+#: rsapp/gui/ctrl.py:62
+msgid "Could not read iso-lang.json"
 msgstr ""
 
-#: rsapp/gui/ctrl.py:91
+#: rsapp/gui/ctrl.py:100
 #, python-format
 msgid ""
 "%s\n"
@@ -32,122 +32,202 @@ msgid ""
 "%s"
 msgstr ""
 
-#: rsapp/gui/fconfigure.py:93 rsapp/gui/fconfigure.py:99
-#: rsapp/gui/fconfigure.py:130 rsapp/gui/fconfigure.py:165
+#: rsapp/gui/fconfigure.py:113 rsapp/gui/fconfigure.py:119
+#: rsapp/gui/fconfigure.py:151 rsapp/gui/fconfigure.py:186
+#: rsapp/gui/finspect.py:92
 msgid "_label"
 msgstr ""
 
-#: rsapp/gui/fconfigure.py:100
+#: rsapp/gui/fconfigure.py:120
 msgid "Browse"
 msgstr ""
 
-#: rsapp/gui/fconfigure.py:230 rsapp/gui/fconfigure.py:234
+#: rsapp/gui/fconfigure.py:245
+msgid "Reset"
+msgstr ""
+
+#: rsapp/gui/fconfigure.py:257 rsapp/gui/fconfigure.py:261
 #, python-format
 msgid "Configure parameters: '%s'"
 msgstr ""
 
-#: rsapp/gui/fconfigure.py:254
+#: rsapp/gui/fconfigure.py:265
+msgid "Reset current parameters"
+msgstr ""
+
+#: rsapp/gui/fconfigure.py:266
+#, python-format
+msgid "Reset '%s' parameters to default values?"
+msgstr ""
+
+#: rsapp/gui/fconfigure.py:292 rsapp/gui/finspect.py:112
 msgid "resource_dir_label"
 msgstr "Resource directory"
 
-#: rsapp/gui/fconfigure.py:255
+#: rsapp/gui/fconfigure.py:293 rsapp/gui/finspect.py:113
 msgid "metadata_dir_label"
 msgstr "Metadata directory"
 
-#: rsapp/gui/fconfigure.py:256
+#: rsapp/gui/fconfigure.py:294 rsapp/gui/finspect.py:115
 msgid "description_dir_label"
 msgstr "Description directory"
 
-#: rsapp/gui/fconfigure.py:257
+#: rsapp/gui/fconfigure.py:295 rsapp/gui/finspect.py:123
 msgid "plugin_dir_label"
 msgstr "Plugin directory"
 
-#: rsapp/gui/fconfigure.py:258
+#: rsapp/gui/fconfigure.py:296 rsapp/gui/finspect.py:117
 msgid "url_prefix_label"
 msgstr "URL prefix"
 
-#: rsapp/gui/fconfigure.py:259
+#: rsapp/gui/fconfigure.py:297 rsapp/gui/finspect.py:121
 msgid "strategy_label"
 msgstr "Strategy"
 
-#: rsapp/gui/fconfigure.py:260
+#: rsapp/gui/fconfigure.py:298 rsapp/gui/finspect.py:124
 msgid "max_items_in_list_label"
 msgstr "Max. items in one list"
 
-#: rsapp/gui/fconfigure.py:261
+#: rsapp/gui/fconfigure.py:299 rsapp/gui/finspect.py:125
 msgid "zero_fill_filename_label"
 msgstr "Zero-fill filename"
 
-#: rsapp/gui/fconfigure.py:262
+#: rsapp/gui/fconfigure.py:300 rsapp/gui/finspect.py:127
 msgid "is_saving_pretty_xml_label"
 msgstr "Sitemaps with new lines"
 
-#: rsapp/gui/fconfigure.py:263
+#: rsapp/gui/fconfigure.py:301 rsapp/gui/finspect.py:128
 msgid "is_saving_sitemaps_label"
 msgstr "Save sitemaps to disk"
 
-#: rsapp/gui/fconfigure.py:264
+#: rsapp/gui/fconfigure.py:302 rsapp/gui/finspect.py:118
 msgid "has_wellknown_at_root_label"
 msgstr "‘well-known’ is at server root"
 
-#: rsapp/gui/fconfigure.py:266
-msgid "New resourcelist strategy"
+#: rsapp/gui/finspect.py:78 rsapp/gui/finspect.py:83
+#, python-format
+msgid "Inspect configuration: '%s'"
 msgstr ""
 
-#: rsapp/gui/fconfigure.py:267
-msgid "New changelist strategy"
+#: rsapp/gui/finspect.py:111
+msgid "configuration_name_label"
+msgstr "Configuration name"
+
+#: rsapp/gui/finspect.py:114
+msgid "abs_metadata_dir_label"
+msgstr "Absolute path to metadata directory"
+
+#: rsapp/gui/finspect.py:116
+msgid "abs_description_path_label"
+msgstr "Absolute path to source description"
+
+#: rsapp/gui/finspect.py:119
+msgid "description_url_label"
+msgstr "Source description URL"
+
+#: rsapp/gui/finspect.py:120
+msgid "capabilitylist_url_label"
+msgstr "Capability list URL"
+
+#: rsapp/gui/finspect.py:122
+msgid "selector_file_label"
+msgstr "Associated selector file"
+
+#: rsapp/gui/finspect.py:126
+msgid "example_filename_label"
+msgstr "Example filename"
+
+#: rsapp/gui/finspect.py:129
+msgid "last_execution_label"
+msgstr "Last execution"
+
+#: rsapp/gui/finspect.py:133
+msgid "Strategy.resourcelist"
+msgstr "New resourcelist strategy"
+
+#: rsapp/gui/finspect.py:134
+msgid "Strategy.new_changelist"
+msgstr "New changelist strategy"
+
+#: rsapp/gui/finspect.py:135
+msgid "Strategy.inc_changelist"
+msgstr "Incremental changelist strategy"
+
+#: rsapp/gui/finspect.py:136
+msgid "True"
 msgstr ""
 
-#: rsapp/gui/fconfigure.py:268
-msgid "Incremental changelist strategy"
+#: rsapp/gui/finspect.py:137
+msgid "False"
+msgstr ""
+
+#: rsapp/gui/finspect.py:138
+msgid "None"
 msgstr ""
 
 #: rsapp/gui/wapp.py:21
 msgid "Language was set to locale en-US"
 msgstr ""
 
-#: rsapp/gui/wmain.py:59 rsapp/gui/wmain.py:113
+#: rsapp/gui/wmain.py:58 rsapp/gui/wmain.py:112
 msgid "File"
 msgstr ""
 
-#: rsapp/gui/wmain.py:62 rsapp/gui/wmain.py:116
+#: rsapp/gui/wmain.py:61 rsapp/gui/wmain.py:115
 msgid "Load configuration"
 msgstr ""
 
-#: rsapp/gui/wmain.py:68 rsapp/gui/wmain.py:117 rsapp/gui/wmain.py:150
+#: rsapp/gui/wmain.py:67 rsapp/gui/wmain.py:116 rsapp/gui/wmain.py:150
 msgid "Save configuration as..."
 msgstr ""
 
-#: rsapp/gui/wmain.py:73 rsapp/gui/wmain.py:114
+#: rsapp/gui/wmain.py:72 rsapp/gui/wmain.py:113
 msgid "Exit"
 msgstr ""
 
-#: rsapp/gui/wmain.py:83 rsapp/gui/wmain.py:118
+#: rsapp/gui/wmain.py:82 rsapp/gui/wmain.py:117
 msgid "Preferences"
 msgstr ""
 
-#: rsapp/gui/wmain.py:90 rsapp/gui/wmain.py:119
+#: rsapp/gui/wmain.py:89 rsapp/gui/wmain.py:118
 msgid "Language"
 msgstr ""
 
-#: rsapp/gui/wmain.py:115
+#: rsapp/gui/wmain.py:114
 msgid "Exit application"
 msgstr ""
 
-#: rsapp/gui/wmain.py:150
+#: rsapp/gui/wmain.py:141
+msgid "Switch configuration..."
+msgstr ""
+
+#: rsapp/gui/wmain.py:152
 msgid "Configuration name:"
 msgstr ""
 
-#: rsapp/gui/wmain.py:178 rsapp/gui/wmain.py:184
+#: rsapp/gui/wmain.py:181 rsapp/gui/wmain.py:188
 msgid "Configure"
 msgstr ""
 
-#: rsapp/gui/wmain.py:179 rsapp/gui/wmain.py:185
+#: rsapp/gui/wmain.py:182 rsapp/gui/wmain.py:189
+msgid "Inspect"
+msgstr ""
+
+#: rsapp/gui/wmain.py:183 rsapp/gui/wmain.py:190
 msgid "Select"
 msgstr ""
 
-#: rsapp/gui/wmain.py:180 rsapp/gui/wmain.py:186
+#: rsapp/gui/wmain.py:184 rsapp/gui/wmain.py:191
 msgid "Execute"
+msgstr ""
+
+#: rsapp/gui/wmain.py:208
+#, python-format
+msgid "Parameters '%s' has %d error(s)."
+msgstr ""
+
+#: rsapp/gui/wmain.py:210
+msgid "Ok to proceed?"
 msgstr ""
 
 #~ msgid "Load con_figuration"

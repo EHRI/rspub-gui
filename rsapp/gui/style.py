@@ -13,5 +13,13 @@ class Style(object):
         return "color: rgb(0, 0, 0);"
 
     @staticmethod
+    def parameter():
+        return "background-color: rgb(255, 255, 255);"
+
+    @staticmethod
+    def derived():
+        return "background-color: rgb(242, 245, 249);"
+
+    @staticmethod
     def h2():
         return "color: rgb(90, 100, 120); background-color: rgb(225,225,225);"

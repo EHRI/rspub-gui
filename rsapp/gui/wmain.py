@@ -195,6 +195,7 @@ class TabbedFrame(QTabWidget):
         if self.previndex > -1:
             self.widget(self.previndex).hide()
 
+        self.ctrl.report_tab_switch(index)
         self.widget(index).show()
         self.previndex = index
 
