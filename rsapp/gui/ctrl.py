@@ -12,7 +12,9 @@ from PyQt5.QtCore import pyqtSignal
 from PyQt5.QtWidgets import QMessageBox
 
 from rsapp.gui.conf import GuiConf
+from rspub.core.config import Configurations
 from rspub.core.rs_paras import RsParameters
+from rspub.core.selector import Selector
 
 LOG = logging.getLogger(__name__)
 LOCALE_DOMAIN = "rspub"
@@ -82,6 +84,17 @@ class Ctrl(QObject):
             self.switch_configuration.emit(self.paras.configuration_name())
         except Exception as err:
             self.error("Unable to reset parameters.", err)
+
+    def get_selector(self):
+        if self.paras.selector_file:
+            try:
+                selector = Selector(location=self.paras.selector_file)
+            except Exception as err:
+                self.error("Unable to read selector file '%s." % self.paras.selector_file, err)
+                selector = Selector()
+        else:
+            selector = Selector()
+        return selector
 
     @staticmethod
     def error(msg, cause=None):

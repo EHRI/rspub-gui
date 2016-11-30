@@ -3,20 +3,31 @@
 import logging
 
 from PyQt5.QtCore import pyqtSlot
+from PyQt5.QtGui import QFont
+from PyQt5.QtGui import QStandardItem
+from PyQt5.QtGui import QStandardItemModel
+from PyQt5.QtWidgets import QAbstractItemView
 from PyQt5.QtWidgets import QAction, qApp
 from PyQt5.QtWidgets import QActionGroup
 from PyQt5.QtWidgets import QApplication
+from PyQt5.QtWidgets import QDialog
+from PyQt5.QtWidgets import QHBoxLayout
 from PyQt5.QtWidgets import QInputDialog
+from PyQt5.QtWidgets import QLabel
+from PyQt5.QtWidgets import QListView
 from PyQt5.QtWidgets import QMainWindow
 from PyQt5.QtWidgets import QMenu
 from PyQt5.QtWidgets import QMessageBox
+from PyQt5.QtWidgets import QPushButton
 from PyQt5.QtWidgets import QTabWidget
+from PyQt5.QtWidgets import QVBoxLayout
 
 from rsapp.gui.conf import GuiConf
 from rsapp.gui.fconfigure import ConfigureFrame
 from rsapp.gui.fexecute import ExecuteFrame
 from rsapp.gui.finspect import InspectFrame
 from rsapp.gui.fselect import SelectFrame
+from rsapp.gui.style import Style
 from rspub.core.config import Configurations
 
 LOG = logging.getLogger(__name__)
@@ -61,12 +72,16 @@ class WMain(QMainWindow):
         self.menu_open_config = QMenu(_("Load configuration"), self)
         self.menu_file.addMenu(self.menu_open_config)
         self.config_action_group = QActionGroup(self)
-        self.config_action_group.triggered.connect(self.switch_config)
+        self.config_action_group.triggered.connect(self.on_switch_config)
         self.menu_open_config.aboutToShow.connect(self.set_open_config_menu_items)
 
         self.action_save_configuration_as = QAction(_("Save configuration as..."), self)
         self.menu_file.addAction(self.action_save_configuration_as)
-        self.action_save_configuration_as.triggered.connect(self.save_configuration_as)
+        self.action_save_configuration_as.triggered.connect(self.on_save_configuration_as)
+
+        self.action_configurations = QAction(_("Configurations..."), self)
+        self.menu_file.addAction(self.action_configurations)
+        self.action_configurations.triggered.connect(self.on_configurations)
 
         self.menu_file.addSeparator()
         self.action_exit = QAction(_("Exit"), self)
@@ -88,7 +103,7 @@ class WMain(QMainWindow):
     def create_menu_language(self):
         language_menu = QMenu(_("Language"), self)
         action_group = QActionGroup(self)
-        action_group.triggered.connect(self.switch_language)
+        action_group.triggered.connect(self.on_switch_language)
         iso_idx = self.ctrl.iso_lang()
         current_locale = self.ctrl.current_language()
 
@@ -98,7 +113,7 @@ class WMain(QMainWindow):
                 iso = iso_idx[short_locale]
             else:
                 iso = {'nativeName': '-', 'name': '-'}
-            action = QAction("%s - %s | %s" % (iso["nativeName"], iso["name"], locale), self)
+            action = QAction("%s - %s  [%s]" % (iso["nativeName"], iso["name"], locale), self)
             action.setCheckable(True)
             action.setData(locale)
             language_menu.addAction(action)
@@ -135,23 +150,31 @@ class WMain(QMainWindow):
             if name == current_name:
                 action.setChecked(True)
 
-    def switch_config(self):
+    def on_switch_config(self):
         action_group = self.sender()
         name = action_group.checkedAction().data()
         if self.tabframe.ok_to_change_parameters(_("Switch configuration...")):
             self.ctrl.load_configuration(name)
 
-    def switch_language(self):
+    def on_save_configuration_as(self):
+        text =  _("Save configuration as...")
+        if self.tabframe.ok_to_change_parameters(text):
+            dlg = QInputDialog(self)
+            dlg.setInputMode(QInputDialog.TextInput)
+            dlg.setWindowTitle(text)
+            dlg.setLabelText(_("Configuration name:"))
+            dlg.setTextValue(self.paras.configuration_name())
+            dlg.resize(300, 100)
+            if dlg.exec_():
+                self.ctrl.save_configuration_as(dlg.textValue())
+
+    def on_configurations(self):
+        ConfigurationsDialog(self).exec_()
+
+    def on_switch_language(self):
         action_group = self.sender()
         locale = action_group.checkedAction().data()
         self.ctrl.set_language(locale)
-
-    def save_configuration_as(self):
-        text =  _("Save configuration as...")
-        if self.tabframe.ok_to_change_parameters(text):
-            name, ok = QInputDialog.getText(self, text, _("Configuration name:"))
-            if ok:
-                self.ctrl.save_configuration_as(name)
 
     def close(self):
         LOG.debug("window closing")
@@ -222,3 +245,73 @@ class TabbedFrame(QTabWidget):
         self.currentWidget().close()
 
 
+# ################################################################
+class ConfigurationsDialog(QDialog):
+
+    def __init__(self, parent):
+        QDialog.__init__(self, parent)
+        self.ctrl = QApplication.instance().ctrl
+        self.__init_ui__()
+
+    def __init_ui__(self):
+        self.setWindowTitle(_("Manage configurations"))
+        vbox = QVBoxLayout(self)
+
+        list_view = QListView()
+        list_view.setSelectionMode(QAbstractItemView.MultiSelection)
+        list_view.setAlternatingRowColors(True)
+        self.list_model = QStandardItemModel(list_view)
+        self.populate_model()
+        list_view.setModel(self.list_model)
+        self.selection_model = list_view.selectionModel()
+        self.selection_model.selectionChanged.connect(self.on_selection_changed)
+        hbox = QHBoxLayout()
+        hbox.addWidget(list_view)
+        hbox.addStretch(1)
+        vbox.addLayout(hbox)
+
+        btn_box = QHBoxLayout()
+        self.btn_delete = QPushButton(_("Delete"))
+        self.btn_delete.setEnabled(False)
+        self.btn_delete.clicked.connect(self.on_btn_delete_clicked)
+        btn_box.addWidget(self.btn_delete)
+
+        btn_close = QPushButton(_("Close"))
+        btn_close.setDefault(True)
+        btn_close.clicked.connect(self.close)
+        btn_box.addWidget(btn_close)
+
+        btn_box.addStretch(1)
+        vbox.addLayout(btn_box)
+
+        self.setLayout(vbox)
+
+    def populate_model(self):
+        self.list_model.clear()
+        for cfg in Configurations.list_configurations():
+            item = QStandardItem(cfg)
+            self.list_model.appendRow(item)
+
+    def on_selection_changed(self, selected=None, deselected=None):
+        self.btn_delete.setEnabled(self.selection_model.hasSelection())
+
+    def on_btn_delete_clicked(self):
+        items = [x.data() for x in self.selection_model.selectedIndexes()]
+        msg_box = QMessageBox()
+        msg_box.setText(_("Delete configurations"))
+        if len(items) == 1:
+            i_text = _("Delete configuration '%s'" % items[0])
+        else:
+            i_text = _("Delete %d configurations" % len(items))
+        i_text += "\n\n"
+        i_text += _("Ok to proceed?")
+        msg_box.setInformativeText(i_text)
+        msg_box.setIcon(QMessageBox.Question)
+        msg_box.setStandardButtons(QMessageBox.No | QMessageBox.Yes)
+        msg_box.setDefaultButton(QMessageBox.Yes)
+        exe = msg_box.exec()
+        if exe == QMessageBox.Yes:
+            for item in self.selection_model.selectedIndexes():
+                Configurations.remove_configuration(item.data())
+            self.populate_model()
+            self.on_selection_changed()
