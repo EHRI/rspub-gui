@@ -1,5 +1,6 @@
 #! /usr/bin/env python3
 # -*- coding: utf-8 -*-
+import logging
 from PyQt5.QtCore import QUrl
 from PyQt5.QtGui import QDesktopServices
 from PyQt5.QtGui import QFont
@@ -12,18 +13,21 @@ from PyQt5.QtWidgets import QVBoxLayout
 
 from rsapp.gui.style import Style
 
+LOG = logging.getLogger(__name__)
+
 
 class InspectFrame(QFrame):
 
-    def __init__(self, parent):
+    def __init__(self, parent, index=-1):
         super().__init__(parent)
+        self.index = index
         self.ctrl = QApplication.instance().ctrl
-        self.ctrl.switch_language.connect(self.retranslate_ui)
-        self.ctrl.switch_configuration.connect(self.reset_paras)
-        self.ctrl.switch_tab.connect(self.on_tab_switch)
+        self.ctrl.switch_language.connect(self.on_switch_language)
+        self.ctrl.switch_configuration.connect(self.on_switch_configuration)
+        self.ctrl.switch_tab.connect(self.on_switch_tab)
         self.paras = self.ctrl.paras
         self.init_ui()
-        self.retranslate_ui()
+        self.on_switch_language(self.ctrl.current_language())
 
     def init_ui(self):
         vbl_0 = QVBoxLayout(self)
@@ -74,11 +78,13 @@ class InspectFrame(QFrame):
         vbl_0.addStretch(1)
         self.setLayout(vbl_0)
 
-    def retranslate_ui(self, code=None):
+    def on_switch_language(self, code=None):
+        LOG.debug("Switch language: %s" % code)
         self.label_title.setText(_("Inspect configuration: '%s'") % self.paras.configuration_name())
         self.render()
 
-    def reset_paras(self, name=None):
+    def on_switch_configuration(self, name=None):
+        LOG.debug("Switch configuration: %s" % name)
         self.paras = self.ctrl.paras
         self.label_title.setText(_("Inspect configuration: '%s'") % self.paras.configuration_name())
         self.render()
@@ -102,8 +108,8 @@ class InspectFrame(QFrame):
     def on_link_activated(self, link):
         QDesktopServices.openUrl(QUrl(link))
 
-    def on_tab_switch(self, index):
-        if index == 1:
+    def on_switch_tab(self, from_index, to_index):
+        if to_index == self.index:
             self.render()
 
     def translatables(self):

@@ -2,8 +2,9 @@
 # -*- coding: utf-8 -*-
 import logging
 
+from PyQt5.QtCore import QEvent
 from PyQt5.QtCore import pyqtSlot
-from PyQt5.QtGui import QFont
+from PyQt5.QtGui import QCloseEvent
 from PyQt5.QtGui import QStandardItem
 from PyQt5.QtGui import QStandardItemModel
 from PyQt5.QtWidgets import QAbstractItemView
@@ -13,7 +14,6 @@ from PyQt5.QtWidgets import QApplication
 from PyQt5.QtWidgets import QDialog
 from PyQt5.QtWidgets import QHBoxLayout
 from PyQt5.QtWidgets import QInputDialog
-from PyQt5.QtWidgets import QLabel
 from PyQt5.QtWidgets import QListView
 from PyQt5.QtWidgets import QMainWindow
 from PyQt5.QtWidgets import QMenu
@@ -27,7 +27,6 @@ from rsapp.gui.fconfigure import ConfigureFrame
 from rsapp.gui.fexecute import ExecuteFrame
 from rsapp.gui.finspect import InspectFrame
 from rsapp.gui.fselect import SelectFrame
-from rsapp.gui.style import Style
 from rspub.core.config import Configurations
 
 LOG = logging.getLogger(__name__)
@@ -86,7 +85,7 @@ class WMain(QMainWindow):
         self.menu_file.addSeparator()
         self.action_exit = QAction(_("Exit"), self)
         self.action_exit.setShortcut("Ctrl+Q")
-        self.action_exit.triggered.connect(qApp.quit)
+        self.action_exit.triggered.connect(self.on_action_exit_triggered)
         self.menu_file.addAction(self.action_exit)
 
         self.menu_settings = self.create_menu_settings()
@@ -153,12 +152,12 @@ class WMain(QMainWindow):
     def on_switch_config(self):
         action_group = self.sender()
         name = action_group.checkedAction().data()
-        if self.tabframe.ok_to_change_parameters(_("Switch configuration...")):
+        if self.tabframe.about_to_change(_("Switch configuration...")):
             self.ctrl.load_configuration(name)
 
     def on_save_configuration_as(self):
         text =  _("Save configuration as...")
-        if self.tabframe.ok_to_change_parameters(text):
+        if self.tabframe.about_to_change(text):
             dlg = QInputDialog(self)
             dlg.setInputMode(QInputDialog.TextInput)
             dlg.setWindowTitle(text)
@@ -175,6 +174,18 @@ class WMain(QMainWindow):
         action_group = self.sender()
         locale = action_group.checkedAction().data()
         self.ctrl.set_language(locale)
+
+    def on_action_exit_triggered(self):
+        LOG.debug("action_exit_triggered")
+        if self.tabframe.about_to_change(_("Closing application...")):
+            qApp.quit()
+
+    def closeEvent(self, event):
+        LOG.debug("closeEvent was triggered")
+        if self.tabframe.about_to_change(_("Closing application...")):
+            event.accept()
+        else:
+            event.ignore()
 
     def close(self):
         LOG.debug("window closing")
@@ -196,10 +207,10 @@ class TabbedFrame(QTabWidget):
         self.init_ui()
 
     def init_ui(self):
-        self.frame_configure = ConfigureFrame(self)
-        self.frame_inspect = InspectFrame(self)
-        self.frame_select = SelectFrame(self)
-        self.frame_execute = ExecuteFrame(self)
+        self.frame_configure = ConfigureFrame(self, 0)
+        self.frame_inspect = InspectFrame(self, 1)
+        self.frame_select = SelectFrame(self, 2)
+        self.frame_execute = ExecuteFrame(self, 3)
 
         self.addTab(self.frame_configure, _("Configure"))
         self.addTab(self.frame_inspect, _("Inspect"))
@@ -218,27 +229,13 @@ class TabbedFrame(QTabWidget):
         if self.previndex > -1:
             self.widget(self.previndex).hide()
 
-        self.ctrl.report_tab_switch(index)
+        self.ctrl.report_tab_switch(self.previndex, index)
         self.widget(index).show()
         self.previndex = index
 
-    def ok_to_change_parameters(self, text):
-        ok_to_change = True
-        error_count = self.frame_configure.count_errors()
-        if error_count > 0:
-            msg_box = QMessageBox()
-            msg_box.setText(text)
-            i_text = _("Parameters '%s' has %d error(s).") % (self.paras.configuration_name(), error_count)
-            i_text += "\n\n"
-            i_text += _("Ok to proceed?")
-            msg_box.setInformativeText(i_text)
-            msg_box.setIcon(QMessageBox.Question)
-            msg_box.setStandardButtons(QMessageBox.No | QMessageBox.Yes)
-            msg_box.setDefaultButton(QMessageBox.Yes)
-            exe = msg_box.exec()
-            if exe == QMessageBox.No:
-                ok_to_change = False
-        return ok_to_change
+    def about_to_change(self, window_title):
+        return self.frame_configure.on_about_to_change(window_title) and \
+               self.frame_select.on_about_to_change(window_title)
 
     def close(self):
         LOG.debug("TabbedFrame closing")

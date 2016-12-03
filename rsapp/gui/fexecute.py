@@ -7,8 +7,9 @@ from PyQt5.QtWidgets import QFrame
 
 class ExecuteFrame(QFrame):
 
-    def __init__(self, parent):
+    def __init__(self, parent, index=-1):
         super().__init__(parent)
+        self.index = index
         self.ctrl = QApplication.instance().ctrl
         self.ctrl.switch_language.connect(self.retranslate_ui)
 

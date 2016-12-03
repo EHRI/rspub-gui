@@ -1,5 +1,6 @@
 #! /usr/bin/env python3
 # -*- coding: utf-8 -*-
+import logging
 from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtWidgets import QCheckBox
@@ -12,23 +13,29 @@ from PyQt5.QtWidgets import QLabel
 from PyQt5.QtWidgets import QLineEdit
 from PyQt5.QtWidgets import QMessageBox
 from PyQt5.QtWidgets import QPushButton
-from PyQt5.QtWidgets import QRadioButton
 from PyQt5.QtWidgets import QVBoxLayout
 from PyQt5.QtWidgets import QWidget
 
 from rsapp.gui.style import Style
 from rspub.core.rs_enum import Strategy
 
+LOG = logging.getLogger(__name__)
+
+
 class ParaWidget(QWidget):
 
     def __init__(self, parent):
         QWidget.__init__(self, parent)
+        self.ctrl = QApplication.instance().ctrl
+        self.ctrl.switch_language.connect(self.on_switch_language)
+        self.ctrl.switch_configuration.connect(self.on_switch_configuration)
+        self.paras = self.ctrl.paras
         self.accepted = True
 
-    def retranslate_ui(self):
+    def on_switch_language(self):
         raise NotImplementedError
 
-    def reset_paras(self):
+    def on_switch_configuration(self):
         raise NotImplementedError
 
     def is_accepted(self):
@@ -39,10 +46,6 @@ class ParaLine(ParaWidget):
 
     def __init__(self, parent, name, conv, grid, ordinal, browse=False, width=None):
         ParaWidget.__init__(self, parent)
-        self.ctrl = QApplication.instance().ctrl
-        self.ctrl.switch_language.connect(self.retranslate_ui)
-        self.ctrl.switch_configuration.connect(self.reset_paras)
-        self.paras = self.ctrl.paras
         self.name = name
         self.v2tx = conv[0]
         self.tx2v = conv[1]
@@ -69,8 +72,8 @@ class ParaLine(ParaWidget):
             grid.addWidget(self.button, ordinal, 3)
         grid.addWidget(self.err_label, ordinal + 1, 1, 1, 3)
 
-        self.retranslate_ui()
-        self.reset_paras()
+        self.on_switch_language()
+        self.on_switch_configuration()
 
     def parameter_changed(self, text):
         try:
@@ -115,11 +118,11 @@ class ParaLine(ParaWidget):
         if filename != "":
             self.edit.setText(filename)
 
-    def retranslate_ui(self):
+    def on_switch_language(self):
         self.label.setText(_(self.name + "_label"))
         self.button.setText(_("Browse"))
 
-    def reset_paras(self):
+    def on_switch_configuration(self):
         self.paras = self.ctrl.paras
         value = self.v2tx(getattr(self.paras, self.name))
         self.edit.setText(value)
@@ -129,28 +132,24 @@ class ParaCheck(ParaWidget):
 
     def __init__(self, parent, name, grid, ordinal):
         ParaWidget.__init__(self, parent)
-        self.ctrl = QApplication.instance().ctrl
-        self.ctrl.switch_language.connect(self.retranslate_ui)
-        self.ctrl.switch_configuration.connect(self.reset_paras)
-        self.paras = self.ctrl.paras
         self.name = name
         self.check = QCheckBox("", self)
         self.check.setFixedHeight(25)
         self.check.toggled.connect(self.on_toggled)
         grid.addWidget(self.check, ordinal, 2)
 
-        self.retranslate_ui()
-        self.reset_paras()
+        self.on_switch_language()
+        self.on_switch_configuration()
 
     def on_toggled(self, checked):
         if checked != getattr(self.paras, self.name):
             setattr(self.paras, self.name, checked)
             self.paras.save_configuration()
 
-    def retranslate_ui(self):
+    def on_switch_language(self):
         self.check.setText(_(self.name + "_label"))
 
-    def reset_paras(self):
+    def on_switch_configuration(self):
         self.paras = self.ctrl.paras
         self.check.setChecked(getattr(self.paras, self.name))
 
@@ -159,10 +158,6 @@ class ParaStrategyDrop(ParaWidget):
 
     def __init__(self, parent, name, grid, ordinal):
         ParaWidget.__init__(self, parent)
-        self.ctrl = QApplication.instance().ctrl
-        self.ctrl.switch_language.connect(self.retranslate_ui)
-        self.ctrl.switch_configuration.connect(self.reset_paras)
-        self.paras = self.ctrl.paras
         self.name = name
         self.label = QLabel(self)
         self.combo = QComboBox(self)
@@ -175,21 +170,21 @@ class ParaStrategyDrop(ParaWidget):
         grid.addWidget(self.label, ordinal, 1)
         grid.addLayout(hbox, ordinal, 2)
 
-        self.retranslate_ui()
-        self.reset_paras()
+        self.on_switch_language()
+        self.on_switch_configuration()
 
     def on_activated(self):
         setattr(self.paras, self.name, self.combo.currentData())
         self.paras.save_configuration()
 
-    def retranslate_ui(self):
+    def on_switch_language(self):
         self.label.setText(_(self.name + "_label"))
         self.combo.clear()
         for i in range(len(Strategy.names())):
             strategy = Strategy.strategy_for(i)
             self.combo.addItem(_(str(strategy)), strategy.name)
 
-    def reset_paras(self):
+    def on_switch_configuration(self):
         self.paras = self.ctrl.paras
         strategy = getattr(self.paras, self.name)
         self.combo.setCurrentIndex(strategy.value)
@@ -197,14 +192,15 @@ class ParaStrategyDrop(ParaWidget):
 
 class ConfigureFrame(QFrame):
 
-    def __init__(self, parent):
+    def __init__(self, parent, index=-1):
         super().__init__(parent)
+        self.index = index
         self.ctrl = QApplication.instance().ctrl
-        self.ctrl.switch_language.connect(self.retranslate_ui)
-        self.ctrl.switch_configuration.connect(self.reset_paras)
+        self.ctrl.switch_language.connect(self.on_switch_language)
+        self.ctrl.switch_configuration.connect(self.on_switch_configuration)
         self.paras = self.ctrl.paras
         self.init_ui()
-        self.retranslate_ui()
+        self.on_switch_language(self.ctrl.current_language())
 
     def init_ui(self):
         vbl_0 = QVBoxLayout(self)
@@ -250,13 +246,12 @@ class ConfigureFrame(QFrame):
         vbl_0.addStretch(1)
         self.setLayout(vbl_0)
 
-    def count_errors(self):
-        return len([p for p in self.para_widgets.values() if not p.is_accepted()])
-
-    def retranslate_ui(self, code=None):
+    def on_switch_language(self, code=None):
+        LOG.debug("Switch language: %s" % code)
         self.label_title.setText(_("Configure parameters: '%s'") % self.paras.configuration_name())
 
-    def reset_paras(self, name=None):
+    def on_switch_configuration(self, name=None):
+        LOG.debug("Switch configuration: %s" % name)
         self.paras = self.ctrl.paras
         self.label_title.setText(_("Configure parameters: '%s'") % self.paras.configuration_name())
 
@@ -270,6 +265,27 @@ class ConfigureFrame(QFrame):
         exe = msg_box.exec()
         if exe == QMessageBox.Yes:
             self.ctrl.reset_configuration()
+
+    def count_errors(self):
+        return len([p for p in self.para_widgets.values() if not p.is_accepted()])
+
+    def on_about_to_change(self, window_title):
+        ok_to_change = True
+        error_count = self.count_errors()
+        if error_count > 0:
+            msg_box = QMessageBox()
+            msg_box.setText(window_title)
+            i_text = _("Parameters '%s' has %d error(s).") % (self.paras.configuration_name(), error_count)
+            i_text += "\n\n"
+            i_text += _("Ok to proceed?")
+            msg_box.setInformativeText(i_text)
+            msg_box.setIcon(QMessageBox.Question)
+            msg_box.setStandardButtons(QMessageBox.No | QMessageBox.Yes)
+            msg_box.setDefaultButton(QMessageBox.Yes)
+            exe = msg_box.exec()
+            if exe == QMessageBox.No:
+                ok_to_change = False
+        return ok_to_change
 
     @staticmethod
     def str2tx(x):

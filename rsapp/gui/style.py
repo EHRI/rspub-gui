@@ -22,4 +22,8 @@ class Style(object):
 
     @staticmethod
     def h2():
-        return "color: rgb(90, 100, 120); background-color: rgb(225,225,225);"
+        return "color: rgb(90, 100, 120); background-color: rgb(225, 225, 225);"
+
+    @staticmethod
+    def alarm():
+        return "color: rgb(255, 255, 255); background-color: rgb(225, 0, 0);"
