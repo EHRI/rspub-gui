@@ -2,9 +2,7 @@
 # -*- coding: utf-8 -*-
 import logging
 
-from PyQt5.QtCore import QEvent
 from PyQt5.QtCore import pyqtSlot
-from PyQt5.QtGui import QCloseEvent
 from PyQt5.QtGui import QStandardItem
 from PyQt5.QtGui import QStandardItemModel
 from PyQt5.QtWidgets import QAbstractItemView
@@ -191,6 +189,7 @@ class WMain(QMainWindow):
         LOG.debug("window closing")
         self.ctrl.config.set_window_height(self.height())
         self.ctrl.config.set_window_width(self.width())
+        self.ctrl.config.set_last_configuration_name(self.paras.configuration_name())
         self.ctrl.config.persist()
         self.tabframe.close()
 

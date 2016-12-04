@@ -33,7 +33,10 @@ class Ctrl(QObject):
         self.locale_dir = locale_dir
         self.config = GuiConf()
         self.last_directory = os.path.expanduser("~")
-        self.paras = RsParameters()
+        try:
+            self.paras = RsParameters(config_name=self.config.last_configuration_name())
+        except:
+            self.paras = RsParameters()
         self.selector = self.__get_selector()
 
     def report_tab_switch(self, from_index, to_index):

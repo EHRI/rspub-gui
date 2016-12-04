@@ -18,12 +18,15 @@ from PyQt5.QtWidgets import QLineEdit
 from PyQt5.QtWidgets import QMessageBox
 from PyQt5.QtWidgets import QPlainTextEdit
 from PyQt5.QtWidgets import QPushButton
+from PyQt5.QtWidgets import QSplitter
 from PyQt5.QtWidgets import QVBoxLayout
 from PyQt5.QtWidgets import QWidget
 
+from rsapp.gui.conf import GuiConf
 from rsapp.gui.style import Style
 from rspub.core.rs_enum import SelectMode
 from rspub.core.selector import Selector
+from rspub.util.observe import EventObserver
 
 LOG = logging.getLogger(__name__)
 
@@ -77,7 +80,7 @@ class SelectFrame(QFrame):
         self.btn_simple_brws = QPushButton(_("Browse"))
         self.btn_simple_brws.clicked.connect(self.on_btn_simple_brws_clicked)
         vbox_simple.addWidget(self.btn_simple_brws)
-        self.btn_simple_play = QPushButton(_("Play"))
+        self.btn_simple_play = QPushButton(_("Play..."))
         self.btn_simple_play.clicked.connect(self.on_btn_simple_play_clicked)
         vbox_simple.addWidget(self.btn_simple_play)
 
@@ -93,6 +96,13 @@ class SelectFrame(QFrame):
         self.grp_selector.toggled.connect(self.on_grp_selector_toggle)
         grid = QGridLayout()
 
+        # selector group: selector file
+        self.lbl_saved_as = QLabel(_("Selector"))
+        self.lbl_selector_file = QLabel()
+        self.lbl_selector_file.setTextInteractionFlags(Qt.TextSelectableByMouse)
+        grid.addWidget(self.lbl_saved_as, 1, 1)
+        grid.addWidget(self.lbl_selector_file, 1, 2, 1, 2)
+
         # selector group: includes
         self.lbl_includes = QLabel(_("Includes"))
         self.lbl_includes.setAlignment(Qt.AlignTop)
@@ -101,14 +111,14 @@ class SelectFrame(QFrame):
         self.btn_incl_brws.clicked.connect(self.on_btn_incl_brws_clicked)
         self.btn_incl_imp = QPushButton(_("Import"))
         self.btn_incl_imp.clicked.connect(self.on_btn_incl_import_clicked)
-        grid.addWidget(self.lbl_includes, 1, 1)
-        grid.addWidget(self.txt_includes, 1, 2)
+        grid.addWidget(self.lbl_includes, 2, 1)
+        grid.addWidget(self.txt_includes, 2, 2)
         vbox_inc = QVBoxLayout()
         vbox_inc.setSpacing(0)
         vbox_inc.addWidget(self.btn_incl_brws)
         vbox_inc.addWidget(self.btn_incl_imp)
         vbox_inc.addStretch(1)
-        grid.addLayout(vbox_inc, 1, 3)
+        grid.addLayout(vbox_inc, 2, 3)
 
         # selector group: excludes
         self.lbl_excludes = QLabel(_("Excludes"))
@@ -118,35 +128,29 @@ class SelectFrame(QFrame):
         self.btn_excl_brws.clicked.connect(self.on_btn_excl_brws_clicked)
         self.btn_excl_imp = QPushButton(_("Import"))
         self.btn_excl_imp.clicked.connect(self.on_btn_excl_import_clicked)
-        grid.addWidget(self.lbl_excludes, 2, 1)
-        grid.addWidget(self.txt_excludes, 2, 2)
+        grid.addWidget(self.lbl_excludes, 3, 1)
+        grid.addWidget(self.txt_excludes, 3, 2)
         vbox_exc = QVBoxLayout()
         vbox_exc.setSpacing(0)
         vbox_exc.addWidget(self.btn_excl_brws)
         vbox_exc.addWidget(self.btn_excl_imp)
         vbox_exc.addStretch(1)
-        grid.addLayout(vbox_exc, 2, 3)
-
-        # selector group: selector file
-        self.lbl_saved_as = QLabel(_("Selector"))
-        self.lbl_selector_file = QLabel()
-        self.lbl_selector_file.setTextInteractionFlags(Qt.TextSelectableByMouse)
-        grid.addWidget(self.lbl_saved_as, 3, 1)
-        grid.addWidget(self.lbl_selector_file, 3, 2, 1, 2)
+        grid.addLayout(vbox_exc, 3, 3)
 
         # selector group: bottom buttons
         self.btn_open_selector = QPushButton(_("Open..."))
         self.btn_open_selector.clicked.connect(self.on_btn_open_selector_clicked)
         self.btn_save_selector_as = QPushButton(_("Save as..."))
         self.btn_save_selector_as.clicked.connect(self.on_btn_save_selector_as_clicked)
-        self.btn_play_selected = QPushButton(_("Play"))
+        self.btn_play_selected = QPushButton(_("Play..."))
         self.btn_play_selected.clicked.connect(self.on_btn_play_selected_clicked)
         hbox3 = QHBoxLayout()
         hbox3.addStretch(1)
         hbox3.addWidget(self.btn_open_selector)
         hbox3.addWidget(self.btn_save_selector_as)
-        hbox3.addWidget(self.btn_play_selected)
-        grid.addLayout(hbox3, 4, 1, 1, 3)
+        #hbox3.addWidget(self.btn_play_selected)
+        grid.addLayout(hbox3, 4, 1, 1, 2)
+        grid.addWidget(self.btn_play_selected, 4, 3)
 
         self.grp_selector.setLayout(grid)
         vbl_0.addWidget(self.grp_selector)
@@ -160,7 +164,7 @@ class SelectFrame(QFrame):
         self.grp_simple.setTitle(_("Simpel selection: One file or directory"))
         self.lbl_simple.setText(_("Location"))
         self.btn_simple_brws.setText(_("Browse"))
-        self.btn_simple_play.setText(_("Play"))
+        self.btn_simple_play.setText(_("Play..."))
         self.grp_selector.setTitle(_("Advanced: Create a selector"))
         self.lbl_includes.setText(_("Includes"))
         self.btn_incl_brws.setText(_("Browse"))
@@ -171,7 +175,7 @@ class SelectFrame(QFrame):
         self.lbl_saved_as.setText(_("Selector"))
         self.btn_open_selector.setText(_("Open..."))
         self.btn_save_selector_as.setText(_("Save as..."))
-        self.btn_play_selected.setText(_("Play"))
+        self.btn_play_selected.setText(_("Play..."))
 
     def on_switch_configuration(self, name=None):
         LOG.debug("Switch configuration: %s" % name)
@@ -354,9 +358,12 @@ class PlayWidget(QWidget):
         self.get_selector = get_selector
         self.setWindowTitle(title)
         self.max_lines = max_lines
+        self.conf = GuiConf()
 
         self.player = None
         self.resource_count = 0
+        self.excluded_resource_count = 0
+        self.exception_count = 0
 
         self.__init_ui__()
         self.show()
@@ -364,18 +371,47 @@ class PlayWidget(QWidget):
     def __init_ui__(self):
         vbox = QVBoxLayout()
 
-        self.output = QPlainTextEdit()
-        self.output.setReadOnly(True)
-        self.output.setMaximumBlockCount(self.max_lines)
-        self.output.setLineWrapMode(QPlainTextEdit.NoWrap)
-        self.output.setCenterOnScroll(True)
-        vbox.addWidget(self.output)
+        self.lbl_explanation = QLabel(_("Selected resources"))
+        vbox.addWidget(self.lbl_explanation)
+
+        splitter = QSplitter()
+        splitter.setOrientation(Qt.Vertical)
+
+        self.pte_output = QPlainTextEdit()
+        self.pte_output.setReadOnly(True)
+        self.pte_output.setMaximumBlockCount(self.max_lines)
+        self.pte_output.setLineWrapMode(QPlainTextEdit.NoWrap)
+        self.pte_output.setCenterOnScroll(True)
+        splitter.addWidget(self.pte_output)
+
+        self.pte_exceptions = QPlainTextEdit()
+        self.pte_exceptions.setReadOnly(True)
+        self.pte_exceptions.setMaximumBlockCount(5000)
+        self.pte_exceptions.setLineWrapMode(QPlainTextEdit.NoWrap)
+        self.pte_exceptions.setCenterOnScroll(True)
+        self.pte_exceptions.setStyleSheet(Style.exception_output())
+        splitter.addWidget(self.pte_exceptions)
+        splitter.setStretchFactor(0, 2)
+        splitter.setStretchFactor(1, 1)
+        vbox.addWidget(splitter)
 
         btn_box = QHBoxLayout()
-        lbl_recources_count = QLabel(_("Count resources:"))
-        btn_box.addWidget(lbl_recources_count)
+
+        count_grid = QGridLayout()
+        count_grid.setSpacing(3)
+        lbl_recources_count = QLabel(_("Selected resources:"))
+        count_grid.addWidget(lbl_recources_count, 1, 1)
         self.lbl_resources_counter = QLabel("0")
-        btn_box.addWidget(self.lbl_resources_counter)
+        self.lbl_resources_counter.setTextInteractionFlags(Qt.TextSelectableByMouse)
+        count_grid.addWidget(self.lbl_resources_counter, 1, 2)
+
+        lbl_excluded_recources_count = QLabel(_("Excluded resources:"))
+        count_grid.addWidget(lbl_excluded_recources_count, 2, 1)
+        self.lbl_excluded_resources_counter = QLabel("0")
+        self.lbl_excluded_resources_counter.setTextInteractionFlags(Qt.TextSelectableByMouse)
+        count_grid.addWidget(self.lbl_excluded_resources_counter, 2, 2)
+
+        btn_box.addLayout(count_grid)
         btn_box.addStretch(1)
 
         self.btn_play = QPushButton(_("Play"))
@@ -394,27 +430,45 @@ class PlayWidget(QWidget):
 
         vbox.addLayout(btn_box)
         self.setLayout(vbox)
-        #self.setFixedSize(800, 250)
-        self.resize(800, 250)
+        self.resize(self.conf.play_widget_width(), self.conf.play_widget_height())
 
     def on_btn_play_clicked(self):
-        self.output.setPlainText("")
+        self.pte_output.setPlainText("")
+        self.pte_exceptions.setPlainText("")
         selector = self.get_selector()
         self.player = PlayerThread(selector, self)
         self.player.yield_resource.connect(self.on_yield_resource)
+        self.player.signal_exception.connect(self.on_signal_exception)
+        self.player.signal_excluded_resource.connect(self.on_signal_excluded_resource)
         self.player.finished.connect(self.on_player_finished)
+        # counters
         self.resource_count = 0
-
+        self.excluded_resource_count = 0
+        self.exception_count = 0
+        self.lbl_resources_counter.setText(str(self.resource_count))
+        self.lbl_excluded_resources_counter.setText(str(self.excluded_resource_count))
+        # buttons
         self.btn_close.setEnabled(False)
         self.btn_play.setEnabled(False)
         self.btn_stop.setEnabled(True)
         self.btn_stop.setStyleSheet(Style.alarm())
         self.player.start()
+        self.update()
 
     def on_yield_resource(self, file):
         self.resource_count += 1
         self.lbl_resources_counter.setText(str(self.resource_count))
-        self.output.appendPlainText(file)
+        self.pte_output.appendPlainText(file)
+        self.update()
+
+    def on_signal_exception(self, msg):
+        self.exception_count += 1
+        self.pte_exceptions.appendHtml("<span style=color:red;>" + msg + "</span>")
+
+    def on_signal_excluded_resource(self, msg):
+        self.excluded_resource_count += 1
+        self.lbl_excluded_resources_counter.setText(str(self.excluded_resource_count))
+        self.pte_exceptions.appendPlainText(msg)
         self.update()
 
     def on_btn_stop_clicked(self):
@@ -441,25 +495,42 @@ class PlayWidget(QWidget):
             self.setWindowState(Qt.WindowMaximized)
             event.ignore()
         else:
+            self.conf.set_play_widget_width(self.width())
+            self.conf.set_play_widget_height(self.height())
+            self.conf.persist()
             event.accept()
 
 
-class PlayerThread(QThread):
+class PlayerThread(QThread, EventObserver):
 
     yield_resource = pyqtSignal(str)
+    signal_exception = pyqtSignal(str)
+    signal_excluded_resource = pyqtSignal(str)
 
     def __init__(self, selector, parent=None):
         QThread.__init__(self, parent)
+        EventObserver.__init__(self)
         self.exiting = False
         self.selector = selector
+        self.selector.register(self)
 
     def run(self):
         LOG.debug("Thread started %s" % self)
         for file in self.selector:
             self.yield_resource.emit(file)
             if self.isInterruptionRequested():
-                LOG.debug("Thread interrupt was requested and granted %s" % self)
+                LOG.debug("Thread interrupted %s" % self)
                 break
         LOG.debug("Thread finished %s" % self)
+        self.selector.unregister(self)
+
+    def inform_file_does_not_exist(self, *args, **kwargs):
+        self.signal_exception.emit(_("File does not exist: %s" % kwargs["filename"]))
+
+    def inform_not_a_regular_file(self, *args, **kwargs):
+        self.signal_exception.emit(_("Not a regular file: %s" % kwargs["filename"]))
+
+    def inform_file_excluded(self, *args, **kwargs):
+        self.signal_excluded_resource.emit(_("File excluded: %s" % kwargs["filename"]))
 
 

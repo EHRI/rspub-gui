@@ -27,3 +27,7 @@ class Style(object):
     @staticmethod
     def alarm():
         return "color: rgb(255, 255, 255); background-color: rgb(225, 0, 0);"
+
+    @staticmethod
+    def exception_output():
+        return "color: rgb(0, 0, 255);"

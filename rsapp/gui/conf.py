@@ -9,7 +9,7 @@ CFG_FILENAME = "rspub.cfg"
 CFG_DIRNAME = "gui"
 SECTION_I18N = "i18n"
 SECTION_WINDOW = "window"
-SECTION_MENU = "menu"
+SECTION_CONTENT = "content"
 
 LOG = logging.getLogger(__name__)
 
@@ -113,6 +113,12 @@ class GuiConf(object):
         self.__set_option__(section, option, str(value))
 
     #####################################################
+    def last_configuration_name(self, fallback="DEFAULT"):
+        return self.parser.get(SECTION_CONTENT, "last_configuration_name", fallback=fallback)
+
+    def set_last_configuration_name(self, name):
+        self.__set_option__(SECTION_CONTENT, "last_configuration_name", name)
+
     def language(self, fallback="en-US"):
         return self.parser.get(SECTION_I18N, "language", fallback=fallback)
 
@@ -130,3 +136,15 @@ class GuiConf(object):
 
     def set_window_height(self, height):
         self.__set_int__(SECTION_WINDOW, "window_height", height)
+
+    def play_widget_width(self, fallback=800):
+        return self.__get_int__(SECTION_WINDOW, "play_widget_width", fallback=fallback)
+
+    def set_play_widget_width(self, width):
+        self.__set_int__(SECTION_WINDOW, "play_widget_width", width)
+
+    def play_widget_height(self, fallback=400):
+        return self.__get_int__(SECTION_WINDOW, "play_widget_height", fallback=fallback)
+
+    def set_play_widget_height(self, height):
+        self.__set_int__(SECTION_WINDOW, "play_widget_height", height)
