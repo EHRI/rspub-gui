@@ -249,7 +249,7 @@ class SelectFrame(QFrame):
 
     def on_btn_simple_play_clicked(self):
         if self.play_widget_simple is None:
-            self.play_widget_simple = PlayWidget(self.__get_simple_selector, _("Simpel selection: List resources"))
+            self.play_widget_simple = PlayWidget(self.__get_simple_selector, "Simpel selection: List resources")
         else:
             self.play_widget_simple.show()
             self.play_widget_simple.setWindowState(Qt.WindowActive)
@@ -258,7 +258,8 @@ class SelectFrame(QFrame):
 
     def __get_simple_selector(self):
         selector = Selector()
-        selector.include(self.paras.simple_select_file)
+        if self.paras.simple_select_file:
+            selector.include(self.paras.simple_select_file)
         return selector
 
     # ########################################################
@@ -287,7 +288,7 @@ class SelectFrame(QFrame):
             self.txt_excludes.setPlainText("\n".join(sorted(excludes)))
 
     def on_btn_incl_import_clicked(self):
-        filenames = QFileDialog.getOpenFileName(self, _("Import included filename"), self.ctrl.last_directory)
+        filenames = QFileDialog.getOpenFileName(self, _("Import included filenames"), self.ctrl.last_directory)
         if filenames[0] != "":
             self.ctrl.load_selector_includes(filenames[0])
 
@@ -340,7 +341,7 @@ class SelectFrame(QFrame):
     def on_btn_play_selected_clicked(self):
         self.store_in_selector()
         if self.play_widget_selector is None:
-            self.play_widget_selector = PlayWidget(self.__get_advanced_selector, _("Advanced: List resources"))
+            self.play_widget_selector = PlayWidget(self.__get_advanced_selector, "Advanced: List resources")
         else:
             self.play_widget_selector.show()
             self.play_widget_selector.setWindowState(Qt.WindowActive)
@@ -350,13 +351,21 @@ class SelectFrame(QFrame):
     def __get_advanced_selector(self):
         return self.selector
 
+    def translatables(self):
+        _("Advanced: List resources")
+        _("Simpel selection: List resources")
 
+
+# #################################################################
 class PlayWidget(QWidget):
 
     def __init__(self, get_selector, title=None, max_lines=1000000):
         QWidget.__init__(self)
+        self.ctrl = QApplication.instance().ctrl
+        self.ctrl.switch_language.connect(self.on_switch_language)
         self.get_selector = get_selector
-        self.setWindowTitle(title)
+        self.window_title = title
+        self.setWindowTitle(_(self.window_title))
         self.max_lines = max_lines
         self.conf = GuiConf()
 
@@ -399,14 +408,14 @@ class PlayWidget(QWidget):
 
         count_grid = QGridLayout()
         count_grid.setSpacing(3)
-        lbl_recources_count = QLabel(_("Selected resources:"))
-        count_grid.addWidget(lbl_recources_count, 1, 1)
+        self.lbl_recources_count = QLabel(_("Selected resources:"))
+        count_grid.addWidget(self.lbl_recources_count, 1, 1)
         self.lbl_resources_counter = QLabel("0")
         self.lbl_resources_counter.setTextInteractionFlags(Qt.TextSelectableByMouse)
         count_grid.addWidget(self.lbl_resources_counter, 1, 2)
 
-        lbl_excluded_recources_count = QLabel(_("Excluded resources:"))
-        count_grid.addWidget(lbl_excluded_recources_count, 2, 1)
+        self.lbl_excluded_recources_count = QLabel(_("Excluded resources:"))
+        count_grid.addWidget(self.lbl_excluded_recources_count, 2, 1)
         self.lbl_excluded_resources_counter = QLabel("0")
         self.lbl_excluded_resources_counter.setTextInteractionFlags(Qt.TextSelectableByMouse)
         count_grid.addWidget(self.lbl_excluded_resources_counter, 2, 2)
@@ -431,6 +440,15 @@ class PlayWidget(QWidget):
         vbox.addLayout(btn_box)
         self.setLayout(vbox)
         self.resize(self.conf.play_widget_width(), self.conf.play_widget_height())
+
+    def on_switch_language(self):
+        self.setWindowTitle(_(self.window_title))
+        self.lbl_explanation.setText(_("Selected resources"))
+        self.lbl_recources_count.setText(_("Selected resources:"))
+        self.lbl_excluded_recources_count.setText(_("Excluded resources:"))
+        self.btn_play.setText(_("Play"))
+        self.btn_stop.setText(_("Stop"))
+        self.btn_close.setText(_("Close"))
 
     def on_btn_play_clicked(self):
         self.pte_output.setPlainText("")
@@ -501,6 +519,7 @@ class PlayWidget(QWidget):
             event.accept()
 
 
+# ##############################################################################
 class PlayerThread(QThread, EventObserver):
 
     yield_resource = pyqtSignal(str)
@@ -525,12 +544,13 @@ class PlayerThread(QThread, EventObserver):
         self.selector.unregister(self)
 
     def inform_file_does_not_exist(self, *args, **kwargs):
-        self.signal_exception.emit(_("File does not exist: %s" % kwargs["filename"]))
+        self.signal_exception.emit(_("File does not exist: %s") % kwargs["filename"])
 
     def inform_not_a_regular_file(self, *args, **kwargs):
-        self.signal_exception.emit(_("Not a regular file: %s" % kwargs["filename"]))
+        self.signal_exception.emit(_("Not a regular file: %s") % kwargs["filename"])
 
-    def inform_file_excluded(self, *args, **kwargs):
-        self.signal_excluded_resource.emit(_("File excluded: %s" % kwargs["filename"]))
+    def confirm_file_excluded(self, *args, **kwargs):
+        self.signal_excluded_resource.emit(_("File excluded: %s") % kwargs["filename"])
+        return not self.isInterruptionRequested()
 
 

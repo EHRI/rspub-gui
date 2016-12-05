@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 import logging
 from PyQt5.QtCore import QUrl
+from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QDesktopServices
 from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import QApplication
@@ -56,6 +57,8 @@ class InspectFrame(QFrame):
             para_value = QLabel(self)
             para_name.setContentsMargins(5, 1, 5, 1)
             para_value.setContentsMargins(5, 1, 5, 1)
+            para_name.setTextInteractionFlags(Qt.TextSelectableByMouse)
+            para_value.setTextInteractionFlags(Qt.TextSelectableByMouse)
             # special colors for parameters and derived values
             if tup[0]:
                 para_name.setStyleSheet(Style.parameter())
@@ -126,6 +129,8 @@ class InspectFrame(QFrame):
             _("capabilitylist_url_label"),
             _("strategy_label"),
             _("selector_file_label"),
+            _("simple_select_file_label"),
+            _("select_mode_label"),
             _("plugin_dir_label"),
             _("max_items_in_list_label"),
             _("zero_fill_filename_label"),
@@ -141,5 +146,7 @@ class InspectFrame(QFrame):
             _("Strategy.inc_changelist"),
             _("True"),
             _("False"),
-            _("None")
+            _("None"),
+            _("SelectMode.simple"),
+            _("SelectMode.selector")
         ]

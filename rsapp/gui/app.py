@@ -6,6 +6,10 @@ import logging.config
 import os
 import sys
 
+from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QPixmap
+from PyQt5.QtWidgets import QSplashScreen
+
 LOG_DIR = "logs"
 LOG_FILE = "rspub.log"
 CONFIGURATION_DIR = "conf"
@@ -51,7 +55,19 @@ if __name__ == '__main__':
 
     from rsapp.gui.wapp import RsApplication
     application = RsApplication(sys.argv, application_home=APPLICATION_HOME, locale_dir=LOCALE_DIR)
+
+    from rsapp.gui.conf import GuiConf
+    if GuiConf().show_splash():
+        # Create and display the splash screen
+        splash_pix = QPixmap(os.path.join(APPLICATION_HOME, 'rsapp/img/splash.png'))
+        splash = QSplashScreen(splash_pix, Qt.WindowStaysOnTopHint)
+        splash.setMask(splash_pix.mask())
+        splash.show()
+        splash.finish(application.main_window)
+        #
+
     # start the application
+    application.main_window.show()
     sys.exit(application.exec_())
 
 

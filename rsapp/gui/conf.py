@@ -113,17 +113,25 @@ class GuiConf(object):
         self.__set_option__(section, option, str(value))
 
     #####################################################
+    # SECTION_CONTENT
     def last_configuration_name(self, fallback="DEFAULT"):
         return self.parser.get(SECTION_CONTENT, "last_configuration_name", fallback=fallback)
 
     def set_last_configuration_name(self, name):
         self.__set_option__(SECTION_CONTENT, "last_configuration_name", name)
 
+    #####################################################
+    # SECTION_I18N
     def language(self, fallback="en-US"):
         return self.parser.get(SECTION_I18N, "language", fallback=fallback)
 
     def set_language(self, language):
         self.__set_option__(SECTION_I18N, "language", language)
+
+    #####################################################
+    # SECTION_WINDOW
+    def show_splash(self, fallback=True):
+        return self.__get_boolean__(SECTION_WINDOW, "show_splash", fallback=fallback)
 
     def window_width(self, fallback=500):
         return self.__get_int__(SECTION_WINDOW, "window_width", fallback=fallback)
@@ -148,3 +156,15 @@ class GuiConf(object):
 
     def set_play_widget_height(self, height):
         self.__set_int__(SECTION_WINDOW, "play_widget_height", height)
+
+    def execute_widget_width(self, fallback=800):
+        return self.__get_int__(SECTION_WINDOW, "execute_widget_width", fallback=fallback)
+
+    def set_execute_widget_width(self, width):
+        self.__set_int__(SECTION_WINDOW, "execute_widget_width", width)
+
+    def execute_widget_height(self, fallback=400):
+        return self.__get_int__(SECTION_WINDOW, "execute_widget_height", fallback=fallback)
+
+    def set_execute_widget_height(self, height):
+        self.__set_int__(SECTION_WINDOW, "execute_widget_height", height)

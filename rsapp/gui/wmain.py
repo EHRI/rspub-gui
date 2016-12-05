@@ -40,15 +40,14 @@ class WMain(QMainWindow):
     def __init__(self):
         super().__init__()
         self.ctrl = QApplication.instance().ctrl
-        self.ctrl.switch_language.connect(self.retranslate_ui)
-        self.ctrl.switch_configuration.connect(self.reset_paras)
+        self.ctrl.switch_language.connect(self.on_switch_language)
+        self.ctrl.switch_configuration.connect(self.on_switch_configuration)
         self.paras = self.ctrl.paras
         self.config = GuiConf()
 
         self.init_ui()
-        self.retranslate_ui()
-        self.reset_paras()
-        self.show()
+        self.on_switch_language()
+        self.on_switch_configuration()
 
     def init_ui(self):
         self.create_menus()
@@ -69,16 +68,16 @@ class WMain(QMainWindow):
         self.menu_open_config = QMenu(_("Load configuration"), self)
         self.menu_file.addMenu(self.menu_open_config)
         self.config_action_group = QActionGroup(self)
-        self.config_action_group.triggered.connect(self.on_switch_config)
-        self.menu_open_config.aboutToShow.connect(self.set_open_config_menu_items)
+        self.config_action_group.triggered.connect(self.on_action_switch_config_triggered)
+        self.menu_open_config.aboutToShow.connect(self.on_menu_open_config_about_to_show)
 
         self.action_save_configuration_as = QAction(_("Save configuration as..."), self)
         self.menu_file.addAction(self.action_save_configuration_as)
-        self.action_save_configuration_as.triggered.connect(self.on_save_configuration_as)
+        self.action_save_configuration_as.triggered.connect(self.on_action_save_configuration_as_triggered)
 
         self.action_configurations = QAction(_("Configurations..."), self)
         self.menu_file.addAction(self.action_configurations)
-        self.action_configurations.triggered.connect(self.on_configurations)
+        self.action_configurations.triggered.connect(self.on_action_configurations_triggered)
 
         self.menu_file.addSeparator()
         self.action_exit = QAction(_("Exit"), self)
@@ -100,7 +99,7 @@ class WMain(QMainWindow):
     def create_menu_language(self):
         language_menu = QMenu(_("Language"), self)
         action_group = QActionGroup(self)
-        action_group.triggered.connect(self.on_switch_language)
+        action_group.triggered.connect(self.on_action_language_switch_triggered)
         iso_idx = self.ctrl.iso_lang()
         current_locale = self.ctrl.current_language()
 
@@ -120,20 +119,23 @@ class WMain(QMainWindow):
         return language_menu
 
     ####### functions #######################################
-    def retranslate_ui(self, code=None):
+    def on_switch_language(self, code=None):
+        LOG.debug("Switch language: %s" % code)
         self.menu_file.setTitle(_("File"))
         self.action_exit.setText(_("Exit"))
         self.action_exit.setStatusTip(_("Exit application"))
         self.menu_open_config.setTitle(_("Load configuration"))
         self.action_save_configuration_as.setText(_("Save configuration as..."))
+        self.action_configurations.setText(_("Configurations..."))
         self.menu_settings.setTitle(_("Preferences"))
         self.menu_language.setTitle(_("Language"))
 
-    def reset_paras(self, name=None):
+    def on_switch_configuration(self, name=None):
+        LOG.debug("Switch configuration: %s" % name)
         self.paras = self.ctrl.paras
         self.setWindowTitle(self.paras.configuration_name())
 
-    def set_open_config_menu_items(self):
+    def on_menu_open_config_about_to_show(self):
         self.menu_open_config.clear()
         for child in self.config_action_group.children():
             self.config_action_group.removeAction(child)
@@ -147,13 +149,13 @@ class WMain(QMainWindow):
             if name == current_name:
                 action.setChecked(True)
 
-    def on_switch_config(self):
+    def on_action_switch_config_triggered(self):
         action_group = self.sender()
         name = action_group.checkedAction().data()
         if self.tabframe.about_to_change(_("Switch configuration...")):
             self.ctrl.load_configuration(name)
 
-    def on_save_configuration_as(self):
+    def on_action_save_configuration_as_triggered(self):
         text =  _("Save configuration as...")
         if self.tabframe.about_to_change(text):
             dlg = QInputDialog(self)
@@ -165,10 +167,10 @@ class WMain(QMainWindow):
             if dlg.exec_():
                 self.ctrl.save_configuration_as(dlg.textValue())
 
-    def on_configurations(self):
+    def on_action_configurations_triggered(self):
         ConfigurationsDialog(self).exec_()
 
-    def on_switch_language(self):
+    def on_action_language_switch_triggered(self):
         action_group = self.sender()
         locale = action_group.checkedAction().data()
         self.ctrl.set_language(locale)
@@ -207,21 +209,21 @@ class TabbedFrame(QTabWidget):
 
     def init_ui(self):
         self.frame_configure = ConfigureFrame(self, 0)
-        self.frame_inspect = InspectFrame(self, 1)
-        self.frame_select = SelectFrame(self, 2)
-        self.frame_execute = ExecuteFrame(self, 3)
+        #self.frame_inspect = InspectFrame(self, 1)
+        self.frame_select = SelectFrame(self, 1)
+        self.frame_execute = ExecuteFrame(self, 2)
 
         self.addTab(self.frame_configure, _("Configure"))
-        self.addTab(self.frame_inspect, _("Inspect"))
+        #self.addTab(self.frame_inspect, _("Inspect"))
         self.addTab(self.frame_select, _("Select"))
         self.addTab(self.frame_execute, _("Execute"))
 
     @pyqtSlot(str)
     def retranslate_ui(self, code=None):
         self.setTabText(0, _("Configure"))
-        self.setTabText(1, _("Inspect"))
-        self.setTabText(2, _("Select"))
-        self.setTabText(3, _("Execute"))
+        #self.setTabText(1, _("Inspect"))
+        self.setTabText(1, _("Select"))
+        self.setTabText(2, _("Execute"))
 
     @pyqtSlot(int)
     def __tabchanged(self, index):
