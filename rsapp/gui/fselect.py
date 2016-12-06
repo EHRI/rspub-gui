@@ -398,7 +398,7 @@ class PlayWidget(QWidget):
         self.pte_exceptions.setMaximumBlockCount(5000)
         self.pte_exceptions.setLineWrapMode(QPlainTextEdit.NoWrap)
         self.pte_exceptions.setCenterOnScroll(True)
-        self.pte_exceptions.setStyleSheet(Style.exception_output())
+        self.pte_exceptions.setStyleSheet(Style.blue_text())
         splitter.addWidget(self.pte_exceptions)
         splitter.setStretchFactor(0, 2)
         splitter.setStretchFactor(1, 1)
@@ -529,18 +529,17 @@ class PlayerThread(QThread, EventObserver):
     def __init__(self, selector, parent=None):
         QThread.__init__(self, parent)
         EventObserver.__init__(self)
-        self.exiting = False
         self.selector = selector
         self.selector.register(self)
 
     def run(self):
-        LOG.debug("Thread started %s" % self)
+        LOG.debug("Player thread started %s" % self)
         for file in self.selector:
             self.yield_resource.emit(file)
             if self.isInterruptionRequested():
-                LOG.debug("Thread interrupted %s" % self)
+                LOG.debug("Player thread interrupted %s" % self)
                 break
-        LOG.debug("Thread finished %s" % self)
+        LOG.debug("Player thread finished %s" % self)
         self.selector.unregister(self)
 
     def inform_file_does_not_exist(self, *args, **kwargs):

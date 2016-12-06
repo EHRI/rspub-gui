@@ -2,8 +2,10 @@
 # -*- coding: utf-8 -*-
 import logging
 
+from PyQt5.QtCore import QThread
 from PyQt5.QtCore import QUrl
 from PyQt5.QtCore import Qt
+from PyQt5.QtCore import pyqtSignal
 from PyQt5.QtGui import QDesktopServices
 from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import QApplication
@@ -12,14 +14,21 @@ from PyQt5.QtWidgets import QFrame
 from PyQt5.QtWidgets import QGridLayout
 from PyQt5.QtWidgets import QHBoxLayout
 from PyQt5.QtWidgets import QLabel
+from PyQt5.QtWidgets import QMessageBox
 from PyQt5.QtWidgets import QPlainTextEdit
 from PyQt5.QtWidgets import QPushButton
 from PyQt5.QtWidgets import QSplitter
+from PyQt5.QtWidgets import QTextBrowser
+from PyQt5.QtWidgets import QTextEdit
 from PyQt5.QtWidgets import QVBoxLayout
 from PyQt5.QtWidgets import QWidget
 
 from rsapp.gui.conf import GuiConf
 from rsapp.gui.style import Style
+from rspub.core.rs import ResourceSync
+from rspub.core.rs_enum import SelectMode
+from rspub.core.selector import Selector
+from rspub.util.observe import EventObserver
 
 LOG = logging.getLogger(__name__)
 
@@ -217,19 +226,59 @@ class ExecuteWidget(QWidget):
         self.lbl_events_title1 = QLabel(_("Main events"))
         self.splitter_title.addWidget(self.lbl_events_title1)
 
-        self.lbl_events_title2 = QLabel(_("Events"))
+        self.lbl_events_title2 = QLabel(_("Resources"))
         self.splitter_title.addWidget(self.lbl_events_title2)
 
-        self.pte_events1 = QPlainTextEdit()
+        self.lbl_events_title3 = QLabel(_("Errors"))
+        self.splitter_title.addWidget(self.lbl_events_title3)
+
+        self.pte_events1 = QTextBrowser()
+        self.pte_events1.setOpenExternalLinks(True)
+        self.pte_events1.setOpenLinks(False)
+        self.pte_events1.anchorClicked.connect(self.on_anchor_clicked)
+        self.pte_events1.setLineWrapMode(QTextEdit.NoWrap)
         self.splitter_event.addWidget(self.pte_events1)
 
-        self.pte_events2 = QPlainTextEdit()
+        self.pte_events2 = QTextBrowser()
+        self.pte_events2.setOpenExternalLinks(True)
+        self.pte_events2.setOpenLinks(False)
+        self.pte_events2.anchorClicked.connect(self.on_anchor_clicked)
+        self.pte_events2.setLineWrapMode(QTextEdit.NoWrap)
         self.splitter_event.addWidget(self.pte_events2)
 
+        self.pte_events3 = QPlainTextEdit()
+        self.pte_events3.setReadOnly(True)
+        self.pte_events3.setLineWrapMode(QPlainTextEdit.NoWrap)
+        self.pte_events3.setStyleSheet(Style.red_text())
+        self.pte_events3.setCenterOnScroll(True)
+        self.splitter_event.addWidget(self.pte_events3)
+
+        self.splitter_title.setStretchFactor(0, 5)
+        self.splitter_title.setStretchFactor(1, 3)
+        self.splitter_title.setStretchFactor(2, 1)
+        self.splitter_event.setStretchFactor(0, 5)
+        self.splitter_event.setStretchFactor(1, 3)
+        self.splitter_event.setStretchFactor(2, 1)
         hbox_splitters = QHBoxLayout()
         hbox_splitters.addWidget(self.splitter_title, 0)
         hbox_splitters.addWidget(self.splitter_event, 5)
         vbox.addLayout(hbox_splitters)
+
+        btn_box = QHBoxLayout()
+        btn_box.addStretch(1)
+        self.chk_trial_run = QCheckBox(_("Trial run"))
+        btn_box.addWidget(self.chk_trial_run)
+        self.btn_run = QPushButton(_("Run"))
+        self.btn_run.clicked.connect(self.on_btn_run_clicked)
+        btn_box.addWidget(self.btn_run)
+        self.btn_stop = QPushButton(_("Stop"))
+        self.normal_style = self.btn_stop.styleSheet()
+        self.btn_stop.setEnabled(False)
+        btn_box.addWidget(self.btn_stop)
+        self.btn_close = QPushButton(_("Close"))
+        self.btn_close.clicked.connect(self.on_btn_close_clicked)
+        btn_box.addWidget(self.btn_close)
+        vbox.addLayout(btn_box)
 
         self.setLayout(vbox)
         self.resize(self.conf.execute_widget_width(), self.conf.execute_widget_height())
@@ -248,11 +297,82 @@ class ExecuteWidget(QWidget):
 
     def on_switch_language(self):
         self.setWindowTitle(_("Execute %s") % self.paras.configuration_name())
+        self.lbl_events_title1.setText(_("Main events"))
+        self.lbl_events_title2.setText(_("Resources"))
+        self.lbl_events_title3.setText(_("Errors"))
+        self.chk_trial_run.setText(_("Trial run"))
+        self.btn_run.setText(_("Run"))
+        self.btn_stop.setText(_("Stop"))
+        self.btn_close.setText(_("Close"))
 
     def on_switch_configuration(self, name=None):
         LOG.debug("Switch configuration: %s" % name)
         self.paras = self.ctrl.paras
         self.setWindowTitle(_("Execute %s") % self.paras.configuration_name())
+
+    def on_btn_run_clicked(self):
+        self.pte_events1.setPlainText("")
+        self.pte_events2.setPlainText("")
+        self.pte_events3.setPlainText("")
+
+        self.btn_close.setEnabled(False)
+        self.btn_run.setEnabled(False)
+        self.chk_trial_run.setEnabled(False)
+        self.btn_stop.setEnabled(self.chk_trial_run.isChecked())
+        if self.btn_stop.isEnabled():
+            self.btn_stop.setStyleSheet(Style.alarm())
+        if self.paras.select_mode == SelectMode.simple:
+            selector = Selector()
+            selector.include(self.paras.simple_select_file)
+        else:
+            selector = self.ctrl.selector
+        self.executor_thread = ExecutorThread(self.paras, selector, self)
+        self.executor_thread.signal_execution_error.connect(self.on_signal_execution_error)
+        self.executor_thread.ask_confirmation.connect(self.on_ask_confirmation)
+        self.executor_thread.signal_main_event.connect(self.on_signal_main_event)
+        self.executor_thread.signal_minor_event.connect(self.on_signal_minor_event)
+        self.executor_thread.finished.connect(self.on_executor_thread_finished)
+        self.executor_thread.start()
+        self.update()
+
+    def on_signal_execution_error(self, msg):
+        self.pte_events3.appendHtml(msg)
+        self.update()
+
+    def on_ask_confirmation(self, text, i_text, answer):
+        msg_box = QMessageBox()
+        msg_box.setText(text)
+        i_text += "\n\n"
+        i_text += _("Ok to proceed?")
+        msg_box.setInformativeText(i_text)
+        msg_box.setIcon(QMessageBox.Question)
+        msg_box.setStandardButtons(QMessageBox.No | QMessageBox.Yes)
+        msg_box.setDefaultButton(QMessageBox.Yes)
+        exe = msg_box.exec()
+        if exe == QMessageBox.No:
+            answer.answer = False
+        else:
+            answer.answer = True
+        answer.answered = True
+
+    def on_signal_main_event(self, msg):
+        self.pte_events1.append(msg)
+        self.update()
+
+    def on_signal_minor_event(self, msg):
+        self.pte_events2.append(msg)
+        self.update()
+
+    def on_executor_thread_finished(self):
+        self.btn_stop.setStyleSheet(self.normal_style)
+        self.btn_stop.setEnabled(False)
+        self.btn_close.setEnabled(True)
+        self.btn_run.setEnabled(True)
+        self.chk_trial_run.setEnabled(True)
+        self.update()
+
+    def on_anchor_clicked(self, url):
+        QDesktopServices.openUrl(QUrl(url))
 
     def on_btn_close_clicked(self):
         if self.windowState() & Qt.WindowFullScreen:
@@ -271,3 +391,120 @@ class ExecuteWidget(QWidget):
             self.conf.set_execute_widget_height(self.height())
             self.conf.persist()
             event.accept()
+
+
+class Answer(object):
+
+    answered = False
+    answer = False
+
+# #################################################################
+class ExecutorThread(QThread, EventObserver):
+
+    signal_execution_error = pyqtSignal(str)
+    signal_main_event = pyqtSignal(str)
+    signal_minor_event = pyqtSignal(str)
+    ask_confirmation = pyqtSignal(str, str, Answer)
+
+    def __init__(self, paras, selector, parent=None):
+        QThread.__init__(self, parent)
+        EventObserver.__init__(self)
+        self.paras = paras
+        self.selector = selector
+
+    def run(self):
+        LOG.debug("Executor thread started %s" % self)
+        try:
+            rs = ResourceSync(**self.paras.__dict__)
+            rs.register(self)
+            self.selector.register(self)
+            rs.execute(self.selector)
+        except Exception as err:
+            LOG.exception("Exception in executor thread:")
+            self.signal_execution_error.emit(_("Exception in executor thread: {0}").format(err))
+
+    def inform_execution_start(self, *args, **kwargs):
+        self.signal_main_event.emit(_("Start execution: %s") % kwargs["date_start_processing"])
+
+    def confirm_clear_metadata_directory(self, *args, **kwargs):
+        metadata_dir = kwargs["metadata_dir"]
+        text = _("Clear metadata directory")
+        i_text = _("Clearing xml-files from \n%s") % metadata_dir
+        answer = Answer()
+        self.ask_confirmation.emit(text, i_text, answer)
+        while not answer.answered:
+            pass
+        return answer.answer
+
+    def inform_created_resource(self, *args, **kwargs):
+        resource = kwargs["resource"]
+        count = kwargs["count"]
+        file = kwargs["file"]
+        txt = "<code>"
+        txt += str(count) + "&nbsp;&nbsp;"
+        txt += str(resource.lastmod) + "</code>&nbsp;&nbsp;"
+        txt += "<a href=\"file://" + file + "\">" + file + "</a>&nbsp;&nbsp;&#9679;&nbsp;&nbsp;"
+        txt += "<a href=\"" + resource.uri + "\">" + resource.uri + "</a>&nbsp;&nbsp;"
+        txt += "<code>" + str(resource.length) + "</code>"
+
+        self.signal_minor_event.emit(txt)
+
+    def inform_found_changes(self, *args, **kwargs):
+        # created, updated, deleted, unchanged
+        txt = "<h3>"
+        txt += _("Summary of changes")
+        txt += "</h3>"
+        txt += "<table>"
+        txt += "<tr><td>"
+        txt += _("created") + "&nbsp;"
+        txt += "</td><td>"
+        txt += str(kwargs["created"])
+        txt += "</td></tr><tr><td>"
+        txt += _("updated") + "&nbsp;"
+        txt += "</td><td>"
+        txt += str(kwargs["updated"])
+        txt += "</td></tr><tr><td>"
+        txt += _("deleted") + "&nbsp;"
+        txt += "</td><td>"
+        txt += str(kwargs["deleted"])
+        txt += "</td></tr><tr><td>"
+        txt += _("unchanged") + "&nbsp;"
+        txt += "</td><td>"
+        txt += str(kwargs["unchanged"])
+        txt += "</td></tr></table><br/><br/>"
+        self.signal_main_event.emit(txt)
+
+    def inform_completed_document(self, *args, **kwargs):
+        sitemap_data = kwargs["sitemap_data"]
+        self.signal_main_event.emit(self.pretty_print_sitemap_data(sitemap_data))
+
+    def inform_execution_end(self, *args, **kwargs):
+        self.signal_main_event.emit(_("End execution: %s") % kwargs["date_end_processing"])
+
+    @staticmethod
+    def pretty_print_sitemap_data(sitemap_data):
+        txt = ""
+        txt += "<h3>"
+        txt += sitemap_data.capability_name
+        txt += "</h3>"
+        txt += "<table>"
+        txt += "<tr><td>"
+        txt += _("path") + "&nbsp;"
+        txt += "</td><td>"
+        txt += "<a href=\"file://" + sitemap_data.path + "\">" + sitemap_data.path + "</a>"
+        txt += "</td></tr><tr><td>"
+        txt += _("uri") + "&nbsp;"
+        txt += "</td><td>"
+        txt += "<a href=\"" + sitemap_data.uri + "\">" + sitemap_data.uri + "</a>"
+        txt += "</td></tr><tr><td>"
+        txt += _("count resources") + "&nbsp;"
+        txt += "</td><td>"
+        txt += str(sitemap_data.resource_count)
+        txt += "</td></tr><tr><td>"
+        txt += _("document saved") + "&nbsp;"
+        txt += "</td><td>"
+        txt += _(str(sitemap_data.document_saved))
+        txt += "</td></tr></table><br/><br/>"
+        return txt
+
+

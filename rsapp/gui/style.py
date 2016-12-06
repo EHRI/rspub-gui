@@ -29,5 +29,10 @@ class Style(object):
         return "color: rgb(255, 255, 255); background-color: rgb(225, 0, 0);"
 
     @staticmethod
-    def exception_output():
+    def blue_text():
         return "color: rgb(0, 0, 255);"
+
+
+    @staticmethod
+    def red_text():
+        return "color: rgb(255, 0, 0);"
