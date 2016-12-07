@@ -189,6 +189,7 @@ class WMain(QMainWindow):
 
     def close(self):
         LOG.debug("window closing")
+        self.ctrl.update_selector()
         self.ctrl.config.set_window_height(self.height())
         self.ctrl.config.set_window_width(self.width())
         self.ctrl.config.set_last_configuration_name(self.paras.configuration_name())

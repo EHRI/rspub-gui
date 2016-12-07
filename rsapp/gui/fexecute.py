@@ -27,6 +27,7 @@ from rsapp.gui.conf import GuiConf
 from rsapp.gui.style import Style
 from rspub.core.rs import ResourceSync
 from rspub.core.rs_enum import SelectMode
+from rspub.core.rs_paras import RsParameters
 from rspub.core.selector import Selector
 from rspub.util.observe import EventObserver
 
@@ -96,10 +97,6 @@ class ExecuteFrame(QFrame):
 
         vbox = QVBoxLayout()
         vbox.addStretch(1)
-        # self.chk_trial_run = QCheckBox(_("trial run"))
-        # self.chk_trial_run.setChecked(not self.paras.is_saving_sitemaps)
-        # self.chk_trial_run.toggled.connect(self.on_chk_trial_run_toggled)
-        # vbox.addWidget(self.chk_trial_run)
         self.btn_run = QPushButton(_("Run..."))
         self.btn_run.clicked.connect(self.on_btn_run_clicked)
         vbox.addWidget(self.btn_run)
@@ -113,7 +110,6 @@ class ExecuteFrame(QFrame):
     def on_switch_language(self, code=None):
         LOG.debug("Switch language: %s" % code)
         self.label_title.setText(_("Execute configuration: '%s'") % self.paras.configuration_name())
-        #self.chk_trial_run.setText(_("trial run"))
         self.btn_run.setText(_("Run..."))
         self.render()
 
@@ -121,7 +117,6 @@ class ExecuteFrame(QFrame):
         LOG.debug("Switch configuration: %s" % name)
         self.paras = self.ctrl.paras
         self.label_title.setText(_("Execute configuration: '%s'") % self.paras.configuration_name())
-        #self.chk_trial_run.setChecked(not self.paras.is_saving_sitemaps)
         self.render()
 
     def render(self):
@@ -146,11 +141,6 @@ class ExecuteFrame(QFrame):
     def on_switch_tab(self, from_index, to_index):
         if to_index == self.index:
             self.render()
-
-    # def on_chk_trial_run_toggled(self, checked):
-    #     self.paras.is_saving_sitemaps = not checked
-    #     self.paras.save_configuration()
-    #     self.render()
 
     def on_btn_run_clicked(self):
         if self.execute_widget is None:
@@ -207,6 +197,7 @@ class ExecuteWidget(QWidget):
         self.ctrl.switch_language.connect(self.on_switch_language)
         self.ctrl.switch_configuration.connect(self.on_switch_configuration)
         self.paras = self.ctrl.paras
+        self.trial_run = not self.paras.is_saving_sitemaps
         self.conf = GuiConf()
         self.setWindowTitle(_("Execute %s") % self.paras.configuration_name())
         self.executor_thread = None
@@ -264,14 +255,26 @@ class ExecuteWidget(QWidget):
         hbox_splitters.addWidget(self.splitter_event, 5)
         vbox.addLayout(hbox_splitters)
 
+        lbl_box = QHBoxLayout()
+        self.lbl_processing = QLabel(_("Processing:"))
+        self.lbl_processing_file = QLabel("")
+        self.lbl_processing.setVisible(False)
+        self.lbl_processing_file.setVisible(False)
+        lbl_box.addWidget(self.lbl_processing)
+        lbl_box.addWidget(self.lbl_processing_file)
+        lbl_box.addStretch(1)
+        vbox.addLayout(lbl_box)
+
         btn_box = QHBoxLayout()
         btn_box.addStretch(1)
         self.chk_trial_run = QCheckBox(_("Trial run"))
+        self.chk_trial_run.setChecked(self.trial_run)
         btn_box.addWidget(self.chk_trial_run)
         self.btn_run = QPushButton(_("Run"))
         self.btn_run.clicked.connect(self.on_btn_run_clicked)
         btn_box.addWidget(self.btn_run)
         self.btn_stop = QPushButton(_("Stop"))
+        self.btn_stop.clicked.connect(self.on_btn_stop_clicked)
         self.normal_style = self.btn_stop.styleSheet()
         self.btn_stop.setEnabled(False)
         btn_box.addWidget(self.btn_stop)
@@ -300,6 +303,7 @@ class ExecuteWidget(QWidget):
         self.lbl_events_title1.setText(_("Main events"))
         self.lbl_events_title2.setText(_("Resources"))
         self.lbl_events_title3.setText(_("Errors"))
+        self.lbl_processing.setText(_("Processing:"))
         self.chk_trial_run.setText(_("Trial run"))
         self.btn_run.setText(_("Run"))
         self.btn_stop.setText(_("Stop"))
@@ -309,33 +313,45 @@ class ExecuteWidget(QWidget):
         LOG.debug("Switch configuration: %s" % name)
         self.paras = self.ctrl.paras
         self.setWindowTitle(_("Execute %s") % self.paras.configuration_name())
+        self.trial_run = not self.paras.is_saving_sitemaps
+        self.chk_trial_run.setChecked(self.trial_run)
 
     def on_btn_run_clicked(self):
+        self.ctrl.update_selector()
+        self.paras.is_saving_sitemaps = not self.chk_trial_run.isChecked()
         self.pte_events1.setPlainText("")
         self.pte_events2.setPlainText("")
         self.pte_events3.setPlainText("")
+        self.lbl_processing.setVisible(True)
+        self.lbl_processing_file.setVisible(True)
 
         self.btn_close.setEnabled(False)
         self.btn_run.setEnabled(False)
         self.chk_trial_run.setEnabled(False)
-        self.btn_stop.setEnabled(self.chk_trial_run.isChecked())
-        if self.btn_stop.isEnabled():
-            self.btn_stop.setStyleSheet(Style.alarm())
+        self.btn_stop.setEnabled(True)
+        self.btn_stop.setStyleSheet(Style.alarm())
         if self.paras.select_mode == SelectMode.simple:
             selector = Selector()
             selector.include(self.paras.simple_select_file)
         else:
             selector = self.ctrl.selector
         self.executor_thread = ExecutorThread(self.paras, selector, self)
-        self.executor_thread.signal_execution_error.connect(self.on_signal_execution_error)
+        self.executor_thread.signal_exception.connect(self.on_signal_exception)
         self.executor_thread.ask_confirmation.connect(self.on_ask_confirmation)
         self.executor_thread.signal_main_event.connect(self.on_signal_main_event)
         self.executor_thread.signal_minor_event.connect(self.on_signal_minor_event)
+        self.executor_thread.signal_next_file.connect(self.on_signal_next_file)
+        self.executor_thread.signal_end_processing.connect(self.on_signal_end_processing)
         self.executor_thread.finished.connect(self.on_executor_thread_finished)
         self.executor_thread.start()
         self.update()
 
-    def on_signal_execution_error(self, msg):
+    def on_btn_stop_clicked(self):
+        self.btn_stop.setStyleSheet(self.normal_style)
+        self.btn_stop.setEnabled(False)
+        self.executor_thread.requestInterruption()
+
+    def on_signal_exception(self, msg):
         self.pte_events3.appendHtml(msg)
         self.update()
 
@@ -363,12 +379,26 @@ class ExecuteWidget(QWidget):
         self.pte_events2.append(msg)
         self.update()
 
+    def on_signal_next_file(self, filename):
+        lfn = len(filename)
+        ww = (self.width() - 150)/7
+        www = int(ww/2)
+        if lfn > ww:
+            filename = filename[:www] + "..." + filename[lfn - www:]
+        self.lbl_processing_file.setText(filename)
+        self.update()
+
+    def on_signal_end_processing(self, paras):
+        self.ctrl.update_configuration(paras)
+
     def on_executor_thread_finished(self):
         self.btn_stop.setStyleSheet(self.normal_style)
         self.btn_stop.setEnabled(False)
         self.btn_close.setEnabled(True)
         self.btn_run.setEnabled(True)
         self.chk_trial_run.setEnabled(True)
+        self.lbl_processing.setVisible(False)
+        self.lbl_processing_file.setVisible(False)
         self.update()
 
     def on_anchor_clicked(self, url):
@@ -398,30 +428,47 @@ class Answer(object):
     answered = False
     answer = False
 
+
 # #################################################################
 class ExecutorThread(QThread, EventObserver):
 
-    signal_execution_error = pyqtSignal(str)
+    signal_exception = pyqtSignal(str)
     signal_main_event = pyqtSignal(str)
     signal_minor_event = pyqtSignal(str)
+    signal_next_file = pyqtSignal(str)
     ask_confirmation = pyqtSignal(str, str, Answer)
+    signal_end_processing = pyqtSignal(RsParameters)
 
     def __init__(self, paras, selector, parent=None):
         QThread.__init__(self, parent)
         EventObserver.__init__(self)
         self.paras = paras
         self.selector = selector
+        self.file_count = 0
+        self.excluded_file_count = 0
+        self.rejected_by_gate_count = 0
 
     def run(self):
         LOG.debug("Executor thread started %s" % self)
+        self.file_count = 0
+        self.excluded_file_count = 0
+        self.rejected_by_gate_count = 0
+        rs = None
         try:
             rs = ResourceSync(**self.paras.__dict__)
             rs.register(self)
             self.selector.register(self)
             rs.execute(self.selector)
+            paras = RsParameters(**rs.__dict__)
+            self.signal_end_processing.emit(paras)
         except Exception as err:
             LOG.exception("Exception in executor thread:")
-            self.signal_execution_error.emit(_("Exception in executor thread: {0}").format(err))
+            self.signal_exception.emit(_("Exception in executor thread: {0}").format(err))
+            self.inform_execution_end(date_end_processing=None)
+        finally:
+            self.selector.unregister(self)
+            if rs:
+                rs.unregister(self)
 
     def inform_execution_start(self, *args, **kwargs):
         self.signal_main_event.emit(_("Start execution: %s") % kwargs["date_start_processing"])
@@ -446,7 +493,6 @@ class ExecutorThread(QThread, EventObserver):
         txt += "<a href=\"file://" + file + "\">" + file + "</a>&nbsp;&nbsp;&#9679;&nbsp;&nbsp;"
         txt += "<a href=\"" + resource.uri + "\">" + resource.uri + "</a>&nbsp;&nbsp;"
         txt += "<code>" + str(resource.length) + "</code>"
-
         self.signal_minor_event.emit(txt)
 
     def inform_found_changes(self, *args, **kwargs):
@@ -479,6 +525,11 @@ class ExecutorThread(QThread, EventObserver):
         self.signal_main_event.emit(self.pretty_print_sitemap_data(sitemap_data))
 
     def inform_execution_end(self, *args, **kwargs):
+        trs = self.file_count - self.excluded_file_count - self.rejected_by_gate_count
+        self.signal_main_event.emit(_("Total file count: %d") % self.file_count)
+        self.signal_main_event.emit(_("Excluded by selector: %d") % self.excluded_file_count)
+        self.signal_main_event.emit(_("Rejected by resource gate: %d") % self.rejected_by_gate_count)
+        self.signal_main_event.emit(_("Total resources synchronized: %d") % trs)
         self.signal_main_event.emit(_("End execution: %s") % kwargs["date_end_processing"])
 
     @staticmethod
@@ -507,4 +558,26 @@ class ExecutorThread(QThread, EventObserver):
         txt += "</td></tr></table><br/><br/>"
         return txt
 
+    # resource gate
+    def inform_rejected_file(self, *args, **kwargs):
+        self.rejected_by_gate_count += 1
 
+    # selector events
+    def inform_file_does_not_exist(self, *args, **kwargs):
+        self.signal_exception.emit(_("File does not exist: %s") % kwargs["filename"])
+
+    def inform_not_a_regular_file(self, *args, **kwargs):
+        self.signal_exception.emit(_("Not a regular file: %s") % kwargs["filename"])
+
+    def confirm_file_excluded(self, *args, **kwargs):
+        self.excluded_file_count += 1
+        if self.isInterruptionRequested():
+            self.signal_exception.emit(_("Process interrupted by user"))
+        return not self.isInterruptionRequested()
+
+    def confirm_next_file(self, *args, **kwargs):
+        self.signal_next_file.emit(kwargs["filename"])
+        self.file_count += 1
+        if self.isInterruptionRequested():
+            self.signal_exception.emit(_("Process interrupted by user"))
+        return not self.isInterruptionRequested()

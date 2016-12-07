@@ -41,6 +41,7 @@ class SelectFrame(QFrame):
         self.ctrl.switch_configuration.connect(self.on_switch_configuration)
         self.ctrl.switch_selector.connect(self.on_switch_selector)
         self.ctrl.switch_tab.connect(self.on_switch_tab)
+        self.ctrl.request_update_selector.connect(self.store_in_selector)
         self.paras = self.ctrl.paras
         self.selector = self.ctrl.selector
         self.includes = self.selector.get_included_entries()
@@ -550,6 +551,13 @@ class PlayerThread(QThread, EventObserver):
 
     def confirm_file_excluded(self, *args, **kwargs):
         self.signal_excluded_resource.emit(_("File excluded: %s") % kwargs["filename"])
+        if self.isInterruptionRequested():
+            self.signal_exception.emit(_("Process interrupted by user"))
+        return not self.isInterruptionRequested()
+
+    def confirm_next_file(self, *args, **kwargs):
+        if self.isInterruptionRequested():
+            self.signal_exception.emit(_("Process interrupted by user"))
         return not self.isInterruptionRequested()
 
 

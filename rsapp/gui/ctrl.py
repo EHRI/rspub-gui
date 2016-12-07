@@ -26,6 +26,7 @@ class Ctrl(QObject):
     switch_configuration = pyqtSignal(str)
     switch_selector = pyqtSignal(str)
     switch_tab = pyqtSignal(int, int)
+    request_update_selector = pyqtSignal()
 
     def __init__(self, application_home, locale_dir):
         QObject.__init__(self)
@@ -104,6 +105,14 @@ class Ctrl(QObject):
         except Exception as err:
             self.error("Unable to reset parameters.", err)
 
+    def update_configuration(self, paras):
+        self.paras = paras
+        self.paras.save_configuration()
+        self.selector = self.__get_selector()
+        LOG.debug("Configuration updated")
+        self.switch_configuration.emit(self.paras.configuration_name())
+        self.switch_selector.emit(self.selector.abs_location())
+
     def __get_selector(self):
         if self.paras.selector_file:
             try:
@@ -149,6 +158,11 @@ class Ctrl(QObject):
             self.switch_selector.emit(self.selector.abs_location())
         except Exception as err:
             self.warn("Unable to open selector file '%s'" % self.selector.abs_location(), err)
+
+    def update_selector(self):
+        self.request_update_selector.emit()
+        self.selector = self.__get_selector()
+        self.switch_selector.emit(self.selector.abs_location())
 
     def load_selector_includes(self, filename):
         try:

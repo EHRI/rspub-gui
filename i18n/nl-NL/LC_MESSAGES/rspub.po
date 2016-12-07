@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: rspub-gui 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-12-05 10:34+0100\n"
-"PO-Revision-Date: 2016-12-05 10:42+0100\n"
+"POT-Creation-Date: 2016-12-07 14:30+0100\n"
+"PO-Revision-Date: 2016-12-07 14:41+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -19,11 +19,11 @@ msgstr ""
 "X-Generator: Poedit 1.8.11\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: rsapp/gui/ctrl.py:69
+#: rsapp/gui/ctrl.py:70
 msgid "Could not read iso-lang.json"
 msgstr "Kon iso-lang.json niet lezen"
 
-#: rsapp/gui/ctrl.py:185
+#: rsapp/gui/ctrl.py:199
 #, python-format
 msgid ""
 "%s\n"
@@ -39,13 +39,13 @@ msgstr ""
 # Does not need translation
 #: rsapp/gui/fconfigure.py:116 rsapp/gui/fconfigure.py:122
 #: rsapp/gui/fconfigure.py:150 rsapp/gui/fconfigure.py:181
-#: rsapp/gui/finspect.py:101
+#: rsapp/gui/fexecute.py:134 rsapp/gui/finspect.py:101
 msgid "_label"
 msgstr ""
 
-#: rsapp/gui/fconfigure.py:123 rsapp/gui/fselect.py:80 rsapp/gui/fselect.py:110
-#: rsapp/gui/fselect.py:127 rsapp/gui/fselect.py:166 rsapp/gui/fselect.py:170
-#: rsapp/gui/fselect.py:173
+#: rsapp/gui/fconfigure.py:123 rsapp/gui/fselect.py:81 rsapp/gui/fselect.py:111
+#: rsapp/gui/fselect.py:128 rsapp/gui/fselect.py:167 rsapp/gui/fselect.py:171
+#: rsapp/gui/fselect.py:174
 msgid "Browse"
 msgstr "Bladeren"
 
@@ -72,248 +72,383 @@ msgstr "Parameters '%s' naar default waarden terugzetten?"
 msgid "Parameters '%s' has %d error(s)."
 msgstr "Parameters '%s' bevat %d fouten."
 
-#: rsapp/gui/fconfigure.py:280 rsapp/gui/wmain.py:303
+#: rsapp/gui/fconfigure.py:280 rsapp/gui/fexecute.py:373 rsapp/gui/wmain.py:306
 msgid "Ok to proceed?"
 msgstr "Doorgaan?"
 
-#: rsapp/gui/fconfigure.py:308 rsapp/gui/finspect.py:121
+#: rsapp/gui/fconfigure.py:308 rsapp/gui/fexecute.py:168
+#: rsapp/gui/finspect.py:121
 msgid "resource_dir_label"
 msgstr "Digitale bron folder"
 
-#: rsapp/gui/fconfigure.py:309 rsapp/gui/finspect.py:122
+#: rsapp/gui/fconfigure.py:309 rsapp/gui/fexecute.py:169
+#: rsapp/gui/finspect.py:122
 msgid "metadata_dir_label"
 msgstr "Metadata folder"
 
-#: rsapp/gui/fconfigure.py:310 rsapp/gui/finspect.py:124
+#: rsapp/gui/fconfigure.py:310 rsapp/gui/fexecute.py:171
+#: rsapp/gui/finspect.py:124
 msgid "description_dir_label"
 msgstr "Bronbeschrijving folder"
 
-#: rsapp/gui/fconfigure.py:311 rsapp/gui/finspect.py:134
+#: rsapp/gui/fconfigure.py:311 rsapp/gui/fexecute.py:181
+#: rsapp/gui/finspect.py:134
 msgid "plugin_dir_label"
 msgstr "Plugin folder"
 
-#: rsapp/gui/fconfigure.py:312 rsapp/gui/finspect.py:126
+#: rsapp/gui/fconfigure.py:312 rsapp/gui/fexecute.py:173
+#: rsapp/gui/finspect.py:126
 msgid "url_prefix_label"
 msgstr "URL prefix"
 
-#: rsapp/gui/fconfigure.py:313 rsapp/gui/finspect.py:130
+#: rsapp/gui/fconfigure.py:313 rsapp/gui/fexecute.py:177
+#: rsapp/gui/finspect.py:130
 msgid "strategy_label"
 msgstr "Strategie"
 
-#: rsapp/gui/fconfigure.py:314 rsapp/gui/finspect.py:135
+#: rsapp/gui/fconfigure.py:314 rsapp/gui/fexecute.py:182
+#: rsapp/gui/finspect.py:135
 msgid "max_items_in_list_label"
 msgstr "Max. aantal items"
 
-#: rsapp/gui/fconfigure.py:315 rsapp/gui/finspect.py:136
+#: rsapp/gui/fconfigure.py:315 rsapp/gui/fexecute.py:183
+#: rsapp/gui/finspect.py:136
 msgid "zero_fill_filename_label"
 msgstr "Nul-vul bestandsnaam"
 
-#: rsapp/gui/fconfigure.py:316 rsapp/gui/finspect.py:138
+#: rsapp/gui/fconfigure.py:316 rsapp/gui/fexecute.py:185
+#: rsapp/gui/finspect.py:138
 msgid "is_saving_pretty_xml_label"
 msgstr "Sitemaps met nieuwe regels"
 
-#: rsapp/gui/fconfigure.py:317 rsapp/gui/finspect.py:139
+#: rsapp/gui/fconfigure.py:317 rsapp/gui/fexecute.py:186
+#: rsapp/gui/finspect.py:139
 msgid "is_saving_sitemaps_label"
 msgstr "Sitemaps opslaan"
 
-#: rsapp/gui/fconfigure.py:318 rsapp/gui/finspect.py:127
+#: rsapp/gui/fconfigure.py:318 rsapp/gui/fexecute.py:174
+#: rsapp/gui/finspect.py:127
 msgid "has_wellknown_at_root_label"
 msgstr "‘well-known’ op server root"
+
+#: rsapp/gui/fexecute.py:104 rsapp/gui/fexecute.py:118
+msgid "Run..."
+msgstr "Uitvoeren…"
+
+#: rsapp/gui/fexecute.py:116 rsapp/gui/fexecute.py:124
+#, python-format
+msgid "Execute configuration: '%s'"
+msgstr "Configuratie '%s' uitvoeren"
+
+#: rsapp/gui/fexecute.py:167 rsapp/gui/finspect.py:120
+msgid "configuration_name_label"
+msgstr "Naam van de configuratie"
+
+#: rsapp/gui/fexecute.py:170 rsapp/gui/finspect.py:123
+msgid "abs_metadata_dir_label"
+msgstr "Absoluut pad naar metadata folder"
+
+#: rsapp/gui/fexecute.py:172 rsapp/gui/finspect.py:125
+msgid "abs_description_path_label"
+msgstr "Absoluut pad naar bronbeschrijving"
+
+#: rsapp/gui/fexecute.py:175 rsapp/gui/finspect.py:128
+msgid "description_url_label"
+msgstr "URL voor bronbeschrijving"
+
+#: rsapp/gui/fexecute.py:176 rsapp/gui/finspect.py:129
+msgid "capabilitylist_url_label"
+msgstr "URL voor capabilitylist"
+
+#: rsapp/gui/fexecute.py:178 rsapp/gui/finspect.py:131
+msgid "selector_file_label"
+msgstr "Geassocieerd selector bestand"
+
+#: rsapp/gui/fexecute.py:179 rsapp/gui/finspect.py:132
+msgid "simple_select_file_label"
+msgstr "Locatie eenvoudige selectie"
+
+#: rsapp/gui/fexecute.py:180 rsapp/gui/finspect.py:133
+msgid "select_mode_label"
+msgstr "Selectie modus"
+
+#: rsapp/gui/fexecute.py:184 rsapp/gui/finspect.py:137
+msgid "example_filename_label"
+msgstr "Voorbeeld bestandsnaam"
+
+#: rsapp/gui/fexecute.py:187 rsapp/gui/finspect.py:140
+msgid "last_execution_label"
+msgstr "Laatste keer uitgevoerd"
+
+#: rsapp/gui/fexecute.py:191 rsapp/gui/finspect.py:144
+msgid "Strategy.resourcelist"
+msgstr "Strategie nieuwe resourcelist"
+
+#: rsapp/gui/fexecute.py:192 rsapp/gui/finspect.py:145
+msgid "Strategy.new_changelist"
+msgstr "Strategie nieuwe changelist"
+
+#: rsapp/gui/fexecute.py:193 rsapp/gui/finspect.py:146
+msgid "Strategy.inc_changelist"
+msgstr "Strategie incrementele changelist"
+
+#: rsapp/gui/fexecute.py:194 rsapp/gui/finspect.py:147
+msgid "True"
+msgstr "Ja"
+
+#: rsapp/gui/fexecute.py:195 rsapp/gui/finspect.py:148
+msgid "False"
+msgstr "Neen"
+
+#: rsapp/gui/fexecute.py:196 rsapp/gui/finspect.py:149
+msgid "None"
+msgstr "(Geen)"
+
+#: rsapp/gui/fexecute.py:197 rsapp/gui/finspect.py:150
+msgid "SelectMode.simple"
+msgstr "Selectie-modus eenvoudig"
+
+#: rsapp/gui/fexecute.py:198 rsapp/gui/finspect.py:151
+msgid "SelectMode.selector"
+msgstr "Selectie-modus selector"
+
+#: rsapp/gui/fexecute.py:213 rsapp/gui/fexecute.py:313
+#: rsapp/gui/fexecute.py:326
+#, python-format
+msgid "Execute %s"
+msgstr "%s uitvoeren"
+
+#: rsapp/gui/fexecute.py:228 rsapp/gui/fexecute.py:314
+msgid "Main events"
+msgstr "Gebeurtenissen"
+
+#: rsapp/gui/fexecute.py:231 rsapp/gui/fexecute.py:315
+msgid "Resources"
+msgstr "Bronbestanden"
+
+#: rsapp/gui/fexecute.py:234 rsapp/gui/fexecute.py:316
+msgid "Errors"
+msgstr "Fouten"
+
+#: rsapp/gui/fexecute.py:270 rsapp/gui/fexecute.py:317
+msgid "Processing:"
+msgstr "Bezig met:"
+
+#: rsapp/gui/fexecute.py:281 rsapp/gui/fexecute.py:318
+msgid "Trial run"
+msgstr "Op proef uitvoeren"
+
+#: rsapp/gui/fexecute.py:284 rsapp/gui/fexecute.py:319
+msgid "Run"
+msgstr "Uitvoeren"
+
+#: rsapp/gui/fexecute.py:287 rsapp/gui/fexecute.py:320 rsapp/gui/fselect.py:431
+#: rsapp/gui/fselect.py:451
+msgid "Stop"
+msgstr "Stop"
+
+#: rsapp/gui/fexecute.py:292 rsapp/gui/fexecute.py:321 rsapp/gui/fselect.py:437
+#: rsapp/gui/fselect.py:452 rsapp/gui/wmain.py:278
+msgid "Close"
+msgstr "Sluiten"
+
+#: rsapp/gui/fexecute.py:477
+msgid "Exception in executor thread: {0}"
+msgstr "Fout tijdens uitvoeren: {0}"
+
+#: rsapp/gui/fexecute.py:485
+#, python-format
+msgid "Start execution: %s"
+msgstr "Start uitvoeren: %s"
+
+#: rsapp/gui/fexecute.py:489
+msgid "Clear metadata directory"
+msgstr "Metadata folder schoonmaken"
+
+#: rsapp/gui/fexecute.py:490
+#, python-format
+msgid ""
+"Clearing xml-files from \n"
+"%s"
+msgstr ""
+"xml-bestanden verwijderen uit \n"
+"%s"
+
+#: rsapp/gui/fexecute.py:512
+msgid "Summary of changes"
+msgstr "Veranderingen:"
+
+#: rsapp/gui/fexecute.py:516
+msgid "created"
+msgstr "nieuw"
+
+#: rsapp/gui/fexecute.py:520
+msgid "updated"
+msgstr "bijgewerkt"
+
+#: rsapp/gui/fexecute.py:524
+msgid "deleted"
+msgstr "verwijderd"
+
+#: rsapp/gui/fexecute.py:528
+msgid "unchanged"
+msgstr "niet veranderd"
+
+#: rsapp/gui/fexecute.py:539
+#, python-format
+msgid "Total file count: %d"
+msgstr "Totaal aantal bestanden: %d"
+
+#: rsapp/gui/fexecute.py:540
+#, python-format
+msgid "Excluded by selector: %d"
+msgstr "Door selector uitgesloten: %d"
+
+#: rsapp/gui/fexecute.py:541
+#, python-format
+msgid "Rejected by resource gate: %d"
+msgstr "Door resource gate afgewezen: %d"
+
+#: rsapp/gui/fexecute.py:542
+#, python-format
+msgid "End execution: %s"
+msgstr "Einde uitvoering: %s"
+
+#: rsapp/gui/fexecute.py:552
+msgid "path"
+msgstr "pad"
+
+#: rsapp/gui/fexecute.py:556
+msgid "uri"
+msgstr "uri"
+
+#: rsapp/gui/fexecute.py:560
+msgid "count resources"
+msgstr "aantal resources"
+
+#: rsapp/gui/fexecute.py:564
+msgid "document saved"
+msgstr "document opgeslagen"
+
+#: rsapp/gui/fexecute.py:576 rsapp/gui/fselect.py:547
+#, python-format
+msgid "File does not exist: %s"
+msgstr "Bestand bestaat niet: %s"
+
+#: rsapp/gui/fexecute.py:579 rsapp/gui/fselect.py:550
+#, python-format
+msgid "Not a regular file: %s"
+msgstr "Geen regulier bestand: %s"
+
+#: rsapp/gui/fexecute.py:584 rsapp/gui/fexecute.py:591 rsapp/gui/fselect.py:555
+#: rsapp/gui/fselect.py:560
+msgid "Process interrupted by user"
+msgstr "Proces onderbroken door gebruiker"
 
 #: rsapp/gui/finspect.py:86 rsapp/gui/finspect.py:92
 #, python-format
 msgid "Inspect configuration: '%s'"
 msgstr "Configuratie '%s' inspecteren"
 
-#: rsapp/gui/finspect.py:120
-msgid "configuration_name_label"
-msgstr "Naam van de configuratie"
-
-#: rsapp/gui/finspect.py:123
-msgid "abs_metadata_dir_label"
-msgstr "Absoluut pad naar metadata folder"
-
-#: rsapp/gui/finspect.py:125
-msgid "abs_description_path_label"
-msgstr "Absoluut pad naar bronbeschrijving"
-
-#: rsapp/gui/finspect.py:128
-msgid "description_url_label"
-msgstr "URL voor bronbeschrijving"
-
-#: rsapp/gui/finspect.py:129
-msgid "capabilitylist_url_label"
-msgstr "URL voor capabilitylist"
-
-#: rsapp/gui/finspect.py:131
-msgid "selector_file_label"
-msgstr "Geassocieerd selector bestand"
-
-#: rsapp/gui/finspect.py:132
-msgid "simple_select_file_label"
-msgstr "Locatie eenvoudige selectie"
-
-#: rsapp/gui/finspect.py:133
-msgid "select_mode_label"
-msgstr "Selectie modus"
-
-#: rsapp/gui/finspect.py:137
-msgid "example_filename_label"
-msgstr "Voorbeeld bestandsnaam"
-
-#: rsapp/gui/finspect.py:140
-msgid "last_execution_label"
-msgstr "Laatste keer uitgevoerd"
-
-#: rsapp/gui/finspect.py:144
-msgid "Strategy.resourcelist"
-msgstr "Strategie nieuwe resourcelist"
-
-#: rsapp/gui/finspect.py:145
-msgid "Strategy.new_changelist"
-msgstr "Strategie nieuwe changelist"
-
-#: rsapp/gui/finspect.py:146
-msgid "Strategy.inc_changelist"
-msgstr "Strategie incrementele changelist"
-
-#: rsapp/gui/finspect.py:147
-msgid "True"
-msgstr "Ja"
-
-#: rsapp/gui/finspect.py:148
-msgid "False"
-msgstr "Neen"
-
-#: rsapp/gui/finspect.py:149
-msgid "None"
-msgstr "(Geen)"
-
-#: rsapp/gui/finspect.py:150
-msgid "SelectMode.simple"
-msgstr "Selectie-modus eenvoudig"
-
-#: rsapp/gui/finspect.py:151
-msgid "SelectMode.selector"
-msgstr "Selectie-modus selector"
-
-#: rsapp/gui/fselect.py:58 rsapp/gui/fselect.py:163
+#: rsapp/gui/fselect.py:59 rsapp/gui/fselect.py:164
 msgid "Select resources"
 msgstr "Bronbestanden selecteren"
 
-#: rsapp/gui/fselect.py:70 rsapp/gui/fselect.py:164
+#: rsapp/gui/fselect.py:71 rsapp/gui/fselect.py:165
 msgid "Simpel selection: One file or directory"
 msgstr "Eenvoudige selectie: Eén bestand of folder"
 
-#: rsapp/gui/fselect.py:75 rsapp/gui/fselect.py:165
+#: rsapp/gui/fselect.py:76 rsapp/gui/fselect.py:166
 msgid "Location"
 msgstr "Plaats"
 
-#: rsapp/gui/fselect.py:83 rsapp/gui/fselect.py:145 rsapp/gui/fselect.py:167
-#: rsapp/gui/fselect.py:178
+#: rsapp/gui/fselect.py:84 rsapp/gui/fselect.py:146 rsapp/gui/fselect.py:168
+#: rsapp/gui/fselect.py:179
 msgid "Play..."
 msgstr "Speel…"
 
-#: rsapp/gui/fselect.py:94 rsapp/gui/fselect.py:168
+#: rsapp/gui/fselect.py:95 rsapp/gui/fselect.py:169
 msgid "Advanced: Create a selector"
 msgstr "Geavanceerd: Een selector maken"
 
-#: rsapp/gui/fselect.py:100 rsapp/gui/fselect.py:175
+#: rsapp/gui/fselect.py:101 rsapp/gui/fselect.py:176
 msgid "Selector"
 msgstr "Selector"
 
-#: rsapp/gui/fselect.py:107 rsapp/gui/fselect.py:169
+#: rsapp/gui/fselect.py:108 rsapp/gui/fselect.py:170
 msgid "Includes"
 msgstr "Insluiten"
 
-#: rsapp/gui/fselect.py:112 rsapp/gui/fselect.py:129 rsapp/gui/fselect.py:171
-#: rsapp/gui/fselect.py:174
+#: rsapp/gui/fselect.py:113 rsapp/gui/fselect.py:130 rsapp/gui/fselect.py:172
+#: rsapp/gui/fselect.py:175
 msgid "Import"
 msgstr "Importeren"
 
-#: rsapp/gui/fselect.py:124 rsapp/gui/fselect.py:172
+#: rsapp/gui/fselect.py:125 rsapp/gui/fselect.py:173
 msgid "Excludes"
 msgstr "Uitsluiten"
 
-#: rsapp/gui/fselect.py:141 rsapp/gui/fselect.py:176
+#: rsapp/gui/fselect.py:142 rsapp/gui/fselect.py:177
 msgid "Open..."
 msgstr "Openen…"
 
-#: rsapp/gui/fselect.py:143 rsapp/gui/fselect.py:177
+#: rsapp/gui/fselect.py:144 rsapp/gui/fselect.py:178
 msgid "Save as..."
 msgstr "Opslaan als…"
 
-#: rsapp/gui/fselect.py:290
+#: rsapp/gui/fselect.py:292
 msgid "Import included filenames"
 msgstr "Ingesloten bestandsnamen importeren"
 
-#: rsapp/gui/fselect.py:295
+#: rsapp/gui/fselect.py:297
 msgid "Import excluded filenames"
 msgstr "Uitgesloten bestandsnamen importeren"
 
-#: rsapp/gui/fselect.py:306
+#: rsapp/gui/fselect.py:308
 msgid "Save selector"
 msgstr "Selector opslaan"
 
-#: rsapp/gui/fselect.py:313
+#: rsapp/gui/fselect.py:315
 msgid "Open a new selector"
 msgstr "Een nieuwe selector openen"
 
-#: rsapp/gui/fselect.py:318
+#: rsapp/gui/fselect.py:320
 msgid "Open selector"
 msgstr "Een selector openen"
 
-#: rsapp/gui/fselect.py:328
+#: rsapp/gui/fselect.py:330
 msgid "Selector has unsaved changes."
 msgstr "De selector heeft niet opgeslagen veranderingen"
 
-#: rsapp/gui/fselect.py:330
+#: rsapp/gui/fselect.py:332
 msgid "Save selector?"
 msgstr "Selector opslaan?"
 
-#: rsapp/gui/fselect.py:354
+#: rsapp/gui/fselect.py:356
 msgid "Advanced: List resources"
 msgstr "Geavanceerd: Lijst met bronbestanden"
 
-#: rsapp/gui/fselect.py:355
+#: rsapp/gui/fselect.py:357
 msgid "Simpel selection: List resources"
 msgstr "Eenvoudige selectie: Lijst met bronbestanden"
 
-#: rsapp/gui/fselect.py:382 rsapp/gui/fselect.py:445
+#: rsapp/gui/fselect.py:384 rsapp/gui/fselect.py:447
 msgid "Selected resources"
 msgstr "Geselecteerde bronbestanden"
 
-#: rsapp/gui/fselect.py:410 rsapp/gui/fselect.py:446
+#: rsapp/gui/fselect.py:412 rsapp/gui/fselect.py:448
 msgid "Selected resources:"
 msgstr "Geselecteerde bronbestanden:"
 
-#: rsapp/gui/fselect.py:416 rsapp/gui/fselect.py:447
+#: rsapp/gui/fselect.py:418 rsapp/gui/fselect.py:449
 msgid "Excluded resources:"
 msgstr "Uitgesloten bronbestanden"
 
-#: rsapp/gui/fselect.py:425 rsapp/gui/fselect.py:448
+#: rsapp/gui/fselect.py:427 rsapp/gui/fselect.py:450
 msgid "Play"
 msgstr "Speel"
 
-#: rsapp/gui/fselect.py:429 rsapp/gui/fselect.py:449
-msgid "Stop"
-msgstr "Stop"
-
-#: rsapp/gui/fselect.py:435 rsapp/gui/fselect.py:450 rsapp/gui/wmain.py:275
-msgid "Close"
-msgstr "Sluiten"
-
-#: rsapp/gui/fselect.py:546
-#, python-format
-msgid "File does not exist: %s"
-msgstr "Bestand bestaat niet: %s"
-
-#: rsapp/gui/fselect.py:549
-#, python-format
-msgid "Not a regular file: %s"
-msgstr "Geen regulier bestand: %s"
-
-#: rsapp/gui/fselect.py:552
+#: rsapp/gui/fselect.py:553
 #, python-format
 msgid "File excluded: %s"
 msgstr "Uitgesloten bestand: %s"
@@ -322,31 +457,31 @@ msgstr "Uitgesloten bestand: %s"
 msgid "Language was set to locale en-US"
 msgstr "De taal-instelling is verzet naar nl-NL"
 
-#: rsapp/gui/wmain.py:66 rsapp/gui/wmain.py:124
+#: rsapp/gui/wmain.py:65 rsapp/gui/wmain.py:124
 msgid "File"
 msgstr "Bestand"
 
-#: rsapp/gui/wmain.py:69 rsapp/gui/wmain.py:127
+#: rsapp/gui/wmain.py:68 rsapp/gui/wmain.py:127
 msgid "Load configuration"
 msgstr "Configuratie laden"
 
-#: rsapp/gui/wmain.py:75 rsapp/gui/wmain.py:128 rsapp/gui/wmain.py:157
+#: rsapp/gui/wmain.py:74 rsapp/gui/wmain.py:128 rsapp/gui/wmain.py:159
 msgid "Save configuration as..."
 msgstr "Configuratie opslaan als…"
 
-#: rsapp/gui/wmain.py:79
+#: rsapp/gui/wmain.py:78 rsapp/gui/wmain.py:129
 msgid "Configurations..."
 msgstr "Configuraties…"
 
-#: rsapp/gui/wmain.py:84 rsapp/gui/wmain.py:125
+#: rsapp/gui/wmain.py:83 rsapp/gui/wmain.py:125
 msgid "Exit"
 msgstr "Afsluiten"
 
-#: rsapp/gui/wmain.py:94 rsapp/gui/wmain.py:129
+#: rsapp/gui/wmain.py:93 rsapp/gui/wmain.py:130
 msgid "Preferences"
 msgstr "Voorkeuren"
 
-#: rsapp/gui/wmain.py:101 rsapp/gui/wmain.py:130
+#: rsapp/gui/wmain.py:100 rsapp/gui/wmain.py:131
 msgid "Language"
 msgstr "Taal"
 
@@ -354,55 +489,54 @@ msgstr "Taal"
 msgid "Exit application"
 msgstr "De toepassing afsluiten"
 
-#: rsapp/gui/wmain.py:153
+#: rsapp/gui/wmain.py:155
 msgid "Switch configuration..."
 msgstr "Configuratie wisselen"
 
-#: rsapp/gui/wmain.py:162
+#: rsapp/gui/wmain.py:164
 msgid "Configuration name:"
 msgstr "Configuratie-naam:"
 
-#: rsapp/gui/wmain.py:178 rsapp/gui/wmain.py:183
+#: rsapp/gui/wmain.py:180 rsapp/gui/wmain.py:185
 msgid "Closing application..."
 msgstr "De toepassing wordt afgesloten…"
 
-#: rsapp/gui/wmain.py:214 rsapp/gui/wmain.py:221
+#: rsapp/gui/wmain.py:217 rsapp/gui/wmain.py:224
 msgid "Configure"
 msgstr "Configureren"
 
-#: rsapp/gui/wmain.py:215 rsapp/gui/wmain.py:222
-msgid "Inspect"
-msgstr "Inspecteren"
-
-#: rsapp/gui/wmain.py:216 rsapp/gui/wmain.py:223
+#: rsapp/gui/wmain.py:219 rsapp/gui/wmain.py:226
 msgid "Select"
 msgstr "Selecteren"
 
-#: rsapp/gui/wmain.py:217 rsapp/gui/wmain.py:224
+#: rsapp/gui/wmain.py:220 rsapp/gui/wmain.py:227
 msgid "Execute"
 msgstr "Uitvoeren"
 
-#: rsapp/gui/wmain.py:253
+#: rsapp/gui/wmain.py:256
 msgid "Manage configurations"
 msgstr "Configuraties beheren"
 
-#: rsapp/gui/wmain.py:270
+#: rsapp/gui/wmain.py:273
 msgid "Delete"
 msgstr "Verwijderen"
 
-#: rsapp/gui/wmain.py:297
+#: rsapp/gui/wmain.py:300
 msgid "Delete configurations"
 msgstr "Configuraties verwijderen"
 
-#: rsapp/gui/wmain.py:299
+#: rsapp/gui/wmain.py:302
 #, python-format
 msgid "Delete configuration '%s'"
 msgstr "Configuratie ‘%s’ verwijderen"
 
-#: rsapp/gui/wmain.py:301
+#: rsapp/gui/wmain.py:304
 #, python-format
 msgid "Delete %d configurations"
 msgstr "%d configuraties verwijderen"
+
+#~ msgid "Inspect"
+#~ msgstr "Inspecteren"
 
 #~ msgid "New resourcelist strategy"
 #~ msgstr "Strategie nieuwe resourcelist"
