@@ -64,7 +64,7 @@ class Ctrl(QObject):
         data = {}
         iso_path = os.path.join(self.application_home, "i18n", "iso-lang.json")
         try:
-            with open(iso_path, "r") as iso_file:
+            with open(iso_path, "r", encoding="utf-8") as iso_file:
                 data = json.load(iso_file)
         except Exception as err:
             self.warn(_("Could not read iso-lang.json"), err)

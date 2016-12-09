@@ -40,6 +40,8 @@ if __name__ == '__main__':
     sys.path.append(application_home)
     print("application_home:", application_home)
 
+    # encoding=utf8
+
     # create log directory
     log_dir = os.path.join(application_home, LOG_DIR)
     os.makedirs(log_dir, exist_ok=True)
