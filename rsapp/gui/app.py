@@ -17,14 +17,6 @@ LOGGING_CFG_FILE = "logging.conf"
 LOCALE_DOMAIN = "rspub"
 DEFAULT_LOCALE = "en-US"
 
-#: :samp:`The absolute path to the directory that is the application home or root directory.`
-#:
-#: During run time. So the value shown in documentation is not a constant!
-APPLICATION_HOME = os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
-#                   rspub-gui         rspub           gui               wapp.py
-#: :samp:`The absolute path to the i18n directory.`
-LOCALE_DIR = os.path.join(APPLICATION_HOME, "i18n")
-
 
 def system_language():
     loc = locale.getdefaultlocale()
@@ -37,29 +29,43 @@ def current_language():
 
 
 if __name__ == '__main__':
+
+    if getattr(sys, 'frozen', False):
+        # running in a bundle
+        application_home = sys._MEIPASS
+    else:
+        application_home = os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
+
     # Start this module from anywhere on the system: append root directory of project.
-    sys.path.append(APPLICATION_HOME)
+    sys.path.append(application_home)
+    print("application_home:", application_home)
 
     # create log directory
-    log_dir = os.path.join(APPLICATION_HOME, LOG_DIR)
+    log_dir = os.path.join(application_home, LOG_DIR)
     os.makedirs(log_dir, exist_ok=True)
     log_file = os.path.join(log_dir, LOG_FILE)
     # configure logging
-    log_conf = os.path.join(APPLICATION_HOME, CONFIGURATION_DIR, LOGGING_CFG_FILE)
+    log_conf = os.path.join(application_home, CONFIGURATION_DIR, LOGGING_CFG_FILE)
     logging.config.fileConfig(log_conf, defaults={"log_file": log_file})
+    # create a logger
+    logger = logging.getLogger(__name__)
+    logger.debug("Initialized logging: %s", log_file)
 
     # set an initial language
+    locale_dir = os.path.join(application_home, "i18n")
+    logger.debug("Locale directory: %s", locale_dir)
     language = current_language()
-    trls = gettext.translation(LOCALE_DOMAIN, localedir=LOCALE_DIR, languages=[language], fallback=True)
+    logger.debug("Current language: %s", language)
+    trls = gettext.translation(LOCALE_DOMAIN, localedir=locale_dir, languages=[language], fallback=True)
     trls.install("gettext")
 
     from rsapp.gui.wapp import RsApplication
-    application = RsApplication(sys.argv, application_home=APPLICATION_HOME, locale_dir=LOCALE_DIR)
+    application = RsApplication(sys.argv, application_home=application_home, locale_dir=locale_dir)
 
     from rsapp.gui.conf import GuiConf
     if GuiConf().show_splash():
         # Create and display the splash screen
-        splash_pix = QPixmap(os.path.join(APPLICATION_HOME, 'rsapp/img/splash.png'))
+        splash_pix = QPixmap(os.path.join(application_home, 'conf/img/splash.png'))
         splash = QSplashScreen(splash_pix, Qt.WindowStaysOnTopHint)
         splash.setMask(splash_pix.mask())
         splash.show()

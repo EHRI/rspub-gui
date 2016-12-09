@@ -23,7 +23,7 @@ class GuiConf(object):
 
     @staticmethod
     def _set_configuration_filename(cfg_filename):
-        LOG.info("Setting configuration filename to %s", cfg_filename)
+        LOG.info("Setting GuiConf filename to %s", cfg_filename)
         GuiConf._configuration_filename = cfg_filename
 
     @staticmethod
@@ -36,7 +36,7 @@ class GuiConf(object):
     @staticmethod
     def reset():
         GuiConf._instance = None
-        LOG.info("Configuration was reset.")
+        LOG.info("GuiConf was reset.")
 
     @staticmethod
     def _get_config_path():
@@ -70,7 +70,7 @@ class GuiConf(object):
             cls.config_path = cls._get_config_path()
             cls.config_file = os.path.join(cls.config_path, GuiConf._get_configuration_filename())
             cls.parser = ConfigParser()
-            LOG.info("Reading configuration from '%s'" % cls.config_file)
+            LOG.info("Reading GuiConf from '%s'" % cls.config_file)
             if os.path.exists(cls.config_file):
                 cls.parser.read(cls.config_file)
         return cls._instance
@@ -88,7 +88,7 @@ class GuiConf(object):
         f = open(self.config_file, "w")
         self.parser.write(f)
         f.close()
-        LOG.info("Persisted %s", self.config_file)
+        LOG.info("Persisted GuiConf as %s", self.config_file)
 
     def __set_option__(self, section, option, value):
         if not self.parser.has_section(section):
