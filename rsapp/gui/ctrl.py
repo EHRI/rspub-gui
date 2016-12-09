@@ -47,7 +47,11 @@ class Ctrl(QObject):
         return [os.path.basename(x) for x in glob.glob(os.path.join(self.locale_dir, "*-*")) if os.path.isdir(x)]
 
     def system_language(self):
-        loc = locale.getdefaultlocale()
+        loc = None
+        try:
+            loc = locale.getdefaultlocale()
+        except:
+            pass
         return DEFAULT_LOCALE if loc is None else loc[0]
 
     def current_language(self):

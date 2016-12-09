@@ -19,7 +19,11 @@ DEFAULT_LOCALE = "en-US"
 
 
 def system_language():
-    loc = locale.getdefaultlocale()
+    loc = None
+    try:
+        loc = locale.getdefaultlocale()
+    except:
+        pass
     return DEFAULT_LOCALE if loc is None else loc[0]
 
 
