@@ -19,6 +19,7 @@ DEFAULT_LOCALE = "en-US"
 
 
 def system_language():
+    # # Better to use DEFAULT_LOCALE as fallback because of strange settings in some MacOs versions
     loc = None
     try:
         loc = locale.getdefaultlocale()
@@ -29,7 +30,7 @@ def system_language():
 
 def current_language():
     from rsapp.gui.conf import GuiConf
-    return GuiConf().language(fallback=system_language())
+    return GuiConf().language(fallback=DEFAULT_LOCALE)
 
 
 if __name__ == '__main__':
