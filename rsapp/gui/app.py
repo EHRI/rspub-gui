@@ -51,6 +51,8 @@ if __name__ == '__main__':
     log_dir = os.path.join(application_home, LOG_DIR)
     os.makedirs(log_dir, exist_ok=True)
     log_file = os.path.join(log_dir, LOG_FILE)
+    # For Windows single backslash path names:
+    log_file = log_file.replace("\\", "\\\\")
     # configure logging
     log_conf = os.path.join(application_home, CONFIGURATION_DIR, LOGGING_CFG_FILE)
     logging.config.fileConfig(log_conf, defaults={"log_file": log_file})

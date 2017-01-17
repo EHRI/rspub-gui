@@ -52,7 +52,7 @@ class Ctrl(QObject):
             loc = locale.getdefaultlocale()
         except:
             pass
-        return DEFAULT_LOCALE if loc is None else loc[0]
+        return DEFAULT_LOCALE if loc is None or len(loc) < 2 else loc[0]
 
     def current_language(self):
         return GuiConf().language(fallback=self.system_language())

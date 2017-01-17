@@ -11,5 +11,5 @@ setup(
     author='henk van den berg',
     author_email='henk.van.den.berg at dans.knaw.nl',
     description='Application for ResourceSync publishing',
-    install_requires=['rspub-core']
+    install_requires=['rspub-core', 'pyqt5']
 )

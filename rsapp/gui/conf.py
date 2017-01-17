@@ -13,6 +13,7 @@ SECTION_CONTENT = "content"
 
 LOG = logging.getLogger(__name__)
 
+
 class GuiConf(object):
     """
     :samp:`Singleton persisting object for storing configuration parameters`
