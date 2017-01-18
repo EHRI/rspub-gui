@@ -32,7 +32,6 @@ class Style(object):
     def blue_text():
         return "color: rgb(0, 0, 255);"
 
-
     @staticmethod
     def red_text():
         return "color: rgb(255, 0, 0);"
