@@ -239,9 +239,8 @@ class SelectFrame(QFrame):
         if directory == "":
             directory = self.paras.resource_dir
         dlg.setDirectory(directory)
-        result = dlg.exec()
-        if result > 0:
-            filename = dlg.selectedFiles()[0]
+        filename = dlg.getExistingDirectory()
+        if filename:
             self.edt_simple.setText(filename)
 
     def on_edt_simple_finished(self):
