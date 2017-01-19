@@ -1,6 +1,6 @@
 # -*- mode: python -*-
 
-# ## usage: $ pyinstaller rsapp.spec
+name='MetadataPublishingTool-1.0.rc.3'
 
 block_cipher = None
 
@@ -9,9 +9,8 @@ added_files = [
          ( '..\\..\\i18n\\', 'i18n\\' )
          ]
 
-
 a = Analysis(['..\\..\\rsapp\\gui\\app.py'],
-             pathex=['..\\..\\..\\rspub-gui', '..\\..\\..\\rspub-core'],
+             pathex=['../../../rspub-gui', '../../../rspub-core'],
              binaries=None,
              datas=added_files,
              hiddenimports=[],
@@ -25,16 +24,11 @@ pyz = PYZ(a.pure, a.zipped_data,
              cipher=block_cipher)
 exe = EXE(pyz,
           a.scripts,
-          exclude_binaries=True,
-          name='MetadataPublishingTool',
+          a.binaries,
+          a.zipfiles,
+          a.datas,
+          name=name,
           debug=False,
           strip=False,
           upx=True,
-          console=True )
-coll = COLLECT(exe,
-               a.binaries,
-               a.zipfiles,
-               a.datas,
-               strip=False,
-               upx=True,
-               name='MetadataPublishingTool')
+          console=False, icon='../../conf/img/icon.ico')

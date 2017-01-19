@@ -318,6 +318,12 @@ class ExecuteWidget(QWidget):
 
     def on_btn_run_clicked(self):
         self.ctrl.update_selector()
+        if self.paras.select_mode == SelectMode.simple:
+            selector = Selector()
+            if self.paras.simple_select_file:
+                selector.include(self.paras.simple_select_file)
+        else:
+            selector = self.ctrl.selector
         self.paras.is_saving_sitemaps = not self.chk_trial_run.isChecked()
         self.pte_events1.setPlainText("")
         self.pte_events2.setPlainText("")
@@ -330,11 +336,7 @@ class ExecuteWidget(QWidget):
         self.chk_trial_run.setEnabled(False)
         self.btn_stop.setEnabled(True)
         self.btn_stop.setStyleSheet(Style.alarm())
-        if self.paras.select_mode == SelectMode.simple:
-            selector = Selector()
-            selector.include(self.paras.simple_select_file)
-        else:
-            selector = self.ctrl.selector
+
         self.executor_thread = ExecutorThread(self.paras, selector, self)
         self.executor_thread.signal_exception.connect(self.on_signal_exception)
         self.executor_thread.ask_confirmation.connect(self.on_ask_confirmation)
