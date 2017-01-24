@@ -189,7 +189,7 @@ class WMain(QMainWindow):
 
     def close(self):
         LOG.debug("window closing")
-        self.ctrl.update_selector()
+        # self.ctrl.update_selector()
         self.ctrl.config.set_window_height(self.height())
         self.ctrl.config.set_window_width(self.width())
         self.ctrl.config.set_last_configuration_name(self.paras.configuration_name())
@@ -210,19 +210,16 @@ class TabbedFrame(QTabWidget):
 
     def init_ui(self):
         self.frame_configure = ConfigureFrame(self, 0)
-        #self.frame_inspect = InspectFrame(self, 1)
         self.frame_select = SelectFrame(self, 1)
         self.frame_execute = ExecuteFrame(self, 2)
 
         self.addTab(self.frame_configure, _("Configure"))
-        #self.addTab(self.frame_inspect, _("Inspect"))
         self.addTab(self.frame_select, _("Select"))
         self.addTab(self.frame_execute, _("Execute"))
 
     @pyqtSlot(str)
     def retranslate_ui(self, code=None):
         self.setTabText(0, _("Configure"))
-        #self.setTabText(1, _("Inspect"))
         self.setTabText(1, _("Select"))
         self.setTabText(2, _("Execute"))
 

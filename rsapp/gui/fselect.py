@@ -41,11 +41,7 @@ class SelectFrame(QFrame):
         self.ctrl.switch_configuration.connect(self.on_switch_configuration)
         self.ctrl.switch_selector.connect(self.on_switch_selector)
         self.ctrl.switch_tab.connect(self.on_switch_tab)
-        self.ctrl.request_update_selector.connect(self.store_in_selector)
         self.paras = self.ctrl.paras
-        self.selector = self.ctrl.selector
-        self.includes = self.selector.get_included_entries()
-        self.excludes = self.selector.get_excluded_entries()
         self.init_ui()
         self.play_widget_simple = None
         self.play_widget_selector = None
@@ -108,16 +104,19 @@ class SelectFrame(QFrame):
         self.lbl_includes = QLabel(_("Includes"))
         self.lbl_includes.setAlignment(Qt.AlignTop)
         self.txt_includes = QPlainTextEdit()
-        self.btn_incl_brws = QPushButton(_("Browse"))
-        self.btn_incl_brws.clicked.connect(self.on_btn_incl_brws_clicked)
-        self.btn_incl_imp = QPushButton(_("Import"))
-        self.btn_incl_imp.clicked.connect(self.on_btn_incl_import_clicked)
+        self.btn_incl_directory = QPushButton(_("Add directory"))
+        self.btn_incl_directory.clicked.connect(self.on_btn_incl_directory_clicked)
+        self.btn_incl_files = QPushButton(_("Add files"))
+        self.btn_incl_files.clicked.connect(self.on_btn_incl_files_clicked)
+        self.btn_incl_import = QPushButton(_("Import entries"))
+        self.btn_incl_import.clicked.connect(self.on_btn_incl_import_clicked)
         grid.addWidget(self.lbl_includes, 2, 1)
         grid.addWidget(self.txt_includes, 2, 2)
         vbox_inc = QVBoxLayout()
         vbox_inc.setSpacing(0)
-        vbox_inc.addWidget(self.btn_incl_brws)
-        vbox_inc.addWidget(self.btn_incl_imp)
+        vbox_inc.addWidget(self.btn_incl_directory)
+        vbox_inc.addWidget(self.btn_incl_files)
+        vbox_inc.addWidget(self.btn_incl_import)
         vbox_inc.addStretch(1)
         grid.addLayout(vbox_inc, 2, 3)
 
@@ -168,8 +167,9 @@ class SelectFrame(QFrame):
         self.btn_simple_play.setText(_("Play..."))
         self.grp_selector.setTitle(_("Advanced: Create a selector"))
         self.lbl_includes.setText(_("Includes"))
-        self.btn_incl_brws.setText(_("Browse"))
-        self.btn_incl_imp.setText(_("Import"))
+        self.btn_incl_directory.setText(_("Add directory"))
+        self.btn_incl_files.setText(_("Add files"))
+        self.btn_incl_import.setText(_("Import entries"))
         self.lbl_excludes.setText(_("Excludes"))
         self.btn_excl_brws.setText(_("Browse"))
         self.btn_excl_imp.setText(_("Import"))
@@ -186,38 +186,26 @@ class SelectFrame(QFrame):
         self.edt_simple.setText(self.paras.simple_select_file)
 
     def on_switch_selector(self):
-        self.selector = self.ctrl.selector
-        self.includes = self.selector.get_included_entries()
-        self.excludes = self.selector.get_excluded_entries()
-        self.txt_includes.setPlainText("\n".join(self.includes))
-        self.txt_excludes.setPlainText("\n".join(self.excludes))
-        if self.selector.location:
-            self.lbl_selector_file.setText(self.selector.abs_location())
+        self.txt_includes.setPlainText("\n".join(self.ctrl.selector.get_included_entries()))
+        self.txt_excludes.setPlainText("\n".join(self.ctrl.selector.get_excluded_entries()))
+        if self.ctrl.selector.location:
+            self.lbl_selector_file.setText(self.ctrl.selector.abs_location())
         else:
             self.lbl_selector_file.setText("")
         self.lbl_saved_as.setVisible(self.lbl_selector_file.text() != "")
 
-    def is_selector_dirty(self):
-        dirty = False
+    def synchronize_selector(self):
         includes = {x.strip() for x in self.txt_includes.toPlainText().splitlines() if x.strip() != ""}
-        if includes != self.includes:
-            dirty = True
-            self.selector.clear_includes()
-            self.selector.include(includes)
+        self.ctrl.selector.clear_includes()
+        self.ctrl.selector.include(includes)
         excludes = {x.strip() for x in self.txt_excludes.toPlainText().splitlines() if x.strip() != ""}
-        if excludes != self.excludes:
-            dirty = True
-            self.selector.clear_excludes()
-            self.selector.exclude(excludes)
-        return dirty
-
-    def store_in_selector(self):
-        if self.is_selector_dirty():
-            self.ctrl.save_selector()
+        self.ctrl.selector.clear_excludes()
+        self.ctrl.selector.exclude(excludes)
+        self.ctrl.save_selector()
 
     def on_switch_tab(self, from_index, to_index):
         if from_index == self.index:
-            self.store_in_selector()
+            self.synchronize_selector()
 
     def on_grp_simple_toggle(self, on):
         self.grp_selector.setChecked(not on)
@@ -239,6 +227,7 @@ class SelectFrame(QFrame):
         if directory == "":
             directory = self.paras.resource_dir
         dlg.setDirectory(directory)
+        dlg.setFileMode(QFileDialog.AnyFile)
         filename = dlg.getExistingDirectory()
         if filename:
             self.edt_simple.setText(filename)
@@ -263,17 +252,37 @@ class SelectFrame(QFrame):
         return selector
 
     # ########################################################
-    def on_btn_incl_brws_clicked(self):
+    def on_btn_incl_directory_clicked(self):
         self.txt_includes.setFocus()
         dlg = QFileDialog(self)
         dlg.setDirectory(self.paras.resource_dir)
-        dlg.setFileMode(QFileDialog.AnyFile)
+        dlg.setFileMode(QFileDialog.Directory)
         result = dlg.exec()
         if result > 0:
             for file in dlg.selectedFiles():
                 self.txt_includes.appendPlainText(file)
+            # refresh content of widget
             includes = set(self.txt_includes.toPlainText().splitlines())
             self.txt_includes.setPlainText("\n".join(sorted(includes)))
+
+    def on_btn_incl_files_clicked(self):
+        self.txt_includes.setFocus()
+        dlg = QFileDialog(self)
+        dlg.setDirectory(self.paras.resource_dir)
+        dlg.setFileMode(QFileDialog.ExistingFiles)
+        result = dlg.exec()
+        if result > 0:
+            for file in dlg.selectedFiles():
+                self.txt_includes.appendPlainText(file)
+            # refresh content of widget
+            includes = set(self.txt_includes.toPlainText().splitlines())
+            self.txt_includes.setPlainText("\n".join(sorted(includes)))
+
+    def on_btn_incl_import_clicked(self):
+        self.synchronize_selector()
+        filenames = QFileDialog.getOpenFileName(self, _("Import included filenames"), self.ctrl.last_directory)
+        if filenames[0] != "":
+            self.ctrl.load_selector_includes(filenames[0])
 
     def on_btn_excl_brws_clicked(self):
         self.txt_excludes.setFocus()
@@ -287,21 +296,17 @@ class SelectFrame(QFrame):
             excludes = set(self.txt_excludes.toPlainText().splitlines())
             self.txt_excludes.setPlainText("\n".join(sorted(excludes)))
 
-    def on_btn_incl_import_clicked(self):
-        filenames = QFileDialog.getOpenFileName(self, _("Import included filenames"), self.ctrl.last_directory)
-        if filenames[0] != "":
-            self.ctrl.load_selector_includes(filenames[0])
-
     def on_btn_excl_import_clicked(self):
         filenames = QFileDialog.getOpenFileName(self, _("Import excluded filenames"), self.ctrl.last_directory)
         if filenames[0] != "":
             self.ctrl.load_selector_excludes(filenames[0])
 
+    # #######################################
     def on_btn_save_selector_as_clicked(self):
         saved = False
-        self.store_in_selector()
-        if self.selector.location:
-            directory = self.selector.abs_location()
+        self.synchronize_selector()
+        if self.ctrl.selector.location:
+            directory = self.ctrl.selector.abs_location()
         else:
             directory = os.path.join(os.path.expanduser("~"), "selector.csv")
         filenames = QFileDialog.getSaveFileName(self, _("Save selector"), directory)
@@ -312,8 +317,8 @@ class SelectFrame(QFrame):
 
     def on_btn_open_selector_clicked(self):
         if self.on_about_to_change(_("Open a new selector")):
-            if self.selector.location:
-                directory = os.path.dirname(self.selector.abs_location())
+            if self.ctrl.selector.location:
+                directory = os.path.dirname(self.ctrl.selector.abs_location())
             else:
                 directory = os.path.expanduser("~")
             filenames = QFileDialog.getOpenFileName(self, _("Open selector"), directory)
@@ -322,8 +327,8 @@ class SelectFrame(QFrame):
 
     def on_about_to_change(self, window_title):
         ok_to_change = True
-        self.store_in_selector()
-        if self.selector.location is None and not self.selector.is_empty():
+        self.synchronize_selector()
+        if self.ctrl.selector.location is None and not self.ctrl.selector.is_empty():
             msg_box = QMessageBox()
             msg_box.setText(window_title)
             i_text = _("Selector has unsaved changes.")
@@ -339,7 +344,7 @@ class SelectFrame(QFrame):
         return ok_to_change
 
     def on_btn_play_selected_clicked(self):
-        self.store_in_selector()
+        self.synchronize_selector()
         if self.play_widget_selector is None:
             self.play_widget_selector = PlayWidget(self.__get_advanced_selector, "Advanced: List resources")
         else:
@@ -349,7 +354,7 @@ class SelectFrame(QFrame):
             self.play_widget_selector.raise_()
 
     def __get_advanced_selector(self):
-        return self.selector
+        return self.ctrl.selector
 
     def translatables(self):
         _("Advanced: List resources")

@@ -317,7 +317,6 @@ class ExecuteWidget(QWidget):
         self.chk_trial_run.setChecked(self.trial_run)
 
     def on_btn_run_clicked(self):
-        self.ctrl.update_selector()
         if self.paras.select_mode == SelectMode.simple:
             selector = Selector()
             if self.paras.simple_select_file:

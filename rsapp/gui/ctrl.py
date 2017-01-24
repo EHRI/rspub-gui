@@ -12,6 +12,7 @@ from PyQt5.QtCore import pyqtSignal
 from PyQt5.QtWidgets import QMessageBox
 
 from rsapp.gui.conf import GuiConf
+from rspub.core.config import Configurations
 from rspub.core.rs_paras import RsParameters
 from rspub.core.selector import Selector
 
@@ -26,7 +27,7 @@ class Ctrl(QObject):
     switch_configuration = pyqtSignal(str)
     switch_selector = pyqtSignal(str)
     switch_tab = pyqtSignal(int, int)
-    request_update_selector = pyqtSignal()
+    #request_update_selector = pyqtSignal()
 
     def __init__(self, application_home, locale_dir):
         QObject.__init__(self)
@@ -38,6 +39,7 @@ class Ctrl(QObject):
             self.paras = RsParameters(config_name=self.config.last_configuration_name())
         except:
             self.paras = RsParameters()
+
         self.selector = self.__get_selector()
 
     def report_tab_switch(self, from_index, to_index):
@@ -79,8 +81,8 @@ class Ctrl(QObject):
             self.paras = RsParameters(config_name=name)
             self.selector = self.__get_selector()
             self.switch_configuration.emit(name)
-            LOG.debug("Loaded configuration: '%s'" % name)
             self.switch_selector.emit(self.selector.abs_location())
+            LOG.debug("Loaded configuration: '%s'" % name)
         except ValueError as err:
             self.error("Unable to load configuration %s" % name, err)
 
@@ -90,8 +92,8 @@ class Ctrl(QObject):
                 selector_dir = os.path.dirname(self.paras.selector_file)
                 new_name = os.path.join(selector_dir, name + "-selector.csv")
                 self.selector.write(new_name)
-                LOG.debug("Saved selector '%s' as '%s'" % (self.paras.selector_file, new_name))
                 self.paras.selector_file = new_name
+                LOG.debug("Saved selector '%s' as '%s'" % (self.paras.selector_file, new_name))
             self.paras.save_configuration_as(name)
             LOG.debug("Saved configuration as '%s'" % name)
             self.switch_configuration.emit(name)
@@ -112,10 +114,8 @@ class Ctrl(QObject):
     def update_configuration(self, paras):
         self.paras = paras
         self.paras.save_configuration()
-        self.selector = self.__get_selector()
         LOG.debug("Configuration updated")
         self.switch_configuration.emit(self.paras.configuration_name())
-        self.switch_selector.emit(self.selector.abs_location())
 
     def __get_selector(self):
         if self.paras.selector_file:
@@ -128,6 +128,17 @@ class Ctrl(QObject):
                 selector = Selector()
         else:
             selector = Selector()
+
+        #Difficult keeping track of a selector that is not saved:
+        if selector.location is None:
+            selector_dir = os.path.join(Configurations.rspub_config_dir(), "selectors")
+            os.makedirs(selector_dir, exist_ok=True)
+            location = os.path.join(selector_dir, "default_selector.csv")
+            if os.path.exists(location):
+                selector = Selector(location=location)
+            else:
+                selector.write(location)
+            self.paras.selector_file = location
         return selector
 
     def save_selector(self):
@@ -135,7 +146,7 @@ class Ctrl(QObject):
             try:
                 self.selector.write()
                 LOG.debug("Saved selector as %s" % self.selector.abs_location())
-                self.switch_selector.emit(self.selector.abs_location())
+
             except Exception as err:
                 self.warn("Unable to save selector file '%s'" % self.selector.abs_location(), err)
 
@@ -163,13 +174,10 @@ class Ctrl(QObject):
         except Exception as err:
             self.warn("Unable to open selector file '%s'" % self.selector.abs_location(), err)
 
-    def update_selector(self):
-        self.request_update_selector.emit()
-        self.selector = self.__get_selector()
-        self.switch_selector.emit(self.selector.abs_location())
-
     def load_selector_includes(self, filename):
         try:
+            for entry in self.selector.get_included_entries():
+                print("before", entry)
             self.selector.read_includes(filename)
             LOG.debug("Loaded includes %s" % filename)
             self.last_directory = os.path.dirname(filename)
@@ -181,6 +189,7 @@ class Ctrl(QObject):
         try:
             self.selector.read_excludes(filename)
             LOG.debug("Loaded excludes %s" % filename)
+
             self.last_directory = os.path.dirname(filename)
             self.switch_selector.emit(self.selector.abs_location())
         except Exception as err:
