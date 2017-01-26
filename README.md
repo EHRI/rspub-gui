@@ -5,7 +5,7 @@ Application for ResourceSync publishing
 
 ### External Logistics
 
-![ResourceSync](img/resourcesync.pdf)
+![ResourceSync](img/resourcesync.png)
 
 _Fig. 1. Exposing content and ResourceSync metadata._
 
