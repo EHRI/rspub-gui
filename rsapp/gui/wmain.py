@@ -23,7 +23,6 @@ from PyQt5.QtWidgets import QVBoxLayout
 from rsapp.gui.conf import GuiConf
 from rsapp.gui.fconfigure import ConfigureFrame
 from rsapp.gui.fexecute import ExecuteFrame
-from rsapp.gui.finspect import InspectFrame
 from rsapp.gui.fselect import SelectFrame
 from rspub.core.config import Configurations
 

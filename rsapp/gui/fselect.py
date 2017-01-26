@@ -18,6 +18,7 @@ from PyQt5.QtWidgets import QLineEdit
 from PyQt5.QtWidgets import QMessageBox
 from PyQt5.QtWidgets import QPlainTextEdit
 from PyQt5.QtWidgets import QPushButton
+from PyQt5.QtWidgets import QSizePolicy
 from PyQt5.QtWidgets import QSplitter
 from PyQt5.QtWidgets import QVBoxLayout
 from PyQt5.QtWidgets import QWidget
@@ -64,7 +65,7 @@ class SelectFrame(QFrame):
         hbox.setContentsMargins(0, 0, 0, 5)   # left, top, right, bottom
         vbl_0.addLayout(hbox)
 
-        self.grp_simple = QGroupBox(_("Simpel selection: One file or directory"))
+        self.grp_simple = QGroupBox(_("Simpel selection: One directory"))
         self.grp_simple.setCheckable(True)
         self.grp_simple.toggled.connect(self.on_grp_simple_toggle)
 
@@ -124,16 +125,19 @@ class SelectFrame(QFrame):
         self.lbl_excludes = QLabel(_("Excludes"))
         self.lbl_excludes.setAlignment(Qt.AlignTop)
         self.txt_excludes = QPlainTextEdit()
-        self.btn_excl_brws = QPushButton(_("Browse"))
-        self.btn_excl_brws.clicked.connect(self.on_btn_excl_brws_clicked)
-        self.btn_excl_imp = QPushButton(_("Import"))
-        self.btn_excl_imp.clicked.connect(self.on_btn_excl_import_clicked)
+        self.btn_excl_directory = QPushButton(_("Add directory"))
+        self.btn_excl_directory.clicked.connect(self.on_btn_excl_directory_clicked)
+        self.btn_excl_files = QPushButton(_("Add files"))
+        self.btn_excl_files.clicked.connect(self.on_btn_excl_files_clicked)
+        self.btn_excl_import = QPushButton(_("Import entries"))
+        self.btn_excl_import.clicked.connect(self.on_btn_excl_import_clicked)
         grid.addWidget(self.lbl_excludes, 3, 1)
         grid.addWidget(self.txt_excludes, 3, 2)
         vbox_exc = QVBoxLayout()
         vbox_exc.setSpacing(0)
-        vbox_exc.addWidget(self.btn_excl_brws)
-        vbox_exc.addWidget(self.btn_excl_imp)
+        vbox_exc.addWidget(self.btn_excl_directory)
+        vbox_exc.addWidget(self.btn_excl_files)
+        vbox_exc.addWidget(self.btn_excl_import)
         vbox_exc.addStretch(1)
         grid.addLayout(vbox_exc, 3, 3)
 
@@ -148,20 +152,18 @@ class SelectFrame(QFrame):
         hbox3.addStretch(1)
         hbox3.addWidget(self.btn_open_selector)
         hbox3.addWidget(self.btn_save_selector_as)
-        #hbox3.addWidget(self.btn_play_selected)
         grid.addLayout(hbox3, 4, 1, 1, 2)
         grid.addWidget(self.btn_play_selected, 4, 3)
 
         self.grp_selector.setLayout(grid)
         vbl_0.addWidget(self.grp_selector)
 
-        vbl_0.addStretch(1)
         self.setLayout(vbl_0)
 
     def on_switch_language(self, code=None):
         LOG.debug("Switch language: %s" % code)
         self.label_title.setText(_("Select resources"))
-        self.grp_simple.setTitle(_("Simpel selection: One file or directory"))
+        self.grp_simple.setTitle(_("Simpel selection: One directory"))
         self.lbl_simple.setText(_("Location"))
         self.btn_simple_brws.setText(_("Browse"))
         self.btn_simple_play.setText(_("Play..."))
@@ -171,8 +173,9 @@ class SelectFrame(QFrame):
         self.btn_incl_files.setText(_("Add files"))
         self.btn_incl_import.setText(_("Import entries"))
         self.lbl_excludes.setText(_("Excludes"))
-        self.btn_excl_brws.setText(_("Browse"))
-        self.btn_excl_imp.setText(_("Import"))
+        self.btn_excl_directory.setText(_("Add directory"))
+        self.btn_excl_files.setText(_("Add files"))
+        self.btn_excl_import.setText(_("Import entries"))
         self.lbl_saved_as.setText(_("Selector"))
         self.btn_open_selector.setText(_("Open..."))
         self.btn_save_selector_as.setText(_("Save as..."))
@@ -263,6 +266,7 @@ class SelectFrame(QFrame):
                 self.txt_includes.appendPlainText(file)
             # refresh content of widget
             includes = set(self.txt_includes.toPlainText().splitlines())
+            includes = [x for x in includes if len(x.strip()) > 0]
             self.txt_includes.setPlainText("\n".join(sorted(includes)))
 
     def on_btn_incl_files_clicked(self):
@@ -276,6 +280,7 @@ class SelectFrame(QFrame):
                 self.txt_includes.appendPlainText(file)
             # refresh content of widget
             includes = set(self.txt_includes.toPlainText().splitlines())
+            includes = [x for x in includes if len(x.strip()) > 0]
             self.txt_includes.setPlainText("\n".join(sorted(includes)))
 
     def on_btn_incl_import_clicked(self):
@@ -284,19 +289,36 @@ class SelectFrame(QFrame):
         if filenames[0] != "":
             self.ctrl.load_selector_includes(filenames[0])
 
-    def on_btn_excl_brws_clicked(self):
+    def on_btn_excl_directory_clicked(self):
         self.txt_excludes.setFocus()
         dlg = QFileDialog(self)
         dlg.setDirectory(self.paras.resource_dir)
-        dlg.setFileMode(QFileDialog.AnyFile)
+        dlg.setFileMode(QFileDialog.Directory)
         result = dlg.exec()
         if result > 0:
             for file in dlg.selectedFiles():
                 self.txt_excludes.appendPlainText(file)
+            # refresh content of widget
             excludes = set(self.txt_excludes.toPlainText().splitlines())
+            excludes = [x for x in excludes if len(x.strip()) > 0]
+            self.txt_excludes.setPlainText("\n".join(sorted(excludes)))
+
+    def on_btn_excl_files_clicked(self):
+        self.txt_excludes.setFocus()
+        dlg = QFileDialog(self)
+        dlg.setDirectory(self.paras.resource_dir)
+        dlg.setFileMode(QFileDialog.ExistingFiles)
+        result = dlg.exec()
+        if result > 0:
+            for file in dlg.selectedFiles():
+                self.txt_excludes.appendPlainText(file)
+            # refresh content of widget
+            excludes = set(self.txt_excludes.toPlainText().splitlines())
+            excludes = [x for x in excludes if len(x.strip()) > 0]
             self.txt_excludes.setPlainText("\n".join(sorted(excludes)))
 
     def on_btn_excl_import_clicked(self):
+        self.synchronize_selector()
         filenames = QFileDialog.getOpenFileName(self, _("Import excluded filenames"), self.ctrl.last_directory)
         if filenames[0] != "":
             self.ctrl.load_selector_excludes(filenames[0])

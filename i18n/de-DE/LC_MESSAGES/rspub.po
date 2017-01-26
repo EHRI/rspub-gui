@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: rspub-gui 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-12-09 11:27+0100\n"
-"PO-Revision-Date: 2017-01-17 17:40+0100\n"
+"POT-Creation-Date: 2017-01-26 15:18+0100\n"
+"PO-Revision-Date: 2017-01-26 15:18+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -19,11 +19,11 @@ msgstr ""
 "X-Generator: Poedit 1.8.11\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: rsapp/gui/ctrl.py:70
+#: rsapp/gui/ctrl.py:75
 msgid "Could not read iso-lang.json"
 msgstr "iso-lang.json konnte nicht gelesen werden"
 
-#: rsapp/gui/ctrl.py:199
+#: rsapp/gui/ctrl.py:208
 #, python-format
 msgid ""
 "%s\n"
@@ -38,13 +38,11 @@ msgstr ""
 
 #: rsapp/gui/fconfigure.py:116 rsapp/gui/fconfigure.py:122
 #: rsapp/gui/fconfigure.py:150 rsapp/gui/fconfigure.py:181
-#: rsapp/gui/fexecute.py:134 rsapp/gui/finspect.py:101
+#: rsapp/gui/fexecute.py:128
 msgid "_label"
 msgstr ""
 
-#: rsapp/gui/fconfigure.py:123 rsapp/gui/fselect.py:81 rsapp/gui/fselect.py:111
-#: rsapp/gui/fselect.py:128 rsapp/gui/fselect.py:167 rsapp/gui/fselect.py:171
-#: rsapp/gui/fselect.py:174
+#: rsapp/gui/fconfigure.py:123 rsapp/gui/fselect.py:78 rsapp/gui/fselect.py:168
 msgid "Browse"
 msgstr "Durchsuchen"
 
@@ -71,381 +69,380 @@ msgstr ""
 msgid "Parameters '%s' has %d error(s)."
 msgstr ""
 
-#: rsapp/gui/fconfigure.py:280 rsapp/gui/fexecute.py:373 rsapp/gui/wmain.py:306
+#: rsapp/gui/fconfigure.py:280 rsapp/gui/fexecute.py:363 rsapp/gui/wmain.py:302
 msgid "Ok to proceed?"
 msgstr ""
 
-#: rsapp/gui/fconfigure.py:308 rsapp/gui/fexecute.py:168
-#: rsapp/gui/finspect.py:121
+#: rsapp/gui/fconfigure.py:308 rsapp/gui/fexecute.py:157
 msgid "resource_dir_label"
 msgstr ""
 
-#: rsapp/gui/fconfigure.py:309 rsapp/gui/fexecute.py:169
-#: rsapp/gui/finspect.py:122
+#: rsapp/gui/fconfigure.py:309 rsapp/gui/fexecute.py:158
 msgid "metadata_dir_label"
 msgstr ""
 
-#: rsapp/gui/fconfigure.py:310 rsapp/gui/fexecute.py:171
-#: rsapp/gui/finspect.py:124
+#: rsapp/gui/fconfigure.py:310 rsapp/gui/fexecute.py:160
 msgid "description_dir_label"
 msgstr ""
 
-#: rsapp/gui/fconfigure.py:311 rsapp/gui/fexecute.py:181
-#: rsapp/gui/finspect.py:134
+#: rsapp/gui/fconfigure.py:311 rsapp/gui/fexecute.py:170
 msgid "plugin_dir_label"
 msgstr ""
 
-#: rsapp/gui/fconfigure.py:312 rsapp/gui/fexecute.py:173
-#: rsapp/gui/finspect.py:126
+#: rsapp/gui/fconfigure.py:312 rsapp/gui/fexecute.py:162
 msgid "url_prefix_label"
 msgstr "URL-Präfix"
 
-#: rsapp/gui/fconfigure.py:313 rsapp/gui/fexecute.py:177
-#: rsapp/gui/finspect.py:130
+#: rsapp/gui/fconfigure.py:313 rsapp/gui/fexecute.py:166
 msgid "strategy_label"
 msgstr "Strategie"
 
-#: rsapp/gui/fconfigure.py:314 rsapp/gui/fexecute.py:182
-#: rsapp/gui/finspect.py:135
+#: rsapp/gui/fconfigure.py:314 rsapp/gui/fexecute.py:171
 msgid "max_items_in_list_label"
 msgstr "Max. Artikel in der Liste"
 
-#: rsapp/gui/fconfigure.py:315 rsapp/gui/fexecute.py:183
-#: rsapp/gui/finspect.py:136
+#: rsapp/gui/fconfigure.py:315 rsapp/gui/fexecute.py:172
 msgid "zero_fill_filename_label"
 msgstr "Null-Füllung Dateiname"
 
-#: rsapp/gui/fconfigure.py:316 rsapp/gui/fexecute.py:185
-#: rsapp/gui/finspect.py:138
+#: rsapp/gui/fconfigure.py:316 rsapp/gui/fexecute.py:174
 msgid "is_saving_pretty_xml_label"
 msgstr "Xml mit Zeilenumbrüchen"
 
-#: rsapp/gui/fconfigure.py:317 rsapp/gui/fexecute.py:186
-#: rsapp/gui/finspect.py:139
+#: rsapp/gui/fconfigure.py:317 rsapp/gui/fexecute.py:175
 msgid "is_saving_sitemaps_label"
 msgstr "Speichern von Sitemaps"
 
-#: rsapp/gui/fconfigure.py:318 rsapp/gui/fexecute.py:174
-#: rsapp/gui/finspect.py:127
+#: rsapp/gui/fconfigure.py:318 rsapp/gui/fexecute.py:163
 msgid "has_wellknown_at_root_label"
 msgstr ""
 
-#: rsapp/gui/fexecute.py:104 rsapp/gui/fexecute.py:118
+#: rsapp/gui/fexecute.py:100 rsapp/gui/fexecute.py:113
 msgid "Run..."
 msgstr "Starten..."
 
-#: rsapp/gui/fexecute.py:116 rsapp/gui/fexecute.py:124
+#: rsapp/gui/fexecute.py:112 rsapp/gui/fexecute.py:119
 #, python-format
 msgid "Execute configuration: '%s'"
 msgstr ""
 
-#: rsapp/gui/fexecute.py:167 rsapp/gui/finspect.py:120
+#: rsapp/gui/fexecute.py:156
 msgid "configuration_name_label"
 msgstr ""
 
-#: rsapp/gui/fexecute.py:170 rsapp/gui/finspect.py:123
+#: rsapp/gui/fexecute.py:159
 msgid "abs_metadata_dir_label"
 msgstr ""
 
-#: rsapp/gui/fexecute.py:172 rsapp/gui/finspect.py:125
+#: rsapp/gui/fexecute.py:161
 msgid "abs_description_path_label"
 msgstr ""
 
-#: rsapp/gui/fexecute.py:175 rsapp/gui/finspect.py:128
+#: rsapp/gui/fexecute.py:164
 msgid "description_url_label"
 msgstr ""
 
-#: rsapp/gui/fexecute.py:176 rsapp/gui/finspect.py:129
+#: rsapp/gui/fexecute.py:165
 msgid "capabilitylist_url_label"
 msgstr ""
 
-#: rsapp/gui/fexecute.py:178 rsapp/gui/finspect.py:131
+#: rsapp/gui/fexecute.py:167
 msgid "selector_file_label"
 msgstr ""
 
-#: rsapp/gui/fexecute.py:179 rsapp/gui/finspect.py:132
+#: rsapp/gui/fexecute.py:168
 msgid "simple_select_file_label"
 msgstr ""
 
-#: rsapp/gui/fexecute.py:180 rsapp/gui/finspect.py:133
+#: rsapp/gui/fexecute.py:169
 msgid "select_mode_label"
 msgstr ""
 
-#: rsapp/gui/fexecute.py:184 rsapp/gui/finspect.py:137
+#: rsapp/gui/fexecute.py:173
 msgid "example_filename_label"
 msgstr ""
 
-#: rsapp/gui/fexecute.py:187 rsapp/gui/finspect.py:140
+#: rsapp/gui/fexecute.py:176
 msgid "last_execution_label"
 msgstr ""
 
-#: rsapp/gui/fexecute.py:191 rsapp/gui/finspect.py:144
+#: rsapp/gui/fexecute.py:180
 msgid "Strategy.resourcelist"
 msgstr ""
 
-#: rsapp/gui/fexecute.py:192 rsapp/gui/finspect.py:145
+#: rsapp/gui/fexecute.py:181
 msgid "Strategy.new_changelist"
 msgstr ""
 
-#: rsapp/gui/fexecute.py:193 rsapp/gui/finspect.py:146
+#: rsapp/gui/fexecute.py:182
 msgid "Strategy.inc_changelist"
 msgstr ""
 
-#: rsapp/gui/fexecute.py:194 rsapp/gui/finspect.py:147
+#: rsapp/gui/fexecute.py:183
 msgid "True"
 msgstr ""
 
-#: rsapp/gui/fexecute.py:195 rsapp/gui/finspect.py:148
+#: rsapp/gui/fexecute.py:184
 msgid "False"
 msgstr ""
 
-#: rsapp/gui/fexecute.py:196 rsapp/gui/finspect.py:149
+#: rsapp/gui/fexecute.py:185
 msgid "None"
 msgstr ""
 
-#: rsapp/gui/fexecute.py:197 rsapp/gui/finspect.py:150
+#: rsapp/gui/fexecute.py:186
 msgid "SelectMode.simple"
 msgstr ""
 
-#: rsapp/gui/fexecute.py:198 rsapp/gui/finspect.py:151
+#: rsapp/gui/fexecute.py:187
 msgid "SelectMode.selector"
 msgstr ""
 
-#: rsapp/gui/fexecute.py:213 rsapp/gui/fexecute.py:313
-#: rsapp/gui/fexecute.py:326
+#: rsapp/gui/fexecute.py:202 rsapp/gui/fexecute.py:302
+#: rsapp/gui/fexecute.py:315
 #, python-format
 msgid "Execute %s"
 msgstr ""
 
-#: rsapp/gui/fexecute.py:228 rsapp/gui/fexecute.py:314
+#: rsapp/gui/fexecute.py:217 rsapp/gui/fexecute.py:303
 msgid "Main events"
 msgstr ""
 
-#: rsapp/gui/fexecute.py:231 rsapp/gui/fexecute.py:315
+#: rsapp/gui/fexecute.py:220 rsapp/gui/fexecute.py:304
 msgid "Resources"
 msgstr ""
 
-#: rsapp/gui/fexecute.py:234 rsapp/gui/fexecute.py:316
+#: rsapp/gui/fexecute.py:223 rsapp/gui/fexecute.py:305
 msgid "Errors"
 msgstr ""
 
-#: rsapp/gui/fexecute.py:270 rsapp/gui/fexecute.py:317
+#: rsapp/gui/fexecute.py:259 rsapp/gui/fexecute.py:306
 msgid "Processing:"
 msgstr ""
 
-#: rsapp/gui/fexecute.py:281 rsapp/gui/fexecute.py:318
+#: rsapp/gui/fexecute.py:270 rsapp/gui/fexecute.py:307
 msgid "Trial run"
 msgstr ""
 
-#: rsapp/gui/fexecute.py:284 rsapp/gui/fexecute.py:319
+#: rsapp/gui/fexecute.py:273 rsapp/gui/fexecute.py:308
 msgid "Run"
 msgstr ""
 
-#: rsapp/gui/fexecute.py:287 rsapp/gui/fexecute.py:320 rsapp/gui/fselect.py:431
-#: rsapp/gui/fselect.py:451
+#: rsapp/gui/fexecute.py:276 rsapp/gui/fexecute.py:309 rsapp/gui/fselect.py:457
+#: rsapp/gui/fselect.py:477
 msgid "Stop"
 msgstr ""
 
-#: rsapp/gui/fexecute.py:292 rsapp/gui/fexecute.py:321 rsapp/gui/fselect.py:437
-#: rsapp/gui/fselect.py:452 rsapp/gui/wmain.py:278
+#: rsapp/gui/fexecute.py:281 rsapp/gui/fexecute.py:310 rsapp/gui/fselect.py:463
+#: rsapp/gui/fselect.py:478 rsapp/gui/wmain.py:274
 msgid "Close"
 msgstr ""
 
-#: rsapp/gui/fexecute.py:477
+#: rsapp/gui/fexecute.py:467
 msgid "Exception in executor thread: {0}"
 msgstr ""
 
-#: rsapp/gui/fexecute.py:485
+#: rsapp/gui/fexecute.py:475
 #, python-format
 msgid "Start execution: %s"
 msgstr ""
 
-#: rsapp/gui/fexecute.py:489
+#: rsapp/gui/fexecute.py:479
 msgid "Clear metadata directory"
 msgstr ""
 
-#: rsapp/gui/fexecute.py:490
+#: rsapp/gui/fexecute.py:480
 #, python-format
 msgid ""
 "Clearing xml-files from \n"
 "%s"
 msgstr ""
 
-#: rsapp/gui/fexecute.py:512
+#: rsapp/gui/fexecute.py:502
 msgid "Summary of changes"
 msgstr ""
 
-#: rsapp/gui/fexecute.py:516
+#: rsapp/gui/fexecute.py:506
 msgid "created"
 msgstr ""
 
-#: rsapp/gui/fexecute.py:520
+#: rsapp/gui/fexecute.py:510
 msgid "updated"
 msgstr ""
 
-#: rsapp/gui/fexecute.py:524
+#: rsapp/gui/fexecute.py:514
 msgid "deleted"
 msgstr ""
 
-#: rsapp/gui/fexecute.py:528
+#: rsapp/gui/fexecute.py:518
 msgid "unchanged"
 msgstr ""
 
-#: rsapp/gui/fexecute.py:539
+#: rsapp/gui/fexecute.py:530
 #, python-format
 msgid "Total file count: %d"
 msgstr ""
 
-#: rsapp/gui/fexecute.py:540
+#: rsapp/gui/fexecute.py:531
 #, python-format
 msgid "Excluded by selector: %d"
 msgstr ""
 
-#: rsapp/gui/fexecute.py:541
+#: rsapp/gui/fexecute.py:532
 #, python-format
 msgid "Rejected by resource gate: %d"
 msgstr ""
 
-#: rsapp/gui/fexecute.py:542
+#: rsapp/gui/fexecute.py:533
+#, python-format
+msgid "Total resources synchronized: %d"
+msgstr ""
+
+#: rsapp/gui/fexecute.py:534
 #, python-format
 msgid "End execution: %s"
 msgstr ""
 
-#: rsapp/gui/fexecute.py:552
+#: rsapp/gui/fexecute.py:544
 msgid "path"
 msgstr ""
 
-#: rsapp/gui/fexecute.py:556
+#: rsapp/gui/fexecute.py:548
 msgid "uri"
 msgstr ""
 
-#: rsapp/gui/fexecute.py:560
+#: rsapp/gui/fexecute.py:552
 msgid "count resources"
 msgstr ""
 
-#: rsapp/gui/fexecute.py:564
+#: rsapp/gui/fexecute.py:556
 msgid "document saved"
 msgstr ""
 
-#: rsapp/gui/fexecute.py:576 rsapp/gui/fselect.py:547
+#: rsapp/gui/fexecute.py:568 rsapp/gui/fselect.py:573
 #, python-format
 msgid "File does not exist: %s"
 msgstr ""
 
-#: rsapp/gui/fexecute.py:579 rsapp/gui/fselect.py:550
+#: rsapp/gui/fexecute.py:571 rsapp/gui/fselect.py:576
 #, python-format
 msgid "Not a regular file: %s"
 msgstr ""
 
-#: rsapp/gui/fexecute.py:584 rsapp/gui/fexecute.py:591 rsapp/gui/fselect.py:555
-#: rsapp/gui/fselect.py:560
+#: rsapp/gui/fexecute.py:576 rsapp/gui/fexecute.py:583 rsapp/gui/fselect.py:581
+#: rsapp/gui/fselect.py:586
 msgid "Process interrupted by user"
 msgstr ""
 
-#: rsapp/gui/finspect.py:86 rsapp/gui/finspect.py:92
-#, python-format
-msgid "Inspect configuration: '%s'"
-msgstr ""
-
-#: rsapp/gui/fselect.py:59 rsapp/gui/fselect.py:164
+#: rsapp/gui/fselect.py:56 rsapp/gui/fselect.py:165
 msgid "Select resources"
 msgstr ""
 
-#: rsapp/gui/fselect.py:71 rsapp/gui/fselect.py:165
-msgid "Simpel selection: One file or directory"
+#: rsapp/gui/fselect.py:68 rsapp/gui/fselect.py:166
+msgid "Simpel selection: One directory"
 msgstr ""
 
-#: rsapp/gui/fselect.py:76 rsapp/gui/fselect.py:166
+#: rsapp/gui/fselect.py:73 rsapp/gui/fselect.py:167
 msgid "Location"
 msgstr ""
 
-#: rsapp/gui/fselect.py:84 rsapp/gui/fselect.py:146 rsapp/gui/fselect.py:168
-#: rsapp/gui/fselect.py:179
+#: rsapp/gui/fselect.py:81 rsapp/gui/fselect.py:149 rsapp/gui/fselect.py:169
+#: rsapp/gui/fselect.py:182
 msgid "Play..."
 msgstr ""
 
-#: rsapp/gui/fselect.py:95 rsapp/gui/fselect.py:169
+#: rsapp/gui/fselect.py:92 rsapp/gui/fselect.py:170
 msgid "Advanced: Create a selector"
 msgstr ""
 
-#: rsapp/gui/fselect.py:101 rsapp/gui/fselect.py:176
+#: rsapp/gui/fselect.py:98 rsapp/gui/fselect.py:179
 msgid "Selector"
 msgstr ""
 
-#: rsapp/gui/fselect.py:108 rsapp/gui/fselect.py:170
+#: rsapp/gui/fselect.py:105 rsapp/gui/fselect.py:171
 msgid "Includes"
 msgstr ""
 
-#: rsapp/gui/fselect.py:113 rsapp/gui/fselect.py:130 rsapp/gui/fselect.py:172
-#: rsapp/gui/fselect.py:175
-msgid "Import"
+#: rsapp/gui/fselect.py:108 rsapp/gui/fselect.py:128 rsapp/gui/fselect.py:172
+#: rsapp/gui/fselect.py:176
+msgid "Add directory"
 msgstr ""
 
-#: rsapp/gui/fselect.py:125 rsapp/gui/fselect.py:173
+#: rsapp/gui/fselect.py:110 rsapp/gui/fselect.py:130 rsapp/gui/fselect.py:173
+#: rsapp/gui/fselect.py:177
+msgid "Add files"
+msgstr ""
+
+#: rsapp/gui/fselect.py:112 rsapp/gui/fselect.py:132 rsapp/gui/fselect.py:174
+#: rsapp/gui/fselect.py:178
+msgid "Import entries"
+msgstr ""
+
+#: rsapp/gui/fselect.py:125 rsapp/gui/fselect.py:175
 msgid "Excludes"
 msgstr ""
 
-#: rsapp/gui/fselect.py:142 rsapp/gui/fselect.py:177
+#: rsapp/gui/fselect.py:145 rsapp/gui/fselect.py:180
 msgid "Open..."
 msgstr ""
 
-#: rsapp/gui/fselect.py:144 rsapp/gui/fselect.py:178
+#: rsapp/gui/fselect.py:147 rsapp/gui/fselect.py:181
 msgid "Save as..."
 msgstr ""
 
-#: rsapp/gui/fselect.py:292
+#: rsapp/gui/fselect.py:288
 msgid "Import included filenames"
 msgstr ""
 
-#: rsapp/gui/fselect.py:297
+#: rsapp/gui/fselect.py:322
 msgid "Import excluded filenames"
 msgstr ""
 
-#: rsapp/gui/fselect.py:308
+#: rsapp/gui/fselect.py:334
 msgid "Save selector"
 msgstr ""
 
-#: rsapp/gui/fselect.py:315
+#: rsapp/gui/fselect.py:341
 msgid "Open a new selector"
 msgstr ""
 
-#: rsapp/gui/fselect.py:320
+#: rsapp/gui/fselect.py:346
 msgid "Open selector"
 msgstr ""
 
-#: rsapp/gui/fselect.py:330
+#: rsapp/gui/fselect.py:356
 msgid "Selector has unsaved changes."
 msgstr ""
 
-#: rsapp/gui/fselect.py:332
+#: rsapp/gui/fselect.py:358
 msgid "Save selector?"
 msgstr ""
 
-#: rsapp/gui/fselect.py:356
+#: rsapp/gui/fselect.py:382
 msgid "Advanced: List resources"
 msgstr ""
 
-#: rsapp/gui/fselect.py:357
+#: rsapp/gui/fselect.py:383
 msgid "Simpel selection: List resources"
 msgstr ""
 
-#: rsapp/gui/fselect.py:384 rsapp/gui/fselect.py:447
+#: rsapp/gui/fselect.py:410 rsapp/gui/fselect.py:473
 msgid "Selected resources"
 msgstr ""
 
-#: rsapp/gui/fselect.py:412 rsapp/gui/fselect.py:448
+#: rsapp/gui/fselect.py:438 rsapp/gui/fselect.py:474
 msgid "Selected resources:"
 msgstr ""
 
-#: rsapp/gui/fselect.py:418 rsapp/gui/fselect.py:449
+#: rsapp/gui/fselect.py:444 rsapp/gui/fselect.py:475
 msgid "Excluded resources:"
 msgstr ""
 
-#: rsapp/gui/fselect.py:427 rsapp/gui/fselect.py:450
+#: rsapp/gui/fselect.py:453 rsapp/gui/fselect.py:476
 msgid "Play"
 msgstr ""
 
-#: rsapp/gui/fselect.py:553
+#: rsapp/gui/fselect.py:579
 #, python-format
 msgid "File excluded: %s"
 msgstr ""
@@ -454,80 +451,80 @@ msgstr ""
 msgid "Language was set to locale en-US"
 msgstr "Sprache wurde auf Gebietsschema festgelegt de-DE"
 
-#: rsapp/gui/wmain.py:65 rsapp/gui/wmain.py:124
+#: rsapp/gui/wmain.py:64 rsapp/gui/wmain.py:123
 msgid "File"
 msgstr "Datei"
 
-#: rsapp/gui/wmain.py:68 rsapp/gui/wmain.py:127
+#: rsapp/gui/wmain.py:67 rsapp/gui/wmain.py:126
 msgid "Load configuration"
 msgstr "Konfiguration laden"
 
-#: rsapp/gui/wmain.py:74 rsapp/gui/wmain.py:128 rsapp/gui/wmain.py:159
+#: rsapp/gui/wmain.py:73 rsapp/gui/wmain.py:127 rsapp/gui/wmain.py:158
 msgid "Save configuration as..."
 msgstr "Konfiguration speichern"
 
-#: rsapp/gui/wmain.py:78 rsapp/gui/wmain.py:129
+#: rsapp/gui/wmain.py:77 rsapp/gui/wmain.py:128
 msgid "Configurations..."
 msgstr ""
 
-#: rsapp/gui/wmain.py:83 rsapp/gui/wmain.py:125
+#: rsapp/gui/wmain.py:82 rsapp/gui/wmain.py:124
 msgid "Exit"
 msgstr "Ausgang"
 
-#: rsapp/gui/wmain.py:93 rsapp/gui/wmain.py:130
+#: rsapp/gui/wmain.py:92 rsapp/gui/wmain.py:129
 msgid "Preferences"
 msgstr "Einstellungen"
 
-#: rsapp/gui/wmain.py:100 rsapp/gui/wmain.py:131
+#: rsapp/gui/wmain.py:99 rsapp/gui/wmain.py:130
 msgid "Language"
 msgstr "Sprache"
 
-#: rsapp/gui/wmain.py:126
+#: rsapp/gui/wmain.py:125
 msgid "Exit application"
 msgstr "Anwendung beenden"
 
-#: rsapp/gui/wmain.py:155
+#: rsapp/gui/wmain.py:154
 msgid "Switch configuration..."
 msgstr ""
 
-#: rsapp/gui/wmain.py:164
+#: rsapp/gui/wmain.py:163
 msgid "Configuration name:"
 msgstr "Konfigurationsname:"
 
-#: rsapp/gui/wmain.py:180 rsapp/gui/wmain.py:185
+#: rsapp/gui/wmain.py:179 rsapp/gui/wmain.py:184
 msgid "Closing application..."
 msgstr ""
 
-#: rsapp/gui/wmain.py:217 rsapp/gui/wmain.py:224
+#: rsapp/gui/wmain.py:215 rsapp/gui/wmain.py:221
 msgid "Configure"
 msgstr "Konfigurieren"
 
-#: rsapp/gui/wmain.py:219 rsapp/gui/wmain.py:226
+#: rsapp/gui/wmain.py:216 rsapp/gui/wmain.py:222
 msgid "Select"
 msgstr "Wählen"
 
-#: rsapp/gui/wmain.py:220 rsapp/gui/wmain.py:227
+#: rsapp/gui/wmain.py:217 rsapp/gui/wmain.py:223
 msgid "Execute"
 msgstr "Ausführen"
 
-#: rsapp/gui/wmain.py:256
+#: rsapp/gui/wmain.py:252
 msgid "Manage configurations"
 msgstr ""
 
-#: rsapp/gui/wmain.py:273
+#: rsapp/gui/wmain.py:269
 msgid "Delete"
 msgstr ""
 
-#: rsapp/gui/wmain.py:300
+#: rsapp/gui/wmain.py:296
 msgid "Delete configurations"
 msgstr ""
 
-#: rsapp/gui/wmain.py:302
+#: rsapp/gui/wmain.py:298
 #, python-format
 msgid "Delete configuration '%s'"
 msgstr ""
 
-#: rsapp/gui/wmain.py:304
+#: rsapp/gui/wmain.py:300
 #, python-format
 msgid "Delete %d configurations"
 msgstr ""

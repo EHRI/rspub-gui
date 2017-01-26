@@ -27,7 +27,6 @@ class Ctrl(QObject):
     switch_configuration = pyqtSignal(str)
     switch_selector = pyqtSignal(str)
     switch_tab = pyqtSignal(int, int)
-    #request_update_selector = pyqtSignal()
 
     def __init__(self, application_home, locale_dir):
         QObject.__init__(self)
@@ -176,8 +175,6 @@ class Ctrl(QObject):
 
     def load_selector_includes(self, filename):
         try:
-            for entry in self.selector.get_included_entries():
-                print("before", entry)
             self.selector.read_includes(filename)
             LOG.debug("Loaded includes %s" % filename)
             self.last_directory = os.path.dirname(filename)
@@ -189,7 +186,6 @@ class Ctrl(QObject):
         try:
             self.selector.read_excludes(filename)
             LOG.debug("Loaded excludes %s" % filename)
-
             self.last_directory = os.path.dirname(filename)
             self.switch_selector.emit(self.selector.abs_location())
         except Exception as err:
