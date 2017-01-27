@@ -3,11 +3,11 @@ Application for ResourceSync publishing
 
 ## Logistics
 
-### External Logistics
+### External Logistics (This is not the problem)
 
 ![ResourceSync](img/resourcesync.png)
 
-_Fig. 1. Exposing content and ResourceSync metadata._
+_Fig. 1. Institutions exposing content and ResourceSync metadata._
 
 ### Internal Logistics
 
