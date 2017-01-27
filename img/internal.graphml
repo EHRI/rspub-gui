@@ -158,7 +158,7 @@ changelists</y:NodeLabel>
       <data key="d5"/>
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="30.0" width="30.0" x="525.0" y="525.5245056152344"/>
+          <y:Geometry height="30.0" width="30.0" x="525.0" y="500.0245056152344"/>
           <y:Fill hasColor="false" transparent="false"/>
           <y:BorderStyle hasColor="false" raised="false" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="4.0" x="13.0" y="13.0">
@@ -280,11 +280,12 @@ changelists</y:NodeLabel>
     <edge id="e6" source="n2" target="n1">
       <data key="d9"/>
       <data key="d10">
-        <y:GenericEdge configuration="com.yworks.edge.framed">
-          <y:Path sx="93.0" sy="13.5" tx="0.0" ty="0.0"/>
-          <y:LineStyle color="#000000" type="line" width="6.0"/>
+        <y:PolyLineEdge>
+          <y:Path sx="3.0" sy="13.5" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#0000FF" type="line" width="7.0"/>
           <y:Arrows source="none" target="standard"/>
-        </y:GenericEdge>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
       </data>
     </edge>
   </graph>
