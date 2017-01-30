@@ -144,7 +144,8 @@ class ParaCheck(ParaWidget):
     def on_toggled(self, checked):
         if checked != getattr(self.paras, self.name):
             setattr(self.paras, self.name, checked)
-            self.paras.save_configuration()
+            # link paras.is_saving_sitemaps to 'trial run' on ExecuteWidget Frame:
+            self.ctrl.update_configuration(self.paras)
 
     def on_switch_language(self):
         self.check.setText(_(self.name + "_label"))

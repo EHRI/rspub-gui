@@ -6,6 +6,7 @@ from PyQt5.QtCore import QThread
 from PyQt5.QtCore import QUrl
 from PyQt5.QtCore import Qt
 from PyQt5.QtCore import pyqtSignal
+from PyQt5.QtGui import QActionEvent
 from PyQt5.QtGui import QDesktopServices
 from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import QApplication
@@ -197,7 +198,6 @@ class ExecuteWidget(QWidget):
         self.ctrl.switch_language.connect(self.on_switch_language)
         self.ctrl.switch_configuration.connect(self.on_switch_configuration)
         self.paras = self.ctrl.paras
-        self.trial_run = not self.paras.is_saving_sitemaps
         self.conf = GuiConf()
         self.setWindowTitle(_("Execute %s") % self.paras.configuration_name())
         self.executor_thread = None
@@ -268,7 +268,7 @@ class ExecuteWidget(QWidget):
         btn_box = QHBoxLayout()
         btn_box.addStretch(1)
         self.chk_trial_run = QCheckBox(_("Trial run"))
-        self.chk_trial_run.setChecked(self.trial_run)
+        self.chk_trial_run.setChecked(not self.paras.is_saving_sitemaps)
         btn_box.addWidget(self.chk_trial_run)
         self.btn_run = QPushButton(_("Run"))
         self.btn_run.clicked.connect(self.on_btn_run_clicked)
@@ -313,8 +313,7 @@ class ExecuteWidget(QWidget):
         LOG.debug("Switch configuration: %s" % name)
         self.paras = self.ctrl.paras
         self.setWindowTitle(_("Execute %s") % self.paras.configuration_name())
-        self.trial_run = not self.paras.is_saving_sitemaps
-        self.chk_trial_run.setChecked(self.trial_run)
+        self.chk_trial_run.setChecked(not self.paras.is_saving_sitemaps)
 
     def on_btn_run_clicked(self):
         if self.paras.select_mode == SelectMode.simple:
