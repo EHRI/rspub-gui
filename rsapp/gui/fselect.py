@@ -561,13 +561,17 @@ class PlayerThread(QThread, EventObserver):
 
     def run(self):
         LOG.debug("Player thread started %s" % self)
-        for file in self.selector:
-            self.yield_resource.emit(file)
-            if self.isInterruptionRequested():
-                LOG.debug("Player thread interrupted %s" % self)
-                break
-        LOG.debug("Player thread finished %s" % self)
-        self.selector.unregister(self)
+        try:
+            for file in self.selector:
+                self.yield_resource.emit(file)
+                if self.isInterruptionRequested():
+                    LOG.debug("Player thread interrupted %s" % self)
+                    break
+            LOG.debug("Player thread finished %s" % self)
+        except:
+            LOG.exception("Unregular end of PlayerTread execution.")
+        finally:
+            self.selector.unregister(self)
 
     def inform_file_does_not_exist(self, *args, **kwargs):
         self.signal_exception.emit(_("File does not exist: %s") % kwargs["filename"])
