@@ -23,6 +23,7 @@ from PyQt5.QtWidgets import QVBoxLayout
 from rsapp.gui.conf import GuiConf
 from rsapp.gui.fconfigure import ConfigureFrame
 from rsapp.gui.fexecute import ExecuteFrame
+from rsapp.gui.fexport import ExportFrame
 from rsapp.gui.fselect import SelectFrame
 from rspub.core.config import Configurations
 
@@ -211,16 +212,19 @@ class TabbedFrame(QTabWidget):
         self.frame_configure = ConfigureFrame(self, 0)
         self.frame_select = SelectFrame(self, 1)
         self.frame_execute = ExecuteFrame(self, 2)
+        self.frame_export = ExportFrame(self, 3)
 
         self.addTab(self.frame_configure, _("Configure"))
         self.addTab(self.frame_select, _("Select"))
         self.addTab(self.frame_execute, _("Execute"))
+        self.addTab(self.frame_export, _("Export"))
 
     @pyqtSlot(str)
     def retranslate_ui(self, code=None):
         self.setTabText(0, _("Configure"))
         self.setTabText(1, _("Select"))
         self.setTabText(2, _("Execute"))
+        self.setTabText(3, _("Export"))
 
     @pyqtSlot(int)
     def __tabchanged(self, index):
