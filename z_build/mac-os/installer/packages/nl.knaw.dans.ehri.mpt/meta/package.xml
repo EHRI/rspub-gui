@@ -9,7 +9,6 @@
         <License name="Apache 2.0" file="LICENSE" />
     </Licenses>
     <Default>true</Default>
-    <!-- Script>installscript.qs</Script -->
     <UserInterfaces>
         <UserInterface>page.ui</UserInterface>
     </UserInterfaces>
