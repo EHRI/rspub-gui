@@ -13,6 +13,7 @@ if [ -e "$qt_bin" ]; then
     echo "Found $qt_bin"
 else
     echo "No Qt Installer Framework found at $qt_bin"
+    exit 1
 fi
 
 $qt_archivegen packages/nl.knaw.dans.ehri.mpt/data/mpt.7z ../dist/$current_mpt_version
