@@ -94,6 +94,6 @@ zee_notes.txt
 .idea/
 src/
 logs/
-z_build/mac-os/installer/MPT-Installer*
-z_build/mac-os/installer/packages/nl.knaw.dans.ehri.mpt/data/
+*/**/MPT-Installer*
+*/**/nl.knaw.dans.ehri.mpt/data/
 
