@@ -94,6 +94,8 @@ zee_notes.txt
 .idea/
 src/
 logs/
-*/**/MPT-Installer*
-*/**/nl.knaw.dans.ehri.mpt/data/
+
+*.exe
+/z_build/*/installer/packages/nl.knaw.dans.ehri.mpt/data/
+
 
