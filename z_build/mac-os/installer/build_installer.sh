@@ -16,6 +16,6 @@ else
     exit 1
 fi
 
-$qt_archivegen packages/nl.knaw.dans.ehri.mpt/data/mpt.7z ../dist/$current_mpt_version
+$qt_archivegen packages/nl.knaw.dans.ehri.mpt/data/mpt_win.7z ../dist/$current_mpt_version
 
 $qt_bin -c config/config.xml -p packages MPT-Installer

@@ -38,12 +38,10 @@ function Component()
 
 Component.prototype.createOperations = function()
 {
-    // call default implementation to actually install README.txt!
     component.createOperations();
 
     if (systemInfo.productType === "windows") {
-        component.addOperation("CreateShortcut", "@TargetDir@/MetadataPublishingTool-1.0.rc.4.exe", "@StartMenuDir@/MetadataPublishingTool.lnk",
-            "workingDirectory=@TargetDir@", "iconPath=%SystemRoot%/system32/SHELL32.dll",
-            "iconId=2");
+        component.addOperation("CreateShortcut", "@TargetDir@/MetadataPublishingTool-1.0.rc.4.exe",
+            "@StartMenuDir@/MetadataPublishingTool.lnk");
     }
 }

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package>
+    <DisplayName>Metadata Publishing Tool</DisplayName>
+    <Description>Metadata Publishing Tool (MPT) enables the publishing of resources according
+        to the ResourceSync Framework Specification.</Description>
+    <Version>0.0.4</Version>
+    <ReleaseDate>2017-02-24</ReleaseDate>
+    <Licenses>
+        <License name="Apache 2.0" file="LICENSE" />
+    </Licenses>
+    <Default>true</Default>
+    <Script>installscript.qs</Script>
+    <UserInterfaces>
+        <UserInterface>page.ui</UserInterface>
+    </UserInterfaces>
+</Package>
