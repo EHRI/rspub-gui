@@ -64,10 +64,10 @@ class ExecuteFrame(QFrame):
         self.label_title.setFont(font)
         self.label_title.setContentsMargins(2, 5, 5, 7)
         self.label_title.setStyleSheet(Style.h2())
-        hbox = QHBoxLayout()
-        hbox.addWidget(self.label_title, 1)
-        hbox.setContentsMargins(0, 0, 0, 5)
-        grid.addLayout(hbox, 1, 1, 1, 3)
+        hbox1 = QHBoxLayout()
+        hbox1.addWidget(self.label_title, 1)
+        hbox1.setContentsMargins(0, 0, 0, 5)
+        grid.addLayout(hbox1, 1, 1, 1, 3)
         #
         ordinal = 3
         self.widgets = []
@@ -93,18 +93,18 @@ class ExecuteFrame(QFrame):
             grid.addWidget(para_value, ordinal, 2)
             ordinal += 1
         #
-        hbox = QHBoxLayout()
-        hbox.addLayout(grid)
+        hbox2 = QHBoxLayout()
+        hbox2.addLayout(grid)
 
         vbox = QVBoxLayout()
         vbox.addStretch(1)
         self.btn_run = QPushButton(_("Run..."))
         self.btn_run.clicked.connect(self.on_btn_run_clicked)
         vbox.addWidget(self.btn_run)
-        hbox.addLayout(vbox)
+        hbox2.addLayout(vbox)
 
-        hbox.addStretch(1)
-        vbl_0.addLayout(hbox)
+        hbox2.addStretch(1)
+        vbl_0.addLayout(hbox2)
         vbl_0.addStretch(1)
         self.setLayout(vbl_0)
 
@@ -131,9 +131,11 @@ class ExecuteFrame(QFrame):
             if value == "":
                 value = "None"
             if value.startswith("http"):
-                para_value.setText("<a href=\"" + value + "\">" + value + "</a>")
-            else:
-                para_value.setText(_(value))
+                value = "<a href=\"" + value + "\">" + value + "</a>"
+            if isinstance(value, list):
+                value = str(len(value))
+
+            para_value.setText(_(value))
             t += 1
 
     def on_link_activated(self, link):

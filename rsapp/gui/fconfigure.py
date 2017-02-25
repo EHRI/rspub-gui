@@ -113,10 +113,17 @@ class ParaLine(ParaWidget):
 
     def button_clicked(self):
         self.edit.setFocus()
-        filename = QFileDialog.getExistingDirectory(self.parent(), _(self.name + "_label"),
+        if self.browse == "SaveFileName":
+            filename = QFileDialog.getSaveFileName(self.parent(), _(self.name + "_label"),
+                                                        getattr(self.paras, self.name))
+            if filename[0] != "":
+                self.edit.setText(filename[0])
+        else:
+            filename = QFileDialog.getExistingDirectory(self.parent(), _(self.name + "_label"),
                                                     getattr(self.paras, self.name))
-        if filename != "":
-            self.edit.setText(filename)
+            if filename != "":
+                self.edit.setText(filename)
+
 
     def on_switch_language(self):
         self.label.setText(_(self.name + "_label"))
@@ -231,17 +238,17 @@ class ConfigureFrame(QFrame):
             "description_dir": ParaLine(self, "description_dir", str_conv, grid, 7, True),
             "plugin_dir": ParaLine(self, "plugin_dir", str_conv, grid, 9, True),
             "url_prefix": ParaLine(self, "url_prefix", str_conv, grid, 11, False),
-            "strategy": ParaStrategyDrop(self, "strategy", grid, 13),
-            "max_items_in_list": ParaLine(self, "max_items_in_list", int_conv, grid, 15, False, 100),
-            "zero_fill_filename": ParaLine(self, "zero_fill_filename", int_conv, grid, 17, False, 100),
-            "is_saving_pretty_xml": ParaCheck(self, "is_saving_pretty_xml", grid, 19),
-            "is_saving_sitemaps": ParaCheck(self, "is_saving_sitemaps", grid, 20),
-            "has_wellknown_at_root": ParaCheck(self, "has_wellknown_at_root", grid, 21)
+            "strategy": ParaStrategyDrop(self, "strategy", grid, 15),
+            "max_items_in_list": ParaLine(self, "max_items_in_list", int_conv, grid, 17, False, width=100),
+            "zero_fill_filename": ParaLine(self, "zero_fill_filename", int_conv, grid, 19, False, width=100),
+            "is_saving_pretty_xml": ParaCheck(self, "is_saving_pretty_xml", grid, 21),
+            "is_saving_sitemaps": ParaCheck(self, "is_saving_sitemaps", grid, 22),
+            "has_wellknown_at_root": ParaCheck(self, "has_wellknown_at_root", grid, 23)
         }
 
         self.button_reset = QPushButton(_("Reset"), self)
         self.button_reset.clicked.connect(self.on_button_reset_clicked)
-        grid.addWidget(self.button_reset, 22, 3)
+        grid.addWidget(self.button_reset, 24, 3)
 
         vbl_0.addLayout(grid)
         vbl_0.addStretch(1)
@@ -311,6 +318,7 @@ class ConfigureFrame(QFrame):
         _("description_dir_label")
         _("plugin_dir_label")
         _("url_prefix_label")
+        _("document_root")
         _("strategy_label")
         _("max_items_in_list_label")
         _("zero_fill_filename_label")
