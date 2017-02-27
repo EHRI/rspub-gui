@@ -8,7 +8,6 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtCore import pyqtSlot
 from PyQt5.QtGui import QDesktopServices
 from PyQt5.QtGui import QFont
-from PyQt5.QtGui import QIcon
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtGui import QStandardItem
 from PyQt5.QtGui import QStandardItemModel
@@ -21,7 +20,6 @@ from PyQt5.QtWidgets import QGridLayout
 from PyQt5.QtWidgets import QHBoxLayout
 from PyQt5.QtWidgets import QInputDialog
 from PyQt5.QtWidgets import QLabel
-from PyQt5.QtWidgets import QLineEdit
 from PyQt5.QtWidgets import QListView
 from PyQt5.QtWidgets import QMainWindow
 from PyQt5.QtWidgets import QMenu
