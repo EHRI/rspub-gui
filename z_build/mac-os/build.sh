@@ -4,7 +4,7 @@
 # alongside rspub-gui.
 
 # APPNAME should equal > app = BUNDLE(exe, name=xxx < in rsapp.spec
-APPNAME="MetadataPublishingTool-1.0.rc.4.app"
+APPNAME="MetadataPublishingTool.app"
 
 rm -Rf build dist
 

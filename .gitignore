@@ -90,12 +90,13 @@ ENV/
 .ropeproject
 
 # Stuff
-zee_notes.txt
 .idea/
 src/
 logs/
 
 *.exe
 /z_build/*/installer/packages/nl.knaw.dans.ehri.mpt/data/
-
+/z_build/*/installer/MPT_*_installer.*
+dist_installer/
+zee_*.txt
 

@@ -2,9 +2,14 @@
 # -*- coding: utf-8 -*-
 from setuptools import setup
 
+version = {}
+with open("rsapp/version.py") as fp:
+    exec(fp.read(), version)
+# later on we use: version['__version__']
+
 setup(
     name='rspub-gui',
-    version='0.1',
+    version=version['__version__'],
     packages=['rsapp.gui'],
     url='https://github.com/EHRI/rspub-gui',
     license='Apache License 2.0',
