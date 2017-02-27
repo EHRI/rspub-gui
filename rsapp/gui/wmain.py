@@ -1,8 +1,15 @@
 #! /usr/bin/env python3
 # -*- coding: utf-8 -*-
 import logging
+import os
 
+from PyQt5.QtCore import QUrl
+from PyQt5.QtCore import Qt
 from PyQt5.QtCore import pyqtSlot
+from PyQt5.QtGui import QDesktopServices
+from PyQt5.QtGui import QFont
+from PyQt5.QtGui import QIcon
+from PyQt5.QtGui import QPixmap
 from PyQt5.QtGui import QStandardItem
 from PyQt5.QtGui import QStandardItemModel
 from PyQt5.QtWidgets import QAbstractItemView
@@ -10,21 +17,28 @@ from PyQt5.QtWidgets import QAction, qApp
 from PyQt5.QtWidgets import QActionGroup
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtWidgets import QDialog
+from PyQt5.QtWidgets import QGridLayout
 from PyQt5.QtWidgets import QHBoxLayout
 from PyQt5.QtWidgets import QInputDialog
+from PyQt5.QtWidgets import QLabel
+from PyQt5.QtWidgets import QLineEdit
 from PyQt5.QtWidgets import QListView
 from PyQt5.QtWidgets import QMainWindow
 from PyQt5.QtWidgets import QMenu
 from PyQt5.QtWidgets import QMessageBox
 from PyQt5.QtWidgets import QPushButton
 from PyQt5.QtWidgets import QTabWidget
+from PyQt5.QtWidgets import QTextBrowser
 from PyQt5.QtWidgets import QVBoxLayout
+from PyQt5.QtWidgets import QWidget
 
+from rsapp import version
 from rsapp.gui.conf import GuiConf
 from rsapp.gui.fconfigure import ConfigureFrame
 from rsapp.gui.fexecute import ExecuteFrame
 from rsapp.gui.fexport import ExportFrame
 from rsapp.gui.fselect import SelectFrame
+from rsapp.gui.style import Style
 from rspub.core.config import Configurations
 
 LOG = logging.getLogger(__name__)
@@ -51,9 +65,9 @@ class WMain(QMainWindow):
 
     def init_ui(self):
         self.create_menus()
-
         self.tabframe = TabbedFrame(self)
         self.setCentralWidget(self.tabframe)
+        self.about_widget = None
         self.resize(self.ctrl.config.window_width(), self.ctrl.config.window_height())
 
 
@@ -78,6 +92,11 @@ class WMain(QMainWindow):
         self.action_configurations = QAction(_("Configurations..."), self)
         self.menu_file.addAction(self.action_configurations)
         self.action_configurations.triggered.connect(self.on_action_configurations_triggered)
+
+        self.menu_file.addSeparator()
+        self.action_about = QAction(_("About..."), self)
+        self.menu_file.addAction(self.action_about)
+        self.action_about.triggered.connect(self.on_action_about_triggered)
 
         self.menu_file.addSeparator()
         self.action_exit = QAction(_("Exit"), self)
@@ -127,6 +146,7 @@ class WMain(QMainWindow):
         self.menu_open_config.setTitle(_("Load configuration"))
         self.action_save_configuration_as.setText(_("Save configuration as..."))
         self.action_configurations.setText(_("Configurations..."))
+        self.action_about.setText(_("About..."))
         self.menu_settings.setTitle(_("Preferences"))
         self.menu_language.setTitle(_("Language"))
 
@@ -174,6 +194,16 @@ class WMain(QMainWindow):
         action_group = self.sender()
         locale = action_group.checkedAction().data()
         self.ctrl.set_language(locale)
+
+    def on_action_about_triggered(self):
+        if self.about_widget is None:
+            LOG.debug("Creating About window")
+            self.about_widget = AboutWidget(self)
+        else:
+            self.about_widget.show()
+            self.about_widget.setWindowState(Qt.WindowActive)
+            self.about_widget.activateWindow()
+            self.about_widget.raise_()
 
     def on_action_exit_triggered(self):
         LOG.debug("action_exit_triggered")
@@ -314,3 +344,80 @@ class ConfigurationsDialog(QDialog):
                 Configurations.remove_configuration(item.data())
             self.populate_model()
             self.on_selection_changed()
+
+
+class AboutWidget(QWidget):
+
+    def __init__(self, parent):
+        QWidget.__init__(self)
+        self.ctrl = QApplication.instance().ctrl
+        self.parent = parent
+        self.setWindowTitle("About")
+        hbox = QHBoxLayout()
+        pic = QLabel(self)
+        pix = QPixmap(os.path.join(self.ctrl.application_home, 'conf/img/logo_h.png'))
+        pic.setPixmap(pix)
+        hbox.addWidget(pic)
+
+        vbox = QVBoxLayout()
+
+        lbl_title = QLabel("Metadata Publishing Tool", self)
+        lbl_title.setMinimumWidth(400)
+        font = QFont()
+        font.setPointSize(20)
+        font.setBold(True)
+        lbl_title.setFont(font)
+        lbl_title.setContentsMargins(2, 5, 5, 7)
+        lbl_title.setStyleSheet(Style.h2())
+        vbox.addWidget(lbl_title)
+        vbox.addSpacing(20)
+
+        grid = QGridLayout()
+        grid.setContentsMargins(0, 0, 0, 0)  # left, top, right, bottom
+        grid.setVerticalSpacing(2)
+        grid.setHorizontalSpacing(2)
+
+        grid.addWidget(QLabel("Version: "), 1, 1)
+        grid.addWidget(QLabel(version.__version__), 1,2)
+
+        grid.addWidget(QLabel("Release: "), 2, 1)
+        grid.addWidget(QLabel(version.__release_date__), 2, 2)
+
+        hbox_grid = QHBoxLayout()
+        hbox_grid.addLayout(grid)
+        hbox_grid.addStretch(1)
+        vbox.addLayout(hbox_grid)
+
+        vbox.addStretch(1)
+        txt = QTextBrowser()
+        txt.setOpenExternalLinks(True)
+        txt.setOpenLinks(False)
+        txt.anchorClicked.connect(self.on_anchor_clicked)
+        txt.append(version.__about__)
+        vbox.addWidget(txt)
+
+        hbox_button = QHBoxLayout()
+        hbox_button.addStretch(1)
+        btn_close = QPushButton("Close")
+        btn_close.clicked.connect(self.btn_close_clicked)
+        hbox_button.addWidget(btn_close)
+        vbox.addLayout(hbox_button)
+
+        hbox.addLayout(vbox)
+        hbox.addStretch(1)
+        self.setLayout(hbox)
+        self.move(200, 200)
+
+        self.show()
+
+    def on_anchor_clicked(self, url):
+        QDesktopServices.openUrl(QUrl(url))
+
+    def btn_close_clicked(self):
+        self.close()
+
+    def close(self):
+        self.parent.about_widget = None
+
+    def closeEvent(self, event):
+        self.close()
