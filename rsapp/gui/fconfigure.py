@@ -119,7 +119,6 @@ class ConfigureFrame(QFrame):
         _("description_dir_label")
         _("plugin_dir_label")
         _("url_prefix_label")
-        _("document_root")
         _("strategy_label")
         _("max_items_in_list_label")
         _("zero_fill_filename_label")
