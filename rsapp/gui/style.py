@@ -18,11 +18,11 @@ class Style(object):
 
     @staticmethod
     def derived():
-        return "background-color: rgb(242, 245, 249);"
+        return "background-color: rgb(232, 245, 249);"
 
     @staticmethod
     def h2():
-        return "color: rgb(90, 100, 120); background-color: rgb(225, 225, 225);"
+        return "color: rgb(90, 100, 120); background-color: rgb(210, 210, 210);"
 
     @staticmethod
     def alarm():

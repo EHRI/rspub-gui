@@ -14,8 +14,8 @@ from PyQt5.QtWidgets import QPushButton
 from PyQt5.QtWidgets import QRadioButton
 from PyQt5.QtWidgets import QVBoxLayout
 
-from rsapp.gui.fconfigure import ParaLine, ConfigureFrame
 from rsapp.gui.style import Style
+from rsapp.gui.widgets import ParaLine, ParaWidget
 
 LOG = logging.getLogger(__name__)
 
@@ -37,11 +37,6 @@ class ExportFrame(QFrame):
     def init_ui(self):
         vbl_0 = QVBoxLayout(self)
 
-        grid1 = QGridLayout()
-        grid1.setContentsMargins(0, 0, 0, 0)  # left, top, right, bottom
-        grid1.setVerticalSpacing(2)
-        grid1.setHorizontalSpacing(2)
-
         self.label_title = QLabel(self)
         font = QFont()
         font.setPointSize(18)
@@ -52,7 +47,12 @@ class ExportFrame(QFrame):
         hbox1 = QHBoxLayout()
         hbox1.addWidget(self.label_title, 1)
         hbox1.setContentsMargins(0, 0, 0, 5)
-        grid1.addLayout(hbox1, 1, 1, 1, 3)
+        vbl_0.addLayout(hbox1)
+
+        grid1 = QGridLayout()
+        grid1.setContentsMargins(0, 0, 0, 0)  # left, top, right, bottom
+        grid1.setVerticalSpacing(2)
+        grid1.setHorizontalSpacing(2)
 
         self.lbl_metadata_key = QLabel(self)
         self.lbl_metadata_value = QLabel(self)
@@ -82,10 +82,6 @@ class ExportFrame(QFrame):
         vbl_0.addLayout(hbox2)
         vbl_0.insertSpacing(2, 25)
 
-        # Group boxes
-        str_conv = (ConfigureFrame.str2tx, ConfigureFrame.tx2str)
-        int_conv = (ConfigureFrame.int2tx, ConfigureFrame.tx2int)
-
         # # scp group
         grid2 = QGridLayout()
         grid2.setContentsMargins(0, 0, 0, 0)  # left, top, right, bottom
@@ -96,12 +92,17 @@ class ExportFrame(QFrame):
         vbox3 = QVBoxLayout()
 
         self.para_scp_widgets = {
-            "scp_server": ParaLine(self, "scp_server", str_conv, grid2, 3, False),
-            "scp_port": ParaLine(self, "scp_port", int_conv, grid2, 5, False, width=100),
-            "scp_user": ParaLine(self, "scp_user", str_conv, grid2, 7, False),
-            "scp_document_root": ParaLine(self, "scp_document_root", str_conv, grid2, 9, False),
-            "scp_document_path": ParaLine(self, "scp_document_path", str_conv, grid2, 11, False)
+            "scp_server": ParaLine(self, "scp_server", ParaWidget.str_conv(), grid2, 3, False),
+            "scp_port": ParaLine(self, "scp_port", ParaWidget.int_conv(), grid2, 5, False, width=100),
+            "scp_user": ParaLine(self, "scp_user", ParaWidget.str_conv(), grid2, 7, False),
+            "scp_document_root": ParaLine(self, "scp_document_root", ParaWidget.str_conv(), grid2, 9, False),
         }
+        self.lbl_server_path = QLabel(_("server_path_label"))
+        self.edt_server_path = QLabel(self.ctrl.paras.server_path())
+        self.edt_server_path.setStyleSheet(Style.derived())
+        self.edt_server_path.setTextInteractionFlags(Qt.TextSelectableByMouse)
+        grid2.addWidget(self.lbl_server_path, 11, 1)
+        grid2.addWidget(self.edt_server_path, 11, 2)
 
         self.grp_scp.setLayout(vbox3)
         vbox3.addLayout(grid2)
@@ -131,7 +132,7 @@ class ExportFrame(QFrame):
         vbox4 = QVBoxLayout()
 
         self.para_zip_widgets = {
-            "zip_filename": ParaLine(self, "zip_filename", str_conv, grid3, 3, browse="SaveFileName")
+            "zip_filename": ParaLine(self, "zip_filename", ParaWidget.str_conv(), grid3, 3, browse="SaveFileName")
         }
 
         self.grp_zip.setLayout(vbox4)
@@ -159,6 +160,17 @@ class ExportFrame(QFrame):
         self.label_title.setText(_("Export: '%s'") % self.ctrl.paras.configuration_name())
         self.lbl_metadata_key.setText(_("Export based on"))
         self.lbl_last_execution_key.setText(_("last_execution_label"))
+        #
+        self.grp_scp.setTitle(_("Transfer files with Secure Copy Protocol (scp)"))
+        self.lbl_server_path.setText(_("server_path_label"))
+        self.scp_radio_all.setText(_("Export all resources"))
+        self.scp_radio_latest.setText(_("Export latest changes"))
+        self.scp_button_start.setText(_("Start"))
+        #
+        self.grp_zip.setTitle(_("Create a .zip file"))
+        self.zip_radio_all.setText(_("Zip all resources"))
+        self.zip_radio_latest.setText(_("Zip latest changes"))
+        self.zip_button_start.setText(_("Start"))
 
     def on_switch_configuration(self, name=None):
         LOG.debug("Switch configuration: %s" % name)
@@ -168,6 +180,7 @@ class ExportFrame(QFrame):
         if value is None:
             value = "None"
         self.lbl_last_execution_value.setText(_(value))
+        self.edt_server_path.setText(self.ctrl.paras.server_path())
 
     def on_switch_tab(self, from_index, to_index):
         if to_index == self.index:
@@ -179,5 +192,5 @@ class ExportFrame(QFrame):
         _("scp_port_label")
         _("scp_user_label")
         _("scp_document_root_label")
-        _("scp_document_path_label")
+        _("server_path_label")
         _("zip_filename_label")

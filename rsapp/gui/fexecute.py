@@ -52,11 +52,6 @@ class ExecuteFrame(QFrame):
     def init_ui(self):
         vbl_0 = QVBoxLayout(self)
 
-        grid = QGridLayout()
-        grid.setContentsMargins(0, 0, 0, 0)  # left, top, right, bottom
-        grid.setVerticalSpacing(2)
-        grid.setHorizontalSpacing(2)
-
         self.label_title = QLabel(self)
         font = QFont()
         font.setPointSize(18)
@@ -67,8 +62,13 @@ class ExecuteFrame(QFrame):
         hbox1 = QHBoxLayout()
         hbox1.addWidget(self.label_title, 1)
         hbox1.setContentsMargins(0, 0, 0, 5)
-        grid.addLayout(hbox1, 1, 1, 1, 3)
+        vbl_0.addLayout(hbox1)
         #
+        grid = QGridLayout()
+        grid.setContentsMargins(0, 0, 0, 0)  # left, top, right, bottom
+        grid.setVerticalSpacing(2)
+        grid.setHorizontalSpacing(2)
+
         ordinal = 3
         self.widgets = []
         for tup in self.paras.describe():

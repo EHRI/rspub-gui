@@ -54,6 +54,7 @@ class WMain(QMainWindow):
         self.ctrl = QApplication.instance().ctrl
         self.ctrl.switch_language.connect(self.on_switch_language)
         self.ctrl.switch_configuration.connect(self.on_switch_configuration)
+        self.window_title = (_("Metadata Publishing Tool"))
         self.paras = self.ctrl.paras
         self.config = GuiConf()
 
@@ -147,11 +148,13 @@ class WMain(QMainWindow):
         self.action_about.setText(_("About..."))
         self.menu_settings.setTitle(_("Preferences"))
         self.menu_language.setTitle(_("Language"))
+        self.window_title = (_("Metadata Publishing Tool"))
+        self.setWindowTitle(self.window_title + " [" + self.paras.configuration_name() + "]")
 
     def on_switch_configuration(self, name=None):
         LOG.debug("Switch configuration: %s" % name)
         self.paras = self.ctrl.paras
-        self.setWindowTitle(self.paras.configuration_name())
+        self.setWindowTitle(self.window_title + " [" + self.paras.configuration_name() + "]")
 
     def on_menu_open_config_about_to_show(self):
         self.menu_open_config.clear()
