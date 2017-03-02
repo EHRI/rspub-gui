@@ -1,8 +1,11 @@
 #! /usr/bin/env python3
 # -*- coding: utf-8 -*-
 import logging
+import os
 
+from PyQt5.QtCore import QThread
 from PyQt5.QtCore import Qt
+from PyQt5.QtCore import pyqtSignal
 from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtWidgets import QFrame
@@ -15,7 +18,10 @@ from PyQt5.QtWidgets import QRadioButton
 from PyQt5.QtWidgets import QVBoxLayout
 
 from rsapp.gui.style import Style
-from rsapp.gui.widgets import ParaLine, ParaWidget
+from rsapp.gui.widgets import ParaLine, ParaWidget, WorkWidget, Answer
+from rspub.core.rs_paras import RsParameters
+from rspub.core.transport import Transport
+from rspub.util.observe import EventObserver
 
 LOG = logging.getLogger(__name__)
 
@@ -30,6 +36,9 @@ class ExportFrame(QFrame):
         self.ctrl.switch_language.connect(self.on_switch_language)
         self.ctrl.switch_configuration.connect(self.on_switch_configuration)
         self.ctrl.switch_tab.connect(self.on_switch_tab)
+        self.export_widget = None
+        self.export_mode = None
+        self.all_resources = False
         self.init_ui()
         self.on_switch_language(self.ctrl.current_language())
         self.on_switch_configuration()
@@ -115,7 +124,8 @@ class ExportFrame(QFrame):
         self.scp_radio_latest.setChecked(True)
         hbox_scp.addWidget(self.scp_radio_all)
         hbox_scp.addWidget(self.scp_radio_latest)
-        self.scp_button_start = QPushButton(_("Start"))
+        self.scp_button_start = QPushButton(_("Start transfer"))
+        self.scp_button_start.clicked.connect(self.on_scp_button_start_clicked)
         hbox_scp.addWidget(self.scp_button_start)
         vbox3.addLayout(hbox_scp)
 
@@ -146,7 +156,8 @@ class ExportFrame(QFrame):
         self.zip_radio_latest.setChecked(True)
         hbox_zip.addWidget(self.zip_radio_all)
         hbox_zip.addWidget(self.zip_radio_latest)
-        self.zip_button_start = QPushButton(_("Start"))
+        self.zip_button_start = QPushButton(_("Start creation"))
+        self.zip_button_start.clicked.connect(self.on_zip_button_start_clicked)
         hbox_zip.addWidget(self.zip_button_start)
         vbox4.addLayout(hbox_zip)
 
@@ -186,6 +197,34 @@ class ExportFrame(QFrame):
         if to_index == self.index:
             self.on_switch_configuration()
 
+    def on_scp_button_start_clicked(self):
+        self.activate_worker("scp", self.scp_radio_all.isChecked())
+
+    def on_zip_button_start_clicked(self):
+        self.activate_worker("zip", self.zip_radio_all.isChecked())
+
+    def activate_worker(self, export_mode, all_resources):
+        if self.export_widget:
+            self.export_widget.close()
+            self.export_widget.destroy()
+
+        self.export_widget = TransportWidget(export_mode, all_resources)
+        self.export_widget.work_started.connect(self.on_work_started)
+        self.export_widget.work_ended.connect(self.on_work_ended)
+
+    def on_work_started(self):
+        self.scp_button_start.setEnabled(False)
+        self.zip_button_start.setEnabled(False)
+
+    def on_work_ended(self):
+        self.scp_button_start.setEnabled(True)
+        self.zip_button_start.setEnabled(True)
+
+    def close(self):
+        LOG.debug("ExportFrame closing")
+        if self.export_widget:
+            self.export_widget.save_dimensions()
+
     def translatables(self):
         # parameter labels
         _("scp_server_label")
@@ -194,3 +233,145 @@ class ExportFrame(QFrame):
         _("scp_document_root_label")
         _("server_path_label")
         _("zip_filename_label")
+
+
+class TransportWidget(WorkWidget):
+
+    def __init__(self, export_mode, all_resources = False):
+        WorkWidget.__init__(self, work="Transport", title_style=Style.transport_title())
+        self.export_mode = export_mode
+        self.all_resources = all_resources
+        _("Transport")
+
+    def on_btn_run_clicked(self):
+        super(TransportWidget, self).on_btn_run_clicked()
+        self.executor_thread = TransportThread(self.paras,
+                                               self.export_mode,
+                                               self.all_resources,
+                                               self)
+        self.executor_thread.signal_exception.connect(self.on_signal_exception)
+        self.executor_thread.ask_confirmation.connect(self.on_ask_confirmation)
+        self.executor_thread.signal_main_event.connect(self.on_signal_main_event)
+        self.executor_thread.signal_minor_event.connect(self.on_signal_minor_event)
+        self.executor_thread.signal_next_file.connect(self.on_signal_next_file)
+        self.executor_thread.signal_end_processing.connect(self.on_signal_end_processing)
+        self.executor_thread.finished.connect(self.on_executor_thread_finished)
+        self.executor_thread.start()
+        self.update()
+
+
+class TransportThread(QThread, EventObserver):
+
+    signal_exception = pyqtSignal(str)
+    signal_main_event = pyqtSignal(str)
+    signal_minor_event = pyqtSignal(str)
+    signal_next_file = pyqtSignal(str)
+    ask_confirmation = pyqtSignal(str, str, Answer)
+    signal_end_processing = pyqtSignal(RsParameters)
+
+    def __init__(self, paras, mode, all_resources=False, parent=None):
+        QThread.__init__(self, parent)
+        EventObserver.__init__(self)
+        self.paras = paras
+        self.mode = mode
+        self.all_resources = all_resources
+
+    def run(self):
+        LOG.debug("Transporter thread started %s" % self)
+        trans = None
+        try:
+            trans = Transport(self.paras)
+            trans.register(self)
+            if self.mode == "scp":
+                pass
+            elif self.mode == "zip":
+                LOG.debug("Starting transportation in mode zip")
+                trans.zip_resources(all_resources=self.all_resources)
+            self.signal_end_processing.emit(self.paras)
+        except Exception as err:
+            LOG.exception("Exception in executor thread:")
+            self.signal_exception.emit(_("Exception in transporter thread: {0}").format(err))
+        finally:
+            if trans:
+                trans.unregister(self)
+
+    def pass_inform(self, *args, **kwargs):
+        print(">>>>> inform >>>>>>", args, kwargs)
+
+    def pass_confirm(self, *args, **kwargs):
+        print(">>>>> confirm >>>>>", args, kwargs)
+        return True
+
+    def inform_transport_start(self, *args, **kwargs):
+        mode = kwargs["mode"]
+        all = kwargs["all_resources"]
+        txt = _("Start export. Mode=%s, all resources=%s") % (mode, all)
+        self.signal_main_event.emit(txt)
+
+    def inform_copy_resource(self, *args, **kwargs):
+        file = kwargs["file"]
+        count = kwargs["count_resources"]
+        txt = "<code>resource:&nbsp;"
+        txt += str(count) + "&nbsp;&nbsp;"
+        txt += "<a href=\"file://" + file + "\">" + file + "</a>"
+        self.signal_minor_event.emit(txt)
+
+    def inform_copy_sitemap(self, *args, **kwargs):
+        file = kwargs["file"]
+        count = kwargs["count_sitemaps"]
+        txt = "<code>sitemap:&nbsp;"
+        txt += str(count) + "&nbsp;&nbsp;"
+        txt += "<a href=\"file://" + file + "\">" + file + "</a>"
+        self.signal_minor_event.emit(txt)
+
+    def inform_resource_not_found(self, *args, **kwargs):
+        resource = kwargs["file"]
+        txt = "Resource not found: "
+        txt += resource
+        self.signal_exception.emit(txt)
+
+    def inform_site_map_not_found(self, *args, **kwargs):
+        sitemap = kwargs["file"]
+        txt = "Sitemap not found: "
+        txt += sitemap
+        self.signal_exception.emit(txt)
+
+    def inform_zip_resources(self, *args, **kwargs):
+        zip_file = kwargs["zip_file"]
+        zip_dir = os.path.dirname(zip_file)
+        zip = os.path.basename(zip_file)
+        txt = _("Creating zip file: ")
+        txt += "<a href=\"file://" + zip_dir + "\">" + zip_dir + "</a>"
+        txt += os.path.sep + zip
+        txt += "<br/>"
+        txt += "This ma take a while ...."
+        self.signal_main_event.emit(txt)
+
+    def inform_transport_end(self, *args, **kwargs):
+        count_resources = kwargs["count_resources"]
+        count_sitemaps = kwargs["count_sitemaps"]
+        count_errors = kwargs["count_errors"]
+        mode = kwargs["mode"]
+        txt = "<hr>"
+        txt += _("End export. Mode=%s") % mode
+        txt += "<table>"
+        txt += "<tr><td>"
+        txt += _("resources") + "&nbsp;"
+        txt += "</td><td>"
+        txt += str(count_resources)
+        txt += "</td></tr><tr><td>"
+        txt += _("sitemaps") + "&nbsp;"
+        txt += "</td><td>"
+        txt += str(count_sitemaps)
+        txt += "</td></tr><tr><td>"
+        txt += _("errors") + "&nbsp;"
+        txt += "</td><td>"
+        txt += str(count_errors)
+        txt += "</td></tr></table><br/><br/>"
+        self.signal_main_event.emit(txt)
+
+    def confirm_copy_file(self, *args, **kwargs):
+        self.signal_next_file.emit(kwargs["filename"])
+        if self.isInterruptionRequested():
+            self.signal_exception.emit(_("Process interrupted by user"))
+        return not self.isInterruptionRequested()

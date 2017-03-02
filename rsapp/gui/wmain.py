@@ -57,7 +57,6 @@ class WMain(QMainWindow):
         self.window_title = (_("Metadata Publishing Tool"))
         self.paras = self.ctrl.paras
         self.config = GuiConf()
-
         self.init_ui()
         self.on_switch_language()
         self.on_switch_configuration()
@@ -93,11 +92,6 @@ class WMain(QMainWindow):
         self.action_configurations.triggered.connect(self.on_action_configurations_triggered)
 
         self.menu_file.addSeparator()
-        self.action_about = QAction(_("About..."), self)
-        self.menu_file.addAction(self.action_about)
-        self.action_about.triggered.connect(self.on_action_about_triggered)
-
-        self.menu_file.addSeparator()
         self.action_exit = QAction(_("Exit"), self)
         self.action_exit.setShortcut("Ctrl+Q")
         self.action_exit.triggered.connect(self.on_action_exit_triggered)
@@ -105,6 +99,14 @@ class WMain(QMainWindow):
 
         self.menu_settings = self.create_menu_settings()
         self.menubar.addMenu(self.menu_settings)
+
+        self.menu_window = QMenu(_("Window"), self)
+        self.menu_window.aboutToShow.connect(self.on_menu_window_about_to_show)
+        self.menubar.addMenu(self.menu_window)
+        self.window_action_group = QActionGroup(self)
+        self.window_action_group.triggered.connect(self.on_action_switch_window_triggered)
+        self.action_about = QAction(_("About..."), self)
+        self.action_about.triggered.connect(self.on_action_about_triggered)
 
     ####### menus ######################################
     def create_menu_settings(self):
@@ -136,6 +138,21 @@ class WMain(QMainWindow):
                 action.setChecked(True)
         return language_menu
 
+    def on_menu_window_about_to_show(self):
+        self.menu_window.clear()
+        for child in self.window_action_group.children():
+            self.window_action_group.removeAction(child)
+        for window in QApplication.instance().topLevelWindows():
+            if window.type() == 1 and not window.title() == self.windowTitle():
+                action = QAction(window.title(), self)
+                action.setData(window.title())
+                action.setCheckable(True)
+                self.window_action_group.addAction(action)
+                self.menu_window.addAction(action)
+
+        self.menu_window.addSeparator()
+        self.menu_window.addAction(self.action_about)
+
     ####### functions #######################################
     def on_switch_language(self, code=None):
         LOG.debug("Switch language: %s" % code)
@@ -165,7 +182,7 @@ class WMain(QMainWindow):
             action = QAction(name, self)
             action.setCheckable(True)
             action.setData(name)
-            self. config_action_group.addAction(action)
+            self.config_action_group.addAction(action)
             self.menu_open_config.addAction(action)
             if name == current_name:
                 action.setChecked(True)
@@ -196,6 +213,15 @@ class WMain(QMainWindow):
         locale = action_group.checkedAction().data()
         self.ctrl.set_language(locale)
 
+    def on_action_switch_window_triggered(self):
+        action_group = self.sender()
+        window_title = action_group.checkedAction().data()
+        for window in QApplication.instance().topLevelWindows():
+            if window_title == window.title():
+                window.show()
+                window.raise_()
+                window.requestActivate()
+
     def on_action_about_triggered(self):
         if self.about_widget is None:
             LOG.debug("Creating About window")
@@ -220,7 +246,6 @@ class WMain(QMainWindow):
 
     def close(self):
         LOG.debug("window closing")
-        # self.ctrl.update_selector()
         self.ctrl.config.set_window_height(self.height())
         self.ctrl.config.set_window_width(self.width())
         self.ctrl.config.set_last_configuration_name(self.paras.configuration_name())
@@ -272,7 +297,8 @@ class TabbedFrame(QTabWidget):
 
     def close(self):
         LOG.debug("TabbedFrame closing")
-        self.currentWidget().close()
+        for i in range(0, self.count()):
+            self.widget(i).close()
 
 
 # ################################################################

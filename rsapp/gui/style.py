@@ -35,3 +35,11 @@ class Style(object):
     @staticmethod
     def red_text():
         return "color: rgb(255, 0, 0);"
+
+    @staticmethod
+    def execute_title():
+        return "color: rgb(206, 17, 86); background-color: rgb(230, 242, 121);"
+
+    @staticmethod
+    def transport_title():
+        return "color: rgb(7, 114, 39); background-color: rgb(219, 186, 236);"

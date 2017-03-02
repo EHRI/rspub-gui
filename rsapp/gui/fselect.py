@@ -3,6 +3,7 @@
 import logging
 import os
 
+from PyQt5.QtCore import QEvent
 from PyQt5.QtCore import QThread
 from PyQt5.QtCore import Qt
 from PyQt5.QtCore import pyqtSignal
@@ -41,7 +42,6 @@ class SelectFrame(QFrame):
         self.ctrl.switch_language.connect(self.on_switch_language)
         self.ctrl.switch_configuration.connect(self.on_switch_configuration)
         self.ctrl.switch_selector.connect(self.on_switch_selector)
-        self.ctrl.switch_tab.connect(self.on_switch_tab)
         self.paras = self.ctrl.paras
         self.init_ui()
         self.play_widget_simple = None
@@ -105,6 +105,7 @@ class SelectFrame(QFrame):
         self.lbl_includes = QLabel(_("Includes"))
         self.lbl_includes.setAlignment(Qt.AlignTop)
         self.txt_includes = QPlainTextEdit()
+        self.txt_includes.installEventFilter(self)
         self.btn_incl_directory = QPushButton(_("Add directory"))
         self.btn_incl_directory.clicked.connect(self.on_btn_incl_directory_clicked)
         self.btn_incl_files = QPushButton(_("Add files"))
@@ -125,6 +126,7 @@ class SelectFrame(QFrame):
         self.lbl_excludes = QLabel(_("Excludes"))
         self.lbl_excludes.setAlignment(Qt.AlignTop)
         self.txt_excludes = QPlainTextEdit()
+        self.txt_excludes.installEventFilter(self)
         self.btn_excl_directory = QPushButton(_("Add directory"))
         self.btn_excl_directory.clicked.connect(self.on_btn_excl_directory_clicked)
         self.btn_excl_files = QPushButton(_("Add files"))
@@ -163,7 +165,7 @@ class SelectFrame(QFrame):
     def on_switch_language(self, code=None):
         LOG.debug("Switch language: %s" % code)
         self.label_title.setText(_("Select resources"))
-        self.grp_simple.setTitle(_("Simpel selection: One directory"))
+        self.grp_simple.setTitle(_("Simple selection: One directory"))
         self.lbl_simple.setText(_("Location"))
         self.btn_simple_brws.setText(_("Browse"))
         self.btn_simple_play.setText(_("Play..."))
@@ -197,18 +199,31 @@ class SelectFrame(QFrame):
             self.lbl_selector_file.setText("")
         self.lbl_saved_as.setVisible(self.lbl_selector_file.text() != "")
 
+    def refresh_includes(self):
+        includes = set(self.txt_includes.toPlainText().splitlines())
+        includes = sorted([x for x in includes if len(x.strip()) > 0])
+        self.txt_includes.setPlainText("\n".join(includes))
+        return includes
+
+    def refresh_excludes(self):
+        excludes = set(self.txt_excludes.toPlainText().splitlines())
+        excludes = sorted([x for x in excludes if len(x.strip()) > 0])
+        self.txt_excludes.setPlainText("\n".join(excludes))
+        return excludes
+
     def synchronize_selector(self):
-        includes = {x.strip() for x in self.txt_includes.toPlainText().splitlines() if x.strip() != ""}
+        includes = self.refresh_includes()
         self.ctrl.selector.clear_includes()
         self.ctrl.selector.include(includes)
-        excludes = {x.strip() for x in self.txt_excludes.toPlainText().splitlines() if x.strip() != ""}
+        excludes = self.refresh_excludes()
         self.ctrl.selector.clear_excludes()
         self.ctrl.selector.exclude(excludes)
         self.ctrl.save_selector()
 
-    def on_switch_tab(self, from_index, to_index):
-        if from_index == self.index:
+    def eventFilter(self, source, event):
+        if event.type() == QEvent.FocusOut and (source is self.txt_includes or source is self.txt_excludes):
             self.synchronize_selector()
+        return super(SelectFrame, self).eventFilter(source, event)
 
     def on_grp_simple_toggle(self, on):
         self.grp_selector.setChecked(not on)
@@ -265,9 +280,7 @@ class SelectFrame(QFrame):
             for file in dlg.selectedFiles():
                 self.txt_includes.appendPlainText(file)
             # refresh content of widget
-            includes = set(self.txt_includes.toPlainText().splitlines())
-            includes = [x for x in includes if len(x.strip()) > 0]
-            self.txt_includes.setPlainText("\n".join(sorted(includes)))
+            self.refresh_includes()
 
     def on_btn_incl_files_clicked(self):
         self.txt_includes.setFocus()
@@ -279,9 +292,7 @@ class SelectFrame(QFrame):
             for file in dlg.selectedFiles():
                 self.txt_includes.appendPlainText(file)
             # refresh content of widget
-            includes = set(self.txt_includes.toPlainText().splitlines())
-            includes = [x for x in includes if len(x.strip()) > 0]
-            self.txt_includes.setPlainText("\n".join(sorted(includes)))
+            self.refresh_includes()
 
     def on_btn_incl_import_clicked(self):
         self.synchronize_selector()
@@ -299,9 +310,7 @@ class SelectFrame(QFrame):
             for file in dlg.selectedFiles():
                 self.txt_excludes.appendPlainText(file)
             # refresh content of widget
-            excludes = set(self.txt_excludes.toPlainText().splitlines())
-            excludes = [x for x in excludes if len(x.strip()) > 0]
-            self.txt_excludes.setPlainText("\n".join(sorted(excludes)))
+            self.refresh_excludes()
 
     def on_btn_excl_files_clicked(self):
         self.txt_excludes.setFocus()
@@ -313,9 +322,7 @@ class SelectFrame(QFrame):
             for file in dlg.selectedFiles():
                 self.txt_excludes.appendPlainText(file)
             # refresh content of widget
-            excludes = set(self.txt_excludes.toPlainText().splitlines())
-            excludes = [x for x in excludes if len(x.strip()) > 0]
-            self.txt_excludes.setPlainText("\n".join(sorted(excludes)))
+            self.refresh_excludes()
 
     def on_btn_excl_import_clicked(self):
         self.synchronize_selector()
