@@ -365,6 +365,7 @@ class TransportThread(QThread, EventObserver):
         self.signal_exception.emit(txt)
 
     def inform_zip_resources(self, *args, **kwargs):
+        self.signal_next_file.emit("")
         zip_file = kwargs["zip_file"]
         zip_dir = os.path.dirname(zip_file)
         zip = os.path.basename(zip_file)
