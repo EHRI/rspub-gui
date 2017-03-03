@@ -16,13 +16,11 @@ else
     exit 1
 fi
 
-cp dist/$current_mpt_version .
-
+cd dist
 echo "Archiving $current_mpt_version"
-$qt_archivegen installer/packages/nl.knaw.dans.ehri.mpt/data/mpt_mac.7z $current_mpt_version
+$qt_archivegen ../installer/packages/nl.knaw.dans.ehri.mpt/data/mpt_mac.7z $current_mpt_version
 echo "Archived $current_mpt_version as installer/packages/nl.knaw.dans.ehri.mpt/data/mpt_mac.7z"
-
-rm -Rf $current_mpt_version
+cd ../
 
 echo "Creating installer..."
 $qt_bin -c installer/config/config.xml -p installer/packages --offline-only MPT_mac_installer
