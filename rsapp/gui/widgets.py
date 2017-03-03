@@ -7,6 +7,7 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtCore import pyqtSignal
 from PyQt5.QtGui import QDesktopServices
 from PyQt5.QtGui import QFont
+from PyQt5.QtGui import QFontDatabase
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtWidgets import QCheckBox
 from PyQt5.QtWidgets import QComboBox
@@ -260,7 +261,7 @@ class WorkWidget(QWidget):
         font.setPointSize(18)
         font.setBold(True)
         self.label_title.setFont(font)
-        self.label_title.setContentsMargins(20, 5, 5, 7)
+        self.label_title.setContentsMargins(10, 5, 5, 7)
         self.label_title.setStyleSheet(self.title_style)
         hbox1 = QHBoxLayout()
         hbox1.addWidget(self.label_title, 1)
@@ -315,6 +316,9 @@ class WorkWidget(QWidget):
         lbl_box = QHBoxLayout()
         self.lbl_processing = QLabel(_("Processing:"))
         self.lbl_processing_file = QLabel("")
+        font = QFontDatabase.systemFont(QFontDatabase.FixedFont)
+        self.lbl_processing_file.setFont(font)
+        self.lbl_processing.setFont(font)
         self.lbl_processing.setVisible(False)
         self.lbl_processing_file.setVisible(False)
         lbl_box.addWidget(self.lbl_processing)

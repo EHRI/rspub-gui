@@ -12,7 +12,9 @@ from PyQt5.QtWidgets import QFrame
 from PyQt5.QtWidgets import QGridLayout
 from PyQt5.QtWidgets import QGroupBox
 from PyQt5.QtWidgets import QHBoxLayout
+from PyQt5.QtWidgets import QInputDialog
 from PyQt5.QtWidgets import QLabel
+from PyQt5.QtWidgets import QLineEdit
 from PyQt5.QtWidgets import QPushButton
 from PyQt5.QtWidgets import QRadioButton
 from PyQt5.QtWidgets import QVBoxLayout
@@ -192,6 +194,8 @@ class ExportFrame(QFrame):
             value = "None"
         self.lbl_last_execution_value.setText(_(value))
         self.edt_server_path.setText(self.ctrl.paras.server_path())
+        self.scp_button_start.setEnabled(self.ctrl.paras.last_execution is not None)
+        self.zip_button_start.setEnabled(self.ctrl.paras.last_execution is not None)
 
     def on_switch_tab(self, from_index, to_index):
         if to_index == self.index:
@@ -238,16 +242,31 @@ class ExportFrame(QFrame):
 class TransportWidget(WorkWidget):
 
     def __init__(self, export_mode, all_resources = False):
-        WorkWidget.__init__(self, work="Transport", title_style=Style.transport_title())
+        WorkWidget.__init__(self, work=export_mode + " " + "Transport", title_style=Style.transport_title())
+        self.chk_trial_run.setVisible(False)
         self.export_mode = export_mode
         self.all_resources = all_resources
         _("Transport")
 
     def on_btn_run_clicked(self):
+        password = "secret"
+        if self.export_mode == "scp":
+            dlg = QInputDialog(self)
+            dlg.setInputMode(QInputDialog.TextInput)
+            dlg.setWindowTitle(_("Connecting to %s") % self.paras.scp_server)
+            dlg.setLabelText(_("Password for %s@%s:") % (self.paras.scp_user, self.paras.scp_server))
+            dlg.setTextEchoMode(QLineEdit.Password)
+            dlg.resize(300, 100)
+            if dlg.exec_():
+                password = dlg.textValue()
+            else:
+                return
+
         super(TransportWidget, self).on_btn_run_clicked()
         self.executor_thread = TransportThread(self.paras,
                                                self.export_mode,
                                                self.all_resources,
+                                               password,
                                                self)
         self.executor_thread.signal_exception.connect(self.on_signal_exception)
         self.executor_thread.ask_confirmation.connect(self.on_ask_confirmation)
@@ -269,21 +288,27 @@ class TransportThread(QThread, EventObserver):
     ask_confirmation = pyqtSignal(str, str, Answer)
     signal_end_processing = pyqtSignal(RsParameters)
 
-    def __init__(self, paras, mode, all_resources=False, parent=None):
+    def __init__(self, paras, mode, all_resources=False, password="secret", parent=None):
         QThread.__init__(self, parent)
         EventObserver.__init__(self)
         self.paras = paras
         self.mode = mode
         self.all_resources = all_resources
+        self.password = password
+        self.scp_percentage = 0.0
+        self.scp_count = 0
 
     def run(self):
         LOG.debug("Transporter thread started %s" % self)
+        self.scp_percentage = 0.0
+        self.scp_count = 0
         trans = None
         try:
             trans = Transport(self.paras)
             trans.register(self)
             if self.mode == "scp":
-                pass
+                LOG.debug("Starting transportation in mode scp")
+                trans.scp_resources(all_resources=self.all_resources, password=self.password)
             elif self.mode == "zip":
                 LOG.debug("Starting transportation in mode zip")
                 trans.zip_resources(all_resources=self.all_resources)
@@ -308,12 +333,15 @@ class TransportThread(QThread, EventObserver):
         txt = _("Start export. Mode=%s, all resources=%s") % (mode, all)
         self.signal_main_event.emit(txt)
 
+    def inform_start_copy_to_temp(self, *args, **kwargs):
+        self.signal_main_event.emit(_("Copy resources and sitemaps to temporary directory..."))
+
     def inform_copy_resource(self, *args, **kwargs):
         file = kwargs["file"]
         count = kwargs["count_resources"]
         txt = "<code>resource:&nbsp;"
         txt += str(count) + "&nbsp;&nbsp;"
-        txt += "<a href=\"file://" + file + "\">" + file + "</a>"
+        txt += "<a href=\"file://" + file + "\">" + file + "</a></code>"
         self.signal_minor_event.emit(txt)
 
     def inform_copy_sitemap(self, *args, **kwargs):
@@ -321,18 +349,18 @@ class TransportThread(QThread, EventObserver):
         count = kwargs["count_sitemaps"]
         txt = "<code>sitemap:&nbsp;"
         txt += str(count) + "&nbsp;&nbsp;"
-        txt += "<a href=\"file://" + file + "\">" + file + "</a>"
+        txt += "<a href=\"file://" + file + "\">" + file + "</a></code>"
         self.signal_minor_event.emit(txt)
 
     def inform_resource_not_found(self, *args, **kwargs):
         resource = kwargs["file"]
-        txt = "Resource not found: "
+        txt = _("Resource not found: ")
         txt += resource
         self.signal_exception.emit(txt)
 
     def inform_site_map_not_found(self, *args, **kwargs):
         sitemap = kwargs["file"]
-        txt = "Sitemap not found: "
+        txt = _("Sitemap not found: ")
         txt += sitemap
         self.signal_exception.emit(txt)
 
@@ -344,12 +372,56 @@ class TransportThread(QThread, EventObserver):
         txt += "<a href=\"file://" + zip_dir + "\">" + zip_dir + "</a>"
         txt += os.path.sep + zip
         txt += "<br/>"
-        txt += "This ma take a while ...."
+        txt += _("This may take a while ....")
         self.signal_main_event.emit(txt)
+
+    def inform_scp_exception(self, *args, **kwargs):
+        exception = kwargs["exception"]
+        txt = "SCP exception: "
+        txt += exception
+        self.signal_exception.emit(txt)
+
+    def inform_ssh_client_creation(self, *args, **kwargs):
+        # server, port, user
+        txt = _("Creating ssh client. ")
+        txt += "  server: " + kwargs["server"]
+        txt += "  port: " + str(kwargs["port"])
+        txt += "  user: " + kwargs["user"]
+        self.signal_main_event.emit(txt)
+
+    def inform_scp_resources(self, *arga, **kwargs):
+        command = kwargs["command"]
+        txt = _("Transfering files: ")
+        txt += command
+        self.signal_main_event.emit(txt)
+
+    def inform_scp_progress(self, *args, **kwargs):
+        filename = kwargs["filename"]
+        size = kwargs["size"]
+        sent = kwargs["sent"]
+        perc = sent / size
+        percstr = "{:.0%}".format(perc).rjust(5)
+        total_perc = "{:.0%}".format(self.scp_percentage).rjust(5)
+        txt = " | " + total_perc + " | " + percstr + " | " + filename
+        self.signal_next_file.emit(txt)
+
+    def inform_scp_transfer_complete(self, *args, **kwargs):
+        filename = kwargs["filename"]
+        count_resources = kwargs["count_resources"]
+        count_sitemaps = kwargs["count_sitemaps"]
+        tot_files = count_resources + count_sitemaps
+        self.scp_count = kwargs["count_transfers"]
+        self.scp_percentage = kwargs["percentage"]
+        txt = "<code>transferred:&nbsp;"
+        txt += str(self.scp_count) + "/" + str(tot_files) + "&nbsp;&nbsp;"
+        txt += filename
+        txt += "</code>"
+        self.signal_minor_event.emit(txt)
 
     def inform_transport_end(self, *args, **kwargs):
         count_resources = kwargs["count_resources"]
         count_sitemaps = kwargs["count_sitemaps"]
+        count_transfers = kwargs["count_transfers"]
         count_errors = kwargs["count_errors"]
         mode = kwargs["mode"]
         txt = "<hr>"
@@ -364,6 +436,10 @@ class TransportThread(QThread, EventObserver):
         txt += "</td><td>"
         txt += str(count_sitemaps)
         txt += "</td></tr><tr><td>"
+        txt += _("transfers") + "&nbsp;"
+        txt += "</td><td>"
+        txt += str(count_transfers)
+        txt += "</td></tr><tr><td>"
         txt += _("errors") + "&nbsp;"
         txt += "</td><td>"
         txt += str(count_errors)
@@ -372,6 +448,11 @@ class TransportThread(QThread, EventObserver):
 
     def confirm_copy_file(self, *args, **kwargs):
         self.signal_next_file.emit(kwargs["filename"])
+        if self.isInterruptionRequested():
+            self.signal_exception.emit(_("Process interrupted by user"))
+        return not self.isInterruptionRequested()
+
+    def confirm_transfer_file(self, *args, **kwargs):
         if self.isInterruptionRequested():
             self.signal_exception.emit(_("Process interrupted by user"))
         return not self.isInterruptionRequested()

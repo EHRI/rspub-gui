@@ -370,6 +370,7 @@ class SelectFrame(QFrame):
             exe = msg_box.exec()
             if exe == QMessageBox.Yes:
                 ok_to_change = self.on_btn_save_selector_as_clicked()
+        LOG.debug("Selector ok_to_change=%s" % ok_to_change)
         return ok_to_change
 
     def on_btn_play_selected_clicked(self):

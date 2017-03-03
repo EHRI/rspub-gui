@@ -110,6 +110,7 @@ class ConfigureFrame(QFrame):
             exe = msg_box.exec()
             if exe == QMessageBox.No:
                 ok_to_change = False
+        LOG.debug("Configure ok_to_change=%s" % ok_to_change)
         return ok_to_change
 
     def translatables(self):

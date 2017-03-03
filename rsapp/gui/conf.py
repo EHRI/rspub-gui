@@ -152,7 +152,7 @@ class GuiConf(object):
     def set_play_widget_width(self, width):
         self.__set_int__(SECTION_WINDOW, "play_widget_width", width)
 
-    def play_widget_height(self, fallback=400):
+    def play_widget_height(self, fallback=500):
         return self.__get_int__(SECTION_WINDOW, "play_widget_height", fallback=fallback)
 
     def set_play_widget_height(self, height):
@@ -164,7 +164,7 @@ class GuiConf(object):
     def set_work_widget_width(self, work, width):
         self.__set_int__(SECTION_WINDOW, work + "_work_widget_width", width)
 
-    def work_widget_height(self, work, fallback=400):
+    def work_widget_height(self, work, fallback=500):
         return self.__get_int__(SECTION_WINDOW, work + "_work_widget_height", fallback=fallback)
 
     def set_work_widget_height(self, work, height):

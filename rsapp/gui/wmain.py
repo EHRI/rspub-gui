@@ -240,8 +240,10 @@ class WMain(QMainWindow):
     def closeEvent(self, event):
         LOG.debug("closeEvent was triggered")
         if self.tabframe.about_to_change(_("Closing application...")):
+            LOG.debug("Accepting closeEvent")
             event.accept()
         else:
+            LOG.debug("Ignoring closeEvent")
             event.ignore()
 
     def close(self):
@@ -251,6 +253,8 @@ class WMain(QMainWindow):
         self.ctrl.config.set_last_configuration_name(self.paras.configuration_name())
         self.ctrl.config.persist()
         self.tabframe.close()
+        if self.about_widget:
+            self.about_widget.close()
 
 
 # ################################################################
@@ -441,10 +445,16 @@ class AboutWidget(QWidget):
         QDesktopServices.openUrl(QUrl(url))
 
     def btn_close_clicked(self):
-        self.close()
+        if self.windowState() & Qt.WindowFullScreen:
+            self.setWindowState(Qt.WindowMaximized)
+        else:
+            self.close()
+            self.destroy()
 
     def close(self):
         self.parent.about_widget = None
+        super(AboutWidget, self).close()
 
     def closeEvent(self, event):
         self.close()
+        event.accept()

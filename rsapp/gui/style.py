@@ -38,8 +38,8 @@ class Style(object):
 
     @staticmethod
     def execute_title():
-        return "color: rgb(206, 17, 86); background-color: rgb(230, 242, 121);"
+        return "color: rgb(255, 255, 255); background-color: rgb(102, 0, 0);"
 
     @staticmethod
     def transport_title():
-        return "color: rgb(7, 114, 39); background-color: rgb(219, 186, 236);"
+        return "color: rgb(255, 255, 255); background-color: rgb(0, 0, 153);"
