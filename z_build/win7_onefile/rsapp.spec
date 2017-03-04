@@ -1,6 +1,6 @@
 # -*- mode: python -*-
 
-name='MetadataPublishingTool-1.0.rc.4'
+name='MetadataPublishingTool'
 
 block_cipher = None
 

@@ -41,7 +41,9 @@ Component.prototype.createOperations = function()
     component.createOperations();
 
     if (systemInfo.productType === "windows") {
-        component.addOperation("CreateShortcut", "@TargetDir@/MetadataPublishingTool-1.0.rc.4.exe",
+        component.addOperation("CreateShortcut", "@TargetDir@/MetadataPublishingTool.exe",
             "@StartMenuDir@/MetadataPublishingTool.lnk");
+        component.addOperation("CreateShortcut", "@TargetDir@/MPT_MaintenanceTool.exe",
+            "@StartMenuDir@/MPT_MaintenanceTool.lnk");
     }
 }
