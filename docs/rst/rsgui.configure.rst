@@ -1,4 +1,6 @@
 Configuration
 =============
 
-How to configure rspub-gui
+How to configure the `Metadata Publishing Tool`.
+
+[Under construction]

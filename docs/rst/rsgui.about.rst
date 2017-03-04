@@ -1,4 +1,6 @@
 About
 =====
 
-Something about rspub-gui and MPT.
+Something about rspub-gui and the `Metadata Publishing Tool`.
+
+[Under construction]

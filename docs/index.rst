@@ -10,8 +10,12 @@ Metadata Publishing Tool Documentation
 
 .. toctree::
 
-    rst/rsgui.about
-    rst/rsgui.install
-    rst/rsgui.configure
-    rst/rsgui.select
+   rst/rsgui.about
+   rst/rsgui.install
+   rst/rsgui.configure
+   rst/rsgui.select
+   rst/rsgui.execute
+   rst/rsgui.export
+   rst/rsgui.audit
+
 

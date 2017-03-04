@@ -5,5 +5,6 @@ Installation
 
 .. toctree::
 
-   rsgui.install.windows.rst
-   rsgui.install.mac.rst
+    rsgui.install.wininst.rst
+    rsgui.install.winfold.rst
+    rsgui.install.macinst.rst

@@ -6,8 +6,8 @@ Application for ResourceSync publishing
 ---
 - The component in this repository is intended for end users.
 - Download latest releases from the [releases page](https://github.com/EHRI/rspub-gui/releases)
+- User documentation: [http://rspub-gui.readthedocs.io/en/latest/](http://rspub-gui.readthedocs.io/en/latest/)
 - Source location: [https://github.com/EHRI/rspub-gui](https://github.com/EHRI/rspub-gui)
-- Source documentation: [http://rspub-gui.readthedocs.io/en/latest/](http://rspub-gui.readthedocs.io/en/latest/)
 - This GUI based on `rspub-core`. See [https://github.com/EHRI/rspub-core](https://github.com/EHRI/rspub-core)
 - In case of questions [contact](https://github.com/EHRI/rspub-gui/issues/new) the EHRI team.
 
