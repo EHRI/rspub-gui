@@ -1,5 +1,9 @@
 # -*- mode: python -*-
 
+# ## usage: $ pyinstaller rsapp.spec
+
+# hidden-imports _cffi_backend needed for scp.
+
 name='MetadataPublishingTool'
 
 block_cipher = None
@@ -9,11 +13,12 @@ added_files = [
          ( '..\\..\\i18n\\', 'i18n\\' )
          ]
 
+options = [ ('v', None, 'OPTION') ]
 a = Analysis(['..\\..\\rsapp\\gui\\app.py'],
              pathex=['../../../rspub-gui', '../../../rspub-core'],
              binaries=None,
              datas=added_files,
-             hiddenimports=[],
+             hiddenimports=['_cffi_backend'],
              hookspath=[],
              runtime_hooks=[],
              excludes=[],
