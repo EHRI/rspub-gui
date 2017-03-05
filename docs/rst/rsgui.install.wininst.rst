@@ -1,18 +1,18 @@
 Windows installer
 =================
 
-:samp:`Install the {Metadata Publishing Tool} on Windows`
+:samp:`Install the {Metadata Publishing Tool} on Windows using a wizard`
 
-| :ref:`circumvent-security-label`
-| :ref:`run-wizard-label`
-| :ref:`start-mpt-label`
-| :ref:`uninstall-mpt-label`
+| :ref:`circumvent-security-win-label`
+| :ref:`run-wizard-win-label`
+| :ref:`start-mpt-win-label`
+| :ref:`uninstall-mpt-win-label`
 |
 
 Download the latest ``MPT_win_installer.exe`` from
 the `release page <https://github.com/EHRI/rspub-gui/releases>`_ of the rspub-gui project.
 
-.. _circumvent-security-label:
+.. _circumvent-security-win-label:
 
 Circumvent security
 -------------------
@@ -20,18 +20,18 @@ After download, double-click the downloaded ``MPT_win_installer.exe``.
 Because the software has not been code-signed by a trusted authority, security settings on your machine may object
 to executing it right away.
 
-Windows 7
-^^^^^^^^^
+**Windows 7**
+
 On Windows 7 you may see a sign similar to this.
 
 .. figure:: ../img/install/win7/win7_install_01.png
 
     Security warning on Windows 7
 
-Click `Run` and proceed to :ref:`run-wizard-label`.
+Click `Run` and proceed to :ref:`run-wizard-win-label`.
 
-Windows 10
-^^^^^^^^^^
+**Windows 10**
+
 On Windows 10 a blue warning may appear.
 
 .. figure:: ../img/install/win10/win10_install_02.png
@@ -46,18 +46,17 @@ Click `More information` on the left side of this blue screen...
     Security warning on Windows 10, second screen
 
 
-Click `Run anyway` and proceed to :ref:`run-wizard-label`.
+Click `Run anyway` and proceed to :ref:`run-wizard-win-label`.
 
 
-.. _run-wizard-label:
+.. _run-wizard-win-label:
 
 Run the install wizard
 ----------------------
 The install wizard has several screens and will guide you through the installation process.
 On average, you can accept the predefined values.
 
-Welcome message
-^^^^^^^^^^^^^^^
+**Welcome message**
 
 .. figure:: ../img/install/win10/win10_install_04.png
 
@@ -65,8 +64,7 @@ Welcome message
 
 The wizard opens with a welcome message. Click `Next`.
 
-Installation folder
-^^^^^^^^^^^^^^^^^^^
+**Installation folder**
 
 .. figure:: ../img/install/win10/win10_install_05.png
 
@@ -75,8 +73,7 @@ Installation folder
 Choosing the installation folder. The default value is ``C:\Program Files (x86)\EHRI\MetadataPublishingTool``.
 Choose `Browse...` if you want a different installation folder, choose `Next` when done.
 
-Select components
-^^^^^^^^^^^^^^^^^
+**Select components**
 
 .. figure:: ../img/install/win10/win10_install_06.png
 
@@ -84,8 +81,7 @@ Select components
 
 `Metadata Publishing Tool` has only one component. So leave the component selected and click `Next`.
 
-License agreement
-^^^^^^^^^^^^^^^^^
+**License agreement**
 
 .. figure:: ../img/install/win10/win10_install_07.png
 
@@ -95,8 +91,7 @@ Code and executables of the `Metadata Publishing Tool` are distributed under the
 `Apache License 2.0 <http://apache.org/licenses/LICENSE-2.0>`_. You must accept the license agreement before
 you may proceed with the install wizard. Click `Next` when done.
 
-Start Menu shortcuts
-^^^^^^^^^^^^^^^^^^^^
+**Start Menu shortcuts**
 
 .. figure:: ../img/install/win10/win10_install_08.png
 
@@ -105,8 +100,7 @@ Start Menu shortcuts
 Default a shortcut to the ``MetadataPublishingTool.exe`` will be placed in the program group `EHRI`.
 Click `Next` when done.
 
-Ready to install
-^^^^^^^^^^^^^^^^
+**Ready to install**
 
 .. figure:: ../img/install/win10/win10_install_09.png
 
@@ -115,8 +109,7 @@ Ready to install
 Click `Next` to continue. A security warning may again appear, telling you are about to install software from
 an unknown publisher. Click `Yes` to proceed.
 
-Installing Metadata Publishing Tool
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+**Installing Metadata Publishing Tool**
 
 .. figure:: ../img/install/win10/win10_install_10.png
 
@@ -124,8 +117,7 @@ Installing Metadata Publishing Tool
 
 The installation process will now begin. An indication of progress will be shown.
 
-Completing the Metadata Publishing Tool Wizard
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+**Completing the Metadata Publishing Tool Wizard**
 
 .. figure:: ../img/install/win10/win10_install_11.png
 
@@ -134,7 +126,7 @@ Completing the Metadata Publishing Tool Wizard
 After installation has completed, the last screen of the installation wizard is shown. Click `Finish` to exit
 the wizard.
 
-.. _start-mpt-label:
+.. _start-mpt-win-label:
 
 Start Metadata Publishing Tool
 ------------------------------
@@ -146,7 +138,7 @@ Start Metadata Publishing Tool
 After completing the installation wizard you can find shortcuts to ``MetadataPublishingTool.exe`` and the
 ``MPT_MaintenanceTool.exe`` in the group `EHRI` of your Start Menu.
 
-.. _uninstall-mpt-label:
+.. _uninstall-mpt-win-label:
 
 Uninstall Metadata Publishing Tool
 ----------------------------------
