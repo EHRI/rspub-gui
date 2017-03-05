@@ -130,7 +130,7 @@ Uninstall Metadata Publishing Tool
 ----------------------------------
 The `Metadata Publishing Tool` and its components can be removed from your machine by the
 `MPT Maintenance Tool`. Click the shortcut `MPT_MaintenanceTool` in your Launchpad or
-navigate to ``/Applications/MPT`` and double click ``MPT_MaintenanceTool.app``.
+navigate to ``/Applications/MPT`` and double-click ``MPT_MaintenanceTool.app``.
 The uninstall wizard will begin.
 
 .. figure:: ../img/install/mac/mpt_mac_install_20.png

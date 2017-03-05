@@ -13,18 +13,39 @@ Application for ResourceSync publishing
 
 ---
 
-## Logistics
+## Introduction
+The [ResourceSync specification](http://www.openarchives.org/rs/1.0.9/resourcesync) describes 
+a synchronization framework for the web consisting of various capabilities that allow third-party systems to remain synchronized with a server's evolving resources.
+More precisely the ResourceSync Framework describes the communication between `source` and `destination` aimed at
+synchronizing one or more resources. Communication uses `http` and an extension on 
+the [Sitemap protocol](http://www.sitemaps.org/protocol.html), an xml-based format for expressing metadata, relevant for synchronization.
 
 ### External Logistics (This is not the problem)
 
 ![ResourceSync](img/resourcesync.png)
 
-_Fig. 1. Institutions exposing content and ResourceSync metadata._
+_Fig. 1. The ResourceSync Framework Specification at work. Institutions exposing content and ResourceSync metadata.
+The central hub (in this case the EHRI Portal) is actively collecting resources, with the aid of sitemaps_
+
+The ResourceSync Framework Specification is a well defined protocol between _source_ and _destination_.
+It describes collecting resources and keeping them synchronized in an efficient way with the aid of sitemaps. In the 
+above image the _sources_ are Collection Holding Institutions and the _destination_ is the EHRI portal.
+The resources that are being synchronized are the Extended Archival Descriptions (EAD) files that describe
+collections relevant for the EHRI project. This, the external logistics, is not the problem we are trying
+to solve with `rspub-gui`. What `rspub-gui` and its application `Metadata Publishing Tool` are trying to
+solve is the internal logistics: how can we select and filter resources, create resourcesync metadata about them
+and transfer resources (ead-files) and metadata (sitemaps) to the web server of the institution. And let this be done
+by content-savvy, but maybe technically ignorant workers.
 
 ### Internal Logistics
 
+Comes in `Metadata Publishing Tool`. It is an application, a graphical user interface on a the above mentioned 
+problems: the internal logistics, before the ResourceSync Framework Specification can do its job.
+It helps to configure, select and execute the necessary files on a work station and export them
+to the web server with a push of a button.  
+
 ![Internal](img/internal.png)
 
-_Fig. 1. Institution preparing content and ResourceSync metadata._
+_Fig. 1. Institution preparing content and ResourceSync metadata, and transfering them to their web server._
 
 

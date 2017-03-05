@@ -144,7 +144,7 @@ Uninstall Metadata Publishing Tool
 ----------------------------------
 The `Metadata Publishing Tool` and its components can be removed from your machine by the
 `MPT Maintenance Tool`. Click the shortcut `MPT_MaintenanceTool` in the `EHRI` group of your Start Menu or
-navigate to ``C:\Program Files (x86)\EHRI\MetadataPublishingTool`` and double click ``MPT_MaintenanceTool.exe``.
+navigate to ``C:\Program Files (x86)\EHRI\MetadataPublishingTool`` and double-click ``MPT_MaintenanceTool.exe``.
 The uninstall wizard will begin.
 
 .. figure:: ../img/install/win10/win10_install_50.png
