@@ -24,8 +24,10 @@ the [Sitemap protocol](http://www.sitemaps.org/protocol.html), an xml-based form
 
 ![ResourceSync](img/resourcesync.png)
 
-_Fig. 1. The ResourceSync Framework Specification at work. Institutions exposing content and ResourceSync metadata.
-The central hub (in this case the EHRI Portal) is actively collecting resources, with the aid of sitemaps_
+_Fig. 1. The ResourceSync Framework Specification at work. Institutions exposing content and ResourceSync metadata
+on their web servers.
+The central hub (in this case the EHRI Portal) is actively collecting resources and keeping them
+in sync with the aid of sitemaps._
 
 The ResourceSync Framework Specification is a well defined protocol between _source_ and _destination_.
 It describes collecting resources and keeping them synchronized in an efficient way with the aid of sitemaps. In the 
@@ -39,9 +41,9 @@ by content-savvy, but maybe technically ignorant workers.
 
 ### Internal Logistics
 
-Comes in `Metadata Publishing Tool`. It is an application, a graphical user interface on a the above mentioned 
+Comes in `Metadata Publishing Tool`. It is an application, a graphical user interface solving the above mentioned 
 problems: the internal logistics, before the ResourceSync Framework Specification can do its job.
-It helps to configure, select and execute the necessary files on a work station and export them
+It helps to configure, select, filter and execute the necessary files on a work station and export them
 to the web server with a push of a button.  
 
 ![Internal](img/internal.png)
