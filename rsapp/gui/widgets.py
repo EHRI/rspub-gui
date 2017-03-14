@@ -396,6 +396,7 @@ class WorkWidget(QWidget):
     def on_btn_stop_clicked(self):
         self.btn_stop.setStyleSheet(self.normal_style)
         self.btn_stop.setEnabled(False)
+        self.on_signal_main_event(_("Interrupt requested..."))
         if self.executor_thread:
             self.executor_thread.requestInterruption()
 

@@ -33,10 +33,6 @@ class ConfigureFrame(QFrame):
     def init_ui(self):
         vbl_0 = QVBoxLayout(self)
 
-        grid = QGridLayout()
-        grid.setContentsMargins(0, 0, 0, 0)  # left, top, right, bottom
-        grid.setVerticalSpacing(5)
-
         self.label_title = QLabel(self)
         font = QFont()
         font.setPointSize(18)
@@ -44,10 +40,15 @@ class ConfigureFrame(QFrame):
         self.label_title.setFont(font)
         self.label_title.setContentsMargins(2, 5, 5, 7)
         self.label_title.setStyleSheet(Style.h2())
-        hbox = QHBoxLayout()
-        hbox.addWidget(self.label_title, 1)
-        hbox.setContentsMargins(0, 0, 0, 5)
-        grid.addLayout(hbox, 1, 1, 1, 3)
+        hbox1 = QHBoxLayout()
+        hbox1.addWidget(self.label_title, 1)
+        hbox1.setContentsMargins(0, 0, 0, 5)
+        vbl_0.addLayout(hbox1)
+        vbl_0.insertSpacing(2, 25)
+
+        grid = QGridLayout()
+        grid.setContentsMargins(0, 0, 0, 0)  # left, top, right, bottom
+        grid.setVerticalSpacing(5)
 
         self.para_widgets = {
             "resource_dir": ParaLine(self, "resource_dir", ParaWidget.str_conv(), grid, 3, True),

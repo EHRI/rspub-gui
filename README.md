@@ -41,10 +41,10 @@ to solve with `rspub-gui`.
 What `rspub-gui` and its application `Metadata Publishing Tool` are trying to
 solve is the internal logistics: how can we select and filter resources, create resourcesync metadata about them
 and transfer resources (ead-files) and metadata (sitemaps) to the web server of the institution. And let this be done
-by content-savvy, but maybe technically ignorant workers.
-Comes in `Metadata Publishing Tool`. It is an application, a graphical user interface solving the above mentioned 
-problems: the internal logistics, before the ResourceSync Framework Specification can do its job.
-It helps to configure, select, filter and execute the necessary files on a work station and export them
+by content-savvy users that do not necessarily have technical skills.
+Comes in `Metadata Publishing Tool`. It is an application, a graphical user interface solving the internal logistics, 
+before the ResourceSync Framework Specification can do its job.
+`Metadata Publishing Tool` helps to configure, select, filter and execute the necessary files on a work station and export them
 to the web server with a push of a button.  
 
 ![Internal](img/internal.png)

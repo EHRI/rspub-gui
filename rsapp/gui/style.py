@@ -43,3 +43,7 @@ class Style(object):
     @staticmethod
     def transport_title():
         return "color: rgb(255, 255, 255); background-color: rgb(0, 0, 153);"
+
+    @staticmethod
+    def import_title():
+        return "color: rgb(255, 255, 255); background-color: rgb(228, 131, 20);"

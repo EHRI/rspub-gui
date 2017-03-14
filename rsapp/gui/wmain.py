@@ -35,6 +35,7 @@ from rsapp.gui.conf import GuiConf
 from rsapp.gui.fconfigure import ConfigureFrame
 from rsapp.gui.fexecute import ExecuteFrame
 from rsapp.gui.fexport import ExportFrame
+from rsapp.gui.fimport import ImportFrame
 from rsapp.gui.fselect import SelectFrame
 from rsapp.gui.style import Style
 from rspub.core.config import Configurations
@@ -270,11 +271,13 @@ class TabbedFrame(QTabWidget):
 
     def init_ui(self):
         self.frame_configure = ConfigureFrame(self, 0)
-        self.frame_select = SelectFrame(self, 1)
-        self.frame_execute = ExecuteFrame(self, 2)
-        self.frame_export = ExportFrame(self, 3)
+        self.frame_import = ImportFrame(self, 1)
+        self.frame_select = SelectFrame(self, 2)
+        self.frame_execute = ExecuteFrame(self, 3)
+        self.frame_export = ExportFrame(self, 4)
 
         self.addTab(self.frame_configure, _("Configure"))
+        self.addTab(self.frame_import, _("Import"))
         self.addTab(self.frame_select, _("Select"))
         self.addTab(self.frame_execute, _("Execute"))
         self.addTab(self.frame_export, _("Export"))
@@ -282,9 +285,10 @@ class TabbedFrame(QTabWidget):
     @pyqtSlot(str)
     def retranslate_ui(self, code=None):
         self.setTabText(0, _("Configure"))
-        self.setTabText(1, _("Select"))
-        self.setTabText(2, _("Execute"))
-        self.setTabText(3, _("Export"))
+        self.setTabText(1, _("Import"))
+        self.setTabText(2, _("Select"))
+        self.setTabText(3, _("Execute"))
+        self.setTabText(4, _("Export"))
 
     @pyqtSlot(int)
     def __tabchanged(self, index):
@@ -401,7 +405,8 @@ class AboutWidget(QWidget):
         lbl_title.setContentsMargins(2, 5, 5, 7)
         lbl_title.setStyleSheet(Style.h2())
         vbox.addWidget(lbl_title)
-        vbox.addSpacing(20)
+        #vbox.addSpacing(20)
+        vbox.addStretch(1)
 
         grid = QGridLayout()
         grid.setContentsMargins(0, 0, 0, 0)  # left, top, right, bottom
@@ -419,37 +424,24 @@ class AboutWidget(QWidget):
         hbox_grid.addStretch(1)
         vbox.addLayout(hbox_grid)
 
-        vbox.addStretch(1)
+        vbox.addSpacing(10)
         txt = QTextBrowser()
+        txt.setMinimumHeight(250)
         txt.setOpenExternalLinks(True)
         txt.setOpenLinks(False)
         txt.anchorClicked.connect(self.on_anchor_clicked)
         txt.append(version.__about__)
         vbox.addWidget(txt)
 
-        hbox_button = QHBoxLayout()
-        hbox_button.addStretch(1)
-        btn_close = QPushButton("Close")
-        btn_close.clicked.connect(self.btn_close_clicked)
-        hbox_button.addWidget(btn_close)
-        vbox.addLayout(hbox_button)
-
         hbox.addLayout(vbox)
         hbox.addStretch(1)
         self.setLayout(hbox)
         self.move(200, 200)
-
+        self.setWindowFlags( (self.windowFlags() | Qt.CustomizeWindowHint) & ~Qt.WindowMaximizeButtonHint & ~Qt.WindowMinimizeButtonHint)
         self.show()
 
     def on_anchor_clicked(self, url):
         QDesktopServices.openUrl(QUrl(url))
-
-    def btn_close_clicked(self):
-        if self.windowState() & Qt.WindowFullScreen:
-            self.setWindowState(Qt.WindowMaximized)
-        else:
-            self.close()
-            self.destroy()
 
     def close(self):
         self.parent.about_widget = None

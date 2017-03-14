@@ -103,10 +103,10 @@ class ExportFrame(QFrame):
         vbox3 = QVBoxLayout()
 
         self.para_scp_widgets = {
-            "scp_server": ParaLine(self, "scp_server", ParaWidget.str_conv(), grid2, 3, False),
-            "scp_port": ParaLine(self, "scp_port", ParaWidget.int_conv(), grid2, 5, False, width=100),
-            "scp_user": ParaLine(self, "scp_user", ParaWidget.str_conv(), grid2, 7, False),
-            "scp_document_root": ParaLine(self, "scp_document_root", ParaWidget.str_conv(), grid2, 9, False),
+            "exp_scp_server": ParaLine(self, "exp_scp_server", ParaWidget.str_conv(), grid2, 3, False),
+            "exp_scp_port": ParaLine(self, "exp_scp_port", ParaWidget.int_conv(), grid2, 5, False, width=100),
+            "exp_scp_user": ParaLine(self, "exp_scp_user", ParaWidget.str_conv(), grid2, 7, False),
+            "exp_scp_document_root": ParaLine(self, "exp_scp_document_root", ParaWidget.str_conv(), grid2, 9, False),
         }
         self.lbl_server_path = QLabel(_("server_path_label"))
         self.edt_server_path = QLabel(self.ctrl.paras.server_path())
@@ -231,10 +231,10 @@ class ExportFrame(QFrame):
 
     def translatables(self):
         # parameter labels
-        _("scp_server_label")
-        _("scp_port_label")
-        _("scp_user_label")
-        _("scp_document_root_label")
+        _("exp_scp_server_label")
+        _("exp_scp_port_label")
+        _("exp_scp_user_label")
+        _("exp_scp_document_root_label")
         _("server_path_label")
         _("zip_filename_label")
 
@@ -253,10 +253,10 @@ class TransportWidget(WorkWidget):
         if self.export_mode == "scp":
             dlg = QInputDialog(self)
             dlg.setInputMode(QInputDialog.TextInput)
-            dlg.setWindowTitle(_("Connecting to %s") % self.paras.scp_server)
-            dlg.setLabelText(_("Password for %s@%s:") % (self.paras.scp_user, self.paras.scp_server))
+            dlg.setWindowTitle(_("Connecting to %s") % self.paras.exp_scp_server)
+            dlg.setLabelText(_("Password for %s@%s:") % (self.paras.exp_scp_user, self.paras.exp_scp_server))
             dlg.setTextEchoMode(QLineEdit.Password)
-            dlg.resize(300, 100)
+            #dlg.resize(300, 100)
             if dlg.exec_():
                 password = dlg.textValue()
             else:
@@ -314,7 +314,7 @@ class TransportThread(QThread, EventObserver):
                 trans.zip_resources(all_resources=self.all_resources)
             self.signal_end_processing.emit(self.paras)
         except Exception as err:
-            LOG.exception("Exception in executor thread:")
+            LOG.exception("Exception in transport thread:")
             self.signal_exception.emit(_("Exception in transporter thread: {0}").format(err))
         finally:
             if trans:
