@@ -34,7 +34,7 @@ class Style(object):
 
     @staticmethod
     def h2():
-        return "color: rgb(90, 100, 120); background-color: rgb(230, 230, 230);"
+        return "color: rgb(90, 100, 120); background-color: rgb(240, 240, 240);"
 
     @staticmethod
     def configure_title():
