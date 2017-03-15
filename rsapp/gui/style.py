@@ -37,6 +37,18 @@ class Style(object):
         return "color: rgb(255, 0, 0);"
 
     @staticmethod
+    def configure_title():
+        return "color: rgb(255, 255, 255); background-color: rgb(59, 146, 89);"
+
+    @staticmethod
+    def import_title():
+        return "color: rgb(255, 255, 255); background-color: rgb(228, 131, 20);"
+
+    @staticmethod
+    def select_title():
+        return "color: rgb(255, 255, 255); background-color: rgb(67, 171, 215);"
+
+    @staticmethod
     def execute_title():
         return "color: rgb(255, 255, 255); background-color: rgb(102, 0, 0);"
 
@@ -44,6 +56,3 @@ class Style(object):
     def transport_title():
         return "color: rgb(255, 255, 255); background-color: rgb(0, 0, 153);"
 
-    @staticmethod
-    def import_title():
-        return "color: rgb(255, 255, 255); background-color: rgb(228, 131, 20);"

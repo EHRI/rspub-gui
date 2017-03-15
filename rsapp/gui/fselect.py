@@ -60,7 +60,10 @@ class SelectFrame(QFrame):
         self.label_title.setFont(font)
         self.label_title.setContentsMargins(2, 5, 5, 7)
         self.label_title.setStyleSheet(Style.h2())
+        lbl_color = QLabel("   ", self)
+        lbl_color.setStyleSheet(Style.select_title())
         hbox = QHBoxLayout()
+        hbox.addWidget(lbl_color)
         hbox.addWidget(self.label_title, 1)
         hbox.setContentsMargins(0, 0, 0, 5)   # left, top, right, bottom
         vbl_0.addLayout(hbox)
