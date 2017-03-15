@@ -468,6 +468,8 @@ class WorkWidget(QWidget):
         else:
             self.save_dimensions()
             event.accept()
+            self.close()
+            self.destroy()
 
     def save_dimensions(self):
         LOG.debug("Saving dimensions for work-window %s" % self.work)

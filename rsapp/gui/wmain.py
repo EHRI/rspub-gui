@@ -166,6 +166,7 @@ class WMain(QMainWindow):
         self.action_about.setText(_("About..."))
         self.menu_settings.setTitle(_("Preferences"))
         self.menu_language.setTitle(_("Language"))
+        self.menu_window.setTitle(_("Window"))
         self.window_title = (_("Metadata Publishing Tool"))
         self.setWindowTitle(self.window_title + " [" + self.paras.configuration_name() + "]")
 
