@@ -51,7 +51,10 @@ class ImportFrame(QFrame):
         self.label_title.setFont(font)
         self.label_title.setContentsMargins(2, 5, 5, 7)
         self.label_title.setStyleSheet(Style.h2())
+        lbl_color = QLabel("   ", self)
+        lbl_color.setStyleSheet(Style.import_title())
         hbox1 = QHBoxLayout()
+        hbox1.addWidget(lbl_color)
         hbox1.addWidget(self.label_title, 1)
         hbox1.setContentsMargins(0, 0, 0, 5)
         vbl_0.addLayout(hbox1)
@@ -207,7 +210,7 @@ class ImportThread(QThread, EventObserver):
         return True
 
     def inform_import_start(self, *args, **kwargs):
-        txt = _("Start import.")
+        txt = _("Importing files...")
         self.signal_main_event.emit(txt)
 
     def inform_scp_exception(self, *args, **kwargs):
