@@ -21,10 +21,6 @@ class Style(object):
         return "background-color: rgb(232, 245, 249);"
 
     @staticmethod
-    def h2():
-        return "color: rgb(90, 100, 120); background-color: rgb(210, 210, 210);"
-
-    @staticmethod
     def alarm():
         return "color: rgb(255, 255, 255); background-color: rgb(225, 0, 0);"
 
@@ -35,6 +31,10 @@ class Style(object):
     @staticmethod
     def red_text():
         return "color: rgb(255, 0, 0);"
+
+    @staticmethod
+    def h2():
+        return "color: rgb(90, 100, 120); background-color: rgb(230, 230, 230);"
 
     @staticmethod
     def configure_title():
