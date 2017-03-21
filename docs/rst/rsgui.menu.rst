@@ -12,8 +12,9 @@ Application Menus
 
 The File menu
 -------------
-- The ``File`` menu gives options to manage multiple :term:`configurations`.
-- The ``File`` menu gives an option to exit the application.
+.. IMPORTANT::
+    - The ``File`` menu gives options to manage multiple :term:`configurations`.
+    - The ``File`` menu gives an option to exit the application.
 
 Load configuration >
 ++++++++++++++++++++
@@ -38,7 +39,8 @@ Exit the application.
 
 The Preferences menu
 --------------------
-- The ``Preferences`` menu gives options to change the overall appearance of the application.
+.. IMPORTANT::
+    - The ``Preferences`` menu gives options to change the overall appearance of the application.
 
 Language >
 ++++++++++
@@ -48,7 +50,8 @@ Set the language of the application to the language of your choice.
 
 The Windows menu
 ----------------
-- The ``Windows`` menu gives options to select windows.
+.. IMPORTANT::
+    - The ``Windows`` menu gives options to select windows.
 
 About...
 ++++++++

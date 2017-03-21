@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 import logging
 
+from PyQt5.QtCore import QUrl
+from PyQt5.QtGui import QDesktopServices
 from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtWidgets import QFrame
@@ -45,6 +47,10 @@ class ConfigureFrame(QFrame):
         hbox1 = QHBoxLayout()
         hbox1.addWidget(lbl_color)
         hbox1.addWidget(self.label_title, 1)
+        hbox1.addStretch(1)
+        self.btn_help = QPushButton(_("Help..."), self)
+        self.btn_help.clicked.connect(self.on_button_help_clicked)
+        hbox1.addWidget(self.btn_help)
         hbox1.setContentsMargins(0, 0, 0, 5)
         vbl_0.addLayout(hbox1)
         vbl_0.insertSpacing(2, 25)
@@ -75,9 +81,14 @@ class ConfigureFrame(QFrame):
         vbl_0.addStretch(1)
         self.setLayout(vbl_0)
 
+    def on_button_help_clicked(self):
+        link = "file:///Users/ecco/git/rspub-gui/docs/_build/html/rst/rsgui.configure.html"
+        QDesktopServices.openUrl(QUrl(link))
+
     def on_switch_language(self, code=None):
         LOG.debug("Switch language: %s" % code)
         self.label_title.setText(_("Configure parameters: '%s'") % self.paras.configuration_name())
+        self.btn_help.setText(_("Help..."))
 
     def on_switch_configuration(self, name=None):
         LOG.debug("Switch configuration: %s" % name)

@@ -32,6 +32,7 @@ from PyQt5.QtWidgets import QWidget
 
 from rsapp import version
 from rsapp.gui.conf import GuiConf
+from rsapp.gui.faudit import AuditFrame
 from rsapp.gui.fconfigure import ConfigureFrame
 from rsapp.gui.fexecute import ExecuteFrame
 from rsapp.gui.fexport import ExportFrame
@@ -276,12 +277,14 @@ class TabbedFrame(QTabWidget):
         self.frame_select = SelectFrame(self, 2)
         self.frame_execute = ExecuteFrame(self, 3)
         self.frame_export = ExportFrame(self, 4)
+        self.frame_audit = AuditFrame(self, 5)
 
         self.addTab(self.frame_configure, _("Configure"))
         self.addTab(self.frame_import, _("Import"))
         self.addTab(self.frame_select, _("Select"))
         self.addTab(self.frame_execute, _("Execute"))
         self.addTab(self.frame_export, _("Export"))
+        self.addTab(self.frame_audit, _("Audit"))
 
     @pyqtSlot(str)
     def retranslate_ui(self, code=None):
@@ -290,6 +293,7 @@ class TabbedFrame(QTabWidget):
         self.setTabText(2, _("Select"))
         self.setTabText(3, _("Execute"))
         self.setTabText(4, _("Export"))
+        self.setTabText(5, _("Audit"))
 
     @pyqtSlot(int)
     def __tabchanged(self, index):

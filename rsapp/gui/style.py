@@ -56,3 +56,7 @@ class Style(object):
     def transport_title():
         return "color: rgb(255, 255, 255); background-color: rgb(0, 0, 153);"
 
+    @staticmethod
+    def audit_title():
+        return "color: rgb(255, 255, 255); background-color: rgb(203, 192, 36);"
+
