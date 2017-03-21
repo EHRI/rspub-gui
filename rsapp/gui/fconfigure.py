@@ -47,7 +47,7 @@ class ConfigureFrame(QFrame):
         hbox1 = QHBoxLayout()
         hbox1.addWidget(lbl_color)
         hbox1.addWidget(self.label_title, 1)
-        hbox1.addStretch(1)
+
         self.btn_help = QPushButton(_("Help..."), self)
         self.btn_help.clicked.connect(self.on_button_help_clicked)
         hbox1.addWidget(self.btn_help)
@@ -82,7 +82,7 @@ class ConfigureFrame(QFrame):
         self.setLayout(vbl_0)
 
     def on_button_help_clicked(self):
-        link = "file:///Users/ecco/git/rspub-gui/docs/_build/html/rst/rsgui.configure.html"
+        link = "http://rspub-gui.readthedocs.io/en/latest/rst/rsgui.configure.html"
         QDesktopServices.openUrl(QUrl(link))
 
     def on_switch_language(self, code=None):

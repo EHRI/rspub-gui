@@ -46,6 +46,7 @@ The resource directory influences the composed URL::
     composed URL to resource:   http://www.example.com/rs/abc/to/resource.ead
 
 The button `Browse` will open a file explorer that enables choosing the resource directory.
+
 See also: :ref:`config-url-prefix-label`
 
 Metadata directory
@@ -65,7 +66,9 @@ Description directory
 The :term:`description directory` should be an existing directory on the (local or networked) filesystem.
 In this directory the document that describes the entire site, also known as ``.well-known/resourcesync`` is expected
 or will be created. If the value of description directory is left blank, the document is expected or will be
-created in the :term:`metadata directory`. The button `Browse` will open a file explorer that enables choosing
+created in the :term:`metadata directory`.
+
+The button `Browse` will open a file explorer that enables choosing
 the description directory.
 
 Plugin directory
@@ -75,6 +78,7 @@ In this directory or its subdirectories a search for plugins will be conducted. 
 for plugins of type
 `ResourceGateBuilder <http://rspub-core.readthedocs.io/en/latest/rst/rspub.pluggable.gate.html#resource-gate-builder>`_.
 If plugin directory is left blank, no search will be conducted upon execution of a synchronization.
+
 The button `Browse` will open a file explorer that enables choosing the plugin directory.
 
 .. _config-url-prefix-label:
