@@ -13,7 +13,7 @@ Application Menus
 The File menu
 -------------
 .. IMPORTANT::
-    - The ``File`` menu gives options to manage multiple :term:`configurations`.
+    - The ``File`` menu gives options to manage multiple :term:`configuration`\ s.
     - The ``File`` menu gives an option to exit the application.
 
 Load configuration >
