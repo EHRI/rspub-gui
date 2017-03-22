@@ -15,6 +15,8 @@ Configuration
     Variables on the configuration page are best set with the help of a technically skilled person. Once variables
     are set and tested to be correct, they can be reused over future synchronization runs.
 
+In the following paragraphs we'll describe each parameter in detail.
+
 .. _config-resource-directory-label:
 
 Resource directory
@@ -118,8 +120,9 @@ At the moment you can choose between
   At the start of synchronization, if no resourcelist exists in the :term:`metadata directory`, will conduct
   the `New resourcelist strategy` on first execution.
 
-Maximum amount of items in one list
-+++++++++++++++++++++++++++++++++++
+Max. items in one list
+++++++++++++++++++++++
+The maximum amount of items in one list.
 The :term:`sitemap protocol` has an unofficial standard on how many items (links to resources) can be in one list.
 This amount can vary between 1 and 50000.
 
@@ -134,9 +137,44 @@ The amount of digits that generated :term:`sitemap`\ s should have in their file
     ...
     changelist_9999.xml
 
-With zero-fill filename set to 4, the amount of :term:`changelist`\ s can grow to 100000.
+With zero-fill filename set to 4, the amount of :term:`changelist`\ s can grow to 10000. This means you can execute
+10000 synchronizations in :term:`strategy` mode :term:`new changelist strategy`.
 
+Sitemaps with new lines
++++++++++++++++++++++++
+A completely 'pritty print' mechanism for the generated :term:`sitemap`\ s is not (yet) available. Mark the
+checkmark for a more human readable version of sitemaps.
 
+Save sitemaps to disk
++++++++++++++++++++++
+You can do a trial run of a synchronization. A trial run will report an overview of how many resources are affected,
+how many changes have been detected etc. but will not produce new :term:`sitemap`\ s. Leave the checkmark
+unchecked for a trial run.
+
+'well-known' at server root
++++++++++++++++++++++++++++
+This reflects the locality of the :term:`source description`\ , the document that contains links to all
+published :term:`capabilitylist`\ s. The prescribed location of this document is in the `.well-known` directory
+at the root of the server::
+
+    {server root}/.well-known/resourcesync
+
+However, there may be situations where it is not allowed to access the server root directory. Since EHRI
+makes no use of discovering the site by means of the :term:`well-known URI`\ , this document is not strictly
+necessary. The value for `'well-known' at server root` is used for computing the URL's that link
+:term:`capabilitylist`\ s to their parent document.
+
+Mark the checkmark if the source description is at the server root. If left unchecked the program assumes that
+the source description is in the :term:`metadata directory`\ .
+
+Reset
++++++
+The Reset button will reset the current :term:`configuration` to the default settings, after you press `Yes`
+on the warning dialog.
+
+.. figure:: ../img/configure/reset.png
+
+    Warning dialog after pressing the ``Reset`` button
 
 
 

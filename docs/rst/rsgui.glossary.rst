@@ -49,6 +49,14 @@ Glossary
             `Decribing the Source <http://www.openarchives.org/rs/1.1/resourcesync#SourceDesc>`_
                 ResourceSync Framework Specification
 
+    incremental changelist strategy
+        Will increment an existing :term:`changelist` with the newly found changes.
+
+        .. seealso::
+
+            :doc:`rsgui.configure`
+                Configure page
+
     metadata directory
         The name of the directory where generated sitemaps are stored. The value of metadata directory may
         consist of multiple path elements. The metadata directory is always relative to the
@@ -79,6 +87,21 @@ Glossary
 
             `European Holocaust Research Infrastructure (EHRI) <https://www.ehri-project.eu/>`_
 
+    new changelist strategy
+        Will create a new :term:`changelist` at each synchronization run.
+
+        .. seealso::
+
+            :doc:`rsgui.configure`
+                Configure page
+
+    new resourcelist strategy
+        At each synchronization run a completely new :term:`resourcelist` will be generated.
+
+        .. seealso::
+
+            :doc:`rsgui.configure`
+                Configure page
 
     plugin directory
         In this directory or its subdirectories a search for plugins will be conducted.
@@ -126,6 +149,19 @@ Glossary
             `Sitemap protocol <https://www.sitemaps.org/protocol.html>`_
                 Official site
 
+    source description
+        In the context of :term:`ResourceSync Framework Specification` the document at::
+
+            {server root}/.well-known/resourcesync
+
+        that describes the site by listing all :term:`capabilitylist`\ s that are available from the site.
+        This practice is an extension on the :term:`well-known URI` scheme, also known as RFC5785.
+
+        .. seealso::
+
+            `ResourceSync Well-Known URI <http://www.openarchives.org/rs/1.1/resourcesync#wellknown>`_
+                ResourceSync Framework Specification
+
     strategy
         The strategy defines what kind of sitemap documents will be generated when a synchronization is executed.
 
@@ -142,4 +178,9 @@ Glossary
             :doc:`rsgui.configure`
                 Configure page
 
+    well-known URI
+        RFC5785. An internet standard that defines a path prefix for "well-known locations"
 
+        .. seealso::
+
+            `RFC5785 specification <https://www.ietf.org/rfc/rfc5785.txt>`_
