@@ -47,7 +47,6 @@ class ConfigureFrame(QFrame):
         hbox1 = QHBoxLayout()
         hbox1.addWidget(lbl_color)
         hbox1.addWidget(self.label_title, 1)
-
         self.btn_help = QPushButton(_("Help..."), self)
         self.btn_help.clicked.connect(self.on_button_help_clicked)
         hbox1.addWidget(self.btn_help)

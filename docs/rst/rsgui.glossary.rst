@@ -35,9 +35,44 @@ Glossary
             :doc:`rsgui.configure`
                 Configure page
 
+    DANS
+        Data Archiving and Networked Services. DANS gives permanent access to digital research resources.
+        DANS is an institute of the Dutch Academy KNAW and funding organisation NWO.
+
+        .. seealso::
+
+            `Data Archiving and Networked Services (DANS) <https://dans.knaw.nl/en>`_
+
+    EAD
+        "Encoded Archival Description (..) is a non-proprietary de facto standard for the encoding of finding aids
+        for use in a networked (online) environment. Finding aids are inventories, indexes, or guides that are
+        created by archival and manuscript repositories to provide information about specific collections.
+        While the finding aids may vary somewhat in style, their common purpose is to provide detailed
+        description of the content and intellectual organization of collections of archival materials.
+        EAD allows the standardization of collection information in finding aids within and across repositories."
+
+        -- The Library of Congress, Official Site
+
+        .. seealso::
+
+            `Encoded Archival Description <https://www.loc.gov/ead/index.html>`_
+
+    EHRI
+        European Holocaust Research Infrastructure.
+
+        "The mission of the European Holocaust Research Infrastructure (EHRI) is to support the Holocaust
+        research community by building a digital infrastructure and facilitating human networks."
+
+        -- About EHRI
+
+        .. seealso::
+
+            `European Holocaust Research Infrastructure <https://www.ehri-project.eu/>`_
+
     description directory
         The description directory is an existing directory on the (local or networked) filesystem.
-        In this directory the document that describes the entire site, also known as ``.well-known/resourcesync``
+        In this directory (a copy of) the document that describes the entire site,
+        also known as ``.well-known/resourcesync`` or :term:`source description`
         is expected or will be created. If no description directory is given, the document is expected or will be
         created in the :term:`metadata directory`.
 
@@ -69,11 +104,11 @@ Glossary
 
     MPT
     Metadata Publishing Tool
-        Metadata Publishing Tool is an application for publishing resources in conformance with the
+        Metadata Publishing Tool (MPT) is an application for publishing resources in conformance with the
         :term:`ResourceSync Framework Specification`.
         Metadata Publishing Tool was developed by
-        Data Archiving and Networked Services (DANS-KNAW) under auspices of the
-        European Holocaust Research Infrastructure (EHRI).
+        Data Archiving and Networked Services (:term:`DANS`\ -KNAW) under auspices of the
+        European Holocaust Research Infrastructure (:term:`EHRI`).
 
         .. seealso::
 
@@ -82,10 +117,6 @@ Glossary
 
             `rspub-gui at gitHub <https://github.com/EHRI/rspub-gui>`_
                 The source code of the graphical user interface under MPT
-
-            `Data Archiving and Networked Services (DANS) <https://dans.knaw.nl/en>`_
-
-            `European Holocaust Research Infrastructure (EHRI) <https://www.ehri-project.eu/>`_
 
     new changelist strategy
         Will create a new :term:`changelist` at each synchronization run.
@@ -139,6 +170,13 @@ Glossary
 
             `ResourceSync Framework Specification <http://www.openarchives.org/rs/resourcesync>`_
                 Open Archives Initiative ResourceSync Framework Specification
+
+    scp
+        Secure Copy Protocol. scp copies files over a secure, encrypted network connection.
+
+        .. seealso::
+
+            `Linux and Unix scp command <http://www.computerhope.com/unix/scp.htm>`_
 
     sitemap
     sitemap protocol
