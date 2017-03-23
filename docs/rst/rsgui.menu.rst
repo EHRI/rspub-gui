@@ -1,12 +1,10 @@
 Application Menus
 =================
 
-:samp:`Menus of {Metadata Publishing Tool}`
-
-| :ref:`application-menus-file-label`
-| :ref:`application-menus-preferences-label`
-| :ref:`application-menus-windows-label`
-|
+.. contents:: A quick look at the menus of :term:`Metadata Publishing Tool`
+    :depth: 1
+    :local:
+    :backlinks: top
 
 .. _application-menus-file-label:
 
@@ -28,7 +26,7 @@ Any named configuration that was previously saved under the given name will be o
 
 Configurations...
 +++++++++++++++++
-Pops up a list with the names of saved configurations. You have the ability to delete configurations by clicking their
+Pops up a list with the names of saved configurations. You have the ability to delete configurations by selecting their
 names. Multiple configurations can be deleted by selecting multiple names from the list.
 
 Exit

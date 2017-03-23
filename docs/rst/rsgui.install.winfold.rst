@@ -1,14 +1,16 @@
 Windows folder installation
 ===========================
 
-:samp:`Install the {Metadata Publishing Tool} and its dependencies in a folder`
+.. rubric:: Install :term:`Metadata Publishing Tool` and its dependencies as separate files in a folder
+
+|
 
 Install the `Metadata Publishing Tool` and its dependencies in a folder.
 Advantages of this kind of installation: faster start-up time
 and readable log output.
 
 Download the latest ``MetadataPublishingTool.zip`` from
-the `release page <https://github.com/EHRI/rspub-gui/releases>`_ of the rspub-gui project.
+the `release page <https://github.com/EHRI/rspub-gui/releases>`_ of the rspub-gui project on gitHub.
 Unzip and place anywhere on your file system. Open the folder ``MetadataPublishingTool`` and
 double-click the executable ``MetadataPublishingTool.exe``.
 

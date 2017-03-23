@@ -1,18 +1,15 @@
 Mac OS installer
 ================
 
-:samp:`Install the {Metadata Publishing Tool} on Mac OS using a wizard`
-
-| :ref:`circumvent-security-mac-label`
-| :ref:`run-wizard-mac-label`
-| :ref:`start-mpt-mac-label`
-| :ref:`uninstall-mpt-mac-label`
-|
+.. contents:: Install :term:`Metadata Publishing Tool` on Mac OS using a wizard
+    :depth: 2
+    :local:
+    :backlinks: top
 
 Download the latest ``MPT_mac_installer.dmg`` from
-the `release page <https://github.com/EHRI/rspub-gui/releases>`_ of the rspub-gui project.
-After download, double-click the downloaded ``MPT_mac_installer.dmg``. The ``MPT_mac_installer`` image is
-mounted on your system.
+the `release page <https://github.com/EHRI/rspub-gui/releases>`_ of the rspub-gui project on gitHub.
+After download, double-click the downloaded ``MPT_mac_installer.dmg``. This will mount the ``MPT_mac_installer`` image
+on your system.
 
 .. figure:: ../img/install/mac/mpt_mac_install_01.png
 
@@ -31,13 +28,16 @@ to executing it right away.
 
     Security warning on Mac OS
 
-Click `OK`. Open > `System Preferences` > `Security & Privacy`. You may see the following message.
+| Click `OK`.
+| Open > `System Preferences` > `Security & Privacy`. You may see the following message.
+|
 
 .. figure:: ../img/install/mac/mpt_mac_install_03.png
 
     Part of System Preferences, Security & Privacy
 
-Click `Open Anyway`.
+| Click `Open Anyway`.
+|
 
 Alternatively you may have to lower your security settings temporary. Under `Allow apps downloaded from:` click
 `Anywhere`. After the installation process has completed you may restore your security settings.

@@ -104,7 +104,7 @@ class ImportFrame(QFrame):
     def on_switch_language(self, code=None):
         LOG.debug("Switch language: %s" % code)
         self.label_title.setText(_("Import resources"))
-        #
+        self.btn_help.setText(_("Help..."))
         self.grp_scp.setTitle(_("Import files with Secure Copy Protocol (scp)"))
         self.scp_button_start.setText(_("Start"))
 

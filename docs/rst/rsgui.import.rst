@@ -1,24 +1,27 @@
 Import resources
 ================
 
-:samp:`Import remote resources with {Metadata Publishing Tool}`
+.. contents:: Import files from a server with the :term:`Metadata Publishing Tool`
+    :depth: 1
+    :local:
+    :backlinks: top
 
 .. figure:: ../img/import/import.png
 
     Screenshot of the ``import`` page
 
 .. IMPORTANT::
-    The import functionality is only necessary if your resources (:term:`EAD` files in the case of :term:`EHRI`)
-    are on a server. If your resources are on a local or networked drive you may skip this page of the wizard.
+    The import functionality is only necessary if your files (:term:`EAD` files in the case of :term:`EHRI`)
+    are on a server. If your files are on a local or networked drive you may skip this page of the wizard.
 
-    With the import page you can copy resources from the remote server to a local or networked drive with
+    With the import page you can copy files from the remote server to a local or networked drive with
     the aid of the Secure Copy Protocol (:term:`scp`).
 
     Parameters on the import page are best set with the help of a technically skilled person.
     The variables on this page are part of the same named :term:`configuration` as the one from the
     :doc:`rsgui.configure` page and are saved automatically.
     Once parameters on this page are set, all you have to do each time you want to import your
-    remote resources to your local environment is press the `Start` button (and remember your password).
+    remote files to your local environment is press the `Start` button (and remember your password).
 
 In the following paragraphs we'll describe the import process in detail.
 
@@ -53,15 +56,15 @@ After pressing the `Start` button, the import execution window will open.
 
 .. figure:: ../img/import/run_import_01.png
 
-    Screenshot of the import execution window at start
+    Screenshot of the import execution window
 
-The import execution window has three reporting areas:
+The import execution window has three areas for reporting events:
 
 Main events
     In this area main events of the import process will be reported.
 
 Resources
-    In this area resources that are imported are listed.
+    In this area files that are imported are listed.
 
 Errors
     In this area errors that took place during the import process are reported.
@@ -72,7 +75,7 @@ window itself can also be reshaped.
 Press the `Run` button to start the import process. A dialog appears in which you have to type your password for
 the remote server.
 
-.. HINT::
+.. TIP::
     | A password may not be needed with key-based authentication.
     | See for instance: `Configure SSH Key-Based Authentication <https://www.digitalocean.com/community/tutorials/how-to-configure-ssh-key-based-authentication-on-a-linux-server>`_
 

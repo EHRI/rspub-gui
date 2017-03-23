@@ -5,8 +5,10 @@ import os
 
 from PyQt5.QtCore import QEvent
 from PyQt5.QtCore import QThread
+from PyQt5.QtCore import QUrl
 from PyQt5.QtCore import Qt
 from PyQt5.QtCore import pyqtSignal
+from PyQt5.QtGui import QDesktopServices
 from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtWidgets import QFileDialog
@@ -65,6 +67,9 @@ class SelectFrame(QFrame):
         hbox = QHBoxLayout()
         hbox.addWidget(lbl_color)
         hbox.addWidget(self.label_title, 1)
+        self.btn_help = QPushButton(_("Help..."), self)
+        self.btn_help.clicked.connect(self.on_button_help_clicked)
+        hbox.addWidget(self.btn_help)
         hbox.setContentsMargins(0, 0, 0, 5)   # left, top, right, bottom
         vbl_0.addLayout(hbox)
 
@@ -165,9 +170,14 @@ class SelectFrame(QFrame):
 
         self.setLayout(vbl_0)
 
+    def on_button_help_clicked(self):
+        link = "http://rspub-gui.readthedocs.io/en/latest/rst/rsgui.select.html"
+        QDesktopServices.openUrl(QUrl(link))
+
     def on_switch_language(self, code=None):
         LOG.debug("Switch language: %s" % code)
         self.label_title.setText(_("Select resources"))
+        self.btn_help.setText(_("Help..."))
         self.grp_simple.setTitle(_("Simple selection: One directory"))
         self.lbl_simple.setText(_("Location"))
         self.btn_simple_brws.setText(_("Browse"))

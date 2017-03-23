@@ -1,7 +1,10 @@
 Configuration
 =============
 
-:samp:`Configure {Metadata Publishing Tool}`
+.. contents:: Configure :term:`Metadata Publishing Tool`
+    :depth: 1
+    :local:
+    :backlinks: top
 
 .. figure:: ../img/configure/configure.png
 
@@ -10,7 +13,8 @@ Configuration
 .. IMPORTANT::
     The parameters on the configuration page constitute all variables needed to synchronize a set of resources.
     Variables are validated and, if valid, saved automatically. Multiple sets of parameters can be saved as
-    named :term:`configuration`\ s. See :ref:`application-menus-file-label` for details.
+    named :term:`configuration`\ s. See :ref:`application-menus-file-label` on how to save, load and delete
+    configurations.
 
     Variables on the configuration page are best set with the help of a technically skilled person. Once variables
     are set and tested to be correct, they can be reused over future synchronization runs.
@@ -22,16 +26,18 @@ In the following paragraphs we'll describe each parameter in detail.
 Resource directory
 ++++++++++++++++++
 The :term:`resource directory` should be an existing directory on the (local or networked) filesystem.
-In this base directory resources to be synchronized are stored.
+In this base directory resources to be synchronized can be found.
 The resource directory should be chosen careful, because it influences the composition of the URL to
-the resource. The URL to a resource is composed as follows::
+the resources that will be exposed in :term:`sitemap`\ s::
 
     local path to the resource: C:\path\to\resources\ehri\path\to\resource.ead
     resource directory:         C:\path\to\resources\
     URL prefix:                 http://www.example.com/
     composed URL to resource:   http://www.example.com/ehri/path/to/resource.ead
 
-The resource directory is stripped of the local path to the resource and prefixed with the URL prefix.
+.. IMPORTANT::
+    | The URL to a resource is composed as follows:
+    | The value of :term:`resource directory` is stripped of the local path to the resource and what remains is prefixed with the :term:`URL prefix`\ .
 
 The URL prefix may have a path segment::
 
@@ -51,6 +57,12 @@ The button `Browse` will open a file explorer that enables choosing the resource
 
 See also: :ref:`config-url-prefix-label`
 
+.. ATTENTION::
+    When using the `EHRI mapping tool <https://github.com/EHRI/ehri-conversion-tools>`_, after conversion
+    your :term:`EAD` documents
+    are in a directory that bears the conversion date as its name. Point the :term:`resource directory`
+    entry to this dated directory before execution of a synchronization.
+
 Metadata directory
 ++++++++++++++++++
 The :term:`metadata directory` is the name of the directory where generated sitemaps are stored.
@@ -66,7 +78,8 @@ If the metadata directory does not exist, it will be created during first execut
 Description directory
 +++++++++++++++++++++
 The :term:`description directory` should be an existing directory on the (local or networked) filesystem.
-In this directory the document that describes the entire site, also known as ``.well-known/resourcesync`` is expected
+In this directory the document that describes the entire site, also known as ``.well-known/resourcesync``
+or :term:`source description` is expected
 or will be created. If the value of description directory is left blank, the document is expected or will be
 created in the :term:`metadata directory`.
 
@@ -107,7 +120,7 @@ See also: :ref:`config-resource-directory-label`
 
 Strategy
 ++++++++
-The :term:`strategy` defines what kind of sitemap documents will be generated when a synchronization is executed.
+The :term:`strategy` defines what kind of :term:`sitemap` documents will be generated when a synchronization is executed.
 At the moment you can choose between
 
 - **New resourcelist strategy** - At each synchronization run a completely new :term:`resourcelist` will be generated.
@@ -119,6 +132,9 @@ At the moment you can choose between
 - **Incremental changelist strategy** - Will increment an existing :term:`changelist` with the newly found changes.
   At the start of synchronization, if no resourcelist exists in the :term:`metadata directory`, will conduct
   the `New resourcelist strategy` on first execution.
+
+.. HINT::
+    The strategy can be changed before each successive execution of a synchronization run.
 
 Max. items in one list
 ++++++++++++++++++++++
@@ -153,8 +169,8 @@ unchecked for a trial run.
 
 'well-known' at server root
 +++++++++++++++++++++++++++
-This reflects the locality of the :term:`source description`\ , the document that contains links to all
-published :term:`capabilitylist`\ s. The prescribed location of this document is in the `.well-known` directory
+This reflects the locality of the :term:`source description` on the web server.
+The prescribed location of this document is in the `.well-known` directory
 at the root of the server::
 
     {server root}/.well-known/resourcesync
@@ -169,12 +185,16 @@ the source description is in the :term:`metadata directory`\ .
 
 Reset
 +++++
-The Reset button will reset the current :term:`configuration` to the default settings, after you press `Yes`
-on the warning dialog.
+The Reset button will reset the current :term:`configuration` to the default settings, after you confirm
+the warning dialog.
 
 .. figure:: ../img/configure/reset.png
 
     Warning dialog after pressing the ``Reset`` button
+
+.. CAUTION::
+    Resetting the current configuration also affects the currently set values on wizard pages
+    :doc:`Import <rsgui.import>`\ , :doc:`Select <rsgui.select>` and :doc:`Export <rsgui.export>`\ .
 
 
 

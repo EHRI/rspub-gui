@@ -1,16 +1,13 @@
 Windows installer
 =================
 
-:samp:`Install the {Metadata Publishing Tool} on Windows using a wizard`
-
-| :ref:`circumvent-security-win-label`
-| :ref:`run-wizard-win-label`
-| :ref:`start-mpt-win-label`
-| :ref:`uninstall-mpt-win-label`
-|
+.. contents:: Install :term:`Metadata Publishing Tool` on Windows using a wizard
+    :depth: 2
+    :local:
+    :backlinks: top
 
 Download the latest ``MPT_win_installer.exe`` from
-the `release page <https://github.com/EHRI/rspub-gui/releases>`_ of the rspub-gui project.
+the `release page <https://github.com/EHRI/rspub-gui/releases>`_ of the rspub-gui project on gitHub.
 
 .. _circumvent-security-win-label:
 
