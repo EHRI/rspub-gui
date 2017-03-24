@@ -8,7 +8,7 @@ Import resources
 
 .. figure:: ../img/import/import.png
 
-    Screenshot of the ``import`` page
+    *Screenshot of the import page*
 
 .. IMPORTANT::
     The import functionality is only necessary if your files (:term:`EAD` files in the case of :term:`EHRI`)
@@ -56,7 +56,7 @@ After pressing the `Start` button, the import execution window will open.
 
 .. figure:: ../img/import/run_import_01.png
 
-    Screenshot of the import execution window
+    *Screenshot of the import execution window*
 
 The import execution window has three areas for reporting events:
 
@@ -83,7 +83,7 @@ While the import process is running you may at any time press the ``Stop`` butto
 
 .. figure:: ../img/import/run_import_02.png
 
-    Screenshot of the import execution window while the import process is running
+    *Screenshot of the import execution window while the import process is running*
 
 After the process has ended without errors the complete file and folder tree of the remote path is
 now on the local path.

@@ -8,10 +8,11 @@ Configuration
 
 .. figure:: ../img/configure/configure.png
 
-    Screenshot of the ``configure`` page
+    *Screenshot of the configure page*
 
 .. IMPORTANT::
-    The parameters on the configuration page constitute all variables needed to synchronize a set of resources.
+    The parameters on the configuration page constitute all variables needed to :term:`synchronize`
+    a :term:`set of resources`\ .
     Variables are validated and, if valid, saved automatically. Multiple sets of parameters can be saved as
     named :term:`configuration`\ s. See :ref:`application-menus-file-label` on how to save, load and delete
     configurations.
@@ -161,9 +162,12 @@ Sitemaps with new lines
 A completely 'pretty print' mechanism for the generated :term:`sitemap`\ s is not (yet) available. Mark the
 checkbox for a more human readable version of sitemaps.
 
+.. _config-save-sitemap-to-disk-label:
+
 Save sitemaps to disk
 +++++++++++++++++++++
-You can do a trial run of a synchronization. A trial run will report an overview of how many resources are affected,
+You can do a :term:`trial run` of a :term:`synchronization`\ . A trial run will report an overview of how many
+resources are affected,
 how many changes have been detected etc. but will not produce new :term:`sitemap`\ s. Leave the checkbox
 unchecked for a trial run.
 
@@ -190,7 +194,7 @@ the warning dialog.
 
 .. figure:: ../img/configure/reset.png
 
-    Warning dialog after pressing the ``Reset`` button
+    *Warning dialog after pressing the Reset button*
 
 .. CAUTION::
     Resetting the current configuration also affects the currently set values on wizard pages

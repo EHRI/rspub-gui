@@ -156,6 +156,7 @@ todo_include_todos = False
 
 # html_theme = 'agogo'
 # html_theme = 'alabaster'
+# html_theme = 'basic'
 # html_theme = "bizstyle"
 # html_theme = 'classic'
 # html_theme = "haiku"

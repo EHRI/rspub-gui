@@ -1,7 +1,7 @@
 Glossary
 ========
 
-:samp:`Glossary of terms used in context with {Metadata Publishing Tool}`
+.. rubric:: Glossary of terms used in context with :term:`Metadata Publishing Tool`
 
 .. glossary::
 
@@ -43,6 +43,29 @@ Glossary
 
             `Data Archiving and Networked Services (DANS) <https://dans.knaw.nl/en>`_
 
+    description directory
+        The description directory is an existing directory on the (local or networked) filesystem.
+        In this directory (a copy of) the document that describes the entire site,
+        also known as ``.well-known/resourcesync`` or :term:`source description`
+        is expected or will be created. If no description directory is given, the document is expected or will be
+        created in the :term:`metadata directory`.
+
+        .. seealso::
+
+            :doc:`rsgui.configure`
+                Configure page
+
+            `Describing the Source <http://www.openarchives.org/rs/1.1/resourcesync#SourceDesc>`_
+                ResourceSync Framework Specification
+
+    destination
+        A system that synchronizes itself with a :term:`source`\ 's resources.
+
+        .. seealso::
+
+            `Definitions <http://www.openarchives.org/rs/1.1/resourcesync#Definitions>`_
+                ResourceSync Framework Specification
+
     EAD
         "Encoded Archival Description (..) is a non-proprietary de facto standard for the encoding of finding aids
         for use in a networked (online) environment. Finding aids are inventories, indexes, or guides that are
@@ -68,21 +91,6 @@ Glossary
         .. seealso::
 
             `European Holocaust Research Infrastructure <https://www.ehri-project.eu/>`_
-
-    description directory
-        The description directory is an existing directory on the (local or networked) filesystem.
-        In this directory (a copy of) the document that describes the entire site,
-        also known as ``.well-known/resourcesync`` or :term:`source description`
-        is expected or will be created. If no description directory is given, the document is expected or will be
-        created in the :term:`metadata directory`.
-
-        .. seealso::
-
-            :doc:`rsgui.configure`
-                Configure page
-
-            `Describing the Source <http://www.openarchives.org/rs/1.1/resourcesync#SourceDesc>`_
-                ResourceSync Framework Specification
 
     incremental changelist strategy
         Will increment an existing :term:`changelist` with the newly found changes.
@@ -172,11 +180,23 @@ Glossary
                 Open Archives Initiative ResourceSync Framework Specification
 
     scp
-        Secure Copy Protocol. scp copies files over a secure, encrypted network connection.
+        Secure Copy Protocol. SCP copies files over a secure, encrypted network connection.
 
         .. seealso::
 
             `Linux and Unix scp command <http://www.computerhope.com/unix/scp.htm>`_
+
+    set of resources
+        "A collection of resources that is made available for :term:`synchronization` by a :term:`source`\.
+        A source may expose one or more such collections and support distinct ResourceSync capabilities for each.
+        Individual resources may be included in more than one set of resources"
+
+        -- ResourceSync Framework Specification
+
+        .. seealso::
+
+            `Definitions <http://www.openarchives.org/rs/1.1/resourcesync#Definitions>`_
+                ResourceSync Framework Specification
 
     sitemap
     sitemap protocol
@@ -187,12 +207,20 @@ Glossary
             `Sitemap protocol <https://www.sitemaps.org/protocol.html>`_
                 Official site
 
+    source
+        A server that hosts resources subject to synchronization.
+
+        .. seealso::
+
+            `Definitions <http://www.openarchives.org/rs/1.1/resourcesync#Definitions>`_
+                ResourceSync Framework Specification
+
     source description
         In the context of :term:`ResourceSync Framework Specification` the document at::
 
             {server root}/.well-known/resourcesync
 
-        that describes the site by listing all :term:`capabilitylist`\ s that are available from the site.
+        This document describes the site by listing all :term:`capabilitylist`\ s that are available from the site.
         This practice is an extension on the :term:`well-known URI` scheme, also known as RFC5785.
 
         .. seealso::
@@ -207,6 +235,34 @@ Glossary
 
             :doc:`rsgui.configure`
                 Configure page
+
+    synchronization
+    synchronize
+        Keeping a set of resources
+        at a :term:`destination` the same as the set of resources at a :term:`source`.
+
+        As seen from the destination
+        this includes copying the original set of resources from the source and then keeping up to date with
+        additions to, changes of and deletions from the set of resources at the source.
+
+        As seen from a source this involves providing the resources and the metadata that describe the changes
+        to this set of resources.
+
+        .. seealso::
+
+            `Source perspective <http://www.openarchives.org/rs/1.1/resourcesync#SourcePers>`_
+                ResourceSync Framework Specification
+            `Destination perspective <http://www.openarchives.org/rs/1.1/resourcesync#DestPers>`_
+                ResourceSync Framework Specification
+
+    trial run
+        The execution of a :term:`synchronization` run that will not write :term:`sitemap`\ s to disk.
+
+        .. seealso::
+
+            :ref:`config-save-sitemap-to-disk-label`
+
+            :ref:`execute-synchronise-resources-label`
 
     URL prefix
         The URL prefix is the basename of the site, optionally followed by a path segment.

@@ -8,7 +8,7 @@ Select resources
 
 .. figure:: ../img/select/select.png
 
-    Screenshot of the ``select`` page
+    *Screenshot of the select page*
 
 .. IMPORTANT::
     On the select page you decide which files will be synchronized. The page offers a choice on how to select:
@@ -41,7 +41,7 @@ Select the checkbox for `Advanced: create a selector`.
 
 .. figure:: ../img/select/select_02.png
 
-    The advanced part of the ``select`` page
+    *The advanced part of the select page*
 
 .. IMPORTANT::
     With advanced selection you can choose multiple files and folders for inclusion and exclusion of synchronization.
