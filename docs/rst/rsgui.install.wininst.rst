@@ -57,7 +57,7 @@ On average, you can accept the predefined values.
 
 .. figure:: ../img/install/win10/win10_install_04.png
 
-    Welcome message of the install wizzard
+    Welcome message of the install wizard
 
 The wizard opens with a welcome message. Click `Next`.
 

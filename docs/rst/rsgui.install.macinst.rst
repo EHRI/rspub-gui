@@ -60,7 +60,7 @@ On average, you can accept the predefined values.
 
 .. figure:: ../img/install/mac/mpt_mac_install_10.png
 
-    Welcome message of the install wizzard
+    Welcome message of the install wizard
 
 The wizard opens with a welcome message. Click `Continue`.
 

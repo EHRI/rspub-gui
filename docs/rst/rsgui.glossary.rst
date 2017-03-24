@@ -15,7 +15,7 @@ Glossary
                 ResourceSync Framework Specification
 
     changelist
-        A changelis is an xml-document of type :term:`sitemap` that enlists resources that have changed since a previous
+        A changelist is an xml-document of type :term:`sitemap` that enlists resources that have changed since a previous
         synchronization.
 
         .. seealso::
@@ -81,7 +81,7 @@ Glossary
             :doc:`rsgui.configure`
                 Configure page
 
-            `Decribing the Source <http://www.openarchives.org/rs/1.1/resourcesync#SourceDesc>`_
+            `Describing the Source <http://www.openarchives.org/rs/1.1/resourcesync#SourceDesc>`_
                 ResourceSync Framework Specification
 
     incremental changelist strategy

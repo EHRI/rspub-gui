@@ -65,6 +65,9 @@ class ExecuteFrame(QFrame):
         hbox1 = QHBoxLayout()
         hbox1.addWidget(lbl_color)
         hbox1.addWidget(self.label_title, 1)
+        self.btn_help = QPushButton(_("Help..."), self)
+        self.btn_help.clicked.connect(self.on_button_help_clicked)
+        hbox1.addWidget(self.btn_help)
         hbox1.setContentsMargins(0, 0, 0, 5)
         vbl_0.addLayout(hbox1)
         #
@@ -112,9 +115,14 @@ class ExecuteFrame(QFrame):
         vbl_0.addStretch(1)
         self.setLayout(vbl_0)
 
+    def on_button_help_clicked(self):
+        link = "http://rspub-gui.readthedocs.io/en/latest/rst/rsgui.execute.html"
+        QDesktopServices.openUrl(QUrl(link))
+
     def on_switch_language(self, code=None):
         LOG.debug("Switch language: %s" % code)
         self.label_title.setText(_("Execute configuration: '%s'") % self.paras.configuration_name())
+        self.btn_help.setText(_("Help..."))
         self.btn_run.setText(_("Run..."))
         self.render()
 

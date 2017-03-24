@@ -158,13 +158,13 @@ With zero-fill filename set to 4, the amount of :term:`changelist`\ s can grow t
 
 Sitemaps with new lines
 +++++++++++++++++++++++
-A completely 'pritty print' mechanism for the generated :term:`sitemap`\ s is not (yet) available. Mark the
-checkmark for a more human readable version of sitemaps.
+A completely 'pretty print' mechanism for the generated :term:`sitemap`\ s is not (yet) available. Mark the
+checkbox for a more human readable version of sitemaps.
 
 Save sitemaps to disk
 +++++++++++++++++++++
 You can do a trial run of a synchronization. A trial run will report an overview of how many resources are affected,
-how many changes have been detected etc. but will not produce new :term:`sitemap`\ s. Leave the checkmark
+how many changes have been detected etc. but will not produce new :term:`sitemap`\ s. Leave the checkbox
 unchecked for a trial run.
 
 'well-known' at server root
@@ -180,7 +180,7 @@ makes no use of discovering the site by means of the :term:`well-known URI`\ , t
 necessary. The value for `'well-known' at server root` is used for computing the URL's that link
 :term:`capabilitylist`\ s to their parent document.
 
-Mark the checkmark if the source description is at the server root. If left unchecked the program assumes that
+Mark the checkbox if the source description is at the server root. If left unchecked the program assumes that
 the source description is in the :term:`metadata directory`\ .
 
 Reset

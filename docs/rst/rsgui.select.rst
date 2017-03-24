@@ -23,7 +23,7 @@ Select resources
 
 Simple selection
 ++++++++++++++++
-Select the checkmark for `Simple selection: one directory`.
+Select the checkbox for `Simple selection: one directory`.
 Press the `Browse` button to select the directory that contains the resources that should be synchronized.
 
 .. HINT::
@@ -37,11 +37,11 @@ hidden files are not excluded in this display, but will be excluded in the synch
 
 Advanced selection
 ++++++++++++++++++
-Select the checkmark for `Advanced: create a selector`.
+Select the checkbox for `Advanced: create a selector`.
 
 .. figure:: ../img/select/select_02.png
 
-    Fragment of the advanced part of the ``select`` page
+    The advanced part of the ``select`` page
 
 .. IMPORTANT::
     With advanced selection you can choose multiple files and folders for inclusion and exclusion of synchronization.
