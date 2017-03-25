@@ -176,6 +176,7 @@ Glossary
             `Resource List <http://www.openarchives.org/rs/1.1/resourcesync#ResourceList>`_
                 ResourceSync Framework Specification
 
+    ResourceSync
     ResourceSync Framework Specification
         The ResourceSync specification describes a :term:`synchronization` framework for the web consisting of various
         capabilities that allow third-party systems to remain :term:`synchronize`\ d with a server's evolving :term:`resource`\ s.
