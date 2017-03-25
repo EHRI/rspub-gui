@@ -31,14 +31,14 @@ Click `Run` and proceed to :ref:`run-wizard-win-label`.
 
 On Windows 10 a blue warning may appear.
 
-.. figure:: ../img/install/win10/win10_install_02.png
+.. figure:: ../img/install/win10/win10_install_02a.png
 
     Security warning on Windows 10
 
 
-Click `More information` on the left side of this blue screen...
+Click `More info` on the left side of this blue screen...
 
-.. figure:: ../img/install/win10/win10_install_03.png
+.. figure:: ../img/install/win10/win10_install_03a.png
 
     Security warning on Windows 10, second screen
 
