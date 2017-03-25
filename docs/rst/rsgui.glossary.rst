@@ -5,18 +5,18 @@ Glossary
 
 .. glossary::
 
-    capabilitylist
-        A capabilitylist is an xml-document of type :term:`sitemap` that enlists :term:`resourcelist`\ s
-        and :term:`changelist`\ s that have links to a particular set of resources.
+    Capability List
+        A Capability List is an xml-document of type :term:`sitemap` that enlists :term:`Resource List`\ s
+        and :term:`Change List`\ s that contain links to a particular :term:`set of resources`\ .
 
         .. seealso::
 
             `Capability List <http://www.openarchives.org/rs/1.1/resourcesync#CapabilityList>`_
                 ResourceSync Framework Specification
 
-    changelist
-        A changelist is an xml-document of type :term:`sitemap` that enlists resources that have changed since a previous
-        synchronization.
+    Change List
+        A Change List is an xml-document of type :term:`sitemap` that enlists :term:`resource`\ s that have changed since a
+        previous :term:`synchronization`\ .
 
         .. seealso::
 
@@ -24,7 +24,8 @@ Glossary
                 ResourceSync Framework Specification
 
     configuration
-        A named set of parameters that constitute all variables needed to synchronize a set of resources.
+        A named set of parameters that constitute all variables needed to :term:`synchronize` a
+        :term:`set of resources`\ .
         The first configuration will be saved under the name 'DEFAULT'.
         Configurations can be loaded, saved, listed and deleted under
         the :ref:`File<application-menus-file-label>` menu. The parameters that are set under a configuration
@@ -36,7 +37,7 @@ Glossary
                 Configure page
 
     DANS
-        Data Archiving and Networked Services. DANS gives permanent access to digital research resources.
+        Data Archiving and Networked Services. DANS gives permanent access to digital research :term:`resource`\ s.
         DANS is an institute of the Dutch Academy KNAW and funding organisation NWO.
 
         .. seealso::
@@ -46,7 +47,7 @@ Glossary
     description directory
         The description directory is an existing directory on the (local or networked) filesystem.
         In this directory (a copy of) the document that describes the entire site,
-        also known as ``.well-known/resourcesync`` or :term:`source description`
+        also known as ``.well-known/resourcesync`` or :term:`Source Description`
         is expected or will be created. If no description directory is given, the document is expected or will be
         created in the :term:`metadata directory`.
 
@@ -58,8 +59,8 @@ Glossary
             `Describing the Source <http://www.openarchives.org/rs/1.1/resourcesync#SourceDesc>`_
                 ResourceSync Framework Specification
 
-    destination
-        A system that synchronizes itself with a :term:`source`\ 's resources.
+    Destination
+        A system that :term:`synchronize`\ s itself with a :term:`Source`\ 's :term:`resource`\ s.
 
         .. seealso::
 
@@ -93,7 +94,7 @@ Glossary
             `European Holocaust Research Infrastructure <https://www.ehri-project.eu/>`_
 
     incremental changelist strategy
-        Will increment an existing :term:`changelist` with the newly found changes.
+        Will increment an existing :term:`Change List` with the newly found changes.
 
         .. seealso::
 
@@ -101,7 +102,7 @@ Glossary
                 Configure page
 
     metadata directory
-        The name of the directory where generated sitemaps are stored. The value of metadata directory may
+        The name of the directory where generated :term:`sitemap`\ s are stored. The value of metadata directory may
         consist of multiple path elements. The metadata directory is always relative to the
         :term:`resource directory`.
 
@@ -112,7 +113,7 @@ Glossary
 
     MPT
     Metadata Publishing Tool
-        Metadata Publishing Tool (MPT) is an application for publishing resources in conformance with the
+        Metadata Publishing Tool (MPT) is an application for publishing :term:`resource`\ s in conformance with the
         :term:`ResourceSync Framework Specification`.
         Metadata Publishing Tool was developed by
         Data Archiving and Networked Services (:term:`DANS`\ -KNAW) under auspices of the
@@ -127,7 +128,7 @@ Glossary
                 The source code of the graphical user interface under MPT
 
     new changelist strategy
-        Will create a new :term:`changelist` at each synchronization run.
+        Will create a new :term:`Change List` at each :term:`synchronization` run.
 
         .. seealso::
 
@@ -135,7 +136,7 @@ Glossary
                 Configure page
 
     new resourcelist strategy
-        At each synchronization run a completely new :term:`resourcelist` will be generated.
+        At each :term:`synchronization` run a completely new :term:`Resource List` will be generated.
 
         .. seealso::
 
@@ -153,17 +154,22 @@ Glossary
             `ResourceGateBuilder <http://rspub-core.readthedocs.io/en/latest/rst/rspub.pluggable.gate.html#resource-gate-builder>`_
                 Documentation on rspub-core
 
+    resource
+        In web technology, a data resource is anything that can be accessed with a link. It can for instance
+        be a file, (part of) a database or the output of a program.
+
     resource directory
-        The base directory on the (local or networked) filesystem where resources are stored. The resource directory
-        should be chosen careful, because it influences the composition of the URL to the resource.
+        The base directory on the (local or networked) filesystem where :term:`resource`\ s that should
+        be :term:`synchronize`\ d are stored. The resource directory
+        should be chosen careful, because it influences the composition of the URL to the :term:`resource`\ .
 
         .. seealso::
 
             :doc:`rsgui.configure`
                 Configure page
 
-    resourcelist
-        A resourcelist is an xml-document of type :term:`sitemap` that enlists available resources on a particular site.
+    Resource List
+        A Resource List is an xml-document of type :term:`sitemap` that enlists available :term:`resource`\ s on a particular site.
 
         .. seealso::
 
@@ -171,8 +177,8 @@ Glossary
                 ResourceSync Framework Specification
 
     ResourceSync Framework Specification
-        The ResourceSync specification describes a synchronization framework for the web consisting of various
-        capabilities that allow third-party systems to remain synchronized with a server's evolving resources.
+        The ResourceSync specification describes a :term:`synchronization` framework for the web consisting of various
+        capabilities that allow third-party systems to remain :term:`synchronize`\ d with a server's evolving :term:`resource`\ s.
 
         .. seealso::
 
@@ -187,9 +193,9 @@ Glossary
             `Linux and Unix scp command <http://www.computerhope.com/unix/scp.htm>`_
 
     set of resources
-        "A collection of resources that is made available for :term:`synchronization` by a :term:`source`\.
-        A source may expose one or more such collections and support distinct ResourceSync capabilities for each.
-        Individual resources may be included in more than one set of resources"
+        "A collection of :term:`resource`\ s that is made available for :term:`synchronization` by a :term:`Source`\.
+        A :term:`Source` may expose one or more such collections and support distinct ResourceSync capabilities for each.
+        Individual :term:`resource`\ s may be included in more than one set of :term:`resource`\ s"
 
         -- ResourceSync Framework Specification
 
@@ -200,27 +206,41 @@ Glossary
 
     sitemap
     sitemap protocol
-        An XML schema for xml-documents that describe the resources of a site.
+        An XML schema for xml-documents that describe the :term:`resource`\ s of a site. The
+        :term:`ResourceSync Framework Specification` makes use of this protocol to express the location of :term:`resource`\ s
+        and to express changes that affected this :term:`set of resources`\ . ResourceSync specifies these
+        sitemaps:
+
+        - `Source Description <http://www.openarchives.org/rs/1.1/resourcesync#SourceDesc>`_ enumerates the :term:`Capability List`\ s offered by a :term:`Source`
+        - `Capability List <http://www.openarchives.org/rs/1.1/resourcesync#CapabilityList>`_ enumerates all capabilities supported by a :term:`Source` for a specific :term:`set of resources`
+        - `Resource List <http://www.openarchives.org/rs/1.1/resourcesync#ResourceList>`_ lists and describes the :term:`resource`\ s that a :term:`Source` makes available for :term:`synchronization`
+        - `Resource List Index <http://www.openarchives.org/rs/1.1/resourcesync#ResourceListIndex>`_ for grouping multiple :term:`Resource List`\ s
+        - `Resource Dump <http://www.openarchives.org/rs/1.1/resourcesync#ResourceDump>`_ used to transfer :term:`resource`\ s from the :term:`Source` in bulk
+        - `Resource Dump Manifest <http://www.openarchives.org/rs/1.1/resourcesync#ResourceDumpManifest>`_ describes the bulk package's constituents
+        - `Change List <http://www.openarchives.org/rs/1.1/resourcesync#ChangeList>`_ contains a description of changes to a :term:`Source`\ 's :term:`resource`\ s
+        - `Change List Index <http://www.openarchives.org/rs/1.1/resourcesync#ChangeListIndex>`_ for grouping multiple :term:`Change List`\ s
+        - `Change Dump <http://www.openarchives.org/rs/1.1/resourcesync#ChangeDump>`_ used to transfer changed :term:`resource`\ s from the :term:`Source` in bulk
+        - `Change Dump Manifest <http://www.openarchives.org/rs/1.1/resourcesync#ChangeDumpManifest>`_ describes the bulk package's constituents
 
         .. seealso::
 
             `Sitemap protocol <https://www.sitemaps.org/protocol.html>`_
                 Official site
 
-    source
-        A server that hosts resources subject to synchronization.
+    Source
+        A server that hosts :term:`resource`\ s subject to :term:`synchronization`\ .
 
         .. seealso::
 
             `Definitions <http://www.openarchives.org/rs/1.1/resourcesync#Definitions>`_
                 ResourceSync Framework Specification
 
-    source description
+    Source Description
         In the context of :term:`ResourceSync Framework Specification` the document at::
 
             {server root}/.well-known/resourcesync
 
-        This document describes the site by listing all :term:`capabilitylist`\ s that are available from the site.
+        This document describes the site by listing all :term:`Capability List`\ s that are available from the site.
         This practice is an extension on the :term:`well-known URI` scheme, also known as RFC5785.
 
         .. seealso::
@@ -229,7 +249,8 @@ Glossary
                 ResourceSync Framework Specification
 
     strategy
-        The strategy defines what kind of sitemap documents will be generated when a synchronization is executed.
+        The strategy defines what kind of :term:`sitemap` documents will be generated when
+        a :term:`synchronization` is executed.
 
         .. seealso::
 
@@ -238,15 +259,15 @@ Glossary
 
     synchronization
     synchronize
-        Keeping a set of resources
-        at a :term:`destination` the same as the set of resources at a :term:`source`.
+        Keeping a :term:`set of resources`
+        at a :term:`Destination` the same as the :term:`set of resources` at a :term:`Source`\ .
 
-        As seen from the destination
-        this includes copying the original set of resources from the source and then keeping up to date with
-        additions to, changes of and deletions from the set of resources at the source.
+        As seen from the :term:`Destination`
+        this includes copying the original :term:`set of resources` from the :term:`Source` and then keeping up to date with
+        additions to, changes of and deletions from the :term:`set of resources` at the :term:`Source`\ .
 
-        As seen from a source this involves providing the resources and the metadata that describe the changes
-        to this set of resources.
+        As seen from a :term:`Source` this involves providing the :term:`resource`\ s and the metadata that describe the changes
+        to this :term:`set of resources`\ .
 
         .. seealso::
 

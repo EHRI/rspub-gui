@@ -4,8 +4,10 @@ import logging
 import os
 
 from PyQt5.QtCore import QThread
+from PyQt5.QtCore import QUrl
 from PyQt5.QtCore import Qt
 from PyQt5.QtCore import pyqtSignal
+from PyQt5.QtGui import QDesktopServices
 from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtWidgets import QFrame
@@ -60,6 +62,9 @@ class ExportFrame(QFrame):
         hbox1 = QHBoxLayout()
         hbox1.addWidget(lbl_color)
         hbox1.addWidget(self.label_title, 1)
+        self.btn_help = QPushButton(_("Help..."), self)
+        self.btn_help.clicked.connect(self.on_button_help_clicked)
+        hbox1.addWidget(self.btn_help)
         hbox1.setContentsMargins(0, 0, 0, 5)
         vbl_0.addLayout(hbox1)
 
@@ -171,9 +176,14 @@ class ExportFrame(QFrame):
         vbl_0.addStretch(1)
         self.setLayout(vbl_0)
 
+    def on_button_help_clicked(self):
+        link = "http://rspub-gui.readthedocs.io/en/latest/rst/rsgui.export.html"
+        QDesktopServices.openUrl(QUrl(link))
+
     def on_switch_language(self, code=None):
         LOG.debug("Switch language: %s" % code)
         self.label_title.setText(_("Export: '%s'") % self.ctrl.paras.configuration_name())
+        self.btn_help.setText(_("Help..."))
         self.lbl_metadata_key.setText(_("Export based on"))
         self.lbl_last_execution_key.setText(_("last_execution_label"))
         #

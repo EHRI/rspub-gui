@@ -11,11 +11,13 @@ Select resources
     *Screenshot of the select page*
 
 .. IMPORTANT::
-    On the select page you decide which files will be synchronized. The page offers a choice on how to select:
+    On the select page you decide which files will be :term:`synchronize`\ d. The page offers a choice on how to select:
 
-    - **Simple select** - All files in one directory will be synchronized, including files in subdirectories.
+    - **Simple select** - All files in one directory will be :term:`synchronize`\ d.
 
-    - **Advanced select** - Multiple files and folders can be included and multiple files and folders can be excluded. This gives the opportunity to precisely select the resources that will be synchronized.
+    - **Advanced select** - Multiple files and folders can be included and multiple files and folders can be excluded. This gives the opportunity to precisely select the :term:`resource`\ s that will be :term:`synchronize`\ d.
+
+    Both selection methods work recursive: files in subdirectories are included.
 
     The variables on this page are part of the same named :term:`configuration` as the one from the
     :doc:`rsgui.configure` page and are saved automatically.
@@ -24,16 +26,16 @@ Select resources
 Simple selection
 ++++++++++++++++
 Select the checkbox for `Simple selection: one directory`.
-Press the `Browse` button to select the directory that contains the resources that should be synchronized.
+Press the `Browse` button to select the directory that contains the :term:`resource`\ s that should be :term:`synchronize`\ d.
 
 .. HINT::
     The selected directory should be equal to or a subdirectory of the :term:`resource directory` that you
-    chose on the :doc:`Configure <rsgui.configure>` page. Only resources that are in the :term:`resource directory`
-    or one of its subdirectories are subject to synchronization.
+    chose on the :doc:`Configure <rsgui.configure>` page. Only :term:`resource`\ s that are in the :term:`resource directory`
+    or one of its subdirectories are subject to :term:`synchronization`\ .
 
 Press the `Play...` button if you want to get an impression of how many and which files are in the chosen
 directory and its subdirectories. The list and count displayed are estimates; automatically excluded files like
-hidden files are not excluded in this display, but will be excluded in the synchronization.
+hidden files are not excluded in this display, but will be excluded in the :term:`synchronization`.
 
 Advanced selection
 ++++++++++++++++++
@@ -44,12 +46,12 @@ Select the checkbox for `Advanced: create a selector`.
     *The advanced part of the select page*
 
 .. IMPORTANT::
-    With advanced selection you can choose multiple files and folders for inclusion and exclusion of synchronization.
+    With advanced selection you can choose multiple files and folders for inclusion and exclusion of :term:`synchronization`.
     For instance if you include the directory ``C:\my_files\ehri`` but want to exclude its subdirectory
     ``C:\my_files\ehri\other_files``.
 
     Another feature is the ability to import lists of path names. This opens the possibility of doing the
-    selection of what will be synchronized in or by another application.
+    selection of what will be :term:`synchronize`\ d in or by another application.
 
 Press `Add directory` or `Add files` respectively if you want to browse to directories or files to be included or
 excluded. When adding files you can choose multiple files by pressing `Shift` and `Ctrl` or `Cmd` keys while
@@ -61,13 +63,13 @@ path names in the explorer that opens. Each entry in the file with path name ent
 
 .. HINT::
     Selected directories or files should be in the :term:`resource directory` that you
-    chose on the :doc:`Configure <rsgui.configure>` page. Only resources that are in the :term:`resource directory`
-    or in one of its subdirectories are subject to synchronization.
+    chose on the :doc:`Configure <rsgui.configure>` page. Only :term:`resource`\ s that are in the :term:`resource directory`
+    or in one of its subdirectories are subject to :term:`synchronization`\ .
 
 Press the `Play...` button if you want to get an impression of how many and which files are included and how many
 and which files are excluded.
 The lists and counts displayed are estimates; automatically excluded files like
-hidden files are not excluded in this display, but will be excluded in the synchronization.
+hidden files are not excluded in this display, but will be excluded in the :term:`synchronization`\ .
 
 The entries in `Includes` and `Excludes` are automatically saved with each :term:`configuration`. Besides that,
 they can also be saved and loaded from the filesystem by pressing the `Save` and `Open` buttons respectively.
