@@ -171,6 +171,8 @@ You can do a :term:`trial run` of a :term:`synchronization`\ . A trial run will 
 how many changes have been detected etc. but will not produce new :term:`sitemap`\ s. Leave the checkbox
 unchecked for a trial run.
 
+.. _config-well-known-at-server-root-label:
+
 'well-known' at server root
 +++++++++++++++++++++++++++
 This reflects the locality of the :term:`Source Description` on the web server.

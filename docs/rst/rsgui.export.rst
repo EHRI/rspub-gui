@@ -83,8 +83,8 @@ Resources
 Errors
     In this area errors that took place during the export process are reported.
 
-Press the `Run` button to start the export process. A popup dialog will ask for your password for the user at the
-web site server.
+Press the `Run` button to start the export process. A popup dialog will ask for the password of the user at the
+web server.
 
 .. TIP::
     | A password may not be needed with key-based authentication.
@@ -94,7 +94,7 @@ While the import process is running you may at any time press the ``Stop`` butto
 
 .. figure:: ../img/export/export_05.png
 
-    *Screenshot of the scp Transport execution window while the import process is running*
+    *Screenshot of the scp Transport execution window while the export process is running*
 
 After the export has finished without errors your :term:`resource`\ s and :term:`sitemap`\ s at the web server
 are now up to date with the local changes after your latest :term:`synchronization`\ .
@@ -103,9 +103,62 @@ are now up to date with the local changes after your latest :term:`synchronizati
 
     *Partial screenshot of the scp Transport execution window after the export process has finished*
 
-.. TIP::
-    The
+.. ATTENTION::
+    You need to have write access to the `Document root`/`Document path` at the remote server. If not, you will
+    have received an error message in the scp Transport execution window.
+
+    Also, if your :term:`source description` is :ref:`at server root <config-well-known-at-server-root-label>`,
+    you need to have write access to the :term:`.well-know <well-known URI>` directory at the `Document root`
+    of the web server.
 
 
 Create a zip file
 +++++++++++++++++
+.. figure:: ../img/export/export_07.png
+
+    *Detail of the export page for creating zip files*
+
+
+Zip filename
+    Fill in the name of the zip file that will be created. Use the `Browse` button to open a file explorer
+    that enables choosing the zip filename.
+
+You have a choice between zipping all :term:`resource`\ s and zipping only the latest changes.
+
+- **Zip all resources** will include all resources mentioned in the :term:`sitemap` documents currently in the :term:`metadata directory`. Useful if you want to completely update the part of your site that hosts :term:`resource`\ s and :term:`sitemap`\ s of the current :term:`configuration`\ .
+- **Zip latest changes** will only include resources that where affected according to the last :term:`synchronization`. The default. This will suffice in most occasions.
+
+Press `Start` to open the zip Transport execution window.
+
+.. figure:: ../img/export/export_08.png
+
+    *The zip Transport execution window*
+
+The zip Transport execution window has three areas for reporting events:
+
+Main events
+    In this area main events of the zip process will be reported.
+
+Resources
+    In this area files that are zipped are listed.
+
+Errors
+    In this area errors that took place during the zip process are reported.
+
+Press the `Run` button to start the zip process. While the zip process is running you may at any time
+press the ``Stop`` button to interrupt the process.
+
+.. figure:: ../img/export/export_09.png
+
+    *The zip Transport execution window after the zip process has finished*
+
+You now need to hand over the zip file to the system administrator of your web server. She should take care of copying
+:term:`resource`\ s and :term:`sitemap`\ s to the correct location on the web server.
+
+.. ATTENTION::
+    No matter what you chose at :ref:`config-well-known-at-server-root-label` during :doc:`rsgui.configure`\ ,
+    the :term:`source description` will always be in the metadata directory in the zip file. Your system
+    administrator should take care to place it in the correct location on the web server. Either keep it in
+    the metadata directory (:ref:`config-well-known-at-server-root-label` was set to **False**) or copy it
+    to the ``{Document root}/.well-known/resourcesync``
+    (:ref:`config-well-known-at-server-root-label` was set to **True**).
