@@ -1,5 +1,3 @@
-:ref:`genindex` | :ref:`search`
-
 Installation
 ============
 
