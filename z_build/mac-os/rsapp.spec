@@ -33,7 +33,7 @@ exe = EXE(pyz,
           console=True )
 app = BUNDLE(exe,
              name='MetadataPublishingTool.app',
-             icon='../../conf/img/icon.icns',
+             icon='../../conf/img/mpt256.icns',
              bundle_identifier='nl.knaw.dans.ehri2.MetadataPublishingTool')
 coll = COLLECT(exe,
                a.binaries,

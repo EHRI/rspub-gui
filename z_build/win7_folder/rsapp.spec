@@ -36,7 +36,7 @@ exe = EXE(pyz,
           upx=True,
           console=False,
           onefile=True,
-          windowed=True, icon='../../conf/img/icon.ico')
+          windowed=True, icon='../../conf/img/mpt256.ico')
 coll = COLLECT(exe,
                a.binaries,
                a.zipfiles,

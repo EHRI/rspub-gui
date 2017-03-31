@@ -37,7 +37,8 @@ Glossary
                 Configure page
 
     DANS
-        Data Archiving and Networked Services. DANS gives permanent access to digital research :term:`resource`\ s.
+        Data Archiving and Networked Services. Netherlands Institute for Permanent Access to
+        Digital Research :term:`Resource`\ s.
         DANS is an institute of the Dutch Academy KNAW and funding organisation NWO.
 
         .. seealso::

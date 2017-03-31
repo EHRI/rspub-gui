@@ -192,13 +192,13 @@ else:
 # The name of an image file (relative to this directory) to place at the top
 # of the sidebar.
 #
-html_logo = "img/favicon.ico"
+html_logo = "img/mpt.ico"
 
 # The name of an image file (relative to this directory) to use as a favicon of
 # the docs.  This file should be a Windows icon file (.ico) being 16x16 or 32x32
 # pixels large.
 #
-html_favicon = "img/favicon.ico"
+html_favicon = "img/mpt.ico"
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
@@ -216,6 +216,7 @@ html_static_path = ['_static']
 # The empty string is equivalent to '%b %d, %Y'.
 #
 # html_last_updated_fmt = None
+html_last_updated_fmt = ''
 
 # If true, SmartyPants will be used to convert quotes and dashes to
 # typographically correct entities.

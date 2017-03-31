@@ -231,6 +231,15 @@ class ParaStrategyDrop(ParaWidget):
         self.combo.setCurrentIndex(strategy.value)
 
 
+class SelectableLabel(QLabel):
+
+    def __init__(self, *__args):
+        QLabel.__init__(self, *__args)
+        self.setContentsMargins(5, 1, 5, 1)
+        self.setTextInteractionFlags(Qt.TextSelectableByMouse)
+        self.setStyleSheet(Style.derived())
+
+
 class WorkWidget(QWidget):
 
     work_started = pyqtSignal()
@@ -467,15 +476,25 @@ class WorkWidget(QWidget):
             event.ignore()
         else:
             self.save_dimensions()
+            self.exit_if_last()
             event.accept()
-            self.close()
-            self.destroy()
 
     def save_dimensions(self):
         LOG.debug("Saving dimensions for work-window %s" % self.work)
         self.conf.set_work_widget_width(self.work, self.width())
         self.conf.set_work_widget_height(self.work, self.height())
         self.conf.persist()
+
+    def exit_if_last(self):
+        count_windows = 0
+        for window in QApplication.instance().topLevelWindows():
+            if window.type() == 1 or window.type() == 15:
+                count_windows += 1
+
+        LOG.debug("Testing for last window. window_count=%d" % count_windows)
+        if count_windows == 1:
+            LOG.debug("Closing last window")
+            QApplication.instance().quit()
 
 
 class Answer(object):

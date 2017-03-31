@@ -22,7 +22,7 @@ from PyQt5.QtWidgets import QRadioButton
 from PyQt5.QtWidgets import QVBoxLayout
 
 from rsapp.gui.style import Style
-from rsapp.gui.widgets import ParaLine, ParaWidget, WorkWidget, Answer
+from rsapp.gui.widgets import ParaLine, ParaWidget, WorkWidget, Answer, SelectableLabel
 from rspub.core.rs_paras import RsParameters
 from rspub.core.transport import Transport
 from rspub.util.observe import EventObserver
@@ -73,25 +73,13 @@ class ExportFrame(QFrame):
         grid1.setVerticalSpacing(2)
         grid1.setHorizontalSpacing(2)
 
-        self.lbl_metadata_key = QLabel(self)
-        self.lbl_metadata_value = QLabel(self)
-        self.lbl_metadata_key.setContentsMargins(5, 1, 5, 1)
-        self.lbl_metadata_value.setContentsMargins(5, 1, 5, 1)
-        self.lbl_metadata_key.setTextInteractionFlags(Qt.TextSelectableByMouse)
-        self.lbl_metadata_value.setTextInteractionFlags(Qt.TextSelectableByMouse)
-        self.lbl_metadata_key.setStyleSheet(Style.derived())
-        self.lbl_metadata_value.setStyleSheet(Style.derived())
+        self.lbl_metadata_key = SelectableLabel(self)
+        self.lbl_metadata_value = SelectableLabel(self)
         grid1.addWidget(self.lbl_metadata_key, 2, 1)
         grid1.addWidget(self.lbl_metadata_value, 2, 2)
 
-        self.lbl_last_execution_key = QLabel(self)
-        self.lbl_last_execution_value = QLabel(self)
-        self.lbl_last_execution_key.setContentsMargins(5, 1, 5, 1)
-        self.lbl_last_execution_value.setContentsMargins(5, 1, 5, 1)
-        self.lbl_last_execution_key.setTextInteractionFlags(Qt.TextSelectableByMouse)
-        self.lbl_last_execution_value.setTextInteractionFlags(Qt.TextSelectableByMouse)
-        self.lbl_last_execution_key.setStyleSheet(Style.derived())
-        self.lbl_last_execution_value.setStyleSheet(Style.derived())
+        self.lbl_last_execution_key = SelectableLabel(self)
+        self.lbl_last_execution_value = SelectableLabel(self)
         grid1.addWidget(self.lbl_last_execution_key, 3, 1)
         grid1.addWidget(self.lbl_last_execution_value, 3, 2)
 
@@ -254,7 +242,7 @@ class ExportFrame(QFrame):
 
 class TransportWidget(WorkWidget):
 
-    def __init__(self, export_mode, all_resources = False):
+    def __init__(self, export_mode, all_resources=False):
         WorkWidget.__init__(self, work=export_mode + " " + "Transport", title_style=Style.transport_title())
         self.chk_trial_run.setVisible(False)
         self.export_mode = export_mode
