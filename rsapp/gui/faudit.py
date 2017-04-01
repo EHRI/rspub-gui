@@ -123,6 +123,9 @@ class AuditFrame(QFrame):
         self.lbl_web_server_key.setText(_("web_server_label"))
         self.lbl_server_path_key.setText(_("server_path_label"))
         #
+        self.radio_all.setText(_("Audit all resources"))
+        self.radio_latest.setText(_("Audit latest changes"))
+        self.btn_start.setText(_("Start"))
 
     def on_switch_configuration(self, name=None):
         LOG.debug("Switch configuration: %s" % name)
@@ -138,7 +141,8 @@ class AuditFrame(QFrame):
         #
 
     def on_switch_tab(self, from_index, to_index):
-        pass
+        if to_index == self.index:
+            self.on_switch_configuration()
 
     def on_btn_start_clicked(self):
         self.activate_worker(self.radio_all.isChecked())
@@ -349,7 +353,7 @@ class AuditThread(QThread, EventObserver):
         txt += "</td><td>"
         txt += str(count_global_errors)
         txt += "</td></tr><tr><td>"
-        txt += _("<b>Total errors</b>") + "&nbsp;"
+        txt += "<b>" + _("Total errors") + "&nbsp;" + "</b>"
         txt += "</td><td>"
         txt += "<b>" + str(total_errors) + "</b>"
         txt += "</td></tr></table><br/><br/>"

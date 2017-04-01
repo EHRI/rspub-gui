@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: rspub-gui 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-03-15 15:42+0100\n"
-"PO-Revision-Date: 2017-03-15 15:58+0100\n"
+"POT-Creation-Date: 2017-03-31 19:23+0200\n"
+"PO-Revision-Date: 2017-03-31 19:24+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -36,182 +36,280 @@ msgstr ""
 "\n"
 "%s"
 
-#: rsapp/gui/fconfigure.py:70
+#: rsapp/gui/faudit.py:59 rsapp/gui/faudit.py:120 rsapp/gui/fconfigure.py:50
+#: rsapp/gui/fconfigure.py:90 rsapp/gui/fexecute.py:68
+#: rsapp/gui/fexecute.py:125 rsapp/gui/fexport.py:65 rsapp/gui/fexport.py:174
+#: rsapp/gui/fimport.py:61 rsapp/gui/fimport.py:107 rsapp/gui/fselect.py:70
+#: rsapp/gui/fselect.py:180
+msgid "Help..."
+msgstr "Help…"
+
+#: rsapp/gui/faudit.py:96 rsapp/gui/faudit.py:126
+msgid "Audit all resources"
+msgstr "Audit alle resources"
+
+#: rsapp/gui/faudit.py:98 rsapp/gui/faudit.py:127
+msgid "Audit latest changes"
+msgstr "Audit laatste wijzigingen"
+
+#: rsapp/gui/faudit.py:102 rsapp/gui/faudit.py:128 rsapp/gui/fexport.py:182
+#: rsapp/gui/fexport.py:187 rsapp/gui/fimport.py:90 rsapp/gui/fimport.py:109
+msgid "Start"
+msgstr "Start"
+
+#: rsapp/gui/faudit.py:119 rsapp/gui/faudit.py:132
+#, python-format
+msgid "Audit: '%s'"
+msgstr "Audit: '%s'"
+
+#: rsapp/gui/faudit.py:121
+msgid "Audit based on"
+msgstr "Audit gebaseerd op"
+
+#: rsapp/gui/faudit.py:122 rsapp/gui/fexecute.py:196 rsapp/gui/fexport.py:176
+msgid "last_execution_label"
+msgstr "Gedraaid op"
+
+#: rsapp/gui/faudit.py:123
+msgid "web_server_label"
+msgstr "Web server"
+
+#: rsapp/gui/faudit.py:124 rsapp/gui/fexport.py:107 rsapp/gui/fexport.py:179
+#: rsapp/gui/fexport.py:239
+msgid "server_path_label"
+msgstr "Document pad"
+
+#: rsapp/gui/faudit.py:218
+msgid "Exception in audit thread: {0}"
+msgstr "Fout in audit thread: {0}"
+
+#: rsapp/gui/faudit.py:232
+#, python-format
+msgid "Start audit. all resources=%s"
+msgstr "Start audit. alle resources=%s"
+
+#: rsapp/gui/faudit.py:237 rsapp/gui/faudit.py:242 rsapp/gui/fexecute.py:387
+#: rsapp/gui/fexecute.py:394 rsapp/gui/fexport.py:454 rsapp/gui/fexport.py:459
+#: rsapp/gui/fimport.py:276 rsapp/gui/fselect.py:606 rsapp/gui/fselect.py:611
+msgid "Process interrupted by user"
+msgstr "Proces onderbroken door gebruiker"
+
+#: rsapp/gui/faudit.py:313
+msgid "End Audit."
+msgstr "Einde Audit."
+
+#: rsapp/gui/faudit.py:317
+msgid "total resources"
+msgstr "totaal aantal resources"
+
+#: rsapp/gui/faudit.py:321
+msgid "resources free of error"
+msgstr "resources zonder fouten"
+
+#: rsapp/gui/faudit.py:325
+msgid "resources not found"
+msgstr "niet gevonden resources"
+
+#: rsapp/gui/faudit.py:329
+msgid "resources not in sync"
+msgstr "resources uit sync"
+
+#: rsapp/gui/faudit.py:334
+msgid "total sitemaps"
+msgstr "totaal aantal sitemaps"
+
+#: rsapp/gui/faudit.py:338
+msgid "sitemaps free of error"
+msgstr "sitemaps zonder fouten"
+
+#: rsapp/gui/faudit.py:342
+msgid "sitemaps not found"
+msgstr "niet gevonden sitemaps"
+
+#: rsapp/gui/faudit.py:346
+msgid "sitemaps not in sync"
+msgstr "sitemaps uit sync"
+
+#: rsapp/gui/faudit.py:351
+msgid "other errors"
+msgstr "andere fouten"
+
+#: rsapp/gui/faudit.py:355
+msgid "Total errors"
+msgstr "Totaal aantal fouten"
+
+#: rsapp/gui/fconfigure.py:75
 msgid "Reset"
 msgstr "Reset"
 
-#: rsapp/gui/fconfigure.py:80 rsapp/gui/fconfigure.py:85
+#: rsapp/gui/fconfigure.py:89 rsapp/gui/fconfigure.py:95
 #, python-format
 msgid "Configure parameters: '%s'"
 msgstr "Parameters '%s' configureren"
 
-#: rsapp/gui/fconfigure.py:89
+#: rsapp/gui/fconfigure.py:99
 msgid "Reset current parameters"
 msgstr "Parameters resetten"
 
-#: rsapp/gui/fconfigure.py:90
+#: rsapp/gui/fconfigure.py:100
 #, python-format
 msgid "Reset '%s' parameters to default values?"
 msgstr "Parameters '%s' naar default waarden terugzetten?"
 
-#: rsapp/gui/fconfigure.py:107
+#: rsapp/gui/fconfigure.py:117
 #, python-format
 msgid "Parameters '%s' has %d error(s)."
 msgstr "Parameters '%s' bevat %d fouten."
 
-#: rsapp/gui/fconfigure.py:109 rsapp/gui/widgets.py:411 rsapp/gui/wmain.py:371
+#: rsapp/gui/fconfigure.py:119 rsapp/gui/widgets.py:420 rsapp/gui/wmain.py:376
 msgid "Ok to proceed?"
 msgstr "Doorgaan?"
 
-#: rsapp/gui/fconfigure.py:122 rsapp/gui/fexecute.py:169
+#: rsapp/gui/fconfigure.py:132 rsapp/gui/fexecute.py:177
 msgid "resource_dir_label"
 msgstr "Digitale bron folder"
 
-#: rsapp/gui/fconfigure.py:123 rsapp/gui/fexecute.py:170
+#: rsapp/gui/fconfigure.py:133 rsapp/gui/fexecute.py:178
 msgid "metadata_dir_label"
 msgstr "Metadata folder"
 
-#: rsapp/gui/fconfigure.py:124 rsapp/gui/fexecute.py:172
+#: rsapp/gui/fconfigure.py:134 rsapp/gui/fexecute.py:180
 msgid "description_dir_label"
 msgstr "Bronbeschrijving folder"
 
-#: rsapp/gui/fconfigure.py:125 rsapp/gui/fexecute.py:182
+#: rsapp/gui/fconfigure.py:135 rsapp/gui/fexecute.py:190
 msgid "plugin_dir_label"
 msgstr "Plugin folder"
 
-#: rsapp/gui/fconfigure.py:126 rsapp/gui/fexecute.py:174
+#: rsapp/gui/fconfigure.py:136 rsapp/gui/fexecute.py:182
 msgid "url_prefix_label"
 msgstr "URL prefix"
 
-#: rsapp/gui/fconfigure.py:127 rsapp/gui/fexecute.py:178
+#: rsapp/gui/fconfigure.py:137 rsapp/gui/fexecute.py:186
 msgid "strategy_label"
 msgstr "Strategie"
 
-#: rsapp/gui/fconfigure.py:128 rsapp/gui/fexecute.py:183
+#: rsapp/gui/fconfigure.py:138 rsapp/gui/fexecute.py:191
 msgid "max_items_in_list_label"
 msgstr "Max. aantal items"
 
-#: rsapp/gui/fconfigure.py:129 rsapp/gui/fexecute.py:184
+#: rsapp/gui/fconfigure.py:139 rsapp/gui/fexecute.py:192
 msgid "zero_fill_filename_label"
 msgstr "Nul-vul bestandsnaam"
 
-#: rsapp/gui/fconfigure.py:130 rsapp/gui/fexecute.py:186
+#: rsapp/gui/fconfigure.py:140 rsapp/gui/fexecute.py:194
 msgid "is_saving_pretty_xml_label"
 msgstr "Sitemaps met nieuwe regels"
 
-#: rsapp/gui/fconfigure.py:131 rsapp/gui/fexecute.py:187
+#: rsapp/gui/fconfigure.py:141 rsapp/gui/fexecute.py:195
 msgid "is_saving_sitemaps_label"
 msgstr "Sitemaps opslaan"
 
-#: rsapp/gui/fconfigure.py:132 rsapp/gui/fexecute.py:175
+#: rsapp/gui/fconfigure.py:142 rsapp/gui/fexecute.py:183
 msgid "has_wellknown_at_root_label"
 msgstr "‘well-known’ op server root"
 
-#: rsapp/gui/fexecute.py:105 rsapp/gui/fexecute.py:118
+#: rsapp/gui/fexecute.py:108 rsapp/gui/fexecute.py:126
 msgid "Run..."
 msgstr "Uitvoeren…"
 
-#: rsapp/gui/fexecute.py:117 rsapp/gui/fexecute.py:124
+#: rsapp/gui/fexecute.py:124 rsapp/gui/fexecute.py:132
 #, python-format
 msgid "Execute configuration: '%s'"
 msgstr "Configuratie '%s' uitvoeren"
 
 # Does not need translation
-#: rsapp/gui/fexecute.py:133 rsapp/gui/widgets.py:150 rsapp/gui/widgets.py:155
+#: rsapp/gui/fexecute.py:141 rsapp/gui/widgets.py:150 rsapp/gui/widgets.py:155
 #: rsapp/gui/widgets.py:162 rsapp/gui/widgets.py:191 rsapp/gui/widgets.py:222
 msgid "_label"
 msgstr ""
 
-#: rsapp/gui/fexecute.py:168
+#: rsapp/gui/fexecute.py:176
 msgid "configuration_name_label"
 msgstr "Naam van de configuratie"
 
-#: rsapp/gui/fexecute.py:171
+#: rsapp/gui/fexecute.py:179
 msgid "abs_metadata_dir_label"
 msgstr "Absoluut pad naar metadata folder"
 
-#: rsapp/gui/fexecute.py:173
+#: rsapp/gui/fexecute.py:181
 msgid "abs_description_path_label"
 msgstr "Absoluut pad naar bronbeschrijving"
 
-#: rsapp/gui/fexecute.py:176
+#: rsapp/gui/fexecute.py:184
 msgid "description_url_label"
 msgstr "URL voor bronbeschrijving"
 
-#: rsapp/gui/fexecute.py:177
+#: rsapp/gui/fexecute.py:185
 msgid "capabilitylist_url_label"
 msgstr "URL voor capabilitylist"
 
-#: rsapp/gui/fexecute.py:179
+#: rsapp/gui/fexecute.py:187
 msgid "selector_file_label"
 msgstr "Geassocieerd selector bestand"
 
-#: rsapp/gui/fexecute.py:180
+#: rsapp/gui/fexecute.py:188
 msgid "simple_select_file_label"
 msgstr "Locatie eenvoudige selectie"
 
-#: rsapp/gui/fexecute.py:181
+#: rsapp/gui/fexecute.py:189
 msgid "select_mode_label"
 msgstr "Selectie modus"
 
-#: rsapp/gui/fexecute.py:185
+#: rsapp/gui/fexecute.py:193
 msgid "example_filename_label"
 msgstr "Voorbeeld bestandsnaam"
 
-#: rsapp/gui/fexecute.py:188 rsapp/gui/fexport.py:178
-msgid "last_execution_label"
-msgstr "Gedraaid op"
-
-#: rsapp/gui/fexecute.py:192
+#: rsapp/gui/fexecute.py:200
 msgid "Strategy.resourcelist"
 msgstr "Strategie nieuwe resourcelist"
 
-#: rsapp/gui/fexecute.py:193
+#: rsapp/gui/fexecute.py:201
 msgid "Strategy.new_changelist"
 msgstr "Strategie nieuwe changelist"
 
-#: rsapp/gui/fexecute.py:194
+#: rsapp/gui/fexecute.py:202
 msgid "Strategy.inc_changelist"
 msgstr "Strategie incrementele changelist"
 
-#: rsapp/gui/fexecute.py:195
+#: rsapp/gui/fexecute.py:203
 msgid "True"
 msgstr "Ja"
 
-#: rsapp/gui/fexecute.py:196
+#: rsapp/gui/fexecute.py:204
 msgid "False"
 msgstr "Neen"
 
-#: rsapp/gui/fexecute.py:197
+#: rsapp/gui/fexecute.py:205
 msgid "None"
 msgstr "(Geen)"
 
-#: rsapp/gui/fexecute.py:198
+#: rsapp/gui/fexecute.py:206
 msgid "SelectMode.simple"
 msgstr "Selectie-modus eenvoudig"
 
-#: rsapp/gui/fexecute.py:199
+#: rsapp/gui/fexecute.py:207
 msgid "SelectMode.selector"
 msgstr "Selectie-modus selector"
 
-#: rsapp/gui/fexecute.py:208 rsapp/gui/wmain.py:282 rsapp/gui/wmain.py:290
+#: rsapp/gui/fexecute.py:216 rsapp/gui/wmain.py:285 rsapp/gui/wmain.py:294
 msgid "Execute"
 msgstr "Uitvoeren"
 
-#: rsapp/gui/fexecute.py:270
+#: rsapp/gui/fexecute.py:278
 msgid "Exception in executor thread: {0}"
 msgstr "Fout tijdens uitvoeren: {0}"
 
-#: rsapp/gui/fexecute.py:278
+#: rsapp/gui/fexecute.py:286
 #, python-format
 msgid "Start execution: %s"
 msgstr "Start uitvoeren: %s"
 
-#: rsapp/gui/fexecute.py:282
+#: rsapp/gui/fexecute.py:290
 msgid "Clear metadata directory"
 msgstr "Metadata folder schoonmaken"
 
-#: rsapp/gui/fexecute.py:283
+#: rsapp/gui/fexecute.py:291
 #, python-format
 msgid ""
 "Clearing xml-files from \n"
@@ -220,400 +318,385 @@ msgstr ""
 "xml-bestanden verwijderen uit \n"
 "%s"
 
-#: rsapp/gui/fexecute.py:305
+#: rsapp/gui/fexecute.py:313
 msgid "Summary of changes"
 msgstr "Veranderingen:"
 
-#: rsapp/gui/fexecute.py:309
+#: rsapp/gui/fexecute.py:317
 msgid "created"
 msgstr "nieuw"
 
-#: rsapp/gui/fexecute.py:313
+#: rsapp/gui/fexecute.py:321
 msgid "updated"
 msgstr "bijgewerkt"
 
-#: rsapp/gui/fexecute.py:317
+#: rsapp/gui/fexecute.py:325
 msgid "deleted"
 msgstr "verwijderd"
 
-#: rsapp/gui/fexecute.py:321
+#: rsapp/gui/fexecute.py:329
 msgid "unchanged"
 msgstr "niet veranderd"
 
-#: rsapp/gui/fexecute.py:333
+#: rsapp/gui/fexecute.py:341
 #, python-format
 msgid "Total file count: %d"
 msgstr "Totaal aantal bestanden: %d"
 
-#: rsapp/gui/fexecute.py:334
+#: rsapp/gui/fexecute.py:342
 #, python-format
 msgid "Excluded by selector: %d"
 msgstr "Door selector uitgesloten: %d"
 
-#: rsapp/gui/fexecute.py:335
+#: rsapp/gui/fexecute.py:343
 #, python-format
 msgid "Rejected by resource gate: %d"
 msgstr "Door resource gate afgewezen: %d"
 
-#: rsapp/gui/fexecute.py:336
+#: rsapp/gui/fexecute.py:344
 #, python-format
 msgid "Total resources synchronized: %d"
 msgstr "Totaal gesynchroniseerde resources: %d"
 
-#: rsapp/gui/fexecute.py:337
+#: rsapp/gui/fexecute.py:345
 #, python-format
 msgid "End execution: %s"
 msgstr "Einde uitvoering: %s"
 
-#: rsapp/gui/fexecute.py:347
+#: rsapp/gui/fexecute.py:355
 msgid "path"
 msgstr "pad"
 
-#: rsapp/gui/fexecute.py:351
+#: rsapp/gui/fexecute.py:359
 msgid "uri"
 msgstr "uri"
 
-#: rsapp/gui/fexecute.py:355
+#: rsapp/gui/fexecute.py:363
 msgid "count resources"
 msgstr "aantal resources"
 
-#: rsapp/gui/fexecute.py:359
+#: rsapp/gui/fexecute.py:367
 msgid "document saved"
 msgstr "document opgeslagen"
 
-#: rsapp/gui/fexecute.py:371 rsapp/gui/fselect.py:588
+#: rsapp/gui/fexecute.py:379 rsapp/gui/fselect.py:598
 #, python-format
 msgid "File does not exist: %s"
 msgstr "Bestand bestaat niet: %s"
 
-#: rsapp/gui/fexecute.py:374 rsapp/gui/fselect.py:591
+#: rsapp/gui/fexecute.py:382 rsapp/gui/fselect.py:601
 #, python-format
 msgid "Not a regular file: %s"
 msgstr "Geen regulier bestand: %s"
 
-#: rsapp/gui/fexecute.py:379 rsapp/gui/fexecute.py:386 rsapp/gui/fexport.py:456
-#: rsapp/gui/fexport.py:461 rsapp/gui/fimport.py:267 rsapp/gui/fselect.py:596
-#: rsapp/gui/fselect.py:601
-msgid "Process interrupted by user"
-msgstr "Proces onderbroken door gebruiker"
-
-#: rsapp/gui/fexport.py:105 rsapp/gui/fexport.py:180
+#: rsapp/gui/fexport.py:98 rsapp/gui/fexport.py:178
 msgid "Transfer files with Secure Copy Protocol (scp)"
 msgstr "Bestanden overzetten met Secure Copy Protocol (scp)"
 
-#: rsapp/gui/fexport.py:114 rsapp/gui/fexport.py:181 rsapp/gui/fexport.py:241
-msgid "server_path_label"
-msgstr "Document pad"
-
-#: rsapp/gui/fexport.py:126 rsapp/gui/fexport.py:182
+#: rsapp/gui/fexport.py:119 rsapp/gui/fexport.py:180
 msgid "Export all resources"
 msgstr "Alle bestanden exporteren"
 
-#: rsapp/gui/fexport.py:128 rsapp/gui/fexport.py:183
+#: rsapp/gui/fexport.py:121 rsapp/gui/fexport.py:181
 msgid "Export latest changes"
 msgstr "Laatste wijzigingen exporteren"
 
-#: rsapp/gui/fexport.py:132
+#: rsapp/gui/fexport.py:125
 msgid "Start transfer"
 msgstr "Transfer starten"
 
-#: rsapp/gui/fexport.py:146 rsapp/gui/fexport.py:186
+#: rsapp/gui/fexport.py:139 rsapp/gui/fexport.py:184
 msgid "Create a .zip file"
 msgstr "Een .zip-bestand aanmaken"
 
-#: rsapp/gui/fexport.py:158 rsapp/gui/fexport.py:187
+#: rsapp/gui/fexport.py:151 rsapp/gui/fexport.py:185
 msgid "Zip all resources"
 msgstr "Alle bestanden inpakken"
 
-#: rsapp/gui/fexport.py:160 rsapp/gui/fexport.py:188
+#: rsapp/gui/fexport.py:153 rsapp/gui/fexport.py:186
 msgid "Zip latest changes"
 msgstr "Laatste wijzigingen inpakken"
 
-#: rsapp/gui/fexport.py:164
+#: rsapp/gui/fexport.py:157
 msgid "Start creation"
 msgstr "Start creatie"
 
-#: rsapp/gui/fexport.py:176 rsapp/gui/fexport.py:193
+#: rsapp/gui/fexport.py:173 rsapp/gui/fexport.py:191
 #, python-format
 msgid "Export: '%s'"
 msgstr "Exporteren: '%s'"
 
-#: rsapp/gui/fexport.py:177
+#: rsapp/gui/fexport.py:175
 msgid "Export based on"
 msgstr "Export gebaseerd op"
 
-#: rsapp/gui/fexport.py:184 rsapp/gui/fexport.py:189 rsapp/gui/fimport.py:85
-#: rsapp/gui/fimport.py:100
-msgid "Start"
-msgstr "Start"
-
-#: rsapp/gui/fexport.py:237
+#: rsapp/gui/fexport.py:235
 msgid "exp_scp_server_label"
 msgstr "Server"
 
-#: rsapp/gui/fexport.py:238
+#: rsapp/gui/fexport.py:236
 msgid "exp_scp_port_label"
 msgstr "Port"
 
-#: rsapp/gui/fexport.py:239
+#: rsapp/gui/fexport.py:237
 msgid "exp_scp_user_label"
 msgstr "User"
 
-#: rsapp/gui/fexport.py:240
+#: rsapp/gui/fexport.py:238
 msgid "exp_scp_document_root_label"
 msgstr "Document root"
 
-#: rsapp/gui/fexport.py:242
+#: rsapp/gui/fexport.py:240
 msgid "zip_filename_label"
 msgstr "Zip bestandsnaam"
 
-#: rsapp/gui/fexport.py:252
+#: rsapp/gui/fexport.py:250
 msgid "Transport"
 msgstr "Transporteren"
 
-#: rsapp/gui/fexport.py:259 rsapp/gui/fimport.py:151
+#: rsapp/gui/fexport.py:257 rsapp/gui/fimport.py:160
 #, python-format
 msgid "Connecting to %s"
 msgstr "Verbinden met %s"
 
-#: rsapp/gui/fexport.py:260 rsapp/gui/fimport.py:152
+#: rsapp/gui/fexport.py:258 rsapp/gui/fimport.py:161
 #, python-format
 msgid "Password for %s@%s:"
 msgstr "Wachtwoord voor %s@%s:"
 
-#: rsapp/gui/fexport.py:321
+#: rsapp/gui/fexport.py:319
 msgid "Exception in transporter thread: {0}"
 msgstr "Fout in transporter thread: {0}"
 
-#: rsapp/gui/fexport.py:336
+#: rsapp/gui/fexport.py:334
 #, python-format
 msgid "Start export. Mode=%s, all resources=%s"
 msgstr "Start export. Mode=%s, all resources=%s"
 
-#: rsapp/gui/fexport.py:340
+#: rsapp/gui/fexport.py:338
 msgid "Copy resources and sitemaps to temporary directory..."
 msgstr "Resources en sitemaps naar tijdelijke directory kopiëren…"
 
-#: rsapp/gui/fexport.py:360
+#: rsapp/gui/fexport.py:358
 msgid "Resource not found: "
 msgstr "Resource niet gevonden: "
 
-#: rsapp/gui/fexport.py:366
+#: rsapp/gui/fexport.py:364
 msgid "Sitemap not found: "
 msgstr "Sitemap niet gevonden: "
 
-#: rsapp/gui/fexport.py:375
+#: rsapp/gui/fexport.py:373
 msgid "Creating zip file: "
 msgstr "Zip-file creëren: "
 
-#: rsapp/gui/fexport.py:379
+#: rsapp/gui/fexport.py:377
 msgid "This may take a while ...."
 msgstr "Dit kan enige tijd duren …."
 
-#: rsapp/gui/fexport.py:390 rsapp/gui/fimport.py:224
+#: rsapp/gui/fexport.py:388 rsapp/gui/fimport.py:233
 msgid "Creating ssh client. "
 msgstr "SSH client creëren."
 
-#: rsapp/gui/fexport.py:398
+#: rsapp/gui/fexport.py:396
 msgid "Transfering files: "
 msgstr "Overzetten van bestanden: "
 
-#: rsapp/gui/fexport.py:432
+#: rsapp/gui/fexport.py:430
 #, python-format
 msgid "End export. Mode=%s"
 msgstr "Einde export. Mode=%s"
 
-#: rsapp/gui/fexport.py:435
+#: rsapp/gui/fexport.py:433
 msgid "resources"
 msgstr "resources"
 
-#: rsapp/gui/fexport.py:439
+#: rsapp/gui/fexport.py:437
 msgid "sitemaps"
 msgstr "sitemaps"
 
-#: rsapp/gui/fexport.py:443
+#: rsapp/gui/fexport.py:441
 msgid "transfers"
 msgstr "transfers"
 
-#: rsapp/gui/fexport.py:447 rsapp/gui/fimport.py:259
+#: rsapp/gui/fexport.py:445 rsapp/gui/fimport.py:268
 msgid "errors"
 msgstr "fouten"
 
-#: rsapp/gui/fimport.py:69 rsapp/gui/fimport.py:99
+#: rsapp/gui/fimport.py:74 rsapp/gui/fimport.py:108
 msgid "Import files with Secure Copy Protocol (scp)"
 msgstr "Bestanden importeren met Secure Copy Protocol (scp)"
 
-#: rsapp/gui/fimport.py:97
+#: rsapp/gui/fimport.py:106
 msgid "Import resources"
 msgstr "Resources importeren"
 
-#: rsapp/gui/fimport.py:133
+#: rsapp/gui/fimport.py:142
 msgid "imp_scp_server_label"
 msgstr "Server"
 
-#: rsapp/gui/fimport.py:134
+#: rsapp/gui/fimport.py:143
 msgid "imp_scp_port_label"
 msgstr "Poort"
 
-#: rsapp/gui/fimport.py:135
+#: rsapp/gui/fimport.py:144
 msgid "imp_scp_user_label"
 msgstr "Gebruikersnaam"
 
-#: rsapp/gui/fimport.py:136
+#: rsapp/gui/fimport.py:145
 msgid "imp_scp_remote_path_label"
 msgstr "Pad op server"
 
-#: rsapp/gui/fimport.py:137
+#: rsapp/gui/fimport.py:146
 msgid "imp_scp_local_path_label"
 msgstr "Lokaal pad"
 
-#: rsapp/gui/fimport.py:145 rsapp/gui/wmain.py:280 rsapp/gui/wmain.py:288
+#: rsapp/gui/fimport.py:154 rsapp/gui/wmain.py:283 rsapp/gui/wmain.py:292
 msgid "Import"
 msgstr "Importeren"
 
-#: rsapp/gui/fimport.py:200
+#: rsapp/gui/fimport.py:209
 msgid "Exception in importer thread: {0}"
 msgstr "Fout in importer thread: {0}"
 
-#: rsapp/gui/fimport.py:213
+#: rsapp/gui/fimport.py:222
 msgid "Importing files..."
 msgstr "Bestanden importeren…"
 
-#: rsapp/gui/fimport.py:252
+#: rsapp/gui/fimport.py:261
 msgid "End import."
 msgstr "Einde import"
 
-#: rsapp/gui/fimport.py:255
+#: rsapp/gui/fimport.py:264
 msgid "imports"
 msgstr "aantal"
 
-#: rsapp/gui/fselect.py:56 rsapp/gui/fselect.py:170
+#: rsapp/gui/fselect.py:58 rsapp/gui/fselect.py:179
 msgid "Select resources"
 msgstr "Bronbestanden selecteren"
 
-#: rsapp/gui/fselect.py:71
+#: rsapp/gui/fselect.py:76
 msgid "Simpel selection: One directory"
 msgstr "Simpel: Eén folder"
 
-#: rsapp/gui/fselect.py:76 rsapp/gui/fselect.py:172
+#: rsapp/gui/fselect.py:81 rsapp/gui/fselect.py:182
 msgid "Location"
 msgstr "Plaats"
 
-#: rsapp/gui/fselect.py:81 rsapp/gui/fselect.py:173 rsapp/gui/widgets.py:163
+#: rsapp/gui/fselect.py:86 rsapp/gui/fselect.py:183 rsapp/gui/widgets.py:163
 msgid "Browse"
 msgstr "Bladeren"
 
-#: rsapp/gui/fselect.py:84 rsapp/gui/fselect.py:154 rsapp/gui/fselect.py:174
-#: rsapp/gui/fselect.py:187
+#: rsapp/gui/fselect.py:89 rsapp/gui/fselect.py:159 rsapp/gui/fselect.py:184
+#: rsapp/gui/fselect.py:197
 msgid "Play..."
 msgstr "Speel…"
 
-#: rsapp/gui/fselect.py:95 rsapp/gui/fselect.py:175
+#: rsapp/gui/fselect.py:100 rsapp/gui/fselect.py:185
 msgid "Advanced: Create a selector"
 msgstr "Geavanceerd: Een selector maken"
 
-#: rsapp/gui/fselect.py:101 rsapp/gui/fselect.py:184
+#: rsapp/gui/fselect.py:106 rsapp/gui/fselect.py:194
 msgid "Selector"
 msgstr "Selector"
 
-#: rsapp/gui/fselect.py:108 rsapp/gui/fselect.py:176
+#: rsapp/gui/fselect.py:113 rsapp/gui/fselect.py:186
 msgid "Includes"
 msgstr "Insluiten"
 
-#: rsapp/gui/fselect.py:112 rsapp/gui/fselect.py:133 rsapp/gui/fselect.py:177
-#: rsapp/gui/fselect.py:181
+#: rsapp/gui/fselect.py:117 rsapp/gui/fselect.py:138 rsapp/gui/fselect.py:187
+#: rsapp/gui/fselect.py:191
 msgid "Add directory"
 msgstr "Folder toevoegen"
 
-#: rsapp/gui/fselect.py:114 rsapp/gui/fselect.py:135 rsapp/gui/fselect.py:178
-#: rsapp/gui/fselect.py:182
+#: rsapp/gui/fselect.py:119 rsapp/gui/fselect.py:140 rsapp/gui/fselect.py:188
+#: rsapp/gui/fselect.py:192
 msgid "Add files"
 msgstr "Bestanden toevoegen"
 
-#: rsapp/gui/fselect.py:116 rsapp/gui/fselect.py:137 rsapp/gui/fselect.py:179
-#: rsapp/gui/fselect.py:183
+#: rsapp/gui/fselect.py:121 rsapp/gui/fselect.py:142 rsapp/gui/fselect.py:189
+#: rsapp/gui/fselect.py:193
 msgid "Import entries"
 msgstr "Items importeren"
 
-#: rsapp/gui/fselect.py:129 rsapp/gui/fselect.py:180
+#: rsapp/gui/fselect.py:134 rsapp/gui/fselect.py:190
 msgid "Excludes"
 msgstr "Uitsluiten"
 
-#: rsapp/gui/fselect.py:150 rsapp/gui/fselect.py:185
+#: rsapp/gui/fselect.py:155 rsapp/gui/fselect.py:195
 msgid "Open..."
 msgstr "Openen…"
 
-#: rsapp/gui/fselect.py:152 rsapp/gui/fselect.py:186
+#: rsapp/gui/fselect.py:157 rsapp/gui/fselect.py:196
 msgid "Save as..."
 msgstr "Opslaan als…"
 
-#: rsapp/gui/fselect.py:171
+#: rsapp/gui/fselect.py:181
 msgid "Simple selection: One directory"
 msgstr "Simpele selectie: Eén directory"
 
-#: rsapp/gui/fselect.py:302
+#: rsapp/gui/fselect.py:312
 msgid "Import included filenames"
 msgstr "Ingesloten bestandsnamen importeren"
 
-#: rsapp/gui/fselect.py:332
+#: rsapp/gui/fselect.py:342
 msgid "Import excluded filenames"
 msgstr "Uitgesloten bestandsnamen importeren"
 
-#: rsapp/gui/fselect.py:344
+#: rsapp/gui/fselect.py:354
 msgid "Save selector"
 msgstr "Selector opslaan"
 
-#: rsapp/gui/fselect.py:351
+#: rsapp/gui/fselect.py:361
 msgid "Open a new selector"
 msgstr "Een nieuwe selector openen"
 
-#: rsapp/gui/fselect.py:356
+#: rsapp/gui/fselect.py:366
 msgid "Open selector"
 msgstr "Een selector openen"
 
-#: rsapp/gui/fselect.py:366
+#: rsapp/gui/fselect.py:376
 msgid "Selector has unsaved changes."
 msgstr "De selector heeft niet opgeslagen veranderingen"
 
-#: rsapp/gui/fselect.py:368
+#: rsapp/gui/fselect.py:378
 msgid "Save selector?"
 msgstr "Selector opslaan?"
 
-#: rsapp/gui/fselect.py:393
+#: rsapp/gui/fselect.py:403
 msgid "Advanced: List resources"
 msgstr "Geavanceerd: Lijst met bronbestanden"
 
-#: rsapp/gui/fselect.py:394
+#: rsapp/gui/fselect.py:404
 msgid "Simpel selection: List resources"
 msgstr "Eenvoudige selectie: Lijst met bronbestanden"
 
-#: rsapp/gui/fselect.py:421 rsapp/gui/fselect.py:484
+#: rsapp/gui/fselect.py:431 rsapp/gui/fselect.py:494
 msgid "Selected resources"
 msgstr "Geselecteerde bronbestanden"
 
-#: rsapp/gui/fselect.py:449 rsapp/gui/fselect.py:485
+#: rsapp/gui/fselect.py:459 rsapp/gui/fselect.py:495
 msgid "Selected resources:"
 msgstr "Geselecteerde bronbestanden:"
 
-#: rsapp/gui/fselect.py:455 rsapp/gui/fselect.py:486
+#: rsapp/gui/fselect.py:465 rsapp/gui/fselect.py:496
 msgid "Excluded resources:"
 msgstr "Uitgesloten bronbestanden"
 
-#: rsapp/gui/fselect.py:464 rsapp/gui/fselect.py:487
+#: rsapp/gui/fselect.py:474 rsapp/gui/fselect.py:497
 msgid "Play"
 msgstr "Speel"
 
-#: rsapp/gui/fselect.py:468 rsapp/gui/fselect.py:488 rsapp/gui/widgets.py:337
-#: rsapp/gui/widgets.py:371
+#: rsapp/gui/fselect.py:478 rsapp/gui/fselect.py:498 rsapp/gui/widgets.py:346
+#: rsapp/gui/widgets.py:380
 msgid "Stop"
 msgstr "Stop"
 
-#: rsapp/gui/fselect.py:474 rsapp/gui/fselect.py:489 rsapp/gui/widgets.py:342
-#: rsapp/gui/widgets.py:372 rsapp/gui/wmain.py:343
+#: rsapp/gui/fselect.py:484 rsapp/gui/fselect.py:499 rsapp/gui/widgets.py:351
+#: rsapp/gui/widgets.py:381 rsapp/gui/wmain.py:348
 msgid "Close"
 msgstr "Sluiten"
 
-#: rsapp/gui/fselect.py:594
+#: rsapp/gui/fselect.py:604
 #, python-format
 msgid "File excluded: %s"
 msgstr "Uitgesloten bestand: %s"
@@ -622,120 +705,124 @@ msgstr "Uitgesloten bestand: %s"
 msgid "Language was set to locale en-US"
 msgstr "De taal-instelling is verzet naar nl-NL"
 
-#: rsapp/gui/widgets.py:275 rsapp/gui/widgets.py:365
+#: rsapp/gui/widgets.py:284 rsapp/gui/widgets.py:374
 msgid "Main events"
 msgstr "Gebeurtenissen"
 
-#: rsapp/gui/widgets.py:278 rsapp/gui/widgets.py:366
+#: rsapp/gui/widgets.py:287 rsapp/gui/widgets.py:375
 msgid "Resources"
 msgstr "Bronbestanden"
 
-#: rsapp/gui/widgets.py:281 rsapp/gui/widgets.py:367
+#: rsapp/gui/widgets.py:290 rsapp/gui/widgets.py:376
 msgid "Errors"
 msgstr "Fouten"
 
-#: rsapp/gui/widgets.py:317 rsapp/gui/widgets.py:368
+#: rsapp/gui/widgets.py:326 rsapp/gui/widgets.py:377
 msgid "Processing:"
 msgstr "Bezig met:"
 
-#: rsapp/gui/widgets.py:331 rsapp/gui/widgets.py:369
+#: rsapp/gui/widgets.py:340 rsapp/gui/widgets.py:378
 msgid "Trial run"
 msgstr "Op proef uitvoeren"
 
-#: rsapp/gui/widgets.py:334 rsapp/gui/widgets.py:370
+#: rsapp/gui/widgets.py:343 rsapp/gui/widgets.py:379
 msgid "Run"
 msgstr "Uitvoeren"
 
-#: rsapp/gui/widgets.py:399
+#: rsapp/gui/widgets.py:408
 msgid "Interrupt requested..."
 msgstr "Onderbreking aangevraagd…"
 
-#: rsapp/gui/wmain.py:58 rsapp/gui/wmain.py:169
+#: rsapp/gui/wmain.py:59 rsapp/gui/wmain.py:171
 msgid "Metadata Publishing Tool"
 msgstr "Metadata Publishing Tool"
 
-#: rsapp/gui/wmain.py:78 rsapp/gui/wmain.py:160
+#: rsapp/gui/wmain.py:79 rsapp/gui/wmain.py:161
 msgid "File"
 msgstr "Bestand"
 
-#: rsapp/gui/wmain.py:81 rsapp/gui/wmain.py:163
+#: rsapp/gui/wmain.py:82 rsapp/gui/wmain.py:164
 msgid "Load configuration"
 msgstr "Configuratie laden"
 
-#: rsapp/gui/wmain.py:87 rsapp/gui/wmain.py:164 rsapp/gui/wmain.py:198
+#: rsapp/gui/wmain.py:88 rsapp/gui/wmain.py:165 rsapp/gui/wmain.py:200
 msgid "Save configuration as..."
 msgstr "Configuratie opslaan als…"
 
-#: rsapp/gui/wmain.py:91 rsapp/gui/wmain.py:165
+#: rsapp/gui/wmain.py:92 rsapp/gui/wmain.py:166
 msgid "Configurations..."
 msgstr "Configuraties…"
 
-#: rsapp/gui/wmain.py:96 rsapp/gui/wmain.py:161
+#: rsapp/gui/wmain.py:97 rsapp/gui/wmain.py:162
 msgid "Exit"
 msgstr "Afsluiten"
 
-#: rsapp/gui/wmain.py:104
+#: rsapp/gui/wmain.py:105 rsapp/gui/wmain.py:170
 msgid "Window"
 msgstr "Venster"
 
-#: rsapp/gui/wmain.py:109 rsapp/gui/wmain.py:166
+#: rsapp/gui/wmain.py:110 rsapp/gui/wmain.py:167
 msgid "About..."
 msgstr "Over…"
 
-#: rsapp/gui/wmain.py:114 rsapp/gui/wmain.py:167
+#: rsapp/gui/wmain.py:115 rsapp/gui/wmain.py:168
 msgid "Preferences"
 msgstr "Voorkeuren"
 
-#: rsapp/gui/wmain.py:121 rsapp/gui/wmain.py:168
+#: rsapp/gui/wmain.py:122 rsapp/gui/wmain.py:169
 msgid "Language"
 msgstr "Taal"
 
-#: rsapp/gui/wmain.py:162
+#: rsapp/gui/wmain.py:163
 msgid "Exit application"
 msgstr "De toepassing afsluiten"
 
-#: rsapp/gui/wmain.py:194
+#: rsapp/gui/wmain.py:196
 msgid "Switch configuration..."
 msgstr "Configuratie wisselen"
 
-#: rsapp/gui/wmain.py:203
+#: rsapp/gui/wmain.py:205
 msgid "Configuration name:"
 msgstr "Configuratie-naam:"
 
-#: rsapp/gui/wmain.py:238 rsapp/gui/wmain.py:243
+#: rsapp/gui/wmain.py:240 rsapp/gui/wmain.py:245
 msgid "Closing application..."
 msgstr "De toepassing wordt afgesloten…"
 
-#: rsapp/gui/wmain.py:279 rsapp/gui/wmain.py:287
+#: rsapp/gui/wmain.py:282 rsapp/gui/wmain.py:291
 msgid "Configure"
 msgstr "Configureren"
 
-#: rsapp/gui/wmain.py:281 rsapp/gui/wmain.py:289
+#: rsapp/gui/wmain.py:284 rsapp/gui/wmain.py:293
 msgid "Select"
 msgstr "Selecteren"
 
-#: rsapp/gui/wmain.py:283 rsapp/gui/wmain.py:291
+#: rsapp/gui/wmain.py:286 rsapp/gui/wmain.py:295
 msgid "Export"
 msgstr "Exporteren"
 
-#: rsapp/gui/wmain.py:321
+#: rsapp/gui/wmain.py:287 rsapp/gui/wmain.py:296
+msgid "Audit"
+msgstr "Audit"
+
+#: rsapp/gui/wmain.py:326
 msgid "Manage configurations"
 msgstr "Configuraties beheren"
 
-#: rsapp/gui/wmain.py:338
+#: rsapp/gui/wmain.py:343
 msgid "Delete"
 msgstr "Verwijderen"
 
-#: rsapp/gui/wmain.py:365
+#: rsapp/gui/wmain.py:370
 msgid "Delete configurations"
 msgstr "Configuraties verwijderen"
 
-#: rsapp/gui/wmain.py:367
+#: rsapp/gui/wmain.py:372
 #, python-format
 msgid "Delete configuration '%s'"
 msgstr "Configuratie ‘%s’ verwijderen"
 
-#: rsapp/gui/wmain.py:369
+#: rsapp/gui/wmain.py:374
 #, python-format
 msgid "Delete %d configurations"
 msgstr "%d configuraties verwijderen"
