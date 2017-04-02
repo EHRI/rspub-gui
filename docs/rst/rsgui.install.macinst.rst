@@ -6,6 +6,10 @@ Mac OS installer
     :local:
     :backlinks: top
 
+.. ATTENTION::
+    If a previous release of `Metadata Publishing Tool` was installed on your machine with the installer wizard
+    first uninstall this older release. See :ref:`uninstall-mpt-mac-label`.
+
 Download the latest ``MPT_mac_installer.dmg`` from
 the `release page <https://github.com/EHRI/rspub-gui/releases>`_ of the rspub-gui project on gitHub.
 After download, double-click the downloaded ``MPT_mac_installer.dmg``. This will mount the ``MPT_mac_installer`` image

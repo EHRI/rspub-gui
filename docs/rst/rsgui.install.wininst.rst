@@ -6,6 +6,10 @@ Windows installer
     :local:
     :backlinks: top
 
+.. ATTENTION::
+    If a previous release of `Metadata Publishing Tool` was installed on your machine with the installer wizard
+    first uninstall this older release. See :ref:`uninstall-mpt-win-label`.
+
 Download the latest ``MPT_win_installer.exe`` from
 the `release page <https://github.com/EHRI/rspub-gui/releases>`_ of the rspub-gui project on gitHub.
 
