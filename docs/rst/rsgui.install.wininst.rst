@@ -7,7 +7,7 @@ Windows installer
     :backlinks: top
 
 .. ATTENTION::
-    If a previous release of `Metadata Publishing Tool` was installed on your machine with the installer wizard
+    If a previous release of `Metadata Publishing Tool` was installed on your machine,
     first uninstall this older release. See :ref:`uninstall-mpt-win-label`.
 
 Download the latest ``MPT_win_installer.exe`` from
@@ -137,7 +137,9 @@ Start Metadata Publishing Tool
     Shortcuts to Metadata Publishing Tool and the MPT Maintenance Tool in the EHRI group
 
 After completing the installation wizard you can find shortcuts to ``MetadataPublishingTool.exe`` and the
-``MPT_MaintenanceTool.exe`` in the group `EHRI` of your Start Menu.
+``MPT_MaintenanceTool.exe`` in the group `EHRI` of your Start Menu. Alternatively you may find the executables
+in the folder ``C:\Program Files (x86)\EHRI\MetadataPublishingTool`` (if you did not change the Installation folder
+during installation).
 
 .. _uninstall-mpt-win-label:
 

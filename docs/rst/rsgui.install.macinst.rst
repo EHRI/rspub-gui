@@ -7,7 +7,7 @@ Mac OS installer
     :backlinks: top
 
 .. ATTENTION::
-    If a previous release of `Metadata Publishing Tool` was installed on your machine with the installer wizard
+    If a previous release of `Metadata Publishing Tool` was installed on your machine,
     first uninstall this older release. See :ref:`uninstall-mpt-mac-label`.
 
 Download the latest ``MPT_mac_installer.dmg`` from
@@ -124,6 +124,11 @@ the wizard. You may now eject the mounted ``MPT_mac_installer`` image.
 
 Start Metadata Publishing Tool
 ------------------------------
+
+.. figure:: ../img/install/mac/mpt_mac_install_17.png
+
+    `MetadataPublishingTool.app` and `MPT_MaintenanceTool.app` in the folder ``MPT`` in the Applications folder
+
 After completing the installation wizard you can find ``MetadataPublishingTool.app`` and the
 ``MPT_MaintenanceTool.app`` in the folder ``MPT`` of your ``/Applications`` folder. Alternatively you
 can click on the respective icon in your Launchpad.
