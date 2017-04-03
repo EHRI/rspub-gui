@@ -10,6 +10,7 @@ Metadata Publishing Tool Documentation
     :maxdepth: 2
 
     rst/rsgui.about
+    rst/rsgui.introduction
     rst/rsgui.install
     rst/rsgui.menu
     rst/rsgui.configure
