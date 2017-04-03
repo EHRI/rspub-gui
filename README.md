@@ -38,8 +38,8 @@ to solve with `rspub-gui` and the `Metadata Publishing Tool`.
 
 ### Internal Logistics
 
-What `rspub-gui` and its application `Metadata Publishing Tool` are trying to
-solve is the internal logistics: how can we import, select and filter resources, create resourcesync metadata
+What `rspub-gui` and its application `Metadata Publishing Tool` are
+solving is the internal logistics: how can we import, select and filter resources, create ResourceSync metadata
 and transfer resources (ead-files) and metadata (sitemaps) to the web server of the institution. And let this be done
 by content-savvy users that do not necessarily have technical skills.
 Comes in `Metadata Publishing Tool`.
@@ -59,7 +59,10 @@ In _figure 2._ the complete publication cycle of a Collection Holding Institutio
 
 ## Where to go from here
 
-
+- Download the latest release for your Operating System 
+on the [releases page](https://github.com/EHRI/rspub-gui/releases) of this project.
+- Read the user documentation 
+on [http://rspub-gui.readthedocs.io/en/latest/](http://rspub-gui.readthedocs.io/en/latest/).
 
 
 
