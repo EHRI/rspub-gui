@@ -49,7 +49,9 @@ to the web server with a push of a button.
 
 ![Internal](img/internal.png)
 
-_Fig. 1. A Collection Holding Institution uses Metadata Publishing Tool to  
+_Fig. 1. A Collection Holding Institution uses Metadata Publishing Tool for a complete publication cycle._
+  
+  
 - Import EAD-files from their Archival Information System to a local drive or network drive;
 - Make an automated selection of EAD-files based on different criteria
 - Prepare ResourceSync metadata
