@@ -6,7 +6,7 @@ Introduction
     :local:
     :backlinks: top
 
-.. note:: Introducing the EHRI use case
+.. note:: **Introducing the EHRI use case**
 
     The mission of the European Holocaust Research Infrastructure (:term:`EHRI`) is to support the Holocaust research
     community by building a digital infrastructure and facilitating human networks. :term:`EHRI` provides online access
@@ -72,7 +72,7 @@ This documentation
 ++++++++++++++++++
 This documentation starts with describing how to install :term:`Metadata Publishing Tool` on various operating Systems in the
 :doc:`rsgui.install` pages. Each tab or wizard page of the application is the subject of the other chapters. There
-are `Help` buttons on each tab or wizard page that link to the relevant chapters in the documentation. Finally
+are `Help` buttons on each tab or wizard page that link to the relevant chapters in this documentation. Finally
 there is a :doc:`rsgui.glossary` on terms used throughout this documentation and an appendix that handles various
 use cases that may be applicable to your situation on your institution.
 
