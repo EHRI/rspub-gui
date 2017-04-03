@@ -27,7 +27,7 @@ the [Sitemap protocol](http://www.sitemaps.org/protocol.html), an xml-based form
 _Fig. 1. The ResourceSync Framework Specification at work. Institutions exposing content and ResourceSync metadata
 on their web servers.
 The central hub (in this case the EHRI Portal) is actively collecting resources and keeping them
-in sync with the aid of sitemaps._
+in sync with the aid of published sitemaps._
 
 The ResourceSync Framework Specification is a well defined protocol between _source_ and _destination_.
 It describes collecting resources and keeping them synchronized in an efficient way with the aid of sitemaps. In the 
@@ -49,7 +49,7 @@ to the web server with a push of a button.
 
 ![Internal](img/internal.png)
 
-_Fig. 1. A Collection Holding Institution uses Metadata Publishing Tool for a complete publication cycle._
+_Fig. 2. A Collection Holding Institution uses Metadata Publishing Tool for a complete publication cycle._
   
   
 - Import EAD-files from their Archival Information System to a local drive or network drive;
