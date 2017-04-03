@@ -19,7 +19,7 @@ Introduction
     and :term:`synchronization` mechanism.
 
     :term:`Metadata Publishing Tool` is the subject of this documentation. Examples in this introduction
-    will use the :term:`EHRI` use case to describe the working of the tool.
+    and the rest of the documentation will sometimes use the :term:`EHRI` use case to describe the working of the tool.
 
 ResourceSync
 ++++++++++++
@@ -68,6 +68,13 @@ your laptop or local work station. From there you collect and select :term:`reso
 Configuration of :term:`Metadata Publishing Tool` may need the hand and insight of a technically skilled person.
 Once configured it can be managed by archivists and other content-savvy users that do not necessarily have technical skills.
 
+This documentation
+++++++++++++++++++
+This documentation starts with describing how to install :term:`Metadata Publishing Tool` on various operating Systems in the
+:doc:`rsgui.install` pages. Each tab or wizard page of the application is the subject of the other chapters. There
+are `Help` buttons on each tab or wizard page that link to the relevant chapters in the documentation. Finally
+there is a :doc:`rsgui.glossary` on terms used throughout this documentation and an appendix that handles various
+use cases that may be applicable to your situation on your institution.
 
 
 
