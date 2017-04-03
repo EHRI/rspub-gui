@@ -16,7 +16,7 @@ Application for ResourceSync publishing
 ## Introduction
 The [ResourceSync specification](http://www.openarchives.org/rs/1.0.9/resourcesync) describes 
 a synchronization framework for the web consisting of various capabilities that allow third-party systems to remain synchronized with a server's evolving resources.
-More precisely the ResourceSync Framework describes the communication between `source` and `destination` aimed at
+More precisely the ResourceSync Framework describes the communication between `Source` and `Destination` aimed at
 synchronizing one or more resources. Communication uses `http` and an extension on 
 the [Sitemap protocol](http://www.sitemaps.org/protocol.html), an xml-based format for expressing metadata, relevant for synchronization.
 
@@ -37,25 +37,25 @@ collections relevant for the EHRI project. This, the external logistics, is not 
 to solve with `rspub-gui` and the `Metadata Publishing Tool`. 
 
 ### Internal Logistics
+ 
+ In _figure 2._ the complete publication cycle of a Collection Holding Institution is depicted:  
+- Import EAD-files from the Archival Information System to a local drive or network drive;
+- Make an automated selection of EAD-files based on different criteria;
+- Prepare ResourceSync metadata;
+- Transfer EAD-files and ResourceSync metadata to the web server of the institution;
+- Audit the URL's of the now exposed EAD-files and ResourceSync metadata.
 
+![Internal](img/internal.png)
+
+_Fig. 2. A Collection Holding Institution uses Metadata Publishing Tool for a complete publication cycle._
+  
 What `rspub-gui` and its application `Metadata Publishing Tool` are
 solving is the internal logistics: how can we import, select and filter resources, create ResourceSync metadata
 and transfer resources (ead-files) and metadata (sitemaps) to the web server of the institution. And let this be done
 by content-savvy users that do not necessarily have technical skills.
 Comes in `Metadata Publishing Tool`.
 Once configured `Metadata Publishing Tool` imports, selects, filters, executes and exports the necessary files, 
-all with a push of a button.  
-
-![Internal](img/internal.png)
-
-_Fig. 2. A Collection Holding Institution uses Metadata Publishing Tool for a complete publication cycle._
-  
-In _figure 2._ the complete publication cycle of a Collection Holding Institution is depicted:  
-- Import EAD-files from the Archival Information System to a local drive or network drive;
-- Make an automated selection of EAD-files based on different criteria;
-- Prepare ResourceSync metadata;
-- Transfer EAD-files and ResourceSync metadata to the web server of the institution;
-- Audit the URL's of the now exposed EAD-files and ResourceSync metadata.
+all with a push of a button. 
 
 ## Where to go from here
 
