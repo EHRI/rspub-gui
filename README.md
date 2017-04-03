@@ -49,6 +49,12 @@ to the web server with a push of a button.
 
 ![Internal](img/internal.png)
 
-_Fig. 1. Institution preparing content and ResourceSync metadata, and transfering them to their web server._
+_Fig. 1. A Collection Holding Institution uses Metadata Publishing Tool to  
+- Import EAD-files from their Archival Information System to a local drive or network drive;
+- Make an automated selection of EAD-files based on different criteria
+- Prepare ResourceSync metadata
+- Transfer EAD-files and ResourceSync metadata to the web server of the institution_
+
+
 
 
