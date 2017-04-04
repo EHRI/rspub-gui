@@ -8,10 +8,12 @@ Introduction
 
 .. note:: **Introducing the EHRI use case**
 
-    The mission of the European Holocaust Research Infrastructure (:term:`EHRI`) is to support the Holocaust research
+    "The mission of the European Holocaust Research Infrastructure (:term:`EHRI`) is to support the Holocaust research
     community by building a digital infrastructure and facilitating human networks. :term:`EHRI` provides online access
     to information about dispersed sources relating to the Holocaust through its Online Portal, and tools and
-    methods that enable researchers and archivists to collaboratively work with such sources.
+    methods that enable researchers and archivists to collaboratively work with such sources."
+
+    -- `The EHRI web site <https://www.ehri-project.eu/about-ehri>`_
 
     In order to collect information on dispersed archives across Europe -and the rest of the world- that hold
     Holocaust-related collections the Encoded Archival Description (:term:`EAD`) is used as the format for
