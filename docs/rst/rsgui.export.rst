@@ -16,7 +16,7 @@ Export resources and sitemaps
     The export page offers two methods to export :term:`resource`\ s and :term:`sitemap`\ s from your local or networked
     drive to your web server:
 
-    - **Transfer files with SCP** - Uses the Secure Copy Protocol (:term:`scp`) to transfer files directly to your webserver.
+    - **Transfer files with SCP** - Uses the Secure Copy Protocol (:term:`scp`) to transfer files directly to your web server.
     - **Create a zip file** - This method creates a zip file of your :term:`resource`\ s and :term:`sitemap`\ s. You can hand over this zip file to your system administrator who should take care of publishing the contents on the web server.
 
     There are other ways to publish in conformance with :term:`ResourceSync`. See for this [link to appendix].
