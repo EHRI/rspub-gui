@@ -15,3 +15,6 @@ The documentation in this `rtd <https://readthedocs.org/>`_ is intended for end 
 - Source location: https://github.com/EHRI/rspub-gui.
 - The GUI is based on rspub-core. See https://github.com/EHRI/rspub-core.
 - In case of questions `contact <https://github.com/EHRI/rspub-gui/issues/new>`_ the EHRI team.
+
+|
+|
