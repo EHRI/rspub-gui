@@ -21,6 +21,9 @@ Export resources and sitemaps
 
     There are other ways to publish in conformance with :term:`ResourceSync`. See for this [link to appendix].
 
+    .. todo::
+        Write appendix
+
 The export page shows the current :term:`configuration`, the location of the metadata the export will be based upon
 and at what date and time the last execution of the :term:`synchronization` took place.
 

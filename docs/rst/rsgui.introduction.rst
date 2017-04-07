@@ -78,8 +78,8 @@ are `Help` buttons on each tab or wizard page that link to the relevant chapters
 there is a :doc:`rsgui.glossary` on terms used throughout this documentation and an appendix that handles various
 use cases that may be applicable to your situation on your institution.
 
-
-
+.. todo::
+    Write appendix
 
 
 
