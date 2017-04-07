@@ -367,6 +367,7 @@ class ConfigurationsDialog(QDialog):
     def on_btn_delete_clicked(self):
         items = [x.data() for x in self.selection_model.selectedIndexes()]
         msg_box = QMessageBox()
+        msg_box.setWindowTitle(_("MPT"))
         msg_box.setText(_("Delete configurations"))
         if len(items) == 1:
             i_text = _("Delete configuration '%s'" % items[0])

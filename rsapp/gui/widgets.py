@@ -415,6 +415,7 @@ class WorkWidget(QWidget):
 
     def on_ask_confirmation(self, text, i_text, answer):
         msg_box = QMessageBox()
+        msg_box.setWindowTitle(_("MPT"))
         msg_box.setText(text)
         i_text += "\n\n"
         i_text += _("Ok to proceed?")

@@ -204,6 +204,7 @@ class Ctrl(QObject):
     @staticmethod
     def __msg(icon, text, cause=None):
         msg_box = QMessageBox()
+        msg_box.setWindowTitle(_("MPT"))
         if cause:
             msg_box.setText(_("%s\nCaused by:\n\n%s") % (text, cause))
         else:

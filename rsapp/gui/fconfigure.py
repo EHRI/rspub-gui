@@ -96,6 +96,7 @@ class ConfigureFrame(QFrame):
 
     def on_button_reset_clicked(self):
         msg_box = QMessageBox()
+        msg_box.setWindowTitle(_("MPT"))
         msg_box.setText(_("Reset current parameters"))
         msg_box.setInformativeText(_("Reset '%s' parameters to default values?") % self.paras.configuration_name())
         msg_box.setIcon(QMessageBox.Question)
@@ -113,6 +114,7 @@ class ConfigureFrame(QFrame):
         error_count = self.count_errors()
         if error_count > 0:
             msg_box = QMessageBox()
+            msg_box.setWindowTitle(_("MPT"))
             msg_box.setText(window_title)
             i_text = _("Parameters '%s' has %d error(s).") % (self.paras.configuration_name(), error_count)
             i_text += "\n\n"

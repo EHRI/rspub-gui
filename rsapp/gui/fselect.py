@@ -372,6 +372,7 @@ class SelectFrame(QFrame):
         self.synchronize_selector()
         if self.ctrl.selector.location is None and not self.ctrl.selector.is_empty():
             msg_box = QMessageBox()
+            msg_box.setWindowTitle(_("MPT"))
             msg_box.setText(window_title)
             i_text = _("Selector has unsaved changes.")
             i_text += "\n\n"
