@@ -33,6 +33,28 @@ def current_language():
     return GuiConf().language(fallback=DEFAULT_LOCALE)
 
 
+def get_logging_directory():
+    import platform
+    c_path = os.path.expanduser("~")
+    opsys = platform.system()
+    if opsys == "Windows":
+        win_path = os.path.join(c_path, "AppData", "Local")
+        if os.path.exists(win_path): c_path = win_path
+    elif opsys == "Darwin":
+        dar_path = os.path.join(c_path, ".config")
+        if not os.path.exists(dar_path): os.makedirs(dar_path)
+        if os.path.exists(dar_path): c_path = dar_path
+    elif opsys == "Linux":
+        lin_path = os.path.join(c_path, ".config")
+        if not os.path.exists(lin_path): os.makedirs(lin_path)
+        if os.path.exists(lin_path): c_path = lin_path
+
+    c_path = os.path.join(c_path, "rspub", "logs")
+    if not os.path.exists(c_path):
+        os.makedirs(c_path)
+    return c_path
+
+
 if __name__ == '__main__':
 
     if getattr(sys, 'frozen', False):
@@ -48,7 +70,7 @@ if __name__ == '__main__':
     # encoding=utf8
 
     # create log directory
-    log_dir = os.path.join(application_home, LOG_DIR)
+    log_dir = get_logging_directory()
     os.makedirs(log_dir, exist_ok=True)
     log_file = os.path.join(log_dir, LOG_FILE)
     # For Windows single backslash path names:
