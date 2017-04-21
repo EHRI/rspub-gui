@@ -19,6 +19,7 @@ Metadata Publishing Tool Documentation
     rst/rsgui.execute
     rst/rsgui.export
     rst/rsgui.audit
+    rst/rsgui.miscellaneous
     rst/rsgui.glossary
 
 

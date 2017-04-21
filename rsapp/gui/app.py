@@ -10,6 +10,7 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QSplashScreen
 
+BASE_DIR = "rspub"
 LOG_DIR = "logs"
 LOG_FILE = "rspub.log"
 CONFIGURATION_DIR = "conf"
@@ -49,7 +50,7 @@ def get_logging_directory():
         if not os.path.exists(lin_path): os.makedirs(lin_path)
         if os.path.exists(lin_path): c_path = lin_path
 
-    c_path = os.path.join(c_path, "rspub", "logs")
+    c_path = os.path.join(c_path, BASE_DIR, LOG_DIR)
     if not os.path.exists(c_path):
         os.makedirs(c_path)
     return c_path

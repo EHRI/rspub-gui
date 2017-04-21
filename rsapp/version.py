@@ -1,5 +1,5 @@
-__version__ = "1.0.rc.6"
-__release_date__ = "2017-04-01"
+__version__ = "1.0.0"
+__release_date__ = "2017-04-21"
 __about__ = "<p>Metadata Publishing Tool is an application for publishing resources " \
             "in conformance with the " \
             "<a href='http://www.openarchives.org/rs/1.1/resourcesync'>ResourceSync Framework Specification</a>.</p>" \
