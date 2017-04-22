@@ -76,6 +76,12 @@ relative to the :term:`resource directory`::
 
 If the metadata directory does not exist, it will be created during first execution of a :term:`synchronization`\ .
 
+.. HINT::
+    Executing a :term:`synchronization` will produce one :term:`Capability List` in the Metadata directory.
+    Each :term:`Capability List` defines a :term:`set of resources`. When using multiple :term:`configuration`\ s
+    to define multiple sets of resources from the same :term:`resource directory` make sure that each Metadata
+    directory gets a different name. Like ``md_01``, ``md_02`` etc.
+
 Description directory
 +++++++++++++++++++++
 The :term:`description directory` should be an existing directory on the (local or networked) filesystem.

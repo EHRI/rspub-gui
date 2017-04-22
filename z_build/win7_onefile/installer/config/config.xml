@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Installer>
     <Name>Metadata Publishing Tool</Name>
-    <Version>1.0.rc.6</Version>
+    <Version>1.0.0</Version>
     <Title>Metadata Publishing Tool Installer</Title>
     <Publisher>EHRI project</Publisher>
     <ProductUrl>https://github.com/EHRI/rspub-gui</ProductUrl>
