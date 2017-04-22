@@ -3,8 +3,8 @@
     <DisplayName>Metadata Publishing Tool</DisplayName>
     <Description>Metadata Publishing Tool (MPT) enables the publishing of resources according
         to the ResourceSync Framework Specification.</Description>
-    <Version>0.0.6</Version>
-    <ReleaseDate>2017-04-01</ReleaseDate>
+    <Version>1.0.0</Version>
+    <ReleaseDate>2017-04-22</ReleaseDate>
     <Licenses>
         <License name="Apache 2.0" file="LICENSE" />
     </Licenses>
