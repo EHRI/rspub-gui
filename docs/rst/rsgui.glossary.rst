@@ -292,6 +292,8 @@ Glossary
                 ResourceSync Framework Specification
             `Destination perspective <http://www.openarchives.org/rs/1.1/resourcesync#DestPers>`_
                 ResourceSync Framework Specification
+            :doc:`rsgui.execute`
+                Execute page
 
     trial run
         The execution of a :term:`synchronization` run that will not write :term:`sitemap`\ s to disk.
