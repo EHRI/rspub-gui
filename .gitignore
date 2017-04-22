@@ -97,6 +97,7 @@ logs/
 *.exe
 /z_build/*/installer/packages/nl.knaw.dans.ehri.mpt/data/
 /z_build/*/installer/MPT_*_installer.*
+z_dist/
 dist_installer/
 zee_*.txt
 

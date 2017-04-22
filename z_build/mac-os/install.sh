@@ -48,5 +48,8 @@ rm -Rf dist_installer/*
 echo "Moving files"
 mv MPT_mac_installer.app dist_installer/
 mv MPT_mac_installer.dmg dist_installer/
-echo "Finished"
+echo "Finished creating installer"
+
+mkdir ../../z_dist
+cp dist_installer/MPT_mac_installer.dmg ../../z_dist
 

@@ -22,4 +22,5 @@ echo "This step will probably not work on your machine!"
 cd dist/
 codesign -s "Code Signing Cerificate" "$APPNAME" --deep
 cd ../
+
 echo "Finished"
