@@ -5,6 +5,21 @@ Glossary
 
 .. glossary::
 
+    B2DROP
+        "B2DROP is a secure and trusted data exchange service for researchers and scientists to keep their
+        research data synchronized and up-to-date and to exchange with other researchers."
+
+        -- EUDAT web site
+
+        Together with a :term:`WebDAV` client on a server it is an alternative for using :term:`scp` for exchanging
+        :term:`resource`\ s and :term:`sitemap`\ s between servers and local drives.
+
+        .. seealso::
+            `B2DROP <https://eudat.eu/services/b2drop>`_
+                EUDAT service
+            `Mount B2DROP using the WebDAV client <https://doc.owncloud.org/server/7.0/user_manual/files/files.html#creating-webdav-mounts-on-the-linux-command-line>`_
+                ownCloud Manual
+
     Capability List
         A Capability List is an xml-document of type :term:`sitemap` that enlists :term:`Resource List`\ s
         and :term:`Change List`\ s that contain links to a particular :term:`set of resources`\ .
@@ -294,6 +309,20 @@ Glossary
 
             :doc:`rsgui.configure`
                 Configure page
+
+    WebDAV
+        "Web Distributed Authoring and Versioning (WebDAV) is an extension of the Hypertext Transfer Protocol (HTTP)
+        that allows clients to perform remote Web content authoring operations. WebDAV is defined in RFC 4918
+        by a working group of the Internet Engineering Task Force."
+
+            -- Wikipedia
+
+        .. seealso::
+            `B2DROP <https://eudat.eu/services/b2drop>`_
+                EUDAT service
+            `Mount B2DROP using the WebDAV client <https://doc.owncloud.org/server/7.0/user_manual/files/files.html#creating-webdav-mounts-on-the-linux-command-line>`_
+                ownCloud Manual
+
 
     well-known URI
         RFC5785. An internet standard that defines a path prefix for "well-known locations"

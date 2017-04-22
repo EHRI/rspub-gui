@@ -93,7 +93,7 @@ author = 'hvdb'
 # built documents.
 #
 # The short X.Y version.
-version = "1.0" # "".".join(app_version.__version__.split(".")[0:2])
+version = ".".join(app_version.__version__.split(".")[0:2])
 # The full version, including alpha/beta/rc tags.
 release = app_version.__version__
 

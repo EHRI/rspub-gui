@@ -75,11 +75,10 @@ This documentation
 This documentation starts with describing how to install :term:`Metadata Publishing Tool` on various operating Systems in the
 :doc:`rsgui.install` pages. Each tab or wizard page of the application is the subject of the other chapters. There
 are `Help` buttons on each tab or wizard page that link to the relevant chapters in this documentation. Finally
-there is a :doc:`rsgui.glossary` on terms used throughout this documentation and an appendix that handles various
+there is a :doc:`rsgui.glossary` on terms used throughout this documentation.
+.. and an appendix that handles various
 use cases that may be applicable to your situation on your institution.
 
-.. todo::
-    Write appendix
 
 
 

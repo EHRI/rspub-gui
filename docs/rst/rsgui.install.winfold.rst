@@ -7,8 +7,7 @@ Windows folder installation
     :backlinks: top
 
 Install the `Metadata Publishing Tool` and its dependencies in a folder.
-Advantages of this kind of installation: faster start-up time
-and readable log output.
+Advantages of this kind of installation: faster start-up time.
 
 Download Metadata Publishing Tool
 ---------------------------------

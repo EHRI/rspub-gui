@@ -6,6 +6,13 @@ Export resources and sitemaps
     :local:
     :backlinks: top
 
+.. HINT::
+    There are several ways to overcome problems with the exchange of files between servers and
+    your local or network drive. One way is to use an :term:`scp` client,
+    which is described on this page.
+
+    Another way is to use DropBox-like solutions. See for instance :term:`B2DROP` and :term:`WebDAV`.
+
 .. figure:: ../img/export/export.png
 
     *Screenshot of the export page*
@@ -19,10 +26,6 @@ Export resources and sitemaps
     - **Transfer files with SCP** - Uses the Secure Copy Protocol (:term:`scp`) to transfer files directly to your web server.
     - **Create a zip file** - This method creates a zip file of your :term:`resource`\ s and :term:`sitemap`\ s. You can hand over this zip file to your system administrator who should take care of publishing the contents on the web server.
 
-    There are other ways to publish in conformance with :term:`ResourceSync`. See for this [link to appendix].
-
-    .. todo::
-        Write appendix
 
 The export page shows the current :term:`configuration`, the location of the metadata the export will be based upon
 and at what date and time the last execution of the :term:`synchronization` took place.

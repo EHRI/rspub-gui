@@ -6,6 +6,13 @@ Import resources
     :local:
     :backlinks: top
 
+.. HINT::
+    There are several ways to overcome problems with the exchange of files between servers and
+    your local or network drive. One way is to use an :term:`scp` client,
+    which is described on this page.
+
+    Another way is to use DropBox-like solutions. See for instance :term:`B2DROP` and :term:`WebDAV`.
+
 .. figure:: ../img/import/import.png
 
     *Screenshot of the import page*
