@@ -31,8 +31,7 @@ The :term:`MPT`-team appreciates if you can and will contribute a translation of
 descriptions in the :term:`MPT` application. Here is how to.
 
 1.  Download and install the free Poedit application from `https://poedit.net/download <https://poedit.net/download>`_.
-2.  The ``rspub.pot`` template file contains the original entries in English.
-Download the ``rspub.pot`` template file.
+2.  The ``rspub.pot`` template file contains the original entries in English. Download the ``rspub.pot`` template file.
     *   Go to https://raw.githubusercontent.com/EHRI/rspub-gui/master/i18n/rspub.pot
     *   Right-click on the page and choose ``Save as`` from the popup menu.
 3.  Start Poedit and on the Welcome page click ``Create New Translation``.
@@ -45,7 +44,7 @@ application may give suggestions on the right-most side panel.
 Save your translation as a `*.po` file and contact `contact <https://github.com/EHRI/rspub-gui/issues/new>`_ the
 EHRI-team on how to send in your translation.
 
-.. Alternatively you may clone the GitHub repository and issue a pull request.
+Alternatively you may clone the GitHub repository and issue a pull request for your translation.
 
 
 
