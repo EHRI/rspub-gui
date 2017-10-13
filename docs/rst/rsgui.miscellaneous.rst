@@ -41,7 +41,7 @@ descriptions in the :term:`MPT` application. Here is how to.
 Start translating. Choose an entry in the top panel. Enter tour translation in the text area below. The Poedit
 application may give suggestions on the right-most side panel.
 
-Save your translation as a `*.po` file and contact `contact <https://github.com/EHRI/rspub-gui/issues/new>`_ the
+Save your translation as a `*.po` file and `contact <https://github.com/EHRI/rspub-gui/issues/new>`_ the
 EHRI-team on how to send in your translation.
 
 Alternatively you may clone the GitHub repository and issue a pull request for your translation.
