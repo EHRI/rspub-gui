@@ -48,7 +48,7 @@ EHRI-team on how to send in your translation.
 
 Alternatively you may clone the GitHub repository and issue a pull request for your translation.
 
-
+If all goes well, your translation will be included in the next version release of the :term:`MPT` application.
 
 
 
