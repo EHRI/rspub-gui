@@ -30,14 +30,14 @@ Contributing a language
 The :term:`MPT`-team appreciates if you can and will contribute a translation of the text on buttons, menus and
 descriptions in the :term:`MPT` application. Here is how to.
 
-1. Download and install the free Poedit application from `https://poedit.net/download <https://poedit.net/download>`_.
-2. The ``rspub.pot`` template file contains the original entries in English.
+1.  Download and install the free Poedit application from `https://poedit.net/download <https://poedit.net/download>`_.
+2.  The ``rspub.pot`` template file contains the original entries in English.
 Download the ``rspub.pot`` template file.
     *   Go to https://raw.githubusercontent.com/EHRI/rspub-gui/master/i18n/rspub.pot
     *   Right-click on the page and choose ``Save as`` from the popup menu.
-3. Start Poedit and on the Welcome page click ``Create New Translation``.
-4. Choose the ``rspub.pot`` template file you downloaded in step 2.
-5. Choose language (and region) for the translation you want to contribute.
+3.  Start Poedit and on the Welcome page click ``Create New Translation``.
+4.  Choose the ``rspub.pot`` template file you downloaded in step 2.
+5.  Choose language (and region) for the translation you want to contribute.
 
 Start translating. Choose an entry in the top panel. Enter tour translation in the text area below. The Poedit
 application may give suggestions on the right-most side panel.
