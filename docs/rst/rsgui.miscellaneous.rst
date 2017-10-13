@@ -30,7 +30,7 @@ Contributing a language
 The :term:`MPT`-team appreciates if you can and will contribute a translation of the text on buttons, menus and
 descriptions in the :term:`MPT` application. Here is how to.
 
-1. Download and install the free Poedit application from https://poedit.net/download
+1. Download and install the free Poedit application from `https://poedit.net/download <https://poedit.net/download>`_.
 2. The ``rspub.pot`` template file contains the original entries in English.
 Download the ``rspub.pot`` template file.
     *   Go to https://raw.githubusercontent.com/EHRI/rspub-gui/master/i18n/rspub.pot
@@ -42,13 +42,11 @@ Download the ``rspub.pot`` template file.
 Start translating. Choose an entry in the top panel. Enter tour translation in the text area below. The Poedit
 application may give suggestions on the right-most side panel.
 
-Leave placeholders intact. For instance::
+Save your translation as a `*.po` file and contact `contact <https://github.com/EHRI/rspub-gui/issues/new>`_ the
+EHRI-team on how to send in your translation.
 
-%s Caused by: %s
+.. Alternatively you may clone the GitHub repository and issue a pull request.
 
-may be translated in Italian as::
-
-%s Causata da: %s
 
 
 
