@@ -44,6 +44,9 @@ Language >
 ++++++++++
 Set the language of the application to the language of your choice.
 
+.. Tip::
+    - Contribute your native language to the :term:`MPT` tool. See :doc:`rsgui.miscellaneous`
+
 .. _application-menus-windows-label:
 
 The Windows menu
