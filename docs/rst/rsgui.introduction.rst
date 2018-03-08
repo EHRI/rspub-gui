@@ -6,6 +6,8 @@ Introduction
     :local:
     :backlinks: top
 
+.. figure:: img/ehri_logo.png
+
 .. note:: **Introducing the EHRI use case**
 
     "The mission of the European Holocaust Research Infrastructure (:term:`EHRI`) is to support the Holocaust research

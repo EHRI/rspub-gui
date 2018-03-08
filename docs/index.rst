@@ -6,6 +6,8 @@
 Metadata Publishing Tool Documentation
 ======================================
 
+.. figure:: img/ehri_logo.png
+
 .. toctree::
     :maxdepth: 2
 
