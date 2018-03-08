@@ -6,7 +6,10 @@ Introduction
     :local:
     :backlinks: top
 
-.. figure:: ../img/ehri_logo.png
+.. img:: ../img/ehri_logo.png
+    :scale: 50 %
+    :align: centre
+    :alt: the EHRI logo
 
 .. note:: **Introducing the EHRI use case**
 
