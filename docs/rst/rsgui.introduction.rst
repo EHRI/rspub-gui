@@ -6,7 +6,7 @@ Introduction
     :local:
     :backlinks: top
 
-.. img:: ../img/ehri_logo.png
+.. figure:: ../img/ehri_logo.png
     :scale: 50 %
     :align: centre
     :alt: the EHRI logo
