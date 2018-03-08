@@ -6,7 +6,7 @@ Introduction
     :local:
     :backlinks: top
 
-.. figure:: img/ehri_logo.png
+.. figure:: ../img/ehri_logo.png
 
 .. note:: **Introducing the EHRI use case**
 
